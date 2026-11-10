@@ -76,6 +76,11 @@ function mount(page, query = '', cloudBookmark = null) {
   assert.equal((stats.html.match(/class="weekly-row"/g)||[]).length,10);
   const statsFr = mount('estadisticas','?idioma=francais');
   assert.match(statsFr.html, /Les 14 derniers jours/);
+  for (const subpage of ['','francais/','flashcards/','estadisticas/','grec/','cantonais/','latin/']) {
+    const html = fs.readFileSync(path.join(root,subpage,'index.html'),'utf8');
+    assert.match(html,/app\.js\?v=\d{8}-\d+/,subpage+' must invalidate the old JavaScript cache');
+    assert.match(html,/styles\.css\?v=\d{8}-\d+/,subpage+' must invalidate the old CSS cache');
+  }
   const cloud = mount('francais','', 'd1-tv5');
   await new Promise(resolve=>setImmediate(resolve));
   await new Promise(resolve=>setImmediate(resolve));
