@@ -5,7 +5,7 @@
   const KEY_SUPABASE = 'sb_publishable_be96IsfN-3skQErkZtOtQQ_pK0OT1Y9';
   const root = document.body.dataset.root || './';
   const page = document.body.dataset.page || 'home';
-  let isFrench = page === 'francais' || (page === 'flashcards' && (!new URLSearchParams(location.search).get('idioma') || new URLSearchParams(location.search).get('idioma') === 'francais'));
+  let isFrench = page === 'francais' || ((page === 'flashcards' || page === 'estadisticas') && new URLSearchParams(location.search).get('idioma') === 'francais');
   const C = window.LINGUA;
   const lessons = C.lessons;
   const $app = document.querySelector('#app');
@@ -20,13 +20,15 @@
     user:null, client:null, authModal:false, authMode:'login', authMessage:'', loading:true,
     sessions:[], progress:{}, attempts:{}, notes:{}, writings:[], cards:{},
     lessonId:lessonById(params.get('lecon') || localGet('lastLesson','d0-bonjour')).id,
+    lastLessonSavedAt:localGet('lastLessonSavedAt',null),
     grammar:localGet('grammar','fr'), revealed:new Set(),
     lessonDraft:localGet('drafts',{}),
     localSessions:localGet('sessions',[]), localProgress:localGet('progress',{}),
     localAttempts:localGet('attempts',{}), localCards:localGet('cards',{}),
     tabFocused:true,
     lastActivity:Date.now(), activeSession:null,
-    flashLang:params.get('idioma') || 'francais', flashShow:false, flashId:null, flashFilter:'due', reviewedNow:new Set()
+    flashLang:params.get('idioma') || 'francais', flashShow:false, flashId:null, flashFilter:'due', reviewedNow:new Set(),
+    statsLang:params.get('idioma') || 'all'
   };
   const languages = [
     {slug:'francais',name:'Francés',native:'Français',letter:'F',desc:'A1 · Alter Ego+ 1 · Dossiers 0 y 1',live:true},
@@ -41,7 +43,8 @@
 
   function totalSeconds(sessions) { return sessions.reduce((a,x)=>a+(Number(x.duration_seconds)||0),0); }
   function allSessions() {
-    const items = [...state.sessions, ...state.localSessions];
+    const combined = [...state.sessions, ...state.localSessions];
+    const items = [...new Map(combined.map(s=>[s.id,s])).values()];
     const a = state.activeSession;
     if (a) {
       const index = items.findIndex(s=>s.id===a.id);
@@ -63,10 +66,12 @@
   function progressOf(id){return state.progress[id] ?? state.localProgress[id] ?? false;}
   const completed = () => lessons.filter(l=>progressOf(l.id)).length;
   const statsTime = language=>totalSeconds(allSessions().filter(s=>!language||s.language===language));
+  const currentLessonLink = () => link('francais/?lecon='+encodeURIComponent(state.lessonId));
 
   function header(){
     const account = state.user ? `<button class="btn btn-small" data-action="auth">${h(state.user.email.split('@')[0])} · ${t('Compte','Cuenta')}</button>` : `<button class="btn btn-small" data-action="auth">${t('Se connecter','Mi cuenta')}</button>`;
-    return `<header class="topbar"><div class="shell"><a class="brand" href="${root}">Lingua <em>Viva</em></a><nav class="topnav">${isFrench?`<a href="${link('francais/')}">Le parcours</a><a href="${link('flashcards/?idioma=francais')}">Cartes mémoire</a><a href="${link('')}">Langues</a>`:`<a href="${link('')}">Mis idiomas</a><a href="${link('flashcards/')}">Flashcards</a><a href="${link('')}#actividad">Mi actividad</a>`}</nav><div class="toptools"><a class="btn btn-small btn-plain" href="${root}">${t('Toutes les langues','Inicio')}</a>${account}</div></div></header>`;
+    const pathToCourse=page==='francais'?'#lecon':currentLessonLink()+'#lecon';
+    return `<header class="topbar"><div class="shell"><a class="brand" href="${root}">Lingua <em>Viva</em></a><nav class="topnav">${isFrench?`<a href="${pathToCourse}">Le parcours</a><a href="${link('flashcards/?idioma=francais')}">Cartes mémoire</a><a href="${link('estadisticas/?idioma=francais')}">Mon temps</a><a href="${link('')}">Langues</a>`:`<a href="${link('')}">Mis idiomas</a><a href="${link('flashcards/')}">Flashcards</a><a href="${link('estadisticas/')}">Mis tiempos</a>`}</nav><div class="toptools"><a class="btn btn-small btn-plain" href="${root}">${t('Toutes les langues','Inicio')}</a>${account}</div></div></header>`;
   }
   function footer(){return `<footer class="shell footer"><span>Lingua Viva · ${t('Un espace pour apprendre les langues.','Un lugar para estudiar lenguas.')}</span><span>${t('Parcours original · Repères : Alter Ego+ 1','Material original · Referencia: Alter Ego+ 1')} · <a href="${link('')}">Accueil / Inicio</a></span></footer>`;}
 
@@ -74,12 +79,12 @@
     document.title = 'Lingua Viva · Centro de idiomas';
     const secs=statsTime(), french=statsTime('francais');
     $app.innerHTML=header()+`<main>
-      <section class="hero"><div class="shell hero-grid"><div><div class="eyebrow">Tu espacio de aprendizaje</div><h1>Las lenguas<br><em>se viven.</em></h1><p>Un lugar para estudiar a tu ritmo, volver sobre las palabras y seguir el recorrido que vas construyendo. Cada idioma tiene sus lecciones, ejercicios, audios, tarjetas de repaso y registro de estudio.</p><div class="hero-actions"><a class="btn btn-primary" href="${link('francais/')}">Continuar francés <span>↗</span></a><a class="btn" href="${link('flashcards/')}">Repasar vocabulario</a></div></div><div class="hero-aside"><div class="micro">Tu recorrido, hasta hoy</div><div class="rule"></div><div class="metricrow"><div><div class="metricnum">${completed()}<span style="font-size:15px;color:var(--muted)">/8</span></div><div class="metriclabel">Lecciones</div></div><div><div class="metricnum">${Math.floor(secs/60)}</div><div class="metriclabel">Minutos</div></div><div><div class="metricnum">${Object.values(state.cards).filter(c=>new Date(c.due_at)>new Date()).length}</div><div class="metriclabel">Tarjetas repasadas</div></div></div><div class="rule"></div><p>El contador se pone en marcha cuando estudiás dentro de una lección y se pausa si dejás de interactuar o cambiás de pestaña.</p></div></div></section>
+      <section class="hero"><div class="shell hero-grid"><div><div class="eyebrow">Tu espacio de aprendizaje</div><h1>Las lenguas<br><em>se viven.</em></h1><p>Un lugar para estudiar a tu ritmo, volver sobre las palabras y seguir el recorrido que vas construyendo. Cada idioma tiene sus lecciones, ejercicios, audios, tarjetas de repaso y registro de estudio.</p><div class="hero-actions"><a class="btn btn-primary" href="${currentLessonLink()}">Continuar francés <span>↗</span></a><a class="btn" href="${link('flashcards/')}">Repasar vocabulario</a></div></div><div class="hero-aside"><div class="micro">Tu recorrido, hasta hoy</div><div class="rule"></div><div class="metricrow"><div><div class="metricnum">${completed()}<span style="font-size:15px;color:var(--muted)">/8</span></div><div class="metriclabel">Lecciones</div></div><div><div class="metricnum">${Math.floor(secs/60)}</div><div class="metriclabel">Minutos</div></div><div><div class="metricnum">${Object.values(state.cards).filter(c=>new Date(c.due_at)>new Date()).length}</div><div class="metriclabel">Tarjetas repasadas</div></div></div><div class="rule"></div><p>El contador se pone en marcha cuando estudiás dentro de una lección y se pausa si dejás de interactuar o cambiás de pestaña.</p></div></div></section>
       <section class="section shell" id="idiomas"><div class="section-head"><div><div class="eyebrow">Biblioteca de lenguas</div><h2>Mis idiomas</h2></div><p class="section-note">Un mismo espacio, recorridos independientes. El francés A1 es el primer curso activo.</p></div><div class="language-grid">${languages.map(l=>`<a class="lang-card ${l.live?'':'muted'}" href="${link(l.slug+'/')}"><div class="micro">${l.live?'En curso':'Próximamente'}</div><div class="char" aria-hidden="true">${l.letter}</div><h3>${l.name}</h3><p>${l.desc}</p><div class="bottom"><span>${l.live?`${completed()} de 8 lecciones · ${fmtShort(french)}`:'Crear recorrido'}</span><span class="arrow">↗</span></div></a>`).join('')}</div></section>
-      <section class="section shell" id="actividad"><div class="section-head"><div><div class="eyebrow">Registro personal</div><h2>Mi actividad</h2></div><span class="section-note">${state.user?'Sincronizado con tu cuenta.':'Sin iniciar sesión: guardado en este navegador. Iniciá sesión para sincronizar.'}</span></div><div class="activity-block"><div class="panel"><div class="micro">Últimos siete días</div><h3>Tiempo de estudio</h3>${weekBars()}<p class="note">${fmt(secs)} acumulados · El registro contabiliza el tiempo activo dentro de las lecciones.</p></div><div class="panel"><div class="micro">Revisión</div><h3>Vocabulario aprendido</h3><div class="metricrow"><div><div class="metricnum">${unlockedCards('francais').length}</div><div class="metriclabel">Disponibles</div></div><div><div class="metricnum">${countDue('francais')}</div><div class="metriclabel">Por repasar</div></div><div><div class="metricnum">${completed()}</div><div class="metriclabel">Lecciones hechas</div></div></div><p class="note" style="margin-top:22px">Las flashcards se incorporan a tu mazo según avanzás de unidad. Las que olvidás vuelven antes.</p><a class="btn btn-small" href="${link('flashcards/?idioma=francais')}">Abrir flashcards ↗</a></div></div></section>
+      <section class="section shell" id="actividad"><div class="section-head"><div><div class="eyebrow">Registro personal</div><h2>Mi actividad</h2></div><span class="section-note">${state.user?'Sincronizado con tu cuenta.':'Sin iniciar sesión: guardado en este navegador. Iniciá sesión para sincronizar.'}</span></div><div class="activity-block"><div class="panel"><div class="micro">Últimos siete días</div><h3>Tiempo de estudio</h3>${weekBars()}<p class="note">${fmt(secs)} acumulados · El registro contabiliza el tiempo activo dentro de las lecciones.</p><a class="btn btn-small" href="${link('estadisticas/')}">Ver 14 días y semanas ↗</a></div><div class="panel"><div class="micro">Revisión</div><h3>Vocabulario aprendido</h3><div class="metricrow"><div><div class="metricnum">${unlockedCards('francais').length}</div><div class="metriclabel">Disponibles</div></div><div><div class="metricnum">${countDue('francais')}</div><div class="metriclabel">Por repasar</div></div><div><div class="metricnum">${completed()}</div><div class="metriclabel">Lecciones hechas</div></div></div><p class="note" style="margin-top:22px">Las flashcards se incorporan a tu mazo según avanzás de unidad. Las que olvidás vuelven antes.</p><a class="btn btn-small" href="${link('flashcards/?idioma=francais')}">Abrir flashcards ↗</a></div></div></section>
     </main>`+footer();
   }
-  function lessonNav(){return `<aside class="sidenav" aria-label="Progression"><div class="side-title">Dossier 0 · Découverte</div>${lessons.filter(x=>x.dossier===0).map((l,i)=>navButton(l,i)).join('')}<div class="side-divider"></div><div class="side-title">Dossier 1 · Les uns, les autres</div>${lessons.filter(x=>x.dossier===1).map((l,i)=>navButton(l,i+3)).join('')}<div class="side-divider"></div><a href="${link('flashcards/?idioma=francais')}" class="btn btn-small" style="width:100%">↗ Cartes mémoire</a></aside>`;}
+  function lessonNav(){return `<aside class="sidenav" aria-label="Progression"><div class="side-title">Dossier 0 · Découverte</div>${lessons.filter(x=>x.dossier===0).map((l,i)=>navButton(l,i)).join('')}<div class="side-divider"></div><div class="side-title">Dossier 1 · Les uns, les autres</div>${lessons.filter(x=>x.dossier===1).map((l,i)=>navButton(l,i+3)).join('')}<div class="side-divider"></div><a href="${link('flashcards/?idioma=francais')}" class="btn btn-small" style="width:100%">↗ Cartes mémoire</a><a href="${link('estadisticas/?idioma=francais')}" class="btn btn-small" style="width:100%;margin-top:8px">↗ Mon temps d’étude</a></aside>`;}
   function navButton(l,i){return `<button class="lesson-link ${l.id===state.lessonId?'active':''}" data-action="lesson" data-id="${l.id}"><span class="index">${String(i+1).padStart(2,'0')}</span><span>${h(l.title)}</span>${progressOf(l.id)?'<span class="done">✓</span>':''}</button>`;}
   function renderCourse(){
     const l = lessonById(state.lessonId); const i=lessons.indexOf(l); const percent=Math.round(completed()/lessons.length*100);
@@ -97,7 +102,7 @@
         <section class="content-section"><h3>Mon carnet</h3><p>Notez une difficulté, une phrase utile ou une question pour la prochaine séance.</p><textarea id="notesInput" class="textarea" style="min-height:90px" placeholder="Mes notes personnelles…">${h(state.notes[l.id]??localGet('notes',{})[l.id]??'')}</textarea><div class="writing-actions"><button class="btn" data-action="save-note">Sauvegarder les notes</button><span class="hint">Également accessible depuis votre compte.</span></div></section>
         <div class="lesson-nav"><button class="btn" data-action="lesson" data-id="${lessons[Math.max(i-1,0)].id}" ${i===0?'disabled':''}>← Leçon précédente</button><button class="btn btn-primary" data-action="complete">${progressOf(l.id)?'✓ Leçon terminée':'Marquer comme terminée'}</button><button class="btn" data-action="lesson" data-id="${lessons[Math.min(i+1,lessons.length-1)].id}" ${i===lessons.length-1?'disabled':''}>Suivante →</button></div>
       </article>
-      <aside class="sidebar-right"><div class="mini-panel"><div class="micro">Temps d’étude actif</div><div class="bigtime" id="liveTime">00:00</div><div class="timer-state" id="timerState">● Suivi automatique</div><p>Le chronomètre s’arrête quand vous quittez l’onglet ou après 90 s sans activité.</p><button class="btn btn-small" data-action="timer-toggle" id="timerButton">Faire une pause</button></div><div class="mini-panel"><div class="micro">Votre parcours</div><div class="bigtime" id="courseTime">${fmt(statsTime('francais'))}</div><div class="micro">Total cumulé</div><div class="track"><span style="width:${percent}%"></span></div><p>${completed()} leçons terminées sur 8</p><a href="${link('flashcards/?idioma=francais')}" class="btn btn-small">Cartes mémoire ↗</a></div></aside>
+      <aside class="sidebar-right"><div class="mini-panel"><div class="micro">Temps d’étude actif</div><div class="bigtime" id="liveTime">00:00</div><div class="timer-state" id="timerState">● Suivi automatique</div><p>Le chronomètre s’arrête quand vous quittez l’onglet ou après 90 s sans activité.</p><button class="btn btn-small" data-action="timer-toggle" id="timerButton">Faire une pause</button></div><div class="mini-panel"><div class="micro">Votre parcours</div><div class="bigtime" id="courseTime">${fmt(statsTime('francais'))}</div><div class="micro">Total cumulé</div><div class="track"><span style="width:${percent}%"></span></div><p>${completed()} leçons terminées sur 8</p><a href="${link('estadisticas/?idioma=francais')}" class="btn btn-small">Voir mes temps ↗</a></div></aside>
     </div></div></main>`+footer();
     renderTimerUI(); renderWordCount();
   }
@@ -148,8 +153,55 @@
     </section></main>`+footer();
   }
 
+  function studyDays(count, end = new Date()){
+    return Array.from({length:count},(_,i)=>{const d=new Date(end);d.setHours(12,0,0,0);d.setDate(d.getDate()-(count-1-i));return d;});
+  }
+  function studyBreakdown(entries, periodStart, periodEnd){
+    const within=entries.filter(s=>{const d=new Date(s.started_at);return d>=periodStart && d<periodEnd;});
+    return {seconds:totalSeconds(within), days:new Set(within.filter(s=>s.duration_seconds>0).map(s=>dayKey(s.started_at))).size, sessions:within.length};
+  }
+  const formatDate = (d,options)=>new Date(d).toLocaleDateString(isFrench?'fr-FR':'es-AR',options);
+  const humanMinutes = sec => Math.round(sec/60)+' '+t('min','min');
+  const languageName = slug => languages.find(l=>l.slug===slug)?.name || slug;
+  function renderStats(){
+    const entries=allSessions().filter(s=>s.duration_seconds>0 && (state.statsLang==='all'||s.language===state.statsLang));
+    const days=studyDays(14);
+    const perDay=days.map(d=>studyBreakdown(entries,new Date(d.getFullYear(),d.getMonth(),d.getDate()),new Date(d.getFullYear(),d.getMonth(),d.getDate()+1)));
+    const total14=perDay.reduce((acc,d)=>acc+d.seconds,0);
+    const maxDay=Math.max(900,...perDay.map(x=>x.seconds));
+    const activeDays=perDay.filter(x=>x.seconds>0).length;
+    const today=new Date();
+    const monday=new Date(today.getFullYear(),today.getMonth(),today.getDate());monday.setDate(monday.getDate()-(monday.getDay()+6)%7);
+    const weeks=Array.from({length:10},(_,i)=>{
+      const start=new Date(monday);start.setDate(monday.getDate()-(9-i)*7);
+      const end=new Date(start);end.setDate(start.getDate()+7);
+      return {start,end,...studyBreakdown(entries,start,end)};
+    }).reverse();
+    const maxWeek=Math.max(3600,...weeks.map(w=>w.seconds));
+    const total=totalSeconds(entries);
+    const sessionCount=entries.length;
+    const byLanguage=languages.map(l=>({language:l,seconds:totalSeconds(allSessions().filter(s=>s.language===l.slug))})).filter(x=>x.seconds>0);
+    const maxLanguage=Math.max(60,...byLanguage.map(x=>x.seconds));
+    const lastSessions=[...entries].sort((a,b)=>new Date(b.started_at)-new Date(a.started_at)).slice(0,15);
+    document.title=t('Mon temps d’étude','Mis tiempos')+' · Lingua Viva';
+    $app.innerHTML=header()+`<main class="shell"><section class="statistics-page">
+      <div class="eyebrow">${t('Journal d’apprentissage','Registro de aprendizaje')}</div>
+      <div class="stats-head"><div><h1>${t('Mon temps <em>d’étude.</em>','Mis tiempos <em>de estudio.</em>')}</h1><p>${t('Un aperçu de votre pratique, jour après jour et semaine après semaine.','Un registro de tu práctica, día por día y semana por semana.')}</p></div><label class="stats-filter">${t('Afficher','Mostrar')}<select id="statsLanguage"><option value="all" ${state.statsLang==='all'?'selected':''}>${t('Toutes les langues','Todos los idiomas')}</option>${languages.map(l=>`<option value="${l.slug}" ${l.slug===state.statsLang?'selected':''}>${h(l.name)}</option>`).join('')}</select></label></div>
+      <div class="stats-numbers"><div class="stats-number"><span class="micro">${t('Temps total','Tiempo total')}</span><strong>${fmt(total)}</strong><span class="hint">${t('Toutes les sessions enregistrées','Todas las sesiones registradas')}</span></div><div class="stats-number"><span class="micro">${t('Ces 14 derniers jours','Últimos 14 días')}</span><strong>${fmt(total14)}</strong><span class="hint">${t('Temps d’étude actif','Tiempo de estudio activo')}</span></div><div class="stats-number"><span class="micro">${t('Jours actifs','Días con actividad')}</span><strong>${activeDays}<small>/14</small></strong><span class="hint">${t('Avec au moins une session','Con alguna sesión de estudio')}</span></div><div class="stats-number"><span class="micro">${t('Sessions','Sesiones')}</span><strong>${sessionCount}</strong><span class="hint">${t('Enregistrées dans le journal','Registradas en el historial')}</span></div></div>
+      <section class="stats-panel" id="quatorze"><div class="stats-panel-heading"><div><div class="micro">01 / ${t('Derniers jours','Últimos días')}</div><h2>${t('Les 14 derniers jours','Los últimos 14 días')}</h2></div><span class="micro">${formatDate(days[0],{day:'numeric',month:'short'})} – ${formatDate(days[13],{day:'numeric',month:'short'})}</span></div>
+      <div class="days-14" role="img" aria-label="${t('Temps quotidien sur 14 jours','Tiempo diario durante los últimos 14 días')}">${days.map((d,i)=>`<div class="day14" title="${formatDate(d,{weekday:'long',day:'numeric',month:'long'})} · ${humanMinutes(perDay[i].seconds)}"><span class="day14-value">${perDay[i].seconds?humanMinutes(perDay[i].seconds):''}</span><div class="day14-barwrap"><span class="day14-bar" style="height:${perDay[i].seconds?Math.max(4,perDay[i].seconds/maxDay*100):2}%;opacity:${perDay[i].seconds?1:.25}"></span></div><span class="day14-label">${formatDate(d,{day:'numeric',month:'numeric'})}</span></div>`).join('')}</div>
+      <details class="day-details"><summary>${t('Détail jour par jour','Ver detalle día por día')}</summary><div class="day-detail-grid">${days.map((d,i)=>`<div><span>${formatDate(d,{weekday:'short',day:'numeric',month:'short'})}</span><b>${humanMinutes(perDay[i].seconds)}</b></div>`).join('')}</div></details></section>
+      <section class="stats-panel" id="semaines"><div class="stats-panel-heading"><div><div class="micro">02 / ${t('Historique hebdomadaire','Historial semanal')}</div><h2>${t('Semaine après semaine','Semana por semana')}</h2></div><span class="micro">${t('10 semaines · lundi–dimanche','10 semanas · lunes–domingo')}</span></div>
+      <div class="weekly-list">${weeks.map((w,i)=>`<div class="weekly-row"><div class="weekly-when"><b>${i===0?t('Cette semaine','Esta semana'):formatDate(w.start,{day:'numeric',month:'short'})+' – '+formatDate(new Date(w.end.getTime()-86400000),{day:'numeric',month:'short'})}</b><span>${w.days} ${t('jours actifs','días activos')}</span></div><div class="weekly-bar"><span style="width:${w.seconds?Math.max(1.8,w.seconds/maxWeek*100):0}%"></span></div><strong>${fmt(w.seconds)}</strong></div>`).join('')}</div></section>
+      <div class="stats-bottom"><section class="stats-panel"><div class="micro">03 / ${t('Langues','Idiomas')}</div><h2>${t('Répartition par langue','Distribución por idioma')}</h2>${byLanguage.length?`<div class="language-times">${byLanguage.map(x=>`<div class="language-time"><div class="language-time-head"><span>${h(x.language.name)}</span><strong>${fmt(x.seconds)}</strong></div><div class="language-time-bar"><span class="color-${x.language.slug}" style="width:${Math.max(2,x.seconds/maxLanguage*100)}%"></span></div></div>`).join('')}</div>`:`<p class="note">${t('Les langues apparaîtront dès votre première session.','Los idiomas aparecerán cuando registres tus primeras sesiones.')}</p>`}</section>
+      <section class="stats-panel"><div class="micro">04 / ${t('Dernières sessions','Últimas sesiones')}</div><h2>${t('Votre journal','Tu registro')}</h2>${lastSessions.length?`<div class="sessions-list">${lastSessions.map(s=>`<div class="session-item"><div><b>${h(languageName(s.language))}</b><span>${h(lessonById(s.lesson_id).title)} · ${formatDate(s.started_at,{day:'numeric',month:'short'})}</span></div><strong>${humanMinutes(s.duration_seconds)}</strong></div>`).join('')}</div>`:`<p class="note">${t('Aucune session pour le moment.','Todavía no hay sesiones registradas.')}</p>`}</section></div>
+      <p class="stats-footnote">${t('Le temps est comptabilisé automatiquement quand la leçon est active. Les périodes sans activité et les onglets masqués ne sont pas comptés. Une session est attribuée au jour où elle a commencé.','El tiempo se registra automáticamente mientras la lección está activa. No se cuentan las pestañas ocultas ni los períodos sin interacción. Cada sesión se atribuye al día en que comenzó.')}</p>
+      <a class="btn" href="${currentLessonLink()}">${t('← Retour au français','← Volver al francés')}</a>
+    </section></main>`+footer();
+  }
+
   function render(){
-    if (page==='home')renderHome();else if(page==='francais')renderCourse();else if(page==='flashcards')renderFlashcards();else renderComing();
+    if (page==='home')renderHome();else if(page==='francais')renderCourse();else if(page==='flashcards')renderFlashcards();else if(page==='estadisticas')renderStats();else renderComing();
     if(state.authModal)showModal();
   }
 
@@ -176,14 +228,40 @@
   }
   async function syncFromCloud(){
     if(!state.client||!state.user)return;
-    const names=['lingua_study_sessions','lingua_lesson_progress','lingua_exercise_attempts','lingua_writings','lingua_notes','lingua_flashcard_reviews'];
+    const names=['lingua_study_sessions','lingua_lesson_progress','lingua_exercise_attempts','lingua_writings','lingua_notes','lingua_flashcard_reviews','lingua_user_state'];
     const result=await Promise.all(names.map(table=>state.client.from(table).select('*').eq('user_id',state.user.id).limit(3000)));
     if(result.some(r=>r.error))console.warn('Lingua Viva: parte de los datos no se pudo cargar',result.filter(r=>r.error).map(r=>r.error.message));
     const data=result.map(r=>r.data||[]);
     state.sessions=data[0];state.progress=Object.fromEntries(data[1].map(r=>[r.lesson_id,r.completed]));state.attempts=Object.fromEntries(data[2].map(r=>[r.exercise_id,r]));state.writings=data[3];state.notes=Object.fromEntries(data[4].map(r=>[r.lesson_id,r.body]));state.cards=Object.fromEntries(data[5].map(r=>[r.language+':'+r.card_id,r]));
+    const remoteBookmark=data[6][0];
+    const localDate=new Date(state.lastLessonSavedAt||0).getTime();
+    const remoteDate=new Date(remoteBookmark?.last_opened_at||0).getTime();
+    if(!params.has('lecon') && remoteBookmark && remoteDate >= localDate && lessons.some(l=>l.id===remoteBookmark.current_lesson_id)){
+      if(state.lessonId!==remoteBookmark.current_lesson_id){
+        await flushSession();state.lessonId=remoteBookmark.current_lesson_id;
+        if(page==='francais')startSession();
+      }
+      state.lastLessonSavedAt=remoteBookmark.last_opened_at;
+      localPut('lastLesson',state.lessonId);localPut('lastLessonSavedAt',state.lastLessonSavedAt);
+    }else if((!remoteBookmark || localDate>remoteDate || params.has('lecon')) && page==='francais'){
+      await saveCurrentLesson(state.lessonId,params.has('lecon')?new Date().toISOString():state.lastLessonSavedAt||new Date().toISOString());
+    }
     // Anonymous data are migrated using the same UUIDs, so a retry is safe.
     await migrateLocal();
     render();
+  }
+  let bookmarkQueue=Promise.resolve();
+  function saveCurrentLesson(id,at=new Date().toISOString()){
+    if(!lessons.some(l=>l.id===id))return Promise.resolve();
+    state.lastLessonSavedAt=at;
+    localPut('lastLesson',id);localPut('lastLessonSavedAt',at);
+    if(!state.user||!state.client)return Promise.resolve();
+    const userId=state.user.id;
+    bookmarkQueue=bookmarkQueue.catch(()=>{}).then(async()=>{
+      const {error}=await state.client.from('lingua_user_state').upsert({user_id:userId,current_lesson_id:id,last_opened_at:at},{onConflict:'user_id'});
+      if(error)console.warn('Lingua Viva: signet de leçon non synchronisé',error.message);
+    });
+    return bookmarkQueue;
   }
   async function migrateLocal(){
     if(!state.user||!state.client)return;
@@ -233,7 +311,7 @@
   function markActive(){state.lastActivity=Date.now();if(!document.hidden)state.tabFocused=true;}
   function nextLesson(id){
     if(id===state.lessonId)return;
-    flushSession();state.lessonId=id;localPut('lastLesson',id);state.revealed.clear();
+    flushSession();state.lessonId=id;saveCurrentLesson(id);state.revealed.clear();
     history.replaceState(null,'','?lecon='+encodeURIComponent(id));
     startSession();render();window.scrollTo({top:0,behavior:'smooth'});
   }
@@ -306,7 +384,10 @@
     if(a==='flash-review'){reviewFlashCard(b.dataset.quality);return;}
   });
   document.addEventListener('input',e=>{if(e.target.id==='writingDraft'){state.lessonDraft[state.lessonId]=e.target.value;localPut('drafts',state.lessonDraft);renderWordCount();}});
-  document.addEventListener('change',e=>{if(e.target.id==='flashLanguage'){state.flashLang=e.target.value;isFrench=state.flashLang==='francais';state.flashShow=false;state.flashId=null;state.reviewedNow.clear();history.replaceState(null,'','?idioma='+encodeURIComponent(state.flashLang));render();}});
+  document.addEventListener('change',e=>{
+    if(e.target.id==='flashLanguage'){state.flashLang=e.target.value;isFrench=state.flashLang==='francais';state.flashShow=false;state.flashId=null;state.reviewedNow.clear();history.replaceState(null,'','?idioma='+encodeURIComponent(state.flashLang));render();}
+    if(e.target.id==='statsLanguage'){state.statsLang=e.target.value;isFrench=state.statsLang==='francais';history.replaceState(null,'',state.statsLang==='all'?location.pathname:'?idioma='+encodeURIComponent(state.statsLang));render();}
+  });
   function renderWordCount(){const n=document.querySelector('#wordCount');const v=document.querySelector('#writingDraft');if(n&&v)n.textContent=v.value.trim()?v.value.trim().split(/\s+/).length+' mots':'0 mot';}
   for(const event of ['pointerdown','keydown','scroll','touchstart'])window.addEventListener(event,markActive,{passive:true});
   window.addEventListener('blur',()=>{state.tabFocused=false;flushSession();renderTimerUI();});
@@ -319,6 +400,7 @@
 
   async function init(){
     maybeCreateClient();
+    if(page==='francais' && params.has('lecon'))saveCurrentLesson(state.lessonId);
     if(page==='francais')startSession();
     render();
     if(state.client){
