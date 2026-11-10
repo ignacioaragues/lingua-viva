@@ -19,7 +19,15 @@ function mount(page, query = '', cloudBookmark = null) {
     addEventListener: (name, fn) => { events[name] = fn; },
     hidden: false
   };
-  const window = { addEventListener() {}, LINGUA: null, scrollTo() {} };
+  const spoken = [];
+  const window = {
+    addEventListener() {}, LINGUA: null, scrollTo() {},
+    SpeechSynthesisUtterance: class { constructor(text){ this.text=text; } },
+    speechSynthesis: {
+      cancel() {}, getVoices: () => [{ lang:'fr-FR' },{ lang:'es-ES' }],
+      speak: utterance => spoken.push({ text:utterance.text, lang:utterance.lang, rate:utterance.rate, voice:utterance.voice?.lang })
+    }
+  };
   if (cloudBookmark) {
     window.supabase = { createClient: () => ({
       auth: { getSession: async () => ({ data:{ session:{ user:{id:'test-user',email:'test@example.com'} } } }), onAuthStateChange() {} },
@@ -40,7 +48,7 @@ function mount(page, query = '', cloudBookmark = null) {
   };
   vm.runInNewContext(course, context, { filename: 'content.js' });
   vm.runInNewContext(app, context, { filename: 'app.js' });
-  return { get html() { return element.innerHTML; }, events };
+  return { get html() { return element.innerHTML; }, events, spoken };
 }
 
 (async () => {
@@ -54,15 +62,25 @@ function mount(page, query = '', cloudBookmark = null) {
   assert.match(french.html, /Mon temps d’étude/);
   assert.match(french.html, /Langue des explications grammaticales/);
   assert.match(french.html, /Voir le sens/);
+  assert.match(french.html, /data-action="speak" data-speech-text="Bonjour"/);
+  assert.match(french.html, /Écouter l.explication/);
+  await french.events.click({target:{closest:()=>({dataset:{action:'speak',speechText:'Bonjour',speechLang:'fr-FR'}})}});
+  assert.deepEqual(french.spoken[0],{text:'Bonjour',lang:'fr-FR',rate:0.9,voice:'fr-FR'});
   await french.events.click({ target: { closest: () => ({ dataset: { action:'lesson', id:'d1-contacts' } }) } });
   assert.match(french.html, /Contacts/);
   assert.match(french.html, /class="lesson-link active" data-action="lesson" data-id="d1-contacts"/);
   await french.events.click({ target: { closest: () => ({ dataset: { action:'grammar', lang:'es' } }) } });
   assert.match(french.html, /Para presentarte usás verbos distintos/);
   assert.match(french.html, /lang="es"/);
+  assert.match(french.html, /Escuchar la explicación/);
+  await french.events.click({target:{closest:()=>({dataset:{action:'speak',speechText:'Para presentarte',speechLang:'es-ES'}})}});
+  assert.equal(french.spoken[1].lang,'es-ES');
   const cards = mount('flashcards', '?idioma=francais');
   assert.match(cards.html, /Cartes mémoire/);
   assert.match(cards.html, /Bonjour/);
+  assert.match(cards.html,/Écouter le mot/);
+  await cards.events.click({target:{closest:()=>({dataset:{action:'speak',speechText:'Bonjour',speechLang:'fr-FR'}})}});
+  assert.equal(cards.spoken[0].text,'Bonjour');
   await cards.events.click({ target: { closest: () => ({ dataset: { action:'flip' } }) } });
   assert.match(cards.html, /salutation de la journée/);
   const greek = mount('grec');
@@ -89,5 +107,5 @@ function mount(page, query = '', cloudBookmark = null) {
   await new Promise(resolve=>setImmediate(resolve));
   await new Promise(resolve=>setImmediate(resolve));
   assert.match(explicit.html, /class="lesson-link active" data-action="lesson" data-id="d0-alphabet"/);
-  console.log('Smoke tests OK — hub, cours A1, signet de leçon, grammaire FR/ES, flashcards, historique 14 jours et 10 semaines.');
+  console.log('Smoke tests OK — hub, cours A1, audio FR/ES, flashcards parlantes, signet de leçon, historique 14 jours et 10 semaines.');
 })().catch(e=>{console.error(e);process.exitCode=1;});
