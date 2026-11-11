@@ -37,8 +37,8 @@
     sessions:[], progress:{}, attempts:{}, notes:{}, writings:[], cards:{},
     lessonId:lessonById(params.get('lecon') || localGet('lastLesson','d0-bonjour')).id,
     lastLessonSavedAt:localGet('lastLessonSavedAt',null),
-    grammar:localGet('grammar','fr'), revealed:new Set(),
-    lessonDraft:localGet('drafts',{}),
+    grammar:localGet('grammar','fr'), revealed:new Set(), readingParallel:localGet('readingParallel',true),
+    lessonDraft:localGet('drafts',{}), dictationDraft:localGet('dictationDraft',{}),
     localSessions:localGet('sessions',[]), localProgress:localGet('progress',{}),
     localAttempts:localGet('attempts',{}), localCards:localGet('cards',{}),
     tabFocused:true,
@@ -102,6 +102,26 @@
   }
   function lessonNav(){return `<aside class="sidenav" aria-label="Progression"><div class="side-title">Dossier 0 · Découverte</div>${lessons.filter(x=>x.dossier===0).map((l,i)=>navButton(l,i)).join('')}<div class="side-divider"></div><div class="side-title">Dossier 1 · Les uns, les autres</div>${lessons.filter(x=>x.dossier===1).map((l,i)=>navButton(l,i+3)).join('')}<div class="side-divider"></div><a href="${link('flashcards/?idioma=francais')}" class="btn btn-small" style="width:100%">↗ Cartes mémoire</a><a href="${link('estadisticas/?idioma=francais')}" class="btn btn-small" style="width:100%;margin-top:8px">↗ Mon temps d’étude</a></aside>`;}
   function navButton(l,i){return `<button class="lesson-link ${l.id===state.lessonId?'active':''}" data-action="lesson" data-id="${l.id}"><span class="index">${String(i+1).padStart(2,'0')}</span><span>${h(l.title)}</span>${progressOf(l.id)?'<span class="done">✓</span>':''}</button>`;}
+  function renderAlphabet(l){
+    if(!l.alphabet)return '';
+    return `<section class="content-section" id="alphabet"><div class="grammar-head"><h3>Les 26 lettres · de A à Z</h3><span class="chip">Alphabet complet</span></div><p>Chaque case indique <b>le nom de la lettre</b>, sa transcription phonétique (API) et <b>un son possible dans un mot</b>. Écoutez puis répétez : le nom d’une lettre n’est pas toujours le son qu’elle représente.</p>
+      <div class="alphabet-grid">${l.alphabet.map(([letter,name,ipa,example,sound])=>`<div class="letter-tile"><div class="letter-top"><span class="letter-glyph">${h(letter)}</span><div class="letter-name"><strong>${h(name)}</strong><span>${h(ipa)}</span></div>${speechButton(name,'Écouter la lettre '+letter,'fr-FR','speech-compact')}</div><div class="letter-example"><span>Dans un mot</span><b>${h(example)}</b> <span class="letter-sound">${h(sound)}</span> ${speechButton(example,'Écouter : '+example,'fr-FR','speech-compact')}</div></div>`).join('')}</div>
+      <div class="alphabet-notes"><h4>À ne pas confondre</h4><ul><li><b>Le nom et le son :</b> C se dit « cé », mais dans <i>café</i> on entend /k/ et dans <i>cinéma</i> /s/.</li><li><b>U /y/ et OU /u/ :</b> comparez <i>tu</i> et <i>vous</i>. Le son /y/ demande des lèvres arrondies.</li><li><b>Les accents :</b> é (<i>café</i>), è (<i>père</i>), ê (<i>fête</i>), ë (<i>Noël</i>), ç (<i>français</i>). Pour les épeler, dites « e accent aigu », « e accent grave », « e accent circonflexe », « e tréma », « c cédille ».</li><li><b>Lettres finales :</b> elles sont souvent muettes, mais pas toujours. On écrit <i>Paris</i> avec S, même si on ne le prononce pas.</li></ul></div>
+      <div class="alphabet-practice"><h4>Mini-dictée · écouter et écrire</h4><p>Écoutez le mot sans regarder la réponse, puis écrivez-le. Vous pouvez écouter autant de fois que nécessaire. Le bouton utilise la voix française de votre appareil.</p>${l.dictation.map((word,j)=>`<div class="dictation-row"><span class="dictation-number">${String(j+1).padStart(2,'0')}</span>${speechButton(word,'Écouter le mot '+(j+1),'fr-FR')}<input type="text" id="dictation-${j}" data-dictation="${j}" value="${h(state.dictationDraft[l.id+'-'+j]||'')}" autocomplete="off" spellcheck="false" placeholder="Écrivez le mot…" aria-label="Dictée ${j+1}"/><button class="btn btn-small" data-action="check-dictation" data-index="${j}">Vérifier</button><span class="dictation-feedback" id="dictation-feedback-${j}" role="status"></span></div>`).join('')}</div>
+    </section>`;
+  }
+  function renderReading(l){
+    if(!l.reading)return '';
+    const r=l.reading;
+    const annotate=sentence=>sentence.split(/(\s+|[«».,!?;:–])/u).map(token=>{
+      const key=token.toLocaleLowerCase('fr');
+      if(!r.glossary[key])return h(token);
+      return `<button type="button" class="reading-word" data-action="reading-word" data-word="${h(key)}" aria-label="Consulter : ${h(token)}" aria-expanded="false">${h(token)}</button>`;
+    }).join('');
+    return `<section class="content-section" id="lecture"><div class="grammar-head"><div><span class="micro">Lecture graduée · texte original</span><h3>${h(r.title)}</h3></div><button type="button" class="btn btn-small" data-action="reading-mode" aria-pressed="${state.readingParallel}">${state.readingParallel?'Français + español':'Français seul'}</button></div><p>Un court texte original, avec traduction facultative. Touchez un mot français pour voir sa fiche, sa fonction et son sens. La traduction peut être masquée à tout moment.</p>
+      <div class="parallel-reading">${r.sentences.map((s,j)=>`<div class="reading-pair"><div class="reading-fr" lang="fr"><span class="micro">${String(j+1).padStart(2,'0')}</span><div class="reading-sentence">${annotate(s.fr)}</div>${speechButton(s.fr,'Écouter la phrase '+(j+1),'fr-FR','speech-compact')}</div><div class="reading-translation" lang="es" ${state.readingParallel?'':'hidden'}>${h(s.es)}</div></div>`).join('')}</div><p class="reading-hint">Objectif : relisez le texte sans la traduction, puis répondez oralement à la question : « Comment s’écrit le prénom de Léa ? »</p>
+    </section>`;
+  }
   function renderCourse(){
     const l = lessonById(state.lessonId); const i=lessons.indexOf(l); const percent=Math.round(completed()/lessons.length*100);
     document.title=l.title+' · Français A1 · Lingua Viva';
@@ -109,9 +129,11 @@
     <div class="course-layout">${lessonNav()}
       <article class="lesson-main" id="lecon"><div class="lesson-kicker"><span class="micro">Dossier ${l.dossier} · ${String(i+1).padStart(2,'0')} / 08</span><span class="micro">Repère manuel : p. ${l.pages}</span></div><h2>${h(l.title)}</h2><div class="subtitle">${h(l.subtitle)}</div><div class="goal"><b>À la fin de cette leçon</b>${h(l.goal)}</div>
         <section class="content-section"><h3>En situation</h3><div class="dialogue">${l.example.map(line=>`<div>${h(line)}</div>`).join('')}</div><p style="margin-top:12px;font-size:12px">Lisez le dialogue à voix haute. Rejouez-le ensuite sans regarder.</p></section>
-        <section class="content-section" id="grammaire"><div class="grammar-head"><h3>${h(l.grammarTitle)}</h3><div class="switch" aria-label="Langue des explications grammaticales"><button data-action="grammar" data-lang="fr" class="${state.grammar==='fr'?'active':''}" aria-pressed="${state.grammar==='fr'}">FR</button><button data-action="grammar" data-lang="es" class="${state.grammar==='es'?'active':''}" aria-pressed="${state.grammar==='es'}">ES</button></div></div><div class="grammar-copy" lang="${state.grammar}"><p>${h(l.grammar[state.grammar])}</p><div class="speech-toolbar">${speechButton(l.grammar[state.grammar],state.grammar==='fr'?'Écouter l’explication':'Escuchar la explicación',state.grammar==='fr'?'fr-FR':'es-ES')}</div><div class="grammar-speech-examples" lang="fr"><span class="micro">Écouter les mots et les exemples</span><div class="speech-examples">${grammarExamples(l.grammar.fr).map(x=>speechButton(x,x,'fr-FR','speech-example')).join('')}</div></div></div></section>
+        <section class="content-section" id="grammaire"><div class="grammar-head"><h3>${h(l.grammarTitle)}</h3><div class="switch" aria-label="Langue des explications grammaticales"><button data-action="grammar" data-lang="fr" class="${state.grammar==='fr'?'active':''}" aria-pressed="${state.grammar==='fr'}">FR</button><button data-action="grammar" data-lang="es" class="${state.grammar==='es'?'active':''}" aria-pressed="${state.grammar==='es'}">ES</button></div></div><div class="grammar-copy" lang="${state.grammar}">${l.grammar[state.grammar].split(/\n\n+/).map(x=>`<p>${h(x)}</p>`).join('')}<div class="speech-toolbar">${speechButton(l.grammar[state.grammar],state.grammar==='fr'?'Écouter l’explication':'Escuchar la explicación',state.grammar==='fr'?'fr-FR':'es-ES')}</div><div class="grammar-speech-examples" lang="fr"><span class="micro">Écouter les mots et les exemples</span><div class="speech-examples">${grammarExamples(l.grammar.fr).map(x=>speechButton(x,x,'fr-FR','speech-example')).join('')}</div></div></div></section>
+        ${renderAlphabet(l)}
+        ${renderReading(l)}
         <section class="content-section"><div class="grammar-head"><h3>Mots à retenir</h3><a class="btn btn-small btn-plain" href="${link('flashcards/?idioma=francais')}">Réviser ↗</a></div><p>Cliquez sur un mot pour afficher ou cacher son sens.</p><div class="vocab-grid">${l.words.map(([a,b],j)=>`<div class="vocab-item"><button class="vocab" data-action="reveal" data-word="${j}"><b>${h(a)}</b><span>${state.revealed.has(j)?h(b):'Voir le sens ↗'}</span></button>${speechButton(a,'Écouter : '+a,'fr-FR','speech-compact')}</div>`).join('')}</div></section>
-        <section class="content-section" id="exercices"><h3>À vous de jouer</h3><p>Choisissez une réponse. Vous pouvez recommencer autant de fois que vous voulez.</p>${l.exercises.map((ex,j)=>renderExercise(ex,j)).join('')}</section>
+        <section class="content-section" id="exercices"><h3>À vous de jouer</h3><p>Choisissez une réponse. Vous pouvez recommencer autant de fois que vous voulez.</p>${l.exercises.map((ex,j)=>renderExercise(ex,j,l.exercises.length)).join('')}</section>
         <section class="content-section" id="ecriture"><h3>Écriture</h3><p>${h(l.writing)}</p><textarea id="writingDraft" class="textarea" placeholder="Écrivez ici en français…" aria-label="Votre texte">${h(state.lessonDraft[l.id]||'')}</textarea><div class="writing-actions"><button class="btn btn-primary" data-action="save-writing">${state.user?'Enregistrer le texte':'Enregistrer dans ce navigateur'}</button><span class="count" id="wordCount"></span></div><p class="hint">${state.user?'Vos textes sont conservés dans votre compte. Une correction pourra ensuite être ajoutée à cet endroit.':'Connectez-vous pour retrouver vos textes et leurs corrections sur vos différents appareils.'}</p><div id="writingsList">${renderWritings()}</div></section>
         <section class="content-section" id="oral"><h3>Parler en français</h3><p>Ouvrez une conversation vocale avec ChatGPT. Copiez la consigne, collez-la dans la conversation et activez le mode vocal.</p><div class="writing-actions"><button class="btn btn-primary" data-action="voice">Copier la consigne et ouvrir ChatGPT ↗</button><button class="btn" data-action="copy-voice">Copier seulement</button></div></section>
         <section class="content-section" id="ressources"><h3>Écouter, regarder, découvrir</h3><p>Ressources complémentaires et enregistrements externes.</p><div class="resources">${C.resources.filter(r=>r.lesson==='all'||r.lesson===l.id).map(resourceHTML).join('')}</div></section>
@@ -122,9 +144,9 @@
     </div></div></main>`+footer();
     renderTimerUI(); renderWordCount();
   }
-  function renderExercise(ex,j){
+  function renderExercise(ex,j,total){
     const attempt=state.attempts[ex.id]??state.localAttempts[ex.id];
-    return `<div class="exercise"><div class="qnum">QUESTION ${j+1} / 3</div><p>${h(ex.q)}</p><div class="options">${ex.opts.map((op,k)=>`<button data-action="answer" data-ex="${ex.id}" data-choice="${k}" class="option ${attempt?.selected_answer===k?'selected '+(attempt.correct?'correct':'incorrect'):''}">${h(op)}</button>`).join('')}</div>${attempt?`<p class="feedback ${attempt.correct?'':'error'}">${attempt.correct?'✓ Bonne réponse.':'Essayez encore.'} ${h(ex.why)}</p>`:''}</div>`;
+    return `<div class="exercise"><div class="qnum">QUESTION ${j+1} / ${total}</div><p>${h(ex.q)}</p><div class="options">${ex.opts.map((op,k)=>`<button data-action="answer" data-ex="${ex.id}" data-choice="${k}" class="option ${attempt?.selected_answer===k?'selected '+(attempt.correct?'correct':'incorrect'):''}">${h(op)}</button>`).join('')}</div>${attempt?`<p class="feedback ${attempt.correct?'':'error'}">${attempt.correct?'✓ Bonne réponse.':'Essayez encore.'} ${h(ex.why)}</p>`:''}</div>`;
   }
   function renderWritings(){
     const a=state.writings.filter(w=>w.lesson_id===state.lessonId).sort((x,y)=>new Date(y.created_at)-new Date(x.created_at));
@@ -374,10 +396,38 @@
   }
   async function copyText(value){try{await navigator.clipboard.writeText(value);toast(t('Consigne copiée.','Consigna copiada.'));}catch{prompt(t('Copiez cette consigne :','Copiá esta consigna:'),value);}}
   function toast(message,error=false){document.querySelector('.toast')?.remove();const node=document.createElement('div');node.className='toast';node.style.background=error?'#9b6856':'';node.textContent=message;document.body.append(node);setTimeout(()=>node.remove(),4000);}
+  function closeReadingPopover(){document.querySelector('.reading-popover')?.remove();document.querySelectorAll('.reading-word[aria-expanded="true"]').forEach(x=>x.setAttribute('aria-expanded','false'));}
+  function showReadingPopover(button){
+    const word=button.dataset.word, entry=lessonById(state.lessonId).reading?.glossary[word];
+    const opened=button.getAttribute('aria-expanded')==='true';
+    closeReadingPopover();if(opened||!entry)return;
+    button.setAttribute('aria-expanded','true');
+    const popup=document.createElement('div');popup.className='reading-popover';popup.setAttribute('role','status');
+    popup.innerHTML=`<div class="micro">Fiche de vocabulaire</div><strong>${h(button.textContent)}</strong><span>${h(entry[0])}</span><small>${h(entry[1])}</small>${speechButton(button.textContent,'Écouter le mot '+button.textContent,'fr-FR','speech-compact')}`;
+    document.body.append(popup);
+    const rect=button.getBoundingClientRect(),w=popup.getBoundingClientRect().width,ph=popup.getBoundingClientRect().height;
+    popup.style.left=Math.min(Math.max(12,rect.left),Math.max(12,window.innerWidth-w-12))+'px';
+    popup.style.top=(rect.bottom+10+ph>window.innerHeight?Math.max(12,rect.top-ph-10):rect.bottom+10)+'px';
+  }
 
   document.addEventListener('click',async e=>{
-    const b=e.target.closest('[data-action]');if(!b)return;
+    const b=e.target.closest('[data-action]');if(!b){closeReadingPopover();return;}
     const a=b.dataset.action;markActive();
+    if(a==='reading-word'){showReadingPopover(b);return;}
+    if(a!=='speak')closeReadingPopover();
+    if(a==='reading-mode'){
+      state.readingParallel=!state.readingParallel;localPut('readingParallel',state.readingParallel);
+      document.querySelectorAll('.reading-translation').forEach(node=>{node.hidden=!state.readingParallel;});
+      b.textContent=state.readingParallel?'Français + español':'Français seul';b.setAttribute('aria-pressed',String(state.readingParallel));return;
+    }
+    if(a==='check-dictation'){
+      const j=Number(b.dataset.index),input=document.getElementById('dictation-'+j),out=document.getElementById('dictation-feedback-'+j);
+      const expected=lessonById(state.lessonId).dictation?.[j];if(!input||!out||!expected)return;
+      const answer=input.value.trim().toLocaleLowerCase('fr');
+      const correct=answer===expected.toLocaleLowerCase('fr');
+      out.textContent=!answer?'Écrivez une réponse.':correct?'✓ Très bien !':'À revoir. Réponse : '+expected;
+      out.classList.toggle('error',!correct);return;
+    }
     if(a==='auth'){state.authModal=true;state.authMessage='';render();return;}
     if(a==='close-auth'){state.authModal=false;document.querySelector('.modal-backdrop')?.remove();return;}
     if(a==='auth-mode'){state.authMode=b.dataset.mode;state.authMessage='';showModal();return;}
@@ -400,7 +450,10 @@
     if(a==='flip'){state.flashShow=!state.flashShow;render();return;}
     if(a==='flash-review'){reviewFlashCard(b.dataset.quality);return;}
   });
-  document.addEventListener('input',e=>{if(e.target.id==='writingDraft'){state.lessonDraft[state.lessonId]=e.target.value;localPut('drafts',state.lessonDraft);renderWordCount();}});
+  document.addEventListener('input',e=>{
+    if(e.target.id==='writingDraft'){state.lessonDraft[state.lessonId]=e.target.value;localPut('drafts',state.lessonDraft);renderWordCount();}
+    if(e.target.dataset?.dictation!==undefined){state.dictationDraft[state.lessonId+'-'+e.target.dataset.dictation]=e.target.value;localPut('dictationDraft',state.dictationDraft);}
+  });
   document.addEventListener('change',e=>{
     if(e.target.id==='flashLanguage'){state.flashLang=e.target.value;isFrench=state.flashLang==='francais';state.flashShow=false;state.flashId=null;state.reviewedNow.clear();history.replaceState(null,'','?idioma='+encodeURIComponent(state.flashLang));render();}
     if(e.target.id==='statsLanguage'){state.statsLang=e.target.value;isFrench=state.statsLang==='francais';history.replaceState(null,'',state.statsLang==='all'?location.pathname:'?idioma='+encodeURIComponent(state.statsLang));render();}

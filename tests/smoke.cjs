@@ -16,6 +16,7 @@ function mount(page, query = '', cloudBookmark = null) {
   const document = {
     body: { dataset: { page, root: page === 'home' ? './' : '../' } },
     querySelector: selector => selector === '#app' ? element : null,
+    querySelectorAll: () => [],
     addEventListener: (name, fn) => { events[name] = fn; },
     hidden: false
   };
@@ -48,7 +49,7 @@ function mount(page, query = '', cloudBookmark = null) {
   };
   vm.runInNewContext(course, context, { filename: 'content.js' });
   vm.runInNewContext(app, context, { filename: 'app.js' });
-  return { get html() { return element.innerHTML; }, events, spoken };
+  return { get html() { return element.innerHTML; }, events, spoken, content:window.LINGUA };
 }
 
 (async () => {
@@ -107,5 +108,18 @@ function mount(page, query = '', cloudBookmark = null) {
   await new Promise(resolve=>setImmediate(resolve));
   await new Promise(resolve=>setImmediate(resolve));
   assert.match(explicit.html, /class="lesson-link active" data-action="lesson" data-id="d0-alphabet"/);
+  assert.equal((explicit.html.match(/class="letter-tile"/g)||[]).length,26);
+  assert.equal((explicit.html.match(/class="dictation-row"/g)||[]).length,4);
+  assert.match(explicit.html,/Les 26 lettres/);
+  assert.match(explicit.html,/data-action="reading-word"/);
+  assert.match(explicit.html,/Un prénom à l’accueil/);
+  assert.match(explicit.html,/Français \+ español/);
+  assert.match(explicit.html,/QUESTION 6 \/ 6/);
+  const alpha=explicit.content.lessons.find(x=>x.id==='d0-alphabet');
+  assert.equal(alpha.alphabet.length,26);
+  for(const s of alpha.reading.sentences){
+    const words=s.fr.split(/(\s+|[«».,!?;:–])/u).filter(x=>x.trim()&&!/^[«».,!?;:–]$/.test(x));
+    for(const word of words)assert.ok(alpha.reading.glossary[word.toLocaleLowerCase('fr')],`Unglossed word: ${word}`);
+  }
   console.log('Smoke tests OK — hub, cours A1, audio FR/ES, flashcards parlantes, signet de leçon, historique 14 jours et 10 semaines.');
 })().catch(e=>{console.error(e);process.exitCode=1;});

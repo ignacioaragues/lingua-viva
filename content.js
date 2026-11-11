@@ -20,15 +20,57 @@ window.LINGUA = {
     },
     {
       id:"d0-alphabet", dossier:0, title:"L’alphabet", subtitle:"Épeler et demander de répéter", pages:"17–20", duration:18,
-      goal:"Épeler votre nom et demander à une autre personne d’épeler le sien.",
-      grammarTitle:"Lettres et sons",
-      grammar:{fr:"En français, l’orthographe et la prononciation ne correspondent pas toujours. Les lettres finales sont souvent muettes. Attention à la différence entre « u » /y/ (dans « tu ») et « ou » /u/ (dans « vous »). Pour demander une répétition, dites « Vous pouvez répéter, s’il vous plaît ? ».",es:"En francés, ortografía y pronunciación no siempre coinciden: las letras finales suelen ser mudas. Prestá especial atención a «u» /y/ (como en «tu») frente a «ou» /u/ (como en «vous»). Para pedir que repitan: «Vous pouvez répéter, s’il vous plaît ?»."},
+      goal:"Reconnaître les 26 lettres, distinguer leur nom de leur son, épeler votre nom et demander une répétition.",
+      grammarTitle:"Lettres, sons et accents",
+      grammar:{
+        fr:"L’alphabet français comprend 26 lettres. Chaque lettre a un nom (« B » se nomme « bé », /be/), mais sa prononciation dans un mot peut être différente. Par exemple, le nom de « E » est /ø/, alors que dans « été », la première lettre se prononce /e/. Le tableau ci-dessous donne un son fréquent pour chaque lettre, pas toutes ses prononciations.\n\nUne même lettre peut représenter plusieurs sons : « c » se prononce /k/ dans « café » et /s/ dans « cinéma » ; « g » se prononce /g/ dans « gare » et /ʒ/ dans « girafe ». Le « h » n’a normalement pas de son propre en français. Le groupe « ou » se prononce /u/, mais « u » se prononce /y/.\n\nLes accents comptent : « é », « è », « ê », « ë » et « ç » ne sont pas de nouvelles lettres, mais ils peuvent changer la prononciation ou l’orthographe. Pour épeler un mot, nommez les lettres une par une. Pour demander de répéter : « Vous pouvez répéter, s’il vous plaît ? » ou « Comment ça s’écrit ? ».",
+        es:"El alfabeto francés tiene 26 letras. Cada una posee un nombre (« B » se llama « bé », /be/), pero ese nombre no coincide necesariamente con su sonido dentro de una palabra. Por ejemplo, « E » se llama /ø/, aunque la primera letra de « été » se pronuncia /e/. En la tabla, el sonido indicado es solamente uno de los posibles.\n\nHay letras con distintas realizaciones: « c » representa /k/ en « café » y /s/ en « cinéma »; « g » representa /g/ en « gare » y /ʒ/ en « girafe ». La « h » normalmente no tiene sonido propio en francés. « Ou » se pronuncia /u/, mientras que « u » se pronuncia /y/ (parecido a una i con los labios redondeados).\n\nLos acentos son importantes: « é », « è », « ê », « ë » y « ç » no son letras adicionales, pero pueden modificar la pronunciación o la ortografía. Para deletrear un nombre, decís los nombres de las letras. Para pedir que repitan: « Vous pouvez répéter, s’il vous plaît ? » o « Comment ça s’écrit ? »."
+      },
+      alphabet:[
+        ["A","a","/a/","avion","/a/"],["B","bé","/be/","bonjour","/b/"],
+        ["C","cé","/se/","café","/k/"],["D","dé","/de/","deux","/d/"],
+        ["E","euh","/ø/","été","/e/"],["F","èf","/ɛf/","fille","/f/"],
+        ["G","gé","/ʒe/","gare","/g/"],["H","ache","/aʃ/","hôtel","muet"],
+        ["I","i","/i/","ici","/i/"],["J","ji","/ʒi/","jour","/ʒ/"],
+        ["K","ka","/ka/","kilo","/k/"],["L","èl","/ɛl/","livre","/l/"],
+        ["M","èm","/ɛm/","merci","/m/"],["N","èn","/ɛn/","nom","/n/"],
+        ["O","o","/o/","orange","/ɔ/"],["P","pé","/pe/","Paris","/p/"],
+        ["Q","ku","/ky/","qui","/k/"],["R","èr","/ɛʁ/","rue","/ʁ/"],
+        ["S","ès","/ɛs/","salut","/s/"],["T","té","/te/","tu","/t/"],
+        ["U","u","/y/","une","/y/"],["V","vé","/ve/","vous","/v/"],
+        ["W","double vé","/dublə ve/","week-end","/w/"],["X","iks","/iks/","taxi","/ks/"],
+        ["Y","i grec","/i gʁɛk/","yoga","/j/"],["Z","zèd","/zɛd/","zéro","/z/"]
+      ],
+      dictation:["Paris","Lyon","Marie","Salut"],
+      reading:{
+        title:"Un prénom à l’accueil",
+        sentences:[
+          {fr:"Bonjour ! Je m’appelle Léa.",es:"¡Hola! Me llamo Léa."},
+          {fr:"Je suis à Lyon. Mon nom s’écrit L – É – A.",es:"Estoy en Lyon. Mi nombre se escribe L – É – A."},
+          {fr:"À l’accueil, un homme demande : « Comment ça s’écrit ? »",es:"En recepción, un hombre pregunta: «¿Cómo se escribe?»"},
+          {fr:"Je réponds : « L, É, A. » Il dit : « Merci ! »",es:"Respondo: «L, É, A». Él dice: «¡Gracias!»"}
+        ],
+        glossary:{
+          "bonjour":["hola / buenos días","saludo de día"],"je":["yo","pronombre sujeto"],"m’appelle":["me llamo","verbo s’appeler; 1.ª persona"],
+          "léa":["Léa","nombre propio francés"],"suis":["soy / estoy","verbo être; 1.ª persona"],"à":["en / a","preposición"],
+          "lyon":["Lyon","ciudad francesa"],"mon":["mi","posesivo masculino singular"],"nom":["nombre / apellido","sustantivo masculino"],
+          "s’écrit":["se escribe","verbo s’écrire; 3.ª persona"],"l":["ele","nombre de la letra L"],"é":["e con acento agudo","nombre de letra con signo diacrítico"],
+          "a":["a","nombre de la letra A"],"l’accueil":["la recepción","sustantivo masculino, con artículo elidido"],
+          "un":["un","artículo indefinido masculino"],"homme":["hombre","sustantivo masculino; h muda"],
+          "demande":["pregunta","verbo demander; 3.ª persona"],"comment":["cómo","adverbio interrogativo"],
+          "ça":["eso / esto","pronombre demostrativo familiar"],"réponds":["respondo","verbo répondre; 1.ª persona"],
+          "il":["él","pronombre sujeto"],"dit":["dice","verbo dire; 3.ª persona"],"merci":["gracias","expresión de agradecimiento"]
+        }
+      },
       example:["— Comment vous appelez-vous ?", "— Je m’appelle Martin.", "— Vous pouvez épeler, s’il vous plaît ?", "— M – A – R – T – I – N."],
-      words:[["Épeler","dire les lettres d’un mot"],["Répéter","dire encore une fois"],["Comment ?","pour demander une précision"],["S’il vous plaît","formule de politesse"],["Je m’appelle","pour dire son nom"]],
+      words:[["Épeler","dire les lettres d’un mot"],["Répéter","dire encore une fois"],["Comment ça s’écrit ?","pour demander l’orthographe"],["S’il vous plaît","formule de politesse"],["Je m’appelle","pour dire son nom"],["Une lettre","un signe de l’alphabet"],["Un accent","signe comme é, è ou ê"],["Un prénom","le nom personnel d’une personne"],["Un nom de famille","le nom partagé par une famille"]],
       exercises:[
         {id:"d0a1",q:"Vous ne comprenez pas un nom. Que demandez-vous ?",opts:["Vous pouvez épeler ?","Vous habitez où ?","Vous êtes français ?"],answer:0,why:"« Épeler » signifie dire les lettres d’un mot."},
         {id:"d0a2",q:"Dans le mot « vous », comment se prononce « ou » ?",opts:["/y/","/u/","/ɛ̃/"],answer:1,why:"Le groupe de lettres « ou » correspond ici au son /u/."},
-        {id:"d0a3",q:"Quelle phrase est polie ?",opts:["Répète !","Vous pouvez répéter, s’il vous plaît ?","Vous parler !"],answer:1,why:"La deuxième phrase emploie « vous » et « s’il vous plaît »."}
+        {id:"d0a3",q:"Quelle phrase est polie ?",opts:["Répète !","Vous pouvez répéter, s’il vous plaît ?","Vous parler !"],answer:1,why:"La deuxième phrase emploie « vous » et « s’il vous plaît »."},
+        {id:"d0a4",q:"Quel est le nom de la lettre « H » ?",opts:["ache","hôtel","hé"],answer:0,why:"Le nom de H est « ache » /aʃ/. Dans « hôtel », cette lettre ne représente pas de son."},
+        {id:"d0a5",q:"Dans « café » et « cinéma », la lettre C a…",opts:["toujours le son /k/","deux sons différents","toujours le son /s/"],answer:1,why:"« café » commence par /k/ ; « cinéma » commence par /s/."},
+        {id:"d0a6",q:"Quelle différence entre « u » et « ou » ?",opts:["Aucune","« u » = /y/ ; « ou » = /u/","« u » = /u/ ; « ou » = /y/"],answer:1,why:"La voyelle /y/ s’articule avec les lèvres arrondies ; /u/ correspond au son de « vous »."}
       ],
       writing:"Écrivez un dialogue très court : vous demandez un nom, vous demandez de l’épeler, puis vous remerciez.",
       speaking:"Nous sommes à l’accueil d’un hôtel en France. Demande-moi mon nom, puis épelle le tien. Fais-moi répéter des lettres. Parle lentement en français A1 et corrige mes erreurs à la fin."
@@ -127,6 +169,8 @@ window.LINGUA = {
   resources:[
     {id:"hachette",lesson:"all",type:"Audio",title:"Alter Ego+ 1 · pistes officielles",desc:"Écoutez les enregistrements associés aux activités du livre sur le site de l’éditeur.",url:"https://alteregoplus.hachettefle.fr/alter-ego-%2B-1_livre-de-l-eleve_fr.html"},
     {id:"tv5",lesson:"all",type:"Exercices",title:"TV5MONDE · Apprendre A1",desc:"Vidéos authentiques et exercices de compréhension pour débutants.",url:"https://apprendre.tv5monde.com/fr/exercices/a1-debutant"},
+    {id:"tv5alphabet",lesson:"d0-alphabet",type:"Prononciation · audios natifs",title:"TV5MONDE · Les 26 lettres de l’alphabet",desc:"Écoutez chaque lettre et un prénom exemple, avec des enregistrements natifs. Complément aux voix de synthèse de cette page.",url:"https://apprendre.tv5monde.com/fr/aides/prononciation-les-lettres-de-lalphabet"},
+    {id:"tv5alphabetpractice",lesson:"d0-alphabet",type:"Exercices d’écoute",title:"TV5MONDE · Prononciation : alphabet",desc:"Quatre exercices A1 d’écoute et de prononciation.",url:"https://apprendre.tv5monde.com/fr/exercices/a1-debutant/prononciation-les-lettres-de-lalphabet"},
     {id:"alexa",lesson:"d0-bonjour",type:"Vidéo",title:"Learn French with Alexa · débutants",desc:"Premiers mots, salutations et prononciation.",url:"https://www.youtube.com/watch?v=RxCR3g6aYJ0"},
     {id:"songbonjour",lesson:"d0-bonjour",type:"Chanson",title:"Alain Le Lait · Bonjour Bonjour",desc:"Repérez les salutations et la question « Comment ça va ? ».",url:"https://www.youtube.com/watch?v=atNkI6QFZ50"},
     {id:"pierre",lesson:"d1-contacts",type:"Écoute",title:"Français avec Pierre · informations personnelles",desc:"Un exemple de présentation et de questions simples.",url:"https://www.francaisavecpierre.com/podcast-en-francais-informations-personnelles-niv-a1a2/"},
