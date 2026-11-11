@@ -39,6 +39,7 @@
     lastLessonSavedAt:localGet('lastLessonSavedAt',null),
     grammar:localGet('grammar','fr'), revealed:new Set(), readingParallel:localGet('readingParallel',true),
     lessonDraft:localGet('drafts',{}), dictationDraft:localGet('dictationDraft',{}),
+    questionDrafts:localGet('questionDrafts',{}), questionOpen:new Set(),
     localSessions:localGet('sessions',[]), localProgress:localGet('progress',{}),
     localAttempts:localGet('attempts',{}), localCards:localGet('cards',{}),
     tabFocused:true,
@@ -142,16 +143,34 @@
       </article>
       <aside class="sidebar-right"><div class="mini-panel"><div class="micro">Temps d’étude actif</div><div class="bigtime" id="liveTime">00:00</div><div class="timer-state" id="timerState">● Suivi automatique</div><p>Le chronomètre s’arrête quand vous quittez l’onglet ou après 90 s sans activité.</p><button class="btn btn-small" data-action="timer-toggle" id="timerButton">Faire une pause</button></div><div class="mini-panel"><div class="micro">Votre parcours</div><div class="bigtime" id="courseTime">${fmt(statsTime('francais'))}</div><div class="micro">Total cumulé</div><div class="track"><span style="width:${percent}%"></span></div><p>${completed()} leçons terminées sur 8</p><a href="${link('estadisticas/?idioma=francais')}" class="btn btn-small">Voir mes temps ↗</a></div></aside>
     </div></div></main>`+footer();
-    renderTimerUI(); renderWordCount();
+    installQuestionBoxes();renderTimerUI(); renderWordCount();
   }
   function renderExercise(ex,j,total){
     const attempt=state.attempts[ex.id]??state.localAttempts[ex.id];
     return `<div class="exercise"><div class="qnum">QUESTION ${j+1} / ${total}</div><p>${h(ex.q)}</p><div class="options">${ex.opts.map((op,k)=>`<button data-action="answer" data-ex="${ex.id}" data-choice="${k}" class="option ${attempt?.selected_answer===k?'selected '+(attempt.correct?'correct':'incorrect'):''}">${h(op)}</button>`).join('')}</div>${attempt?`<p class="feedback ${attempt.correct?'':'error'}">${attempt.correct?'✓ Bonne réponse.':'Essayez encore.'} ${h(ex.why)}</p>`:''}</div>`;
   }
   function renderWritings(){
-    const a=state.writings.filter(w=>w.lesson_id===state.lessonId).sort((x,y)=>new Date(y.created_at)-new Date(x.created_at));
-    const local=localGet('writings',[]).filter(w=>w.lesson_id===state.lessonId);
+    const a=state.writings.filter(w=>w.lesson_id===state.lessonId&&!String(w.prompt||'').startsWith('QUESTION_LV:')).sort((x,y)=>new Date(y.created_at)-new Date(x.created_at));
+    const local=localGet('writings',[]).filter(w=>w.lesson_id===state.lessonId&&!String(w.prompt||'').startsWith('QUESTION_LV:'));
     return [...a,...local].slice(0,5).map(w=>`<div class="writing-entry"><div class="micro">${new Date(w.created_at).toLocaleDateString('fr-FR')} · ${w.status==='reviewed'?'Corrigé':'Texte enregistré'}</div><p>${h(w.body)}</p>${w.feedback?`<div class="review"><div class="micro">Retour et corrections</div><p>${h(w.feedback)}</p>${w.corrected_text?`<p><b>Proposition corrigée :</b> ${h(w.corrected_text)}</p>`:''}</div>`:''}<button class="btn btn-small" data-action="copy-writing" data-writing="${h(w.id)}">Demander une correction ↗</button></div>`).join('');
+  }
+  // Questions use the same private, per-user Supabase storage as written work.
+  // The QUESTION_LV: marker keeps tutoring queries distinct from writing corrections.
+  const questionKey = scope => state.lessonId+':'+scope;
+  const questionPrompt = (scope,title) => 'QUESTION_LV:'+scope+':'+title;
+  const questionRows = scope => state.writings.filter(w=>w.lesson_id===state.lessonId&&String(w.prompt||'').startsWith('QUESTION_LV:'+scope+':')).sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+  function questionBoxHTML(scope,title){
+    const key=questionKey(scope),open=state.questionOpen.has(key),rows=questionRows(scope),answered=rows.filter(w=>w.status==='reviewed'&&w.feedback).length;
+    const indicator=answered?`${answered} réponse${answered>1?'s':''}`:rows.length?`${rows.length} en attente`:'';
+    return `<div class="question-box" data-scope="${h(scope)}"><button type="button" class="question-toggle" data-action="toggle-question" data-scope="${h(scope)}" aria-expanded="${open}"><span>Une question sur cette partie ?</span><span class="question-summary">${h(indicator)} <b aria-hidden="true">${open?'−':'+'}</b></span></button><div class="question-panel" ${open?'':'hidden'}><p>Posez une question sur « ${h(title)} ». Elle sera enregistrée dans votre compte et pourra recevoir une réponse lors de la prochaine révision. Ce n’est pas une conversation en direct.</p><label class="micro" for="question-${h(scope)}">Votre question</label><textarea id="question-${h(scope)}" class="textarea question-input" data-question-draft="${h(scope)}" maxlength="3000" placeholder="Qu’est-ce qui n’est pas clair ?">${h(state.questionDrafts[key]||'')}</textarea><div class="question-actions">${state.user?`<button type="button" class="btn btn-primary btn-small" data-action="send-question" data-scope="${h(scope)}">Envoyer ma question</button><button type="button" class="btn btn-small" data-action="refresh-questions">Actualiser les réponses</button>`:`<button type="button" class="btn btn-small btn-primary" data-action="auth">Se connecter pour envoyer</button>`}<button type="button" class="btn btn-small btn-plain" data-action="copy-question" data-scope="${h(scope)}">Poser maintenant dans ChatGPT ↗</button></div>${!state.user?'<p class="question-disclaimer">Sans connexion, le brouillon reste uniquement dans ce navigateur : je ne peux pas le lire.</p>':''}<div class="question-history">${rows.slice(0,5).map(w=>`<div class="question-entry"><span class="micro">${new Date(w.created_at).toLocaleDateString('fr-FR')} · ${w.status==='reviewed'&&w.feedback?'Réponse disponible':'En attente de réponse'}</span><p>${h(w.body)}</p>${w.feedback?`<div class="question-reply"><span class="micro">Réponse du tuteur</span><p>${h(w.feedback)}</p></div>`:''}</div>`).join('')}</div></div></div>`;
+  }
+  function installQuestionBoxes(){
+    const sections=document.querySelectorAll('.lesson-main > .content-section');
+    sections.forEach((section,index)=>{
+      const title=section.querySelector('h3')?.textContent?.trim()||'Partie '+(index+1);
+      const scope=section.id||title.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+      section.insertAdjacentHTML('beforeend',questionBoxHTML(scope,title));
+    });
   }
   function resourceHTML(r){return `<a class="resource" href="${h(r.url)}" target="_blank" rel="noopener noreferrer"><div><div class="micro">${h(r.type)}</div><h4>${h(r.title)}</h4><p>${h(r.desc)}</p></div><span class="launch">↗</span></a>`;}
 
@@ -374,6 +393,17 @@
     else{const old=localGet('writings',[]);old.unshift(rec);localPut('writings',old);}
     state.lessonDraft[l.id]='';localPut('drafts',state.lessonDraft);render();toast('Texte enregistré.');
   }
+  async function saveQuestion(scope,title){
+    const key=questionKey(scope),body=String(state.questionDrafts[key]||'').trim();
+    if(!body){toast('Écrivez une question avant de l’envoyer.',true);return;}
+    if(body.length>3000){toast('Votre question ne doit pas dépasser 3 000 caractères.',true);return;}
+    if(!state.user||!state.client){state.authModal=true;render();return;}
+    const record={user_id:state.user.id,lesson_id:state.lessonId,prompt:questionPrompt(scope,title),body};
+    const {data,error}=await state.client.from('lingua_writings').insert(record).select().single();
+    if(error){toast('La question n’a pas été envoyée : '+error.message,true);return;}
+    state.writings.unshift(data);state.questionDrafts[key]='';localPut('questionDrafts',state.questionDrafts);
+    state.questionOpen.add(key);render();toast('Question enregistrée. Elle sera examinée lors de la prochaine révision.');
+  }
   async function saveNote(){
     const body=document.querySelector('#notesInput')?.value||'';const id=state.lessonId;
     if(state.user&&state.client){const{error}=await state.client.from('lingua_notes').upsert({user_id:state.user.id,lesson_id:id,body,updated_at:new Date().toISOString()},{onConflict:'user_id,lesson_id'});if(error){toast(error.message,true);return;}state.notes[id]=body;}
@@ -415,6 +445,31 @@
     const a=b.dataset.action;markActive();
     if(a==='reading-word'){showReadingPopover(b);return;}
     if(a!=='speak')closeReadingPopover();
+    if(a==='toggle-question'){
+      const scope=b.dataset.scope,key=questionKey(scope),open=!state.questionOpen.has(key);
+      if(open)state.questionOpen.add(key);else state.questionOpen.delete(key);
+      b.setAttribute('aria-expanded',String(open));
+      const panel=b.closest('.question-box')?.querySelector('.question-panel');if(panel)panel.hidden=!open;
+      const symbol=b.querySelector('.question-summary b');if(symbol)symbol.textContent=open?'−':'+';
+      return;
+    }
+    if(a==='send-question'){
+      const scope=b.dataset.scope,title=b.closest('.content-section')?.querySelector('h3')?.textContent?.trim()||'Cette partie';
+      await saveQuestion(scope,title);return;
+    }
+    if(a==='refresh-questions'){
+      if(!state.user||!state.client)return;
+      const {data,error}=await state.client.from('lingua_writings').select('*').eq('user_id',state.user.id).limit(3000);
+      if(error){toast('Impossible d’actualiser les réponses : '+error.message,true);return;}
+      state.writings=data||[];render();toast('Réponses actualisées.');return;
+    }
+    if(a==='copy-question'){
+      const scope=b.dataset.scope,key=questionKey(scope),body=String(state.questionDrafts[key]||'').trim();
+      if(!body){toast('Écrivez une question avant de l’ouvrir dans ChatGPT.',true);return;}
+      const title=b.closest('.content-section')?.querySelector('h3')?.textContent?.trim()||'Leçon';
+      await copyText(`Estoy estudiando francés A1 en Lingua Viva, lección «${lessonById(state.lessonId).title}», sección «${title}». Respondé mi pregunta en español, con ejemplos sencillos en francés y una aclaración breve del punto gramatical cuando corresponda.\n\nMi pregunta:\n${body}`);
+      window.open('https://chatgpt.com/','_blank','noopener');return;
+    }
     if(a==='reading-mode'){
       state.readingParallel=!state.readingParallel;localPut('readingParallel',state.readingParallel);
       document.querySelectorAll('.reading-translation').forEach(node=>{node.hidden=!state.readingParallel;});
@@ -453,6 +508,7 @@
   document.addEventListener('input',e=>{
     if(e.target.id==='writingDraft'){state.lessonDraft[state.lessonId]=e.target.value;localPut('drafts',state.lessonDraft);renderWordCount();}
     if(e.target.dataset?.dictation!==undefined){state.dictationDraft[state.lessonId+'-'+e.target.dataset.dictation]=e.target.value;localPut('dictationDraft',state.dictationDraft);}
+    if(e.target.dataset?.questionDraft!==undefined){state.questionDrafts[questionKey(e.target.dataset.questionDraft)]=e.target.value;localPut('questionDrafts',state.questionDrafts);}
   });
   document.addEventListener('change',e=>{
     if(e.target.id==='flashLanguage'){state.flashLang=e.target.value;isFrench=state.flashLang==='francais';state.flashShow=false;state.flashId=null;state.reviewedNow.clear();history.replaceState(null,'','?idioma='+encodeURIComponent(state.flashLang));render();}
