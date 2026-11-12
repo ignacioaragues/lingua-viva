@@ -67,8 +67,8 @@
     "exercise_fields": "Implementados en lector por páginas con guardado privado; prácticas 1.5 y 1.6 con autocorrección (5 ítems cada una); teclado griego con espíritus y acentos. El resto de las prácticas todavía no tiene autocorrección."
   },
   "next_steps": [
-    "Probar con sesión real el audio Ogg y el PDF en Chrome, iPad/Safari; en caso de incompatibilidad de audio usar fuente de grabación compatible y verificada",
-    "Comprobar navegación, escritura y guardado al cambiar pestañas y páginas en móvil y escritorio",
+    "Validar con sesión real que el reloj compacto abre su panel y sigue contando al cambiar de página o pestaña",
+    "Comprobar en Chrome y Safari/iPad el PDF privado, guardado por página y controles de ejercicios",
     "Continuar el curso de Duff en orden, agregando ejercicios por página y anotación bíblica contextual",
     "Enriquecer fonética comparada con audios independientes para sonidos contrastivos solo cuando se verifique fuente y licencia",
     "Completar autocorrección de prácticas 1.1–1.4"
@@ -123,7 +123,7 @@
     "mode": "Cuaderno derecho compacto con pestañas Ejercicios / Apuntes / Preguntas y scroll propio, oculta/abre desde barra de herramientas.",
     "keyboard": "Teclado griego plegable dentro de Ejercicios y Apuntes.",
     "pronunciation": "Atlas histórico en ventana independiente; no ocupa el cuaderno.",
-    "responsive": "A <=1050px el cuaderno se superpone a la lectura cuando se abre, y arranca cerrado; en móviles se muestra como panel inferior.",
+    "responsive": "A <=1050px el cuaderno se superpone a la lectura cuando se abre, y arranca cerrado; en móviles se muestra como panel inferior. El reloj del temporizador ocupa un indicador pequeño a la derecha de la navegación de página.",
     "save": "Se conserva guardado automático por página y cuenta autorizada."
   },
   "study_timer": {
@@ -132,7 +132,7 @@
     "language": "griego-biblico",
     "storage": "public.lingua_study_sessions con RLS por usuario; cache offline separado lv:greekSessions",
     "features": [
-      "contador visible junto al PDF, sin añadir columna lateral",
+      "contador compacto desplegable en la línea de navegación del PDF, sin franja verde ni columna adicional",
       "registro automático de tiempo activo con pausa manual y pausa tras 90 segundos de inactividad",
       "pausa al ocultar la pestaña o perder foco",
       "acumulado de griego y acceso a Mis tiempos",
@@ -141,7 +141,7 @@
       "integración en gráficos y diario general junto al francés"
     ],
     "database": "Ampliado constraint lingua_study_sessions_language_check para aceptar griego-biblico sin retirar grec",
-    "verification": "Pruebas de sintaxis, simulación del contador, pausa/visibilidad/cambio de capítulo, cola y persistencia simulada, y renderizado integrado; prueba autenticada real pendiente",
+    "verification": "Sintaxis JavaScript y estructura de integración verificadas; el reloj desplegable fue integrado en toolbar y CSS, con cache busting. QA autenticado real en Chrome/iPad pendiente.",
     "notes": "No contar tiempo de páginas anteriores retroactivamente. La lectura pasiva sin interacción durante 90 segundos se pausa, igual que el francés."
   }
 }
