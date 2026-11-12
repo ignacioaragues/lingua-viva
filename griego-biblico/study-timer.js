@@ -105,6 +105,7 @@ function create(config){
   if(isRunning()){
    session.duration_seconds+=Math.min(2,Math.round(elapsed/1000));
    ticks++;
+   if(ticks%5===0)putSession(session);
    if(ticks%20===0)flush();
    if(session.duration_seconds>=MAX_SESSION_SECONDS||new Date(session.started_at).toDateString()!==new Date().toDateString())setLesson(session.lesson_id,true);
   }
@@ -122,7 +123,7 @@ function create(config){
  function stop(){
   if(!alive)return;
   flush();alive=false;clearInterval(interval);
-  ['pointerdown','keydown','scroll','touchstart','wheel'].forEach(function(event){window.removeEventListener(event,markActivity);});
+  ['pointerdown','keydown','scroll','touchstart','wheel'].forEach(function(event){window.removeEventListener(event,markActivity,event==='scroll');});
   window.removeEventListener('focus',focus);window.removeEventListener('blur',blur);
   document.removeEventListener('visibilitychange',visibility);
   window.removeEventListener('pagehide',flush);
@@ -134,7 +135,7 @@ function create(config){
    +'<div class="duff-timer-controls"><button type="button" class="btn btn-small" id="duff-timer-toggle" data-do="timer-toggle" aria-pressed="false">Pausar</button><small>Se pausa al cambiar de pestaña o tras 90 s sin actividad.</small></div>'
    +'</section>';
  }
- ['pointerdown','keydown','scroll','touchstart','wheel'].forEach(function(event){window.addEventListener(event,markActivity,{passive:true});});
+ ['pointerdown','keydown','scroll','touchstart','wheel'].forEach(function(event){window.addEventListener(event,markActivity,event==='scroll'?{capture:true,passive:true}:{passive:true});});
  window.addEventListener('focus',focus);window.addEventListener('blur',blur);
  document.addEventListener('visibilitychange',visibility);
  window.addEventListener('pagehide',flush);
