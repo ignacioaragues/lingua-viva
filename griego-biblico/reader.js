@@ -113,7 +113,7 @@ async function savePage(p){
 }
 function scheduleSave(p){clearTimeout(state.saveTimers[p]);state.saveTimers[p]=setTimeout(function(){savePage(p);},900);var el=document.getElementById('duff-save-status');if(el)el.textContent='Guardando…';}
 async function bookmark(p){await client.from('lingua_notes').upsert({user_id:OWNER,lesson_id:'duff:bookmark',body:JSON.stringify({page:p}),updated_at:new Date().toISOString()},{onConflict:'user_id,lesson_id'});}
-function go(p){p=Number(p);if(!Number.isFinite(p)||p<1||p>522)return;state.page=Math.floor(p);state.saveStatus='';render();bookmark(state.page);history.replaceState(null,'','#pagina='+state.page);}
+function go(p){if(!state.user||state.user.id!==OWNER)return;p=Number(p);if(!Number.isFinite(p)||p<1||p>522)return;state.page=Math.floor(p);state.saveStatus='';render();bookmark(state.page);history.replaceState(null,'','#pagina='+state.page);}
 async function loadData(){
  var notes=await client.from('lingua_notes').select('lesson_id,body').eq('user_id',OWNER).like('lesson_id','duff:%').limit(1000);
  if(notes.error)state.bookError='No se pudieron cargar los apuntes: '+notes.error.message;
@@ -130,7 +130,7 @@ async function loadData(){
 async function loadBook(){
  var res=await client.storage.from(BUCKET).download(PATH);
  if(res.error){state.bookError='Todavía no se encontró tu ejemplar privado. Seleccionalo abajo para subirlo una sola vez.';render();return;}
- if(state.bookUrl)URL.revokeObjectURL(state.bookUrl);
+ if(state.bookUrl)window.URL.revokeObjectURL(state.bookUrl);
  state.bookUrl=window.URL.createObjectURL(res.data);
  state.bookError='';render();
 }
