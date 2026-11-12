@@ -99,12 +99,12 @@ async function renderPdfPage(){
  }finally{if(ticket===state.pdfRenderTicket)state.pdfRenderTask=null;}
 }
 function toolbar(){
- return '<div class="duff-toolbar"><div class="duff-page-nav">'
+ return '<div class="duff-toolbar"><div class="duff-toolbar-top"><div class="duff-page-nav">'
  +'<button class="btn btn-small" data-do="prev" '+(state.page===1?'disabled':'')+' aria-label="Página anterior">←</button>'
  +'<label for="duff-page-input">Página del PDF</label><input id="duff-page-input" type="number" min="1" max="'+state.pdfPageCount+'" value="'+state.page+'">'
  +'<span class="micro">/ '+state.pdfPageCount+'</span>'
  +'<button class="btn btn-small" data-do="next" '+(state.page===state.pdfPageCount?'disabled':'')+' aria-label="Página siguiente">→</button>'
- +'</div><div class="duff-page-nav">'
+ +'</div>'+(timer?timer.html():'')+'</div><div class="duff-page-nav duff-toolbar-actions">'
  +(state.pdfDocument?'<button class="btn btn-small" data-do="pdf-zoom-out" title="Reducir zoom">−</button><span class="micro">'+Math.round(state.pdfZoom*100)+'%</span><button class="btn btn-small" data-do="pdf-zoom-in" title="Ampliar zoom">+</button><button class="btn btn-small" data-do="pdf-fit" title="Ajustar al ancho">Ajustar</button>':'')
  +(state.bookUrl?'<a class="btn btn-small" href="'+h(state.bookUrl)+'#page='+state.page+'" target="_blank" rel="noopener">Abrir libro ↗</a>':'')
  +'<button class="btn btn-small" data-do="phonetics-open">Pronunciación · AFI</button>'
@@ -257,7 +257,7 @@ function render(){
  if(!state.user){app.innerHTML=auth();return;}
  if(state.user.id!==OWNER){app.innerHTML=blocked();return;}
  var c=current();
- app.innerHTML=header()+'<div class="duff-banner"><div class="duff-banner-inner"><div><div class="eyebrow">Jeremy Duff · Editorial CLIE · edición española</div><h1 class="duff-title">Capítulo '+(c+1)+'. '+h(chapters[c][0])+'</h1><p class="duff-subtitle">Secuencia original del manual · 20 capítulos · PDF de 522 páginas</p></div><span class="chip">Solo tu cuenta</span></div></div><div class="duff-shell '+(state.workOpen?'':'work-collapsed')+'">'+nav()+'<main class="duff-reader"><p class="note">El original se lee en su formato íntegro; el cuaderno de ejercicios está separado y se guarda en privado.</p>'+toolbar()+(timer?timer.html():'')+pdf()+readingPanel()+'</main>'+workbook()+'</div>'+(state.phoneticsOpen?phoneticsModal():'')+'<div class="duff-privacy">El archivo del libro no se publica en GitHub Pages: se descarga únicamente tras iniciar sesión y superar las reglas de acceso del almacenamiento privado. Las respuestas se guardan en tu cuenta.</div>';
+ app.innerHTML=header()+'<div class="duff-banner"><div class="duff-banner-inner"><div><div class="eyebrow">Jeremy Duff · Editorial CLIE · edición española</div><h1 class="duff-title">Capítulo '+(c+1)+'. '+h(chapters[c][0])+'</h1><p class="duff-subtitle">Secuencia original del manual · 20 capítulos · PDF de 522 páginas</p></div><span class="chip">Solo tu cuenta</span></div></div><div class="duff-shell '+(state.workOpen?'':'work-collapsed')+'">'+nav()+'<main class="duff-reader"><p class="note">El original se lee en su formato íntegro; el cuaderno de ejercicios está separado y se guarda en privado.</p>'+toolbar()+pdf()+readingPanel()+'</main>'+workbook()+'</div>'+(state.phoneticsOpen?phoneticsModal():'')+'<div class="duff-privacy">El archivo del libro no se publica en GitHub Pages: se descarga únicamente tras iniciar sesión y superar las reglas de acceso del almacenamiento privado. Las respuestas se guardan en tu cuenta.</div>';
  if(timer)timer.updateUI();
  if(state.pdfDocument)window.requestAnimationFrame(renderPdfPage);
 }
