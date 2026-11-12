@@ -116,13 +116,24 @@
     const r=l.reading;
     const annotate=sentence=>sentence.split(/(\s+|[«».,!?;:–])/u).map(token=>{
       const key=token.toLocaleLowerCase('fr');
-      if(!r.glossary[key])return h(token);
+      if(!r.glossary[key]&&!window.LINGUA_FR_MORPH?.[key])return h(token);
       return `<button type="button" class="reading-word" data-action="reading-word" data-word="${h(key)}" aria-label="Consulter : ${h(token)}" aria-expanded="false">${h(token)}</button>`;
     }).join('');
     return `<section class="content-section" id="lecture"><div class="grammar-head"><div><span class="micro">Lecture graduée · texte original</span><h3>${h(r.title)}</h3></div><button type="button" class="btn btn-small" data-action="reading-mode" aria-pressed="${state.readingParallel}">${state.readingParallel?'Français + español':'Français seul'}</button></div><p>Un court texte original, avec traduction facultative. Touchez un mot français pour voir sa fiche, sa fonction et son sens. La traduction peut être masquée à tout moment.</p>
       <div class="parallel-reading">${r.sentences.map((s,j)=>`<div class="reading-pair"><div class="reading-fr" lang="fr"><span class="micro">${String(j+1).padStart(2,'0')}</span><div class="reading-sentence">${annotate(s.fr)}</div>${speechButton(s.fr,'Écouter la phrase '+(j+1),'fr-FR','speech-compact')}</div><div class="reading-translation" lang="es" ${state.readingParallel?'':'hidden'}>${h(s.es)}</div></div>`).join('')}</div><p class="reading-hint">Objectif : relisez le texte sans la traduction, puis répondez oralement à la question : « Comment s’écrit le prénom de Léa ? »</p>
     </section>`;
   }
+
+  function renderFrenchSoundLab(l){
+    if(!l.alphabet)return '';
+    const pairs=[
+      {a:'tu',ai:'/ty/',b:'tout',bi:'/tu/',tip:'Para /y/, poné los labios como para decir u, pero mantené la lengua en posición de i. No es la u española.'},
+      {a:'les',ai:'/le/',b:'lait',bi:'/lɛ/',tip:'La e cerrada /e/ y la e abierta /ɛ/ contrastan en francés estándar; abrí un poco más la boca para /ɛ/.'},
+      {a:'beau',ai:'/bo/',b:'bon',bi:'/bɔ̃/',tip:'En bon, el aire sale también por la nariz; evitá añadir una n final como en español.'}
+    ];
+    return '<section class="content-section" id="sons-fr"><div class="grammar-head"><h3>Laboratoire des sons</h3><span class="chip">Phonétique · A1</span></div><p>Écoutez chaque paire, puis répétez-la sans regarder. Les voix du navigateur sont synthétiques : pour des modèles natifs, utilisez les vidéos TV5MONDE en bas de la leçon.</p><div class="sound-pairs">'+pairs.map(p=>'<div class="sound-pair"><div class="sound-contrast"><div><b>'+h(p.a)+'</b> <span>'+h(p.ai)+'</span>'+speechButton(p.a,'Écouter '+p.a,'fr-FR','speech-compact')+'</div><div><b>'+h(p.b)+'</b> <span>'+h(p.bi)+'</span>'+speechButton(p.b,'Écouter '+p.b,'fr-FR','speech-compact')+'</div></div><p>'+h(p.tip)+'</p></div>').join('')+'</div></section>';
+  }
+
   function renderCourse(){
     const l = lessonById(state.lessonId); const i=lessons.indexOf(l); const percent=Math.round(completed()/lessons.length*100);
     document.title=l.title+' · Français A1 · Lingua Viva';
@@ -132,6 +143,7 @@
         <section class="content-section"><h3>En situation</h3><div class="dialogue">${l.example.map(line=>`<div>${h(line)}</div>`).join('')}</div><p style="margin-top:12px;font-size:12px">Lisez le dialogue à voix haute. Rejouez-le ensuite sans regarder.</p></section>
         <section class="content-section" id="grammaire"><div class="grammar-head"><h3>${h(l.grammarTitle)}</h3><div class="switch" aria-label="Langue des explications grammaticales"><button data-action="grammar" data-lang="fr" class="${state.grammar==='fr'?'active':''}" aria-pressed="${state.grammar==='fr'}">FR</button><button data-action="grammar" data-lang="es" class="${state.grammar==='es'?'active':''}" aria-pressed="${state.grammar==='es'}">ES</button></div></div><div class="grammar-copy" lang="${state.grammar}">${l.grammar[state.grammar].split(/\n\n+/).map(x=>`<p>${h(x)}</p>`).join('')}<div class="speech-toolbar">${speechButton(l.grammar[state.grammar],state.grammar==='fr'?'Écouter l’explication':'Escuchar la explicación',state.grammar==='fr'?'fr-FR':'es-ES')}</div><div class="grammar-speech-examples" lang="fr"><span class="micro">Écouter les mots et les exemples</span><div class="speech-examples">${grammarExamples(l.grammar.fr).map(x=>speechButton(x,x,'fr-FR','speech-example')).join('')}</div></div></div></section>
         ${renderAlphabet(l)}
+        ${renderFrenchSoundLab(l)}
         ${renderReading(l)}
         <section class="content-section"><div class="grammar-head"><h3>Mots à retenir</h3><a class="btn btn-small btn-plain" href="${link('flashcards/?idioma=francais')}">Réviser ↗</a></div><p>Cliquez sur un mot pour afficher ou cacher son sens.</p><div class="vocab-grid">${l.words.map(([a,b],j)=>`<div class="vocab-item"><button class="vocab" data-action="reveal" data-word="${j}"><b>${h(a)}</b><span>${state.revealed.has(j)?h(b):'Voir le sens ↗'}</span></button>${speechButton(a,'Écouter : '+a,'fr-FR','speech-compact')}</div>`).join('')}</div></section>
         <section class="content-section" id="exercices"><h3>À vous de jouer</h3><p>Choisissez une réponse. Vous pouvez recommencer autant de fois que vous voulez.</p>${l.exercises.map((ex,j)=>renderExercise(ex,j,l.exercises.length)).join('')}</section>
@@ -428,12 +440,19 @@
   function toast(message,error=false){document.querySelector('.toast')?.remove();const node=document.createElement('div');node.className='toast';node.style.background=error?'#9b6856':'';node.textContent=message;document.body.append(node);setTimeout(()=>node.remove(),4000);}
   function closeReadingPopover(){document.querySelector('.reading-popover')?.remove();document.querySelectorAll('.reading-word[aria-expanded="true"]').forEach(x=>x.setAttribute('aria-expanded','false'));}
   function showReadingPopover(button){
-    const word=button.dataset.word, entry=lessonById(state.lessonId).reading?.glossary[word];
+    const word=button.dataset.word,entry=lessonById(state.lessonId).reading?.glossary[word];
+    const morph=window.LINGUA_FR_MORPH?.[word];
     const opened=button.getAttribute('aria-expanded')==='true';
-    closeReadingPopover();if(opened||!entry)return;
+    closeReadingPopover();if(opened||(!entry&&!morph))return;
     button.setAttribute('aria-expanded','true');
-    const popup=document.createElement('div');popup.className='reading-popover';popup.setAttribute('role','status');
-    popup.innerHTML=`<div class="micro">Fiche de vocabulaire</div><strong>${h(button.textContent)}</strong><span>${h(entry[0])}</span><small>${h(entry[1])}</small>${speechButton(button.textContent,'Écouter le mot '+button.textContent,'fr-FR','speech-compact')}`;
+    const popup=document.createElement('div');popup.className='reading-popover';popup.setAttribute('role','dialog');
+    popup.setAttribute('aria-label','Analyse de '+button.textContent);
+    const conj=morph?.conjugation?'https://leconjugueur.lefigaro.fr/conjugaison/verbe/'+encodeURIComponent(morph.conjugation)+'.html':null;
+    popup.innerHTML='<div class="micro">Fiche morphologique · en contexte</div><strong>'+h(button.textContent)+'</strong>'
+      +(entry?'<span>'+h(entry[0])+'</span>':'')
+      +(morph?'<div class="morph-row"><b>Lemme</b><span>'+h(morph.lemma)+'</span></div><div class="morph-row"><b>Catégorie</b><span>'+h(morph.category)+'</span></div><div class="morph-row"><b>Analyse</b><span>'+h(morph.features)+'</span></div><div class="morph-row morph-note">'+h(morph.note)+'</div>':entry?'<small>'+h(entry[1])+'</small>':'')
+      +(conj?'<div class="morph-row"><a href="'+conj+'" target="_blank" rel="noopener noreferrer">Conjugaison complète ↗</a></div>':'')
+      +speechButton(button.textContent,'Écouter le mot '+button.textContent,'fr-FR','speech-compact');
     document.body.append(popup);
     const rect=button.getBoundingClientRect(),w=popup.getBoundingClientRect().width,ph=popup.getBoundingClientRect().height;
     popup.style.left=Math.min(Math.max(12,rect.left),Math.max(12,window.innerWidth-w-12))+'px';
