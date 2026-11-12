@@ -40,7 +40,7 @@
     grammar:localGet('grammar','fr'), revealed:new Set(), readingParallel:localGet('readingParallel',true),
     lessonDraft:localGet('drafts',{}), dictationDraft:localGet('dictationDraft',{}),
     questionDrafts:localGet('questionDrafts',{}), questionOpen:new Set(),
-    localSessions:localGet('sessions',[]), localProgress:localGet('progress',{}),
+    localSessions:localGet('sessions',[]), greekSessions:localGet('greekSessions',[]), localProgress:localGet('progress',{}),
     localAttempts:localGet('attempts',{}), localCards:localGet('cards',{}),
     tabFocused:true,
     lastActivity:Date.now(), activeSession:null,
@@ -60,8 +60,10 @@
 
   function totalSeconds(sessions) { return sessions.reduce((a,x)=>a+(Number(x.duration_seconds)||0),0); }
   function allSessions() {
-    const combined = [...state.sessions, ...state.localSessions];
-    const items = [...new Map(combined.map(s=>[s.id,s])).values()];
+    const combined = [...state.sessions, ...state.localSessions, ...state.greekSessions];
+    const merged = new Map();
+    combined.forEach(s=>{const prev=merged.get(s.id);if(!prev||Number(s.duration_seconds)>Number(prev.duration_seconds))merged.set(s.id,s);});
+    const items = [...merged.values()];
     const a = state.activeSession;
     if (a) {
       const index = items.findIndex(s=>s.id===a.id);
@@ -97,7 +99,7 @@
     const secs=statsTime(), french=statsTime('francais');
     $app.innerHTML=header()+`<main>
       <section class="hero"><div class="shell hero-grid"><div><div class="eyebrow">Tu espacio de aprendizaje</div><h1>Las lenguas<br><em>se viven.</em></h1><p>Un lugar para estudiar a tu ritmo, volver sobre las palabras y seguir el recorrido que vas construyendo. Cada idioma tiene sus lecciones, ejercicios, audios, tarjetas de repaso y registro de estudio.</p><div class="hero-actions"><a class="btn btn-primary" href="${currentLessonLink()}">Continuar francés <span>↗</span></a><a class="btn" href="${link('griego-biblico/')}">Griego bíblico</a><a class="btn" href="${link('flashcards/')}">Repasar vocabulario</a></div></div><div class="hero-aside"><div class="micro">Tu recorrido, hasta hoy</div><div class="rule"></div><div class="metricrow"><div><div class="metricnum">${completed()}<span style="font-size:15px;color:var(--muted)">/8</span></div><div class="metriclabel">Lecciones</div></div><div><div class="metricnum">${Math.floor(secs/60)}</div><div class="metriclabel">Minutos</div></div><div><div class="metricnum">${Object.values(state.cards).filter(c=>new Date(c.due_at)>new Date()).length}</div><div class="metriclabel">Tarjetas repasadas</div></div></div><div class="rule"></div><p>El contador se pone en marcha cuando estudiás dentro de una lección y se pausa si dejás de interactuar o cambiás de pestaña.</p></div></div></section>
-      <section class="section shell" id="idiomas"><div class="section-head"><div><div class="eyebrow">Biblioteca de lenguas</div><h2>Mis idiomas</h2></div><p class="section-note">Un mismo espacio, recorridos independientes. Francés A1 y griego bíblico tienen recorridos independientes.</p></div><div class="language-grid">${languages.map(l=>`<a class="lang-card ${l.live?'':'muted'}" href="${link(l.slug+'/')}"><div class="micro">${l.live?'En curso':'Próximamente'}</div><div class="char" aria-hidden="true">${l.letter}</div><h3>${l.name}</h3><p>${l.desc}</p><div class="bottom"><span>${l.slug==='francais'?`${completed()} de 8 lecciones · ${fmtShort(french)}`:l.slug==='griego-biblico'?'20 capítulos · Acceso privado':'Crear recorrido'}</span><span class="arrow">↗</span></div></a>`).join('')}</div></section>
+      <section class="section shell" id="idiomas"><div class="section-head"><div><div class="eyebrow">Biblioteca de lenguas</div><h2>Mis idiomas</h2></div><p class="section-note">Un mismo espacio, recorridos independientes. Francés A1 y griego bíblico tienen recorridos independientes.</p></div><div class="language-grid">${languages.map(l=>`<a class="lang-card ${l.live?'':'muted'}" href="${link(l.slug+'/')}"><div class="micro">${l.live?'En curso':'Próximamente'}</div><div class="char" aria-hidden="true">${l.letter}</div><h3>${l.name}</h3><p>${l.desc}</p><div class="bottom"><span>${l.slug==='francais'?`${completed()} de 8 lecciones · ${fmtShort(french)}`:l.slug==='griego-biblico'?`20 capítulos · ${fmtShort(statsTime('griego-biblico'))} de estudio`:'Crear recorrido'}</span><span class="arrow">↗</span></div></a>`).join('')}</div></section>
       <section class="section shell" id="actividad"><div class="section-head"><div><div class="eyebrow">Registro personal</div><h2>Mi actividad</h2></div><span class="section-note">${state.user?'Sincronizado con tu cuenta.':'Sin iniciar sesión: guardado en este navegador. Iniciá sesión para sincronizar.'}</span></div><div class="activity-block"><div class="panel"><div class="micro">Últimos siete días</div><h3>Tiempo de estudio</h3>${weekBars()}<p class="note">${fmt(secs)} acumulados · El registro contabiliza el tiempo activo dentro de las lecciones.</p><a class="btn btn-small" href="${link('estadisticas/')}">Ver 14 días y semanas ↗</a></div><div class="panel"><div class="micro">Revisión</div><h3>Vocabulario aprendido</h3><div class="metricrow"><div><div class="metricnum">${unlockedCards('francais').length}</div><div class="metriclabel">Disponibles</div></div><div><div class="metricnum">${countDue('francais')}</div><div class="metriclabel">Por repasar</div></div><div><div class="metricnum">${completed()}</div><div class="metriclabel">Lecciones hechas</div></div></div><p class="note" style="margin-top:22px">Las flashcards se incorporan a tu mazo según avanzás de unidad. Las que olvidás vuelven antes.</p><a class="btn btn-small" href="${link('flashcards/?idioma=francais')}">Abrir flashcards ↗</a></div></div></section>
     </main>`+footer();
   }
@@ -232,6 +234,9 @@
   const formatDate = (d,options)=>new Date(d).toLocaleDateString(isFrench?'fr-FR':'es-AR',options);
   const humanMinutes = sec => Math.round(sec/60)+' '+t('min','min');
   const languageName = slug => languages.find(l=>l.slug===slug)?.name || slug;
+  const sessionLessonName = s => s.language==='griego-biblico' && /^duff-ch\d+$/.test(s.lesson_id)
+    ? 'Capítulo '+Number(s.lesson_id.slice(7))+' · Jeremy Duff'
+    : lessonById(s.lesson_id).title;
   function renderStats(){
     const entries=allSessions().filter(s=>s.duration_seconds>0 && (state.statsLang==='all'||s.language===state.statsLang));
     const days=studyDays(14);
@@ -263,7 +268,7 @@
       <section class="stats-panel" id="semaines"><div class="stats-panel-heading"><div><div class="micro">02 / ${t('Historique hebdomadaire','Historial semanal')}</div><h2>${t('Semaine après semaine','Semana por semana')}</h2></div><span class="micro">${t('10 semaines · lundi–dimanche','10 semanas · lunes–domingo')}</span></div>
       <div class="weekly-list">${weeks.map((w,i)=>`<div class="weekly-row"><div class="weekly-when"><b>${i===0?t('Cette semaine','Esta semana'):formatDate(w.start,{day:'numeric',month:'short'})+' – '+formatDate(new Date(w.end.getTime()-86400000),{day:'numeric',month:'short'})}</b><span>${w.days} ${t('jours actifs','días activos')}</span></div><div class="weekly-bar"><span style="width:${w.seconds?Math.max(1.8,w.seconds/maxWeek*100):0}%"></span></div><strong>${fmt(w.seconds)}</strong></div>`).join('')}</div></section>
       <div class="stats-bottom"><section class="stats-panel"><div class="micro">03 / ${t('Langues','Idiomas')}</div><h2>${t('Répartition par langue','Distribución por idioma')}</h2>${byLanguage.length?`<div class="language-times">${byLanguage.map(x=>`<div class="language-time"><div class="language-time-head"><span>${h(x.language.name)}</span><strong>${fmt(x.seconds)}</strong></div><div class="language-time-bar"><span class="color-${x.language.slug}" style="width:${Math.max(2,x.seconds/maxLanguage*100)}%"></span></div></div>`).join('')}</div>`:`<p class="note">${t('Les langues apparaîtront dès votre première session.','Los idiomas aparecerán cuando registres tus primeras sesiones.')}</p>`}</section>
-      <section class="stats-panel"><div class="micro">04 / ${t('Dernières sessions','Últimas sesiones')}</div><h2>${t('Votre journal','Tu registro')}</h2>${lastSessions.length?`<div class="sessions-list">${lastSessions.map(s=>`<div class="session-item"><div><b>${h(languageName(s.language))}</b><span>${h(lessonById(s.lesson_id).title)} · ${formatDate(s.started_at,{day:'numeric',month:'short'})}</span></div><strong>${humanMinutes(s.duration_seconds)}</strong></div>`).join('')}</div>`:`<p class="note">${t('Aucune session pour le moment.','Todavía no hay sesiones registradas.')}</p>`}</section></div>
+      <section class="stats-panel"><div class="micro">04 / ${t('Dernières sessions','Últimas sesiones')}</div><h2>${t('Votre journal','Tu registro')}</h2>${lastSessions.length?`<div class="sessions-list">${lastSessions.map(s=>`<div class="session-item"><div><b>${h(languageName(s.language))}</b><span>${h(sessionLessonName(s))} · ${formatDate(s.started_at,{day:'numeric',month:'short'})}</span></div><strong>${humanMinutes(s.duration_seconds)}</strong></div>`).join('')}</div>`:`<p class="note">${t('Aucune session pour le moment.','Todavía no hay sesiones registradas.')}</p>`}</section></div>
       <p class="stats-footnote">${t('Le temps est comptabilisé automatiquement quand la leçon est active. Les périodes sans activité et les onglets masqués ne sont pas comptés. Une session est attribuée au jour où elle a commencé.','El tiempo se registra automáticamente mientras la lección está activa. No se cuentan las pestañas ocultas ni los períodos sin interacción. Cada sesión se atribuye al día en que comenzó.')}</p>
       <a class="btn" href="${currentLessonLink()}">${t('← Retour au français','← Volver al francés')}</a>
     </section></main>`+footer();
@@ -335,8 +340,8 @@
   async function migrateLocal(){
     if(!state.user||!state.client)return;
     const id=state.user.id;
-    const localSessions=state.localSessions.filter(s=>s.duration_seconds>0).map(s=>({...s,user_id:id}));
-    if(localSessions.length){const{error}=await state.client.from('lingua_study_sessions').upsert(localSessions,{onConflict:'id'});if(!error){state.sessions=[...state.sessions.filter(s=>!localSessions.some(x=>x.id===s.id)),...localSessions];state.localSessions=[];localPut('sessions',[]);}}
+    const localSessions=[...state.localSessions,...state.greekSessions].filter(s=>s.duration_seconds>0).map(s=>({...s,user_id:id}));
+    if(localSessions.length){const{error}=await state.client.from('lingua_study_sessions').upsert(localSessions,{onConflict:'id'});if(!error){state.sessions=[...state.sessions.filter(s=>!localSessions.some(x=>x.id===s.id)),...localSessions];state.localSessions=[];state.greekSessions=[];localPut('sessions',[]);localPut('greekSessions',[]);}}
     const p=Object.entries(state.localProgress).map(([lesson_id,completed])=>({user_id:id,lesson_id,completed,updated_at:new Date().toISOString()}));
     if(p.length){const{error}=await state.client.from('lingua_lesson_progress').upsert(p,{onConflict:'user_id,lesson_id'});if(!error){Object.assign(state.progress,state.localProgress);state.localProgress={};localPut('progress',{});}}
     const a=Object.entries(state.localAttempts).map(([exercise_id,entry])=>({user_id:id,exercise_id,lesson_id:entry.lesson_id,selected_answer:entry.selected_answer,correct:entry.correct,updated_at:new Date().toISOString()}));
