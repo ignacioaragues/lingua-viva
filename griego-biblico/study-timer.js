@@ -141,7 +141,6 @@ function create(config){
    +'<span class="duff-timer-live" id="duff-timer-live">'+clock(session.duration_seconds)+'</span>'
    +'<span class="duff-timer-caret" aria-hidden="true">⌄</span></summary>'
    +'<div class="duff-timer-popover"><div class="micro">CONTADOR DE ESTUDIO</div>'
-   +'<p class="duff-timer-label">Tiempo de esta sesión</p>'
    +'<p class="duff-timer-label">Griego bíblico · acumulado</p>'
    +'<strong class="duff-timer-total" id="duff-timer-total">'+cumulative(totalSeconds())+'</strong>'
    +'<div class="duff-timer-links"><button type="button" class="btn btn-small" id="duff-timer-toggle" data-do="timer-toggle" aria-pressed="false">Pausar</button>'
