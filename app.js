@@ -341,7 +341,8 @@
     if(!state.user||!state.client)return;
     const id=state.user.id;
     const pendingSessions=new Map();
-    [...state.localSessions,...state.greekSessions].filter(s=>s.duration_seconds>0).forEach(s=>{const prev=pendingSessions.get(s.id);if(!prev||Number(s.duration_seconds)>Number(prev.duration_seconds))pendingSessions.set(s.id,{...s,user_id:id});});
+    const remoteDurations=new Map(state.sessions.map(s=>[s.id,Number(s.duration_seconds)||0]));
+    [...state.localSessions,...state.greekSessions].filter(s=>s.duration_seconds>0 && Number(s.duration_seconds)>(remoteDurations.get(s.id)||0)).forEach(s=>{const prev=pendingSessions.get(s.id);if(!prev||Number(s.duration_seconds)>Number(prev.duration_seconds))pendingSessions.set(s.id,{...s,user_id:id});});
     const localSessions=[...pendingSessions.values()];
     if(localSessions.length){const{error}=await state.client.from('lingua_study_sessions').upsert(localSessions,{onConflict:'id'});if(!error){state.sessions=[...state.sessions.filter(s=>!localSessions.some(x=>x.id===s.id)),...localSessions];state.localSessions=[];state.greekSessions=[];localPut('sessions',[]);localPut('greekSessions',[]);}}
     const p=Object.entries(state.localProgress).map(([lesson_id,completed])=>({user_id:id,lesson_id,completed,updated_at:new Date().toISOString()}));
