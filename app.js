@@ -451,13 +451,14 @@
     popup.innerHTML='<div class="micro">Fiche morphologique · en contexte</div><strong>'+h(button.textContent)+'</strong>'
       +(entry?'<span>'+h(entry[0])+'</span>':'')
       +(morph?'<div class="morph-row"><b>Lemme</b><span>'+h(morph.lemma)+'</span></div><div class="morph-row"><b>Catégorie</b><span>'+h(morph.category)+'</span></div><div class="morph-row"><b>Analyse</b><span>'+h(morph.features)+'</span></div><div class="morph-row morph-note">'+h(morph.note)+'</div>':entry?'<small>'+h(entry[1])+'</small>':'')
-      +(conj?'<div class="morph-row"><a href="'+conj+'" target="_blank" rel="noopener noreferrer">Conjugaison complète ↗</a></div>':'')
+      +(conj?'<div class="morph-row"><a href="'+conj+'" target="_blank" rel="noopener noreferrer">'+(morph.category==='Verbo pronominal'?'Conjugaison du verbe de base ↗':'Conjugaison complète ↗')+'</a></div>':'')
       +speechButton(button.textContent,'Écouter le mot '+button.textContent,'fr-FR','speech-compact');
     document.body.append(popup);
     const rect=button.getBoundingClientRect(),w=popup.getBoundingClientRect().width,ph=popup.getBoundingClientRect().height;
     popup.style.left=Math.min(Math.max(12,rect.left),Math.max(12,window.innerWidth-w-12))+'px';
     popup.style.top=(rect.bottom+10+ph>window.innerHeight?Math.max(12,rect.top-ph-10):rect.bottom+10)+'px';
   }
+  window.addEventListener('scroll',closeReadingPopover,{passive:true});
 
   document.addEventListener('click',async e=>{
     const b=e.target.closest('[data-action]');if(!b){closeReadingPopover();return;}
