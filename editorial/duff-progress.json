@@ -64,14 +64,15 @@
       "ejercicios_finales": "46-48"
     },
     "pronunciation": "convención española del manual con aclaraciones rioplatenses: theta /θ/ no /s/, zeta /z/ no z castellana, chi /x/, eta /eː/, omega /oː/, upsilon /u/ didáctica",
-    "exercise_fields": "implementados en lector por páginas con guardado en lingua_notes, corrección automática aún pendiente"
+    "exercise_fields": "Implementados en lector por páginas con guardado privado; prácticas 1.5 y 1.6 con autocorrección (5 ítems cada una); teclado griego con espíritus y acentos. El resto de las prácticas todavía no tiene autocorrección."
   },
   "next_steps": [
-    "Verificar subida privada del PDF por la cuenta autorizada",
-    "Comprobar inicio de sesión y carga de PDF en navegador real",
-    "Revisar calidad de los campos de la Práctica 1.1 y corrección personalizada",
-    "Agregar correspondencia exacta de prácticas del capítulo 2 y siguientes, sin cambiar la secuencia ni reproducir el manual públicamente",
-    "Mejorar lector móvil y seguimiento de minutos"
+    "Usuario: subir una vez su PDF al bucket privado desde el lector",
+    "Comprobar inicio de sesión y carga real del PDF en navegador y en iPad",
+    "Validar guardado interdispositivos y preguntas con cuenta real",
+    "Completar autocorrección de prácticas 1.1–1.4 y transcripción de Juan 1:1–23",
+    "Agregar ejercicios de capítulo 2 en el orden del libro, sin reproducir el manual públicamente",
+    "Integrar temporizador de lectura y mejorar navegación móvil"
   ],
   "last_updated": "2026-11-12"
 }
