@@ -95,3 +95,82 @@
 .duff-pdf-failure p{font-size:13px;line-height:1.7}
 .duff-pdf-failure button{margin-top:12px}
 @media(max-width:680px){.duff-pdf-frame{padding:9px;scrollbar-gutter:auto}}
+
+/* Cuaderno compacto: pestañas y scroll independiente, sin una columna interminable. */
+.duff-shell{grid-template-columns:190px minmax(0,1fr) 330px}
+.duff-shell.work-collapsed{grid-template-columns:190px minmax(0,1fr)}
+.duff-work{position:sticky;top:66px;align-self:start;height:calc(100dvh - 66px);max-height:calc(100dvh - 66px);min-height:0;display:flex;flex-direction:column;overflow:hidden;padding:0;border-left:1px solid var(--line);background:#fffefa}
+.duff-work-head{padding:16px 16px 10px;display:flex;justify-content:space-between;align-items:start;gap:10px;border-bottom:1px solid var(--line)}
+.duff-work-head h2{margin:6px 0 0;font-size:18px}
+.duff-work-head .btn{flex-shrink:0}
+.duff-work-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-bottom:1px solid var(--line);background:#f5f5ef}
+.duff-work-tabs button{padding:12px 3px;border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);font-size:12px;cursor:pointer}
+.duff-work-tabs button[aria-pressed=true]{border-bottom-color:var(--green);color:var(--ink);background:#fffefa;font-weight:700}
+.duff-work-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:12px 16px 26px;scrollbar-gutter:stable}
+.duff-work-scroll .duff-exercise:first-child{margin-top:2px;border-top:0}
+.duff-work-scroll .duff-index{margin:3px 0 14px}
+.duff-work-scroll .duff-index button{background:#fff;border-radius:3px}
+.duff-keyboard-details{margin-top:18px!important;padding-top:13px!important}
+.duff-keyboard-details summary{cursor:pointer;font-size:13px;font-weight:650;color:var(--green)}
+.duff-keyboard-details[open] summary{margin-bottom:12px}
+.duff-keyboard-details .duff-keyboard button{min-width:31px}
+.duff-work-scroll .duff-question{border-top:0;padding-top:2px;margin-top:0}
+.duff-work-scroll .duff-question textarea{width:100%;border:1px solid var(--line);padding:10px;min-height:100px}
+.duff-work-scroll .duff-exercise textarea{min-height:140px}
+.duff-shell.work-collapsed .duff-reader{max-width:1200px;width:100%;margin:0 auto}
+@media(max-width:1050px){
+ .duff-shell,.duff-shell.work-collapsed{grid-template-columns:170px minmax(0,1fr)}
+ .duff-work{position:fixed;z-index:85;right:0;top:64px;bottom:0;width:min(410px,calc(100vw - 12px));height:auto;max-height:none;border:1px solid var(--line);box-shadow:-12px 0 35px #1b30212d}
+}
+@media(max-width:680px){
+ .duff-shell,.duff-shell.work-collapsed{display:flex;flex-direction:column}
+ .duff-work{top:auto;bottom:0;right:0;left:0;width:100%;height:min(78dvh,720px);max-height:none;border-radius:12px 12px 0 0;box-shadow:0 -10px 30px #1b30212d}
+ .duff-work-head{padding:12px 16px}
+ .duff-work-scroll{padding:12px 18px 30px}
+}
+/* Atlas de pronunciación comparada: se consulta sin abandonar la página del libro. */
+body:has(.duff-phonetics-overlay){overflow:hidden}
+.duff-phonetics-overlay{position:fixed;inset:0;z-index:230;display:grid;place-items:center;padding:14px}
+.duff-phonetics-shade{position:absolute;inset:0;background:rgba(20,31,27,.62);backdrop-filter:blur(2px)}
+.duff-phonetics-dialog{position:relative;z-index:1;width:min(1080px,100%);max-height:calc(100dvh - 28px);overflow-y:auto;overscroll-behavior:contain;background:#fffefa;border:1px solid #b3c4ac;box-shadow:0 18px 70px #0c181b55;padding:22px 26px 28px}
+.duff-phonetics-head{display:flex;justify-content:space-between;align-items:start;gap:16px}
+.duff-phonetics-head h2{font:clamp(23px,3vw,31px)/1.2 var(--serif);margin:6px 0 8px}
+.duff-phonetics-intro{font-size:13px;line-height:1.7;color:var(--muted);max-width:90ch;margin:9px 0 14px}
+.duff-phonetics-audio{display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:12px 14px;background:#f0f3ec;border:1px solid #dbe4d6}
+.duff-phonetics-audio>div{flex:1 1 260px}
+.duff-phonetics-audio b{font-size:13px}
+.duff-phonetics-audio p{font-size:12px;line-height:1.5;color:var(--muted);margin:5px 0 0}
+.duff-phonetics-audio audio{width:min(280px,100%);height:35px}
+.duff-phonetics-audio a{font-size:12px;color:var(--green);text-decoration:underline;text-underline-offset:3px}
+.duff-phonetics-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 12px}
+.duff-phonetics-tabs button{font-size:12px;background:#fff;border:1px solid var(--line);padding:8px 12px;cursor:pointer}
+.duff-phonetics-tabs button[aria-pressed=true]{background:var(--green);color:white;border-color:var(--green)}
+.duff-phonetics-selected{display:grid;grid-template-columns:80px minmax(0,1fr);gap:16px;padding:13px 16px;margin:0 0 14px;border-left:3px solid var(--green);background:#f2f5ee}
+.duff-phonetics-symbol{font:42px Georgia,'Noto Serif',serif;color:var(--green);align-self:center;overflow-wrap:anywhere}
+.duff-phonetics-detail p{font-size:12px;line-height:1.6;margin:6px 0}
+.duff-phonetics-detail [lang=grc]{font:18px Georgia,'Noto Serif',serif}
+.duff-phonetics-table-wrap{overflow:auto;max-height:min(48vh,490px);border:1px solid var(--line);scrollbar-gutter:stable}
+.duff-phonetics-table{width:100%;min-width:680px;border-collapse:collapse;font-size:13px}
+.duff-phonetics-table thead{position:sticky;top:0;z-index:1;background:#e8eee4}
+.duff-phonetics-table th,.duff-phonetics-table td{text-align:left;vertical-align:middle;border-bottom:1px solid #e0e5dc;padding:9px 12px}
+.duff-phonetics-table thead th{font-weight:650;font-size:12px}
+.duff-phonetics-table tbody th{font-weight:400;width:120px}
+.duff-phonetics-table tbody tr.selected{background:#ecf3e7}
+.duff-phonetics-table tbody tr:hover{background:#f5f8f1}
+.duff-phonetics-table tbody th button{display:flex;flex-direction:column;align-items:flex-start;gap:1px;width:100%;background:transparent;border:0;text-align:left;cursor:pointer;color:var(--ink)}
+.duff-phonetics-table tbody th button span{font:23px Georgia,'Noto Serif',serif;color:var(--green)}
+.duff-phonetics-table tbody th button small{font-size:11px;color:var(--muted)}
+.duff-phonetics-table .ipa,.duff-phonetics-detail .ipa{font-family:'Noto Sans','DejaVu Sans',system-ui,sans-serif;line-height:1.5}
+.duff-phonetics-foot{font-size:12px;color:var(--muted);line-height:1.65;margin:11px 0}
+.duff-phonetics-sources{border-top:1px solid var(--line);margin-top:15px;padding-top:12px;font-size:13px}
+.duff-phonetics-sources summary{cursor:pointer;font-weight:650;color:var(--green)}
+.duff-phonetics-sources ul{padding-left:20px;line-height:1.9}
+.duff-phonetics-sources a{color:var(--green);text-decoration:underline;text-underline-offset:3px}
+@media(max-width:680px){
+ .duff-phonetics-overlay{padding:0}
+ .duff-phonetics-dialog{width:100%;height:100dvh;max-height:none;padding:16px 14px 25px}
+ .duff-phonetics-head h2{font-size:23px}
+ .duff-phonetics-selected{grid-template-columns:52px minmax(0,1fr);padding:10px;gap:10px}
+ .duff-phonetics-symbol{font-size:33px}
+ .duff-phonetics-table-wrap{max-height:43vh}
+}
