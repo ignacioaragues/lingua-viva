@@ -125,5 +125,23 @@
     "pronunciation": "Atlas histórico en ventana independiente; no ocupa el cuaderno.",
     "responsive": "A <=1050px el cuaderno se superpone a la lectura cuando se abre, y arranca cerrado; en móviles se muestra como panel inferior.",
     "save": "Se conserva guardado automático por página y cuenta autorizada."
+  },
+  "study_timer": {
+    "status": "implementado en griego-biblico/study-timer.js y reader.js",
+    "date": "2026-11-12",
+    "language": "griego-biblico",
+    "storage": "public.lingua_study_sessions con RLS por usuario; cache offline separado lv:greekSessions",
+    "features": [
+      "contador visible junto al PDF, sin añadir columna lateral",
+      "registro automático de tiempo activo con pausa manual y pausa tras 90 segundos de inactividad",
+      "pausa al ocultar la pestaña o perder foco",
+      "acumulado de griego y acceso a Mis tiempos",
+      "sesiones separadas por capítulo y día",
+      "reintento de sincronización y recuperación local",
+      "integración en gráficos y diario general junto al francés"
+    ],
+    "database": "Ampliado constraint lingua_study_sessions_language_check para aceptar griego-biblico sin retirar grec",
+    "verification": "Pruebas de sintaxis, simulación del contador, pausa/visibilidad/cambio de capítulo, cola y persistencia simulada, y renderizado integrado; prueba autenticada real pendiente",
+    "notes": "No contar tiempo de páginas anteriores retroactivamente. La lectura pasiva sin interacción durante 90 segundos se pausa, igual que el francés."
   }
 }
