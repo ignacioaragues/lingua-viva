@@ -56,7 +56,8 @@ function create(config){
   if(total)total.textContent=cumulative(totalSeconds());
   var running=isRunning();
   if(status){
-   status.textContent=running?'● Estudiando':paused?'◌ Pausa manual':'◌ Pausa automática';
+   status.textContent=running?'●':'◌';
+   status.title=running?'Estudiando':paused?'Pausa manual':'Pausa automática';
    status.classList.toggle('paused',!running);
   }
   if(button){button.textContent=paused?'Reanudar':'Pausar';button.setAttribute('aria-pressed',String(paused));}
@@ -134,11 +135,19 @@ function create(config){
   window.removeEventListener('pagehide',flush);
  }
  function html(){
-  return '<section class="duff-timer" aria-label="Contador de tiempo de estudio del griego">'
-   +'<div class="duff-timer-current"><span class="micro">TIEMPO ACTIVO</span><strong id="duff-timer-live">'+clock(session.duration_seconds)+'</strong><span class="duff-timer-state" id="duff-timer-state">● Estudiando</span></div>'
-   +'<div class="duff-timer-summary"><span class="micro">GRIEGO BÍBLICO · ACUMULADO</span><strong id="duff-timer-total">'+cumulative(totalSeconds())+'</strong><a href="../estadisticas/?idioma=griego-biblico">Mis tiempos ↗</a></div>'
-   +'<div class="duff-timer-controls"><button type="button" class="btn btn-small" id="duff-timer-toggle" data-do="timer-toggle" aria-pressed="false">Pausar</button><small>Se pausa al cambiar de pestaña o tras 90 s sin actividad.</small></div>'
-   +'</section>';
+  return '<details class="duff-timer" aria-label="Tiempo de estudio del griego">'
+   +'<summary class="duff-timer-trigger" title="Ver tiempo de estudio y opciones del contador">'
+   +'<span class="duff-timer-state" id="duff-timer-state" aria-hidden="true">●</span>'
+   +'<span class="duff-timer-live" id="duff-timer-live">'+clock(session.duration_seconds)+'</span>'
+   +'<span class="duff-timer-caret" aria-hidden="true">⌄</span></summary>'
+   +'<div class="duff-timer-popover"><div class="micro">CONTADOR DE ESTUDIO</div>'
+   +'<p class="duff-timer-label">Tiempo de esta sesión</p>'
+   +'<p class="duff-timer-label">Griego bíblico · acumulado</p>'
+   +'<strong class="duff-timer-total" id="duff-timer-total">'+cumulative(totalSeconds())+'</strong>'
+   +'<div class="duff-timer-links"><button type="button" class="btn btn-small" id="duff-timer-toggle" data-do="timer-toggle" aria-pressed="false">Pausar</button>'
+   +'<a href="../estadisticas/?idioma=griego-biblico">Mis tiempos ↗</a></div>'
+   +'<small>Se pausa al cambiar de pestaña o tras 90 s sin actividad.</small>'
+   +'</div></details>';
  }
  ['pointerdown','keydown','scroll','touchstart','wheel'].forEach(function(event){window.addEventListener(event,markActivity,event==='scroll'?{capture:true,passive:true}:{passive:true});});
  window.addEventListener('focus',focus);window.addEventListener('blur',blur);
