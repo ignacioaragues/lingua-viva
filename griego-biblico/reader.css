@@ -1,0 +1,55 @@
+/* Lingua Viva · Griego bíblico, cuaderno privado */
+.duff-loading{max-width:780px;margin:14vh auto;padding:30px;color:#526453}
+.duff-header{position:sticky;top:0;z-index:40;background:#f7f6f0ed;border-bottom:1px solid var(--line);backdrop-filter:blur(15px)}
+.duff-head-inner{max-width:1500px;margin:auto;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.duff-header .brand{font-size:20px}.duff-head-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.duff-crumb{font-size:12px;color:var(--muted)}.duff-title{font-family:var(--serif);font-size:clamp(24px,3vw,39px);line-height:1.15;margin:0 0 7px}
+.duff-subtitle{color:var(--muted);font-size:13px;margin:0}
+.duff-auth{max-width:490px;margin:10vh auto 8vh;background:var(--white);border:1px solid var(--line);padding:35px}
+.duff-auth label{display:block;margin:16px 0 5px;font-weight:600;font-size:12px}
+.duff-auth input{display:block;width:100%;border:1px solid var(--line);background:white;padding:12px}
+.duff-auth button{margin-top:20px;width:100%}.duff-auth .note{margin-top:17px}
+.duff-banner{padding:18px 28px;border-bottom:1px solid var(--line);background:#f0f3ec}
+.duff-banner-inner{max-width:1500px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.duff-shell{max-width:1560px;margin:0 auto;display:grid;grid-template-columns:220px minmax(0,1fr) 340px;min-height:calc(100vh - 170px)}
+.duff-nav{border-right:1px solid var(--line);padding:22px 14px;background:#f3f3eb;max-height:calc(100vh - 80px);overflow:auto;position:sticky;top:70px}
+.duff-nav h2,.duff-work h2{font-size:19px;margin:5px 0 13px}.duff-nav small{display:block;margin:12px 8px}
+.duff-chapter{display:flex;gap:9px;align-items:baseline;width:100%;text-align:left;background:transparent;border:0;border-left:3px solid transparent;padding:9px 8px;color:var(--ink);font-size:12px;line-height:1.4}
+.duff-chapter:hover,.duff-chapter.active{background:#e5ebdf}.duff-chapter.active{border-left-color:var(--green);font-weight:700}
+.duff-chapter .duff-num{font-family:var(--mono);color:var(--muted);min-width:20px}
+.duff-reader{padding:24px 22px 36px;min-width:0}
+.duff-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:18px 0 14px}
+.duff-page-nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.duff-page-nav input{width:67px;padding:7px 9px;border:1px solid var(--line);text-align:center;background:#fff}
+.duff-page-nav .btn{padding:8px 10px}
+.duff-pdf-frame{height:calc(100vh - 255px);min-height:500px;background:#e5e6e1;border:1px solid var(--line)}
+.duff-pdf-frame iframe{width:100%;height:100%;border:0}
+.duff-no-book{border:1px dashed #aab9a6;background:var(--white);padding:30px;margin:20px 0}
+.duff-no-book input{max-width:100%;margin:15px 0}
+.duff-work{padding:23px 19px;border-left:1px solid var(--line);background:#fffefa;min-width:0}
+.duff-work label{display:block;font-size:12px;font-weight:600;margin:11px 0 5px}
+.duff-work textarea,.duff-work input[type=text]{width:100%;padding:10px;border:1px solid var(--line);border-radius:3px;background:#fff;font:14px/1.55 var(--font)}
+.duff-work textarea{resize:vertical;min-height:86px}.duff-work textarea:focus,.duff-work input:focus{outline:2px solid #c4d6be;outline-offset:0}
+.duff-work .greek-answer{font-family:Georgia,'Noto Serif',serif;font-size:17px}
+.duff-work .duff-status{font-size:11px;color:var(--muted);margin:7px 0 15px;min-height:20px}
+.duff-work .duff-exercise{margin:16px 0;padding:14px 0;border-top:1px solid var(--line)}
+.duff-exercise h3{font-size:14px;margin:0 0 5px}.duff-exercise p{font-size:12px;color:var(--muted);margin:0 0 10px}
+.duff-answer-row{margin:9px 0 15px}.duff-answer-row .duff-answer-label{font:12px var(--mono);color:var(--muted)}
+.duff-answer-pair{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.duff-toggle{display:flex;gap:6px;margin:9px 0}.duff-toggle button{padding:6px 9px;font-size:11px;border:1px solid var(--line);background:#fff}
+.duff-toggle button[aria-pressed=true]{background:var(--green);color:#fff}
+.duff-letters{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:13px 0}
+.duff-letter{background:#f4f6f0;border:1px solid #dce2d6;border-radius:3px;padding:6px 2px;font:21px Georgia,serif;color:var(--green)}
+.duff-letter.active{background:var(--green);color:#fff}
+.duff-pron-note{padding:13px;background:#f0f3eb;border-left:3px solid var(--green);font-size:12px;line-height:1.7;margin-bottom:15px}
+.duff-pron-note b{font-size:15px}.duff-pron-note .ipa{font:13px var(--mono);color:#476147}
+.duff-index{display:flex;gap:5px;flex-wrap:wrap;margin:12px 0 16px}
+.duff-index button{border:1px solid var(--line);background:transparent;padding:6px 8px;font-size:11px}
+.duff-index button:hover{background:var(--sage)}
+.duff-message{font-size:12px;line-height:1.5;color:#915d45;white-space:pre-wrap}
+.duff-question{border-top:1px solid var(--line);padding-top:15px;margin-top:22px}
+.duff-question textarea{min-height:65px}
+.duff-reply{margin:10px 0;background:var(--sage);padding:12px;border-left:2px solid var(--green);white-space:pre-wrap;font-size:12px}
+.duff-privacy{max-width:1100px;margin:0 auto;padding:15px 28px;font-size:11px;color:var(--muted)}
+@media(max-width:1100px){.duff-shell{grid-template-columns:180px minmax(0,1fr)}.duff-work{grid-column:1/-1;border-left:0;border-top:1px solid var(--line);display:block}.duff-pdf-frame{height:65vh}}
+@media(max-width:680px){.duff-head-inner{padding:10px 14px}.duff-shell{display:flex;flex-direction:column}.duff-nav{position:static;max-height:180px;border-right:0;border-bottom:1px solid var(--line);overflow:auto}.duff-nav-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.duff-reader{padding:18px 12px}.duff-work{padding:18px 14px}.duff-pdf-frame{height:62vh;min-height:380px}.duff-banner{padding:15px}.duff-banner-inner{display:block}.duff-auth{margin:35px 14px;padding:23px}.duff-header .brand{font-size:17px}}
