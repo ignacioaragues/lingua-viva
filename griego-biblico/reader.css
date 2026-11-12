@@ -175,15 +175,24 @@ body:has(.duff-phonetics-overlay){overflow:hidden}
  .duff-phonetics-table-wrap{max-height:43vh}
 }
 
-/* Contador activo del griego, integrado en el lector sin sumar una columna. */
-.duff-timer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 18px;padding:11px 16px;margin:0 0 13px;border:1px solid #d2dfcc;background:#edf3e9;color:var(--ink)}
-.duff-timer-current,.duff-timer-summary{display:flex;flex-direction:column;gap:3px}
-.duff-timer-current strong{font:700 26px/1.1 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:-.025em;font-variant-numeric:tabular-nums;color:var(--green)}
-.duff-timer-summary strong{font:600 15px/1.25 ui-monospace,SFMono-Regular,Consolas,monospace;font-variant-numeric:tabular-nums}
-.duff-timer-summary a{font-size:11px;color:var(--green);text-decoration:underline;text-underline-offset:3px}
-.duff-timer-state{font-size:11px;color:#38634b}
+/* Contador discreto en la primera línea de navegación del PDF. */
+.duff-toolbar{gap:7px;margin-bottom:11px;position:relative;z-index:12}
+.duff-toolbar-top{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.duff-toolbar-actions{width:100%}
+.duff-timer{position:relative;margin-left:auto;flex:0 0 auto;color:var(--ink)}
+.duff-timer-trigger{list-style:none;display:inline-flex;align-items:center;gap:7px;min-height:31px;padding:5px 9px;border:1px solid var(--line);border-radius:3px;background:#fafbf8;cursor:pointer;user-select:none;color:var(--ink)}
+.duff-timer-trigger::-webkit-details-marker{display:none}
+.duff-timer-trigger::marker{content:""}
+.duff-timer-trigger:hover,.duff-timer[open] .duff-timer-trigger{background:#edf3e9;border-color:#cbd9c7}
+.duff-timer-live{font:600 12px/1.3 ui-monospace,SFMono-Regular,Consolas,monospace;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.duff-timer-state{font-size:12px;color:#4c8162;line-height:1}
 .duff-timer-state.paused{color:var(--muted)}
-.duff-timer-controls{display:flex;align-items:center;gap:10px}
-.duff-timer-controls small{font-size:11px;line-height:1.5;color:var(--muted);max-width:160px}
-.duff-timer-controls button{min-width:78px}
-@media(max-width:680px){.duff-timer{gap:10px;padding:11px}.duff-timer-current strong{font-size:23px}.duff-timer-controls{width:100%;justify-content:space-between}.duff-timer-controls small{max-width:220px}}
+.duff-timer-caret{font-size:12px;color:var(--muted);line-height:1}
+.duff-timer-popover{position:absolute;top:calc(100% + 7px);right:0;z-index:30;width:252px;max-width:calc(100vw - 35px);padding:16px;background:#fffefa;border:1px solid var(--line);box-shadow:0 8px 24px rgba(22,38,27,.12);font-size:12px}
+.duff-timer-popover .micro{font-size:10px}
+.duff-timer-label{font-size:12px;margin:12px 0 3px;color:var(--muted)}
+.duff-timer-total{display:block;font:600 17px/1.3 ui-monospace,SFMono-Regular,Consolas,monospace;font-variant-numeric:tabular-nums}
+.duff-timer-links{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0}
+.duff-timer-links a{font-size:12px;color:var(--green);text-decoration:underline;text-underline-offset:3px}
+.duff-timer-popover small{display:block;color:var(--muted);line-height:1.55;font-size:11px}
+@media(max-width:680px){.duff-toolbar-top{gap:6px}.duff-timer-trigger{padding:5px 7px}.duff-timer-popover{right:0}}
