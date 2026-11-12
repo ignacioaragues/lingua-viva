@@ -44,6 +44,7 @@ var exercises={
 46:[['Ejercicios · 1','text','Juan 1:1–14: transcripción en letras españolas (continúa en la página siguiente)',1]],
 48:[['Ejercicios · 2','text','Juan 1:15–23: escribir el pasaje en griego',1]]
 };
+var timer=null;
 var state={user:null,page:33,bookUrl:null,bookError:'',uploading:false,notes:{},done:{},questions:[],pron:7,greekTranslation:true,authMessage:'',loading:true,saveTimers:{},saveStatus:'',ready:false,lastInput:null,pdfDocument:null,pdfLoading:false,pdfError:'',pdfPageCount:522,pdfZoom:1,pdfRenderTask:null,pdfRenderTicket:0,workOpen:!(window.matchMedia&&window.matchMedia('(max-width:1050px)').matches),workTab:'notes',phoneticsOpen:false,phoneticsGroup:'letters',phoneticsIndex:7};
 var answerKeys={'1.5':['no','sí','no','no','sí'],'1.6':['sí','no','no','sí','no']};
 function h(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -246,12 +247,18 @@ function workbook(){
   +'<div class="duff-work-tabs" role="group" aria-label="Secciones del cuaderno">'+tabs.map(function(t){return '<button type="button" data-do="work-tab" data-tab="'+t[0]+'" aria-pressed="'+(t[0]===state.workTab)+'">'+t[1]+'</button>';}).join('')+'</div>'
   +'<div class="duff-work-scroll">'+body+'</div></aside>';
 }
+function ensureTimer(){
+ if(timer||!state.user||state.user.id!==OWNER||!window.LINGUA_GREEK_TIMER)return;
+ timer=window.LINGUA_GREEK_TIMER.create({client:client,userId:OWNER,lessonId:chapterId(current())});
+ timer.load().then(function(){if(timer)timer.updateUI();});
+}
 function render(){
  if(state.loading){app.innerHTML='<div class="duff-loading">Comprobando la sesión…</div>';return;}
  if(!state.user){app.innerHTML=auth();return;}
  if(state.user.id!==OWNER){app.innerHTML=blocked();return;}
  var c=current();
- app.innerHTML=header()+'<div class="duff-banner"><div class="duff-banner-inner"><div><div class="eyebrow">Jeremy Duff · Editorial CLIE · edición española</div><h1 class="duff-title">Capítulo '+(c+1)+'. '+h(chapters[c][0])+'</h1><p class="duff-subtitle">Secuencia original del manual · 20 capítulos · PDF de 522 páginas</p></div><span class="chip">Solo tu cuenta</span></div></div><div class="duff-shell '+(state.workOpen?'':'work-collapsed')+'">'+nav()+'<main class="duff-reader"><p class="note">El original se lee en su formato íntegro; el cuaderno de ejercicios está separado y se guarda en privado.</p>'+toolbar()+pdf()+readingPanel()+'</main>'+workbook()+'</div>'+(state.phoneticsOpen?phoneticsModal():'')+'<div class="duff-privacy">El archivo del libro no se publica en GitHub Pages: se descarga únicamente tras iniciar sesión y superar las reglas de acceso del almacenamiento privado. Las respuestas se guardan en tu cuenta.</div>';
+ app.innerHTML=header()+'<div class="duff-banner"><div class="duff-banner-inner"><div><div class="eyebrow">Jeremy Duff · Editorial CLIE · edición española</div><h1 class="duff-title">Capítulo '+(c+1)+'. '+h(chapters[c][0])+'</h1><p class="duff-subtitle">Secuencia original del manual · 20 capítulos · PDF de 522 páginas</p></div><span class="chip">Solo tu cuenta</span></div></div><div class="duff-shell '+(state.workOpen?'':'work-collapsed')+'">'+nav()+'<main class="duff-reader"><p class="note">El original se lee en su formato íntegro; el cuaderno de ejercicios está separado y se guarda en privado.</p>'+toolbar()+(timer?timer.html():'')+pdf()+readingPanel()+'</main>'+workbook()+'</div>'+(state.phoneticsOpen?phoneticsModal():'')+'<div class="duff-privacy">El archivo del libro no se publica en GitHub Pages: se descarga únicamente tras iniciar sesión y superar las reglas de acceso del almacenamiento privado. Las respuestas se guardan en tu cuenta.</div>';
+ if(timer)timer.updateUI();
  if(state.pdfDocument)window.requestAnimationFrame(renderPdfPage);
 }
 async function savePage(p){
@@ -265,7 +272,7 @@ async function savePage(p){
 }
 function scheduleSave(p){clearTimeout(state.saveTimers[p]);state.saveTimers[p]=setTimeout(function(){savePage(p);},900);var el=document.getElementById('duff-save-status');if(el)el.textContent='Guardando…';}
 async function bookmark(p){await client.from('lingua_notes').upsert({user_id:OWNER,lesson_id:'duff:bookmark',body:JSON.stringify({page:p}),updated_at:new Date().toISOString()},{onConflict:'user_id,lesson_id'});}
-function go(p){closeGreekCard();if(!state.user||state.user.id!==OWNER)return;p=Number(p);if(!Number.isFinite(p)||p<1||p>state.pdfPageCount)return;state.page=Math.floor(p);state.workTab=exercises[state.page]?'exercise':'notes';state.lastInput=null;state.saveStatus='';render();bookmark(state.page);history.replaceState(null,'','#pagina='+state.page);}
+function go(p){closeGreekCard();if(!state.user||state.user.id!==OWNER)return;p=Number(p);if(!Number.isFinite(p)||p<1||p>state.pdfPageCount)return;var oldChapter=current();state.page=Math.floor(p);if(timer&&current()!==oldChapter)timer.setLesson(chapterId(current()));state.workTab=exercises[state.page]?'exercise':'notes';state.lastInput=null;state.saveStatus='';render();bookmark(state.page);history.replaceState(null,'','#pagina='+state.page);}
 async function loadData(){
  var notes=await client.from('lingua_notes').select('lesson_id,body').eq('user_id',OWNER).like('lesson_id','duff:%').limit(1000);
  if(notes.error)state.bookError='No se pudieron cargar los apuntes: '+notes.error.message;
@@ -306,10 +313,10 @@ async function init(){
  var sess=await client.auth.getSession();
  state.user=sess.data&&sess.data.session?sess.data.session.user:null;
  state.loading=false;render();
- if(state.user&&state.user.id===OWNER){await loadData();render();await loadBook();}
+ if(state.user&&state.user.id===OWNER){await loadData();ensureTimer();render();await loadBook();}
  client.auth.onAuthStateChange(function(event,session){
   var uid=session&&session.user?session.user.id:null;
-  if(uid!==(state.user&&state.user.id)){state.user=session?session.user:null;if(!state.user&&state.bookUrl){cancelPdfRender();if(state.pdfDocument){state.pdfDocument.destroy();state.pdfDocument=null;}window.URL.revokeObjectURL(state.bookUrl);state.bookUrl=null;}render();if(uid===OWNER){loadData().then(function(){render();loadBook();});}}
+  if(uid!==(state.user&&state.user.id)){if(timer){timer.stop();timer=null;}state.user=session?session.user:null;if(!state.user&&state.bookUrl){cancelPdfRender();if(state.pdfDocument){state.pdfDocument.destroy();state.pdfDocument=null;}window.URL.revokeObjectURL(state.bookUrl);state.bookUrl=null;}render();if(uid===OWNER){loadData().then(function(){ensureTimer();render();loadBook();});}}
  });
 }
 app.addEventListener('submit',async function(e){
@@ -345,6 +352,7 @@ app.addEventListener('click',async function(e){
  if(act==='phonetics-select'){state.phoneticsIndex=Number(b.dataset.index);updatePhoneticsModal();return;}
  if(act==='work-tab'){setWorkTab(b.dataset.tab);return;}
  if(act==='toggle-work'){state.workOpen=!state.workOpen;render();return;}
+ if(act==='timer-toggle'){if(timer)timer.togglePause();return;}
  if(act==='logout'){await client.auth.signOut();return;}
  if(act==='page')go(b.dataset.page);
  if(act==='prev')go(state.page-1);
