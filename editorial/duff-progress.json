@@ -93,5 +93,19 @@
       "https://www.stepbible.org/"
     ],
     "caveat": "El audio de voz moderna NO representa la convención didáctica de Duff."
+  },
+  "pdf_viewer": {
+    "implementation": "PDF.js 3.11.174 (canvas por página), ya no iframe nativo con blob:",
+    "reason": "El visor nativo de Chrome mostraba un panel oscuro y un botón Abrir en vez de las páginas del PDF privado.",
+    "storage": "Archivo confirmado en Supabase Storage lingua-duff-private (aprox. 4,9 MB, application/pdf), no volver a solicitar subida salvo archivo inválido.",
+    "features": [
+      "paginación por número y flechas",
+      "zoom +/- y ajuste al ancho",
+      "conteo de páginas real",
+      "verificación de cabecera PDF",
+      "mensaje de error y apertura alternativa"
+    ],
+    "verification": "Revisión estática y sintaxis JavaScript verificadas; prueba interactiva autenticada en Chrome/iPad pendiente.",
+    "caveat": "No reemplazar con iframe de blob: sin verificar que renderiza en navegadores objetivo."
   }
 }
