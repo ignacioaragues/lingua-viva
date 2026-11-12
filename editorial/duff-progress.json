@@ -5,7 +5,7 @@
   "original_file": "Solo en archivo aportado por el usuario o en bucket privado de Supabase. NO subir PDF ni transcripciones extensas al repositorio público.",
   "site": "griego-biblico/",
   "privacy": "Supabase Storage bucket lingua-duff-private (public=false), RLS restringida a cuenta autorizada. Frontend GitHub Pages es público, no guardar libro allí.",
-  "status": "lector navegable con cuaderno por página y ejercicios del capítulo 1 indexados, PDF aún pendiente de subida por el usuario a Storage",
+  "status": "Manual PDF privado disponible en Supabase; visor PDF.js implementado. Cuaderno rediseñado con pestañas compactas y atlas histórico de pronunciación. QA real autenticado en Chrome/iPad pendiente.",
   "chapter_starts_pdf": [
     33,
     50,
@@ -67,11 +67,11 @@
     "exercise_fields": "Implementados en lector por páginas con guardado privado; prácticas 1.5 y 1.6 con autocorrección (5 ítems cada una); teclado griego con espíritus y acentos. El resto de las prácticas todavía no tiene autocorrección."
   },
   "next_steps": [
-    "Probar con la sesión autorizada la carga del PDF, fichas, popovers y audio en navegador real/iPad",
-    "Continuar anotación bíblica palabra por palabra cuando el libro presente los pasajes siguientes, conservando el orden del manual",
-    "Extender Juan 1:3–23 con fuente textual verificada y fichas morfológicas completas, sin afirmar cobertura anticipada",
-    "Enriquecer cada letra y diptongo con ejemplos, audios externos autorizados y contrastes rioplatenses",
-    "Completar autocorrección de prácticas 1.1–1.4 y mejorar teclado y seguimiento del estudio"
+    "Probar con sesión real el audio Ogg y el PDF en Chrome, iPad/Safari; en caso de incompatibilidad de audio usar fuente de grabación compatible y verificada",
+    "Comprobar navegación, escritura y guardado al cambiar pestañas y páginas en móvil y escritorio",
+    "Continuar el curso de Duff en orden, agregando ejercicios por página y anotación bíblica contextual",
+    "Enriquecer fonética comparada con audios independientes para sonidos contrastivos solo cuando se verifique fuente y licencia",
+    "Completar autocorrección de prácticas 1.1–1.4"
   ],
   "last_updated": "2026-11-12",
   "biblical_reader": {
@@ -87,12 +87,23 @@
     "source": "Texto bíblico breve de tradición griega común, no reproducción de la edición del manual."
   },
   "pronunciation_enrichment": {
-    "coverage": "24 letras con ejemplos griegos y significado; contrastes seleccionados θ/τ, ζ/σ, χ/κ, η/ε, ω/ο, υ; voz del navegador el-GR rotulada como griego moderno",
-    "resources": [
-      "https://koinefoundations.com/instructor-videos/",
-      "https://www.stepbible.org/"
+    "coverage": "24 letras, 11 secuencias vocálicas/diptongos, 4 grupos consonánticos, 3 signos. Tabla comparativa con AFI/IPA ático clásico (s. V–IV a.C.), koiné bíblica (aprox. s. I–II d.C., con evolución y variación regional) y griego moderno, con alternativas, notas, ejemplos y convención didáctica de Duff por letra.",
+    "files": [
+      "griego-biblico/phonetics.js",
+      "griego-biblico/phonetics-ui.js",
+      "griego-biblico/reader.js",
+      "griego-biblico/reader.css"
     ],
-    "caveat": "El audio de voz moderna NO representa la convención didáctica de Duff."
+    "audio": "Grabación humana de 24 letras del alfabeto griego moderno en Wikimedia Commons, dominio público, enlazada por Special:Redirect/file; botón externo de respaldo. No requiere voz TTS instalada.",
+    "resources": [
+      "Oxford Classical Dictionary Greek pronunciation",
+      "UC Press Introduction to Attic Greek",
+      "Briercrest reconstructed Koine alphabet",
+      "Wikimedia Commons Modern Greek alphabet audio",
+      "Koine Foundations instructor videos",
+      "STEP Bible"
+    ],
+    "caveat": "No igualar ático, koiné temprana, koiné tardía y moderno; flechas representan cambios históricos y ~ representa variantes o reconstrucciones."
   },
   "pdf_viewer": {
     "implementation": "PDF.js 3.11.174 (canvas por página), ya no iframe nativo con blob:",
@@ -107,5 +118,12 @@
     ],
     "verification": "Revisión estática y sintaxis JavaScript verificadas; prueba interactiva autenticada en Chrome/iPad pendiente.",
     "caveat": "No reemplazar con iframe de blob: sin verificar que renderiza en navegadores objetivo."
+  },
+  "workbook_ui": {
+    "mode": "Cuaderno derecho compacto con pestañas Ejercicios / Apuntes / Preguntas y scroll propio, oculta/abre desde barra de herramientas.",
+    "keyboard": "Teclado griego plegable dentro de Ejercicios y Apuntes.",
+    "pronunciation": "Atlas histórico en ventana independiente; no ocupa el cuaderno.",
+    "responsive": "A <=1050px el cuaderno se superpone a la lectura cuando se abre, y arranca cerrado; en móviles se muestra como panel inferior.",
+    "save": "Se conserva guardado automático por página y cuenta autorizada."
   }
 }
