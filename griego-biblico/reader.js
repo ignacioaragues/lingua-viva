@@ -44,7 +44,7 @@ var exercises={
 46:[['Ejercicios · 1','text','Juan 1:1–14: transcripción en letras españolas (continúa en la página siguiente)',1]],
 48:[['Ejercicios · 2','text','Juan 1:15–23: escribir el pasaje en griego',1]]
 };
-var state={user:null,page:33,bookUrl:null,bookError:'',uploading:false,notes:{},done:{},questions:[],pron:7,greekTranslation:true,authMessage:'',loading:true,saveTimers:{},saveStatus:'',ready:false,lastInput:null};
+var state={user:null,page:33,bookUrl:null,bookError:'',uploading:false,notes:{},done:{},questions:[],pron:7,greekTranslation:true,authMessage:'',loading:true,saveTimers:{},saveStatus:'',ready:false,lastInput:null,pdfDocument:null,pdfLoading:false,pdfError:'',pdfPageCount:522,pdfZoom:1,pdfRenderTask:null,pdfRenderTicket:0};
 var answerKeys={'1.5':['no','sí','no','no','sí'],'1.6':['sí','no','no','sí','no']};
 function h(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function chFor(p){var n=0;chapters.forEach(function(c,i){if(p>=c[1])n=i;});return n;}
@@ -56,8 +56,59 @@ function auth(){return header()+'<main class="duff-auth"><div class="eyebrow">Bi
 function blocked(){return header()+'<main class="duff-auth"><h1 class="duff-title">Acceso privado</h1><p>Este curso está reservado para una cuenta concreta de Lingua Viva. La sesión actual no tiene permiso.</p><button class="btn" data-do="logout">Cambiar de cuenta</button></main>';}
 function nav(){return '<aside class="duff-nav"><small>ÍNDICE DEL MANUAL</small><div class="duff-nav-list">'+chapters.map(function(c,i){return '<button class="duff-chapter '+(i===current()?'active':'')+'" data-do="page" data-page="'+c[1]+'"><span class="duff-num">'+(i+1)+'.</span><span>'+h(c[0])+(state.done[chapterId(i)]?' ✓':'')+'</span></button>';}).join('')+'</div></aside>';}
 function uploadPanel(){return '<div class="duff-no-book"><h2>Conectar tu ejemplar</h2><p>El cuaderno está preparado, pero todavía no hay ningún PDF en tu biblioteca privada. Elegí el archivo de <b>Jeremy Duff · Curso de griego bíblico</b> desde este dispositivo <b>una sola vez</b>. Se guardará en un espacio de Supabase con acceso restringido a tu cuenta; <b>no se sube a GitHub</b>.</p><label for="duff-upload" class="btn btn-primary">Seleccionar PDF</label><input id="duff-upload" type="file" accept="application/pdf,.pdf" style="display:block"><p class="duff-message">'+h(state.bookError)+'</p></div>';}
-function pdf(){return state.bookUrl?'<div class="duff-pdf-frame"><iframe title="Manual de Jeremy Duff, página '+state.page+'" src="'+h(state.bookUrl)+'#page='+state.page+'&zoom=page-width"></iframe></div>':uploadPanel();}
-function toolbar(){return '<div class="duff-toolbar"><div class="duff-page-nav"><button class="btn btn-small" data-do="prev" '+(state.page===1?'disabled':'')+' aria-label="Página anterior">←</button><label for="duff-page-input">Página del PDF</label><input id="duff-page-input" type="number" min="1" max="522" value="'+state.page+'"><span class="micro">/ 522</span><button class="btn btn-small" data-do="next" '+(state.page===522?'disabled':'')+' aria-label="Página siguiente">→</button></div><div class="duff-page-nav">'+(state.bookUrl?'<a class="btn btn-small" href="'+h(state.bookUrl)+'#page='+state.page+'" target="_blank" rel="noopener">Abrir libro ↗</a>':'')+'<button class="btn btn-small" data-do="complete">'+(state.done[chapterId(current())]?'✓ Capítulo terminado':'Marcar capítulo terminado')+'</button></div></div>';}
+function pdf(){
+ if(!state.bookUrl)return uploadPanel();
+ var status=state.pdfError?'<div class="duff-pdf-failure"><h3>No se pudo mostrar esta página</h3><p>'+h(state.pdfError)+'</p><p>Podés abrir el archivo original desde «Abrir libro» o reintentar.</p><button class="btn btn-small" data-do="retry-pdf">Reintentar visor</button></div>':state.pdfLoading?'<div class="duff-pdf-progress" role="status">Preparando las páginas del PDF…</div>':'';
+ return '<div class="duff-pdf-frame" id="duff-pdf-frame" role="region" aria-label="Visor privado del manual">'+status+'<canvas id="duff-pdf-canvas" aria-label="Página '+state.page+' del libro" '+(state.pdfDocument?'':'hidden')+'></canvas><div class="duff-pdf-progress duff-page-progress" id="duff-page-progress" aria-live="polite"></div></div>';
+}
+function cancelPdfRender(){
+ state.pdfRenderTicket++;
+ if(state.pdfRenderTask){try{state.pdfRenderTask.cancel();}catch(e){}state.pdfRenderTask=null;}
+}
+async function renderPdfPage(){
+ if(!state.pdfDocument||!state.bookUrl)return;
+ var frame=document.getElementById('duff-pdf-frame'),canvas=document.getElementById('duff-pdf-canvas');
+ if(!frame||!canvas)return;
+ cancelPdfRender();
+ var ticket=state.pdfRenderTicket,pageNumber=state.page,status=document.getElementById('duff-page-progress');
+ if(status)status.textContent='Cargando página '+pageNumber+'…';
+ try{
+  var page=await state.pdfDocument.getPage(pageNumber);
+  if(ticket!==state.pdfRenderTicket||!document.contains(canvas))return;
+  var base=page.getViewport({scale:1}),width=Math.max(280,frame.clientWidth-32);
+  var viewport=page.getViewport({scale:width/base.width*state.pdfZoom});
+  var ratio=Math.min(window.devicePixelRatio||1,2);
+  canvas.width=Math.ceil(viewport.width*ratio);
+  canvas.height=Math.ceil(viewport.height*ratio);
+  canvas.style.width=Math.ceil(viewport.width)+'px';
+  canvas.style.height=Math.ceil(viewport.height)+'px';
+  var ctx=canvas.getContext('2d',{alpha:false});
+  if(!ctx)throw Error('No se pudo iniciar el lienzo de páginas.');
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);
+  var task=page.render({canvasContext:ctx,viewport:viewport,transform:ratio===1?null:[ratio,0,0,ratio,0,0]});
+  state.pdfRenderTask=task;
+  await task.promise;
+  if(ticket===state.pdfRenderTicket&&document.contains(canvas)){
+   if(status)status.textContent='Página '+pageNumber+' de '+state.pdfPageCount;
+   canvas.hidden=false;
+  }
+ }catch(e){
+  if(e&&e.name==='RenderingCancelledException')return;
+  if(ticket===state.pdfRenderTicket&&document.contains(canvas)&&status)status.textContent='Error al dibujar la página: '+(e.message||String(e));
+ }finally{if(ticket===state.pdfRenderTicket)state.pdfRenderTask=null;}
+}
+function toolbar(){
+ return '<div class="duff-toolbar"><div class="duff-page-nav">'
+ +'<button class="btn btn-small" data-do="prev" '+(state.page===1?'disabled':'')+' aria-label="Página anterior">←</button>'
+ +'<label for="duff-page-input">Página del PDF</label><input id="duff-page-input" type="number" min="1" max="'+state.pdfPageCount+'" value="'+state.page+'">'
+ +'<span class="micro">/ '+state.pdfPageCount+'</span>'
+ +'<button class="btn btn-small" data-do="next" '+(state.page===state.pdfPageCount?'disabled':'')+' aria-label="Página siguiente">→</button>'
+ +'</div><div class="duff-page-nav">'
+ +(state.pdfDocument?'<button class="btn btn-small" data-do="pdf-zoom-out" title="Reducir zoom">−</button><span class="micro">'+Math.round(state.pdfZoom*100)+'%</span><button class="btn btn-small" data-do="pdf-zoom-in" title="Ampliar zoom">+</button><button class="btn btn-small" data-do="pdf-fit" title="Ajustar al ancho">Ajustar</button>':'')
+ +(state.bookUrl?'<a class="btn btn-small" href="'+h(state.bookUrl)+'#page='+state.page+'" target="_blank" rel="noopener">Abrir libro ↗</a>':'')
+ +'<button class="btn btn-small" data-do="complete">'+(state.done[chapterId(current())]?'✓ Capítulo terminado':'Marcar capítulo terminado')+'</button>'
+ +'</div></div>';
+}
 function field(key,label,greek,multi){
  var val=note(state.page).answers[key]||'';
  return '<label for="field-'+h(key)+'">'+h(label)+'</label>'+(multi?'<textarea id="field-'+h(key)+'" '+(greek?'class="greek-answer" ':'')+'data-field="'+h(key)+'" rows="'+(multi===2?8:3)+'">'+h(val)+'</textarea>':'<input type="text" id="field-'+h(key)+'" '+(greek?'class="greek-answer" ':'')+'data-field="'+h(key)+'" value="'+h(val)+'">');
@@ -169,6 +220,7 @@ function render(){
  if(state.user.id!==OWNER){app.innerHTML=blocked();return;}
  var c=current();
  app.innerHTML=header()+'<div class="duff-banner"><div class="duff-banner-inner"><div><div class="eyebrow">Jeremy Duff · Editorial CLIE · edición española</div><h1 class="duff-title">Capítulo '+(c+1)+'. '+h(chapters[c][0])+'</h1><p class="duff-subtitle">Secuencia original del manual · 20 capítulos · PDF de 522 páginas</p></div><span class="chip">Solo tu cuenta</span></div></div><div class="duff-shell">'+nav()+'<main class="duff-reader"><p class="note">El original se lee en su formato íntegro; el cuaderno de ejercicios está separado y se guarda en privado.</p>'+toolbar()+pdf()+readingPanel()+'</main>'+workbook()+'</div><div class="duff-privacy">El archivo del libro no se publica en GitHub Pages: se descarga únicamente tras iniciar sesión y superar las reglas de acceso del almacenamiento privado. Las respuestas se guardan en tu cuenta.</div>';
+ if(state.pdfDocument)window.requestAnimationFrame(renderPdfPage);
 }
 async function savePage(p){
  if(!state.user||state.user.id!==OWNER)return;
@@ -181,7 +233,7 @@ async function savePage(p){
 }
 function scheduleSave(p){clearTimeout(state.saveTimers[p]);state.saveTimers[p]=setTimeout(function(){savePage(p);},900);var el=document.getElementById('duff-save-status');if(el)el.textContent='Guardando…';}
 async function bookmark(p){await client.from('lingua_notes').upsert({user_id:OWNER,lesson_id:'duff:bookmark',body:JSON.stringify({page:p}),updated_at:new Date().toISOString()},{onConflict:'user_id,lesson_id'});}
-function go(p){closeGreekCard();if(!state.user||state.user.id!==OWNER)return;p=Number(p);if(!Number.isFinite(p)||p<1||p>522)return;state.page=Math.floor(p);state.saveStatus='';render();bookmark(state.page);history.replaceState(null,'','#pagina='+state.page);}
+function go(p){closeGreekCard();if(!state.user||state.user.id!==OWNER)return;p=Number(p);if(!Number.isFinite(p)||p<1||p>state.pdfPageCount)return;state.page=Math.floor(p);state.saveStatus='';render();bookmark(state.page);history.replaceState(null,'','#pagina='+state.page);}
 async function loadData(){
  var notes=await client.from('lingua_notes').select('lesson_id,body').eq('user_id',OWNER).like('lesson_id','duff:%').limit(1000);
  if(notes.error)state.bookError='No se pudieron cargar los apuntes: '+notes.error.message;
@@ -198,9 +250,24 @@ async function loadData(){
 async function loadBook(){
  var res=await client.storage.from(BUCKET).download(PATH);
  if(res.error){state.bookError='Todavía no se encontró tu ejemplar privado. Seleccionalo abajo para subirlo una sola vez.';render();return;}
+ cancelPdfRender();
+ if(state.pdfDocument){try{await state.pdfDocument.destroy();}catch(e){}state.pdfDocument=null;}
  if(state.bookUrl)window.URL.revokeObjectURL(state.bookUrl);
  state.bookUrl=window.URL.createObjectURL(res.data);
- state.bookError='';render();
+ state.bookError='';state.pdfError='';state.pdfLoading=true;render();
+ try{
+  if(!window.pdfjsLib)throw Error('No se cargó PDF.js. Revisá tu conexión o los bloqueadores de scripts.');
+  window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+  var bytes=await res.data.arrayBuffer();
+  if(new TextDecoder('ascii').decode(bytes.slice(0,5))!=='%PDF-')throw Error('El archivo descargado no tiene una cabecera PDF válida.');
+  var task=window.pdfjsLib.getDocument({data:new Uint8Array(bytes)});
+  state.pdfDocument=await task.promise;
+  state.pdfPageCount=state.pdfDocument.numPages;
+  if(state.page>state.pdfPageCount)state.page=state.pdfPageCount;
+ }catch(e){
+  state.pdfError=e&&e.message?e.message:String(e);
+  console.error('Lingua Viva PDF viewer:',e);
+ }finally{state.pdfLoading=false;render();}
 }
 async function init(){
  if(!client){state.loading=false;state.authMessage='No se pudo cargar el sistema de acceso. Revisá tu conexión.';render();return;}
@@ -210,7 +277,7 @@ async function init(){
  if(state.user&&state.user.id===OWNER){await loadData();render();await loadBook();}
  client.auth.onAuthStateChange(function(event,session){
   var uid=session&&session.user?session.user.id:null;
-  if(uid!==(state.user&&state.user.id)){state.user=session?session.user:null;if(!state.user&&state.bookUrl){window.URL.revokeObjectURL(state.bookUrl);state.bookUrl=null;}render();if(uid===OWNER){loadData().then(function(){render();loadBook();});}}
+  if(uid!==(state.user&&state.user.id)){state.user=session?session.user:null;if(!state.user&&state.bookUrl){cancelPdfRender();if(state.pdfDocument){state.pdfDocument.destroy();state.pdfDocument=null;}window.URL.revokeObjectURL(state.bookUrl);state.bookUrl=null;}render();if(uid===OWNER){loadData().then(function(){render();loadBook();});}}
  });
 }
 app.addEventListener('submit',async function(e){
@@ -244,6 +311,10 @@ app.addEventListener('click',async function(e){
  if(act==='logout'){await client.auth.signOut();return;}
  if(act==='page')go(b.dataset.page);
  if(act==='prev')go(state.page-1);
+ if(act==='pdf-zoom-in'){state.pdfZoom=Math.min(2.5,Math.round((state.pdfZoom+.2)*10)/10);render();}
+ if(act==='pdf-zoom-out'){state.pdfZoom=Math.max(.6,Math.round((state.pdfZoom-.2)*10)/10);render();}
+ if(act==='pdf-fit'){state.pdfZoom=1;render();}
+ if(act==='retry-pdf'){loadBook();}
  if(act==='next')go(state.page+1);
  if(act==='letter'){state.pron=Number(b.dataset.letter);render();}
  if(act==='save')savePage(state.page);
@@ -278,6 +349,7 @@ app.addEventListener('click',async function(e){
 document.addEventListener('click',function(e){if(e.target.closest('.duff-close')){closeGreekCard();return;}if(!e.target.closest('[data-do="greek-word"],.greek-card'))closeGreekCard();});
 window.addEventListener('scroll',closeGreekCard,{passive:true});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeGreekCard();if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;if(e.key==='ArrowRight')go(state.page+1);if(e.key==='ArrowLeft')go(state.page-1);});
-window.addEventListener('pagehide',function(){if(state.user&&state.user.id===OWNER)savePage(state.page);if(state.bookUrl)window.URL.revokeObjectURL(state.bookUrl);});
+window.addEventListener('resize',function(){if(state.pdfDocument&&state.user&&state.user.id===OWNER)renderPdfPage();});
+window.addEventListener('pagehide',function(){cancelPdfRender();if(state.user&&state.user.id===OWNER)savePage(state.page);if(state.bookUrl)window.URL.revokeObjectURL(state.bookUrl);});
 init();
 })();
