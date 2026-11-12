@@ -275,7 +275,8 @@ app.addEventListener('click',async function(e){
   state.questions.unshift(res.data);render();
  }
 });
-document.addEventListener('click',function(e){if(!e.target.closest('[data-do="greek-word"],.greek-card'))closeGreekCard();});
+document.addEventListener('click',function(e){if(e.target.closest('.duff-close')){closeGreekCard();return;}if(!e.target.closest('[data-do="greek-word"],.greek-card'))closeGreekCard();});
+window.addEventListener('scroll',closeGreekCard,{passive:true});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeGreekCard();if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;if(e.key==='ArrowRight')go(state.page+1);if(e.key==='ArrowLeft')go(state.page-1);});
 window.addEventListener('pagehide',function(){if(state.user&&state.user.id===OWNER)savePage(state.page);if(state.bookUrl)window.URL.revokeObjectURL(state.bookUrl);});
 init();
