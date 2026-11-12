@@ -1,0 +1,77 @@
+{
+  "work": "Jeremy Duff · Curso de griego bíblico: Los elementos del griego del Nuevo Testamento",
+  "edition": "Editorial CLIE, 2019, traducción y adaptación de Trevor R. Allin",
+  "pdf_total_pages": 522,
+  "original_file": "Solo en archivo aportado por el usuario o en bucket privado de Supabase. NO subir PDF ni transcripciones extensas al repositorio público.",
+  "site": "griego-biblico/",
+  "privacy": "Supabase Storage bucket lingua-duff-private (public=false), RLS restringida a cuenta autorizada. Frontend GitHub Pages es público, no guardar libro allí.",
+  "status": "lector navegable con cuaderno por página y ejercicios del capítulo 1 indexados, PDF aún pendiente de subida por el usuario a Storage",
+  "chapter_starts_pdf": [
+    33,
+    50,
+    66,
+    81,
+    98,
+    114,
+    134,
+    149,
+    162,
+    177,
+    193,
+    210,
+    224,
+    237,
+    252,
+    267,
+    282,
+    298,
+    318,
+    332
+  ],
+  "chapter_titles": [
+    "El alfabeto",
+    "Oraciones básicas",
+    "Los casos y el género",
+    "Las preposiciones",
+    "Los adjetivos",
+    "Los tiempos de los verbos",
+    "Los modos de los verbos",
+    "Otros patrones de sustantivos y verbos",
+    "Pronombres y conjunciones",
+    "Oraciones compuestas",
+    "Verbos especiales",
+    "La tercera declinación – Primera parte",
+    "La tercera declinación – Segunda parte",
+    "Los participios",
+    "La voz pasiva y la voz media",
+    "El perfecto",
+    "El subjuntivo",
+    "Más sobre los verbos",
+    "Verbos adicionales",
+    "Puntos finales"
+  ],
+  "chapter_1": {
+    "pdf_pages": [
+      33,
+      49
+    ],
+    "practices": {
+      "1.1": "39",
+      "1.2": "41",
+      "1.3-1.4": "43",
+      "1.5": "45",
+      "1.6": "45",
+      "ejercicios_finales": "46-48"
+    },
+    "pronunciation": "convención española del manual con aclaraciones rioplatenses: theta /θ/ no /s/, zeta /z/ no z castellana, chi /x/, eta /eː/, omega /oː/, upsilon /u/ didáctica",
+    "exercise_fields": "implementados en lector por páginas con guardado en lingua_notes, corrección automática aún pendiente"
+  },
+  "next_steps": [
+    "Verificar subida privada del PDF por la cuenta autorizada",
+    "Comprobar inicio de sesión y carga de PDF en navegador real",
+    "Revisar calidad de los campos de la Práctica 1.1 y corrección personalizada",
+    "Agregar correspondencia exacta de prácticas del capítulo 2 y siguientes, sin cambiar la secuencia ni reproducir el manual públicamente",
+    "Mejorar lector móvil y seguimiento de minutos"
+  ],
+  "last_updated": "2026-11-12"
+}
