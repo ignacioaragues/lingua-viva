@@ -63,22 +63,22 @@ function create(config){
  }
  async function persist(){
   if(flushing||!alive&&pending.size===0)return;
-  flushing=true;
+  flushing=true;var hadError=false;
   try{
    for(var entry of Array.from(pending.entries())){
     var id=entry[0],record=entry[1];
     if(!record||!record.duration_seconds){pending.delete(id);continue;}
     var payload={...record,user_id:userId,updated_at:new Date().toISOString()};
     var result=await client.from('lingua_study_sessions').upsert(payload,{onConflict:'id'});
-    if(result.error){console.warn('Lingua Viva: no se pudo sincronizar el tiempo griego',result.error.message);break;}
+    if(result.error){hadError=true;console.warn('Lingua Viva: no se pudo sincronizar el tiempo griego',result.error.message);break;}
     var previous=history.get(id);
     if(!previous||previous.duration_seconds<=record.duration_seconds)history.set(id,record);
     var newer=pending.get(id);
     if(!newer||newer.duration_seconds<=record.duration_seconds)pending.delete(id);
     savePending(pending);
    }
-  }catch(e){console.warn('Lingua Viva: sincronización de tiempo pendiente',e);}
-  finally{flushing=false;updateUI();}
+  }catch(e){hadError=true;console.warn('Lingua Viva: sincronización de tiempo pendiente',e);}
+  finally{flushing=false;updateUI();if(!hadError&&pending.size)Promise.resolve().then(persist);}
  }
  function flush(){putSession(session);return persist();}
  async function load(){
