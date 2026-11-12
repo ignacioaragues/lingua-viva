@@ -91,3 +91,18 @@
 .question-reply{background:var(--sage);padding:12px;margin-top:12px;border-left:2px solid var(--green)}
 .question-reply>p{margin:6px 0 0;white-space:pre-wrap;line-height:1.7;font-size:13px}
 @media(max-width:600px){.question-panel{padding:13px}.question-actions .btn{flex:1 1 auto}.question-toggle{padding:11px}}
+
+/* Contextual morphology cards and sound laboratory (French) */
+.reading-popover{width:min(340px,calc(100vw - 24px));max-height:min(480px,calc(100vh - 30px));overflow:auto;grid-template-columns:minmax(0,1fr) 35px}
+.reading-popover .morph-row{grid-column:1/-1;display:grid;grid-template-columns:75px minmax(0,1fr);gap:9px;line-height:1.55;font-size:12px;padding-top:6px;border-top:1px solid var(--line)}
+.reading-popover .morph-row b{color:var(--muted);font-weight:600}
+.reading-popover .morph-row a{grid-column:1/-1;color:var(--green);text-decoration:underline;text-underline-offset:3px}
+.reading-popover .morph-note{display:block;color:var(--muted)}
+.reading-popover>.speech-btn{grid-column:2;grid-row:2/span 2}
+.sound-pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:14px 0}
+.sound-pair{padding:15px;border:1px solid var(--line);background:var(--white)}
+.sound-contrast{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sound-contrast>div{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.sound-contrast b{font:24px var(--serif);width:100%}
+.sound-contrast span{font-size:12px;color:var(--muted)}
+.sound-pair p{font-size:12px;line-height:1.65;color:var(--muted);margin:12px 0 0}
