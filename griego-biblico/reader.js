@@ -44,7 +44,8 @@ var exercises={
 46:[['Ejercicios · 1','text','Juan 1:1–14: transcripción en letras españolas (continúa en la página siguiente)',1]],
 48:[['Ejercicios · 2','text','Juan 1:15–23: escribir el pasaje en griego',1]]
 };
-var state={user:null,page:33,bookUrl:null,bookError:'',uploading:false,notes:{},done:{},questions:[],pron:7,authMessage:'',loading:true,saveTimers:{},saveStatus:'',ready:false};
+var state={user:null,page:33,bookUrl:null,bookError:'',uploading:false,notes:{},done:{},questions:[],pron:7,authMessage:'',loading:true,saveTimers:{},saveStatus:'',ready:false,lastInput:null};
+var answerKeys={'1.5':['no','sí','no','no','sí'],'1.6':['sí','no','no','sí','no']};
 function h(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function chFor(p){var n=0;chapters.forEach(function(c,i){if(p>=c[1])n=i;});return n;}
 function chapterId(i){return 'duff-ch'+(i+1);}
@@ -76,6 +77,7 @@ function practice(){
      out+='<div class="duff-answer-row"><label>Ítem '+k+'</label><div class="duff-toggle"><button type="button" data-do="choice" data-key="'+h(key)+'" data-value="sí" aria-pressed="'+(v==='sí')+'">Sí</button><button type="button" data-do="choice" data-key="'+h(key)+'" data-value="no" aria-pressed="'+(v==='no')+'">No</button></div></div>';
    }
  }
+ if(type==='choice'&&answerKeys[id])out+='<button class="btn btn-small" data-do="check" data-ex="'+h(id)+'">Comprobar respuestas</button><div class="duff-status" id="check-'+h(id)+'"></div>';
  return out+'</div>';
  }).join('');
 }
@@ -92,8 +94,9 @@ function questionPanel(){
  var recent=state.questions.filter(function(q){return q.lesson_id===chapterId(current());}).slice(0,4);
  return '<section class="duff-question"><h3>¿Una pregunta sobre esta parte?</h3><p class="note">La pregunta se guarda en tu cuenta para revisión del tutor; no llega como mensaje en tiempo real a este chat.</p><textarea id="duff-question-text" placeholder="Por ejemplo: ¿por qué θ no se pronuncia como la z argentina?"></textarea><button class="btn btn-small" data-do="question">Enviar pregunta</button><div id="duff-question-msg" class="duff-message"></div>'+recent.map(function(q){return '<div class="duff-reply"><b>'+h(q.status==='reviewed'?'Respondida':'Pendiente')+'</b><p>'+h(q.body)+'</p>'+(q.feedback?'<p><b>Respuesta:</b> '+h(q.feedback)+'</p>':'')+'</div>';}).join('')+'</section>';
 }
+function keyboard(){return '<section class="duff-exercise"><h3>Teclado griego</h3><p>Seleccioná una casilla de respuesta y pulsá las letras. Los espíritus y acentos se añaden después de la vocal.</p><div class="duff-keyboard">'+letters.map(function(l){return '<button type="button" data-do="insert" data-char="'+l[0]+'">'+l[0]+'</button>';}).join('')+'<button data-do="insert" data-char="ς">ς</button><button data-do="insert" data-cp="0313" title="Espíritu suave">᾿</button><button data-do="insert" data-cp="0314" title="Espíritu áspero">῾</button><button data-do="insert" data-cp="0301" title="Acento agudo">´</button><button data-do="insert" data-cp="0342" title="Circunflejo">῀</button><button data-do="insert" data-cp="0345" title="Iota suscrita">ͅ</button><button data-do="insert" data-char=" ">espacio</button></div></section>';}
 function workbook(){
- return '<aside class="duff-work"><div class="micro">CUADERNO PERSONAL</div><h2>Capítulo '+(current()+1)+' · pág. '+state.page+'</h2><p class="note">Leé el libro a la izquierda y escribí acá. Cada página conserva sus respuestas por separado, sincronizadas con tu cuenta.</p><div class="duff-index"><button data-do="page" data-page="39">1.1</button><button data-do="page" data-page="41">1.2</button><button data-do="page" data-page="43">1.3–1.4</button><button data-do="page" data-page="45">1.5–1.6</button><button data-do="page" data-page="46">Ej. 1</button><button data-do="page" data-page="48">Ej. 2</button></div>'+practice()+'<div class="duff-exercise"><h3>Mis apuntes · página '+state.page+'</h3><textarea id="duff-general" rows="5" placeholder="Anotá dudas, traducciones, ejercicios o lo que quieras…">'+h(note(state.page).general)+'</textarea><div id="duff-save-status" class="duff-status">'+h(state.saveStatus||'Los cambios se guardan automáticamente.')+'</div><button class="btn btn-small" data-do="save">Guardar ahora</button></div>'+pronunciation()+questionPanel()+'</aside>';
+ return '<aside class="duff-work"><div class="micro">CUADERNO PERSONAL</div><h2>Capítulo '+(current()+1)+' · pág. '+state.page+'</h2><p class="note">Leé el libro a la izquierda y escribí acá. Cada página conserva sus respuestas por separado, sincronizadas con tu cuenta.</p><div class="duff-index"><button data-do="page" data-page="39">1.1</button><button data-do="page" data-page="41">1.2</button><button data-do="page" data-page="43">1.3–1.4</button><button data-do="page" data-page="45">1.5–1.6</button><button data-do="page" data-page="46">Ej. 1</button><button data-do="page" data-page="48">Ej. 2</button></div>'+practice()+'<div class="duff-exercise"><h3>Mis apuntes · página '+state.page+'</h3><textarea id="duff-general" rows="5" placeholder="Anotá dudas, traducciones, ejercicios o lo que quieras…">'+h(note(state.page).general)+'</textarea><div id="duff-save-status" class="duff-status">'+h(state.saveStatus||'Los cambios se guardan automáticamente.')+'</div><button class="btn btn-small" data-do="save">Guardar ahora</button></div>'+keyboard()+pronunciation()+questionPanel()+'</aside>';
 }
 function render(){
  if(state.loading){app.innerHTML='<div class="duff-loading">Comprobando la sesión…</div>';return;}
@@ -151,6 +154,7 @@ app.addEventListener('submit',async function(e){
  state.authMessage='Ingresando…';var res=await client.auth.signInWithPassword({email:email,password:pass});
  if(res.error){state.authMessage='No se pudo iniciar sesión: '+res.error.message;render();}
 });
+app.addEventListener('focusin',function(e){if(e.target.matches('#duff-general,[data-field]'))state.lastInput=e.target;});
 app.addEventListener('input',function(e){
  if(e.target.id==='duff-general'){note(state.page).general=e.target.value;scheduleSave(state.page);}
  if(e.target.dataset.field){note(state.page).answers[e.target.dataset.field]=e.target.value;scheduleSave(state.page);}
@@ -174,6 +178,17 @@ app.addEventListener('click',async function(e){
  if(act==='next')go(state.page+1);
  if(act==='letter'){state.pron=Number(b.dataset.letter);render();}
  if(act==='save')savePage(state.page);
+ if(act==='insert'){
+  var input=state.lastInput;
+  if(!input||!document.contains(input)){input=document.querySelector('[data-field],#duff-general');}
+  if(input){var ch=b.dataset.cp?String.fromCodePoint(parseInt(b.dataset.cp,16)):b.dataset.char;input.focus();var a=input.selectionStart||0,z=input.selectionEnd||a;input.setRangeText(ch,a,z,'end');input.dispatchEvent(new Event('input',{bubbles:true}));}
+ }
+ if(act==='check'){
+  var id=b.dataset.ex,key=answerKeys[id],values=key.map(function(x,i){return note(state.page).answers[id+':'+(i+1)]||'';}),el=document.getElementById('check-'+id);
+  if(values.some(function(x){return !x;})){el.textContent='Respondé los cinco ítems antes de comprobar.';return;}
+  var score=values.filter(function(x,i){return x===key[i];}).length;
+  el.textContent=score+'/5 correctas. '+(score===5?'¡Muy bien!':'Revisá los ítems '+values.map(function(x,i){return x===key[i]?'':i+1;}).filter(Boolean).join(', ')+'.');
+ }
  if(act==='choice'){
   note(state.page).answers[b.dataset.key]=b.dataset.value;scheduleSave(state.page);render();
  }
