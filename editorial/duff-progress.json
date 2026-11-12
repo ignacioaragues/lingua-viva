@@ -67,12 +67,31 @@
     "exercise_fields": "Implementados en lector por páginas con guardado privado; prácticas 1.5 y 1.6 con autocorrección (5 ítems cada una); teclado griego con espíritus y acentos. El resto de las prácticas todavía no tiene autocorrección."
   },
   "next_steps": [
-    "Usuario: subir una vez su PDF al bucket privado desde el lector",
-    "Comprobar inicio de sesión y carga real del PDF en navegador y en iPad",
-    "Validar guardado interdispositivos y preguntas con cuenta real",
-    "Completar autocorrección de prácticas 1.1–1.4 y transcripción de Juan 1:1–23",
-    "Agregar ejercicios de capítulo 2 en el orden del libro, sin reproducir el manual públicamente",
-    "Integrar temporizador de lectura y mejorar navegación móvil"
+    "Probar con la sesión autorizada la carga del PDF, fichas, popovers y audio en navegador real/iPad",
+    "Continuar anotación bíblica palabra por palabra cuando el libro presente los pasajes siguientes, conservando el orden del manual",
+    "Extender Juan 1:3–23 con fuente textual verificada y fichas morfológicas completas, sin afirmar cobertura anticipada",
+    "Enriquecer cada letra y diptongo con ejemplos, audios externos autorizados y contrastes rioplatenses",
+    "Completar autocorrección de prácticas 1.1–1.4 y mejorar teclado y seguimiento del estudio"
   ],
-  "last_updated": "2026-11-12"
+  "last_updated": "2026-11-12",
+  "biblical_reader": {
+    "location": "griego-biblico/ · aparece al llegar a las páginas físicas 46–48",
+    "coverage": "Juan 1:1–2, 2 versículos y 24 tokens con fichas morfológicas (12 formas distintas) y traducción propia opcional",
+    "features": [
+      "selección de palabra con ficha contextual cerca del texto",
+      "lema, categoría, rasgos morfológicos, glosa y nota",
+      "traducción propia visible/oculta",
+      "enlace externo a STEP Bible"
+    ],
+    "scope": "Solo Juan 1:1–2 está anotado; NO afirmar cobertura del resto de Juan 1:1–23 ni del NT.",
+    "source": "Texto bíblico breve de tradición griega común, no reproducción de la edición del manual."
+  },
+  "pronunciation_enrichment": {
+    "coverage": "24 letras con ejemplos griegos y significado; contrastes seleccionados θ/τ, ζ/σ, χ/κ, η/ε, ω/ο, υ; voz del navegador el-GR rotulada como griego moderno",
+    "resources": [
+      "https://koinefoundations.com/instructor-videos/",
+      "https://www.stepbible.org/"
+    ],
+    "caveat": "El audio de voz moderna NO representa la convención didáctica de Duff."
+  }
 }
