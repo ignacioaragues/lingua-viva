@@ -174,3 +174,16 @@ body:has(.duff-phonetics-overlay){overflow:hidden}
  .duff-phonetics-symbol{font-size:33px}
  .duff-phonetics-table-wrap{max-height:43vh}
 }
+
+/* Contador activo del griego, integrado en el lector sin sumar una columna. */
+.duff-timer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 18px;padding:11px 16px;margin:0 0 13px;border:1px solid #d2dfcc;background:#edf3e9;color:var(--ink)}
+.duff-timer-current,.duff-timer-summary{display:flex;flex-direction:column;gap:3px}
+.duff-timer-current strong{font:700 26px/1.1 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:-.025em;font-variant-numeric:tabular-nums;color:var(--green)}
+.duff-timer-summary strong{font:600 15px/1.25 ui-monospace,SFMono-Regular,Consolas,monospace;font-variant-numeric:tabular-nums}
+.duff-timer-summary a{font-size:11px;color:var(--green);text-decoration:underline;text-underline-offset:3px}
+.duff-timer-state{font-size:11px;color:#38634b}
+.duff-timer-state.paused{color:var(--muted)}
+.duff-timer-controls{display:flex;align-items:center;gap:10px}
+.duff-timer-controls small{font-size:11px;line-height:1.5;color:var(--muted);max-width:160px}
+.duff-timer-controls button{min-width:78px}
+@media(max-width:680px){.duff-timer{gap:10px;padding:11px}.duff-timer-current strong{font-size:23px}.duff-timer-controls{width:100%;justify-content:space-between}.duff-timer-controls small{max-width:220px}}
