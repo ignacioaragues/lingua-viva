@@ -83,3 +83,15 @@
 .greek-card>a{font-size:12px;color:var(--green);text-decoration:underline;text-underline-offset:3px}
 .duff-close{position:absolute;right:10px;top:8px;border:0;background:transparent;color:var(--muted);font-size:24px;cursor:pointer}
 @media(max-width:680px){.duff-greek-reader{padding:14px}.greek-verse-text{font-size:23px}}
+
+/* Visor PDF.js: el PDF privado se dibuja directamente, sin el plugin PDF de Chrome. */
+.duff-pdf-frame{overflow:auto;position:relative;background:#e7e9e4;padding:16px;scrollbar-gutter:stable;display:block}
+.duff-pdf-frame canvas{display:block;max-width:none;margin:0 auto;background:#fff;box-shadow:0 2px 18px rgba(0,0,0,.13)}
+.duff-pdf-frame canvas[hidden]{display:none}
+.duff-pdf-progress{font:12px/1.5 var(--font);color:var(--muted);text-align:center;padding:16px}
+.duff-pdf-frame .duff-page-progress{position:sticky;bottom:0;margin:10px auto 0;padding:5px 10px;background:#f6f7f3df;max-width:max-content;border-radius:4px}
+.duff-pdf-failure{background:#fff;padding:22px;max-width:620px;margin:10px auto;border:1px solid #c9b8ad}
+.duff-pdf-failure h3{margin:0 0 10px;font-size:18px}
+.duff-pdf-failure p{font-size:13px;line-height:1.7}
+.duff-pdf-failure button{margin-top:12px}
+@media(max-width:680px){.duff-pdf-frame{padding:9px;scrollbar-gutter:auto}}
