@@ -23,6 +23,7 @@ window.LINGUA_FR_MORPH = {
   "réponds": {lemma:"répondre",category:"Verbo",features:"Presente de indicativo · 1.ª persona singular",meaning:"respondo",note:"La -s final no se pronuncia normalmente.",conjugation:"repondre"},
   "il": {lemma:"il",category:"Pronombre personal",features:"3.ª persona · masculino singular · sujeto",meaning:"él",note:"Aquí remite a «un homme»."},
   "dit": {lemma:"dire",category:"Verbo",features:"Presente de indicativo · 3.ª persona singular",meaning:"dice",note:"Forma irregular de dire.",conjugation:"dire"},
+  "a:avoir": {lemma:"avoir",category:"Verbo",features:"Presente de indicativo · 3.ª persona singular",meaning:"tiene",note:"«Hugo a dix-huit ans»: avoir expresa la edad; no es la letra A.",conjugation:"avoir"},
   "nina": {lemma:"Nina",category:"Nombre propio",features:"Antropónimo femenino · singular",meaning:"Nina",note:"Nombre de la protagonista de esta lectura."},
   "j’ai": {lemma:"avoir",category:"Verbo con pronombre sujeto elidido",features:"Presente de indicativo · 1.ª persona singular",meaning:"tengo",note:"j’ = je ante vocal; «avoir ... ans» expresa la edad, no «être».",conjugation:"avoir"},
   "seize": {lemma:"seize",category:"Numeral cardinal",features:"Invariable · 16",meaning:"dieciséis",note:"Forma simple; no se construye como dix-six."},
