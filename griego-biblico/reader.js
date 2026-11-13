@@ -45,7 +45,7 @@ var exercises={
 48:[['Ejercicios · 2','text','Juan 1:15–23: escribir el pasaje en griego',1]]
 };
 var timer=null;
-var state={user:null,page:33,bookUrl:null,bookError:'',uploading:false,notes:{},done:{},questions:[],pron:7,greekTranslation:true,authMessage:'',loading:true,saveTimers:{},saveStatus:'',ready:false,lastInput:null,pdfDocument:null,pdfLoading:false,pdfError:'',pdfPageCount:522,pdfZoom:1,pdfRenderTask:null,pdfRenderTicket:0,workOpen:!(window.matchMedia&&window.matchMedia('(max-width:1050px)').matches),workTab:'notes',phoneticsOpen:false,phoneticsGroup:'letters',phoneticsIndex:7};
+var state={user:null,page:33,bookUrl:null,bookError:'',uploading:false,notes:{},reviews:{},done:{},questions:[],pron:7,greekTranslation:true,authMessage:'',loading:true,saveTimers:{},saveStatus:'',ready:false,lastInput:null,pdfDocument:null,pdfLoading:false,pdfError:'',pdfPageCount:522,pdfZoom:1,pdfRenderTask:null,pdfRenderTicket:0,workOpen:!(window.matchMedia&&window.matchMedia('(max-width:1050px)').matches),workTab:'notes',phoneticsOpen:false,phoneticsGroup:'letters',phoneticsIndex:7};
 var answerKeys={'1.5':['no','sí','no','no','sí'],'1.6':['sí','no','no','sí','no']};
 function h(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function chFor(p){var n=0;chapters.forEach(function(c,i){if(p>=c[1])n=i;});return n;}
@@ -133,7 +133,27 @@ function practice(){
  }
  if(type==='choice'&&answerKeys[id])out+='<button class="btn btn-small" data-do="check" data-ex="'+h(id)+'">Comprobar respuestas</button><div class="duff-status" id="check-'+h(id)+'"></div>';
  return out+'</div>';
+ }).join('')+reviewPanel(state.page);
+}
+
+function reviewPanel(p){
+ var review=state.reviews[p];
+ if(!review)return '<section class="duff-review" aria-label="Corrección del tutor"><h3>Corrección del tutor</h3><p>Esta página todavía no tiene una devolución guardada.</p><button type="button" class="btn btn-small" data-do="refresh-review">Buscar corrección</button></section>';
+ var sections=review.sections||{};
+ var items=Object.keys(sections).map(function(key){
+  var val=sections[key];
+  return '<div class="duff-review-part"><b>Sección '+h(key)+'</b>'+(Array.isArray(val)?'<ol>'+val.map(function(line){return '<li>'+h(line)+'</li>';}).join('')+'</ol>':'<p>'+h(val)+'</p>')+'</div>';
  }).join('');
+ return '<section class="duff-review" aria-label="Corrección del tutor"><h3>Corrección del tutor · '+h(review.practice||'página '+p)+'</h3><p class="duff-review-date">Revisión: '+h(review.reviewed_at||'fecha no indicada')+'</p><p>'+h(review.summary||'')+'</p>'+items+'<p class="note">Tus respuestas originales se conservan. Una variante de transliteración válida no es un error.</p><button type="button" class="btn btn-small" data-do="refresh-review">Actualizar corrección</button></section>';
+}
+async function refreshReview(){
+ if(!state.user||state.user.id!==OWNER)return;
+ var p=state.page,button=document.querySelector('[data-do="refresh-review"]');
+ if(button){button.disabled=true;button.textContent='Consultando…';}
+ var res=await client.from('lingua_notes').select('body').eq('user_id',OWNER).eq('lesson_id','duff:review:p:'+p).maybeSingle();
+ if(res.error){if(button){button.disabled=false;button.textContent='No se pudo consultar · Reintentar';}return;}
+ if(res.data){try{state.reviews[p]=JSON.parse(res.data.body);}catch(e){}}
+ if(p===state.page){var work=document.getElementById('duff-work');if(work)work.outerHTML=workbook();}
 }
 
 var letterExamples={
@@ -278,6 +298,7 @@ async function loadData(){
  if(notes.error)state.bookError='No se pudieron cargar los apuntes: '+notes.error.message;
  (notes.data||[]).forEach(function(r){
   if(r.lesson_id==='duff:bookmark'&&!location.hash){try{state.page=JSON.parse(r.body).page||33;}catch(e){}}
+  else if(r.lesson_id.indexOf('duff:review:p:')===0){try{state.reviews[Number(r.lesson_id.slice('duff:review:p:'.length))]=JSON.parse(r.body);}catch(e){}}
   else if(r.lesson_id.indexOf('duff:p:')===0){try{state.notes[Number(r.lesson_id.slice(7))]=JSON.parse(r.body);}catch(e){}}
  });
  var prog=await client.from('lingua_lesson_progress').select('lesson_id,completed').eq('user_id',OWNER).like('lesson_id','duff-ch%');
@@ -351,6 +372,7 @@ app.addEventListener('click',async function(e){
  if(act==='phonetics-group'){state.phoneticsGroup=b.dataset.group;state.phoneticsIndex=0;updatePhoneticsModal();return;}
  if(act==='phonetics-select'){state.phoneticsIndex=Number(b.dataset.index);updatePhoneticsModal();return;}
  if(act==='work-tab'){setWorkTab(b.dataset.tab);return;}
+ if(act==='refresh-review'){await refreshReview();return;}
  if(act==='toggle-work'){state.workOpen=!state.workOpen;render();return;}
  if(act==='timer-toggle'){if(timer)timer.togglePause();return;}
  if(act==='logout'){await client.auth.signOut();return;}
