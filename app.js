@@ -117,12 +117,13 @@
     if(!l.reading)return '';
     const r=l.reading;
     const annotate=sentence=>sentence.split(/(\s+|[«».,!?;:–])/u).map(token=>{
-      const key=token.toLocaleLowerCase('fr');
+      const rawKey=token.toLocaleLowerCase('fr');
+      const key=l.id==='d0-nombres' && rawKey==='a' ? 'a:avoir' : rawKey;
       if(!r.glossary[key]&&!window.LINGUA_FR_MORPH?.[key])return h(token);
       return `<button type="button" class="reading-word" data-action="reading-word" data-word="${h(key)}" aria-label="Consulter : ${h(token)}" aria-expanded="false">${h(token)}</button>`;
     }).join('');
     return `<section class="content-section" id="lecture"><div class="grammar-head"><div><span class="micro">Lecture graduée · texte original</span><h3>${h(r.title)}</h3></div><button type="button" class="btn btn-small" data-action="reading-mode" aria-pressed="${state.readingParallel}">${state.readingParallel?'Français + español':'Français seul'}</button></div><p>Un court texte original, avec traduction facultative. Touchez un mot français pour voir sa fiche, sa fonction et son sens. La traduction peut être masquée à tout moment.</p>
-      <div class="parallel-reading">${r.sentences.map((s,j)=>`<div class="reading-pair"><div class="reading-fr" lang="fr"><span class="micro">${String(j+1).padStart(2,'0')}</span><div class="reading-sentence">${annotate(s.fr)}</div>${speechButton(s.fr,'Écouter la phrase '+(j+1),'fr-FR','speech-compact')}</div><div class="reading-translation" lang="es" ${state.readingParallel?'':'hidden'}>${h(s.es)}</div></div>`).join('')}</div><p class="reading-hint">Objectif : relisez le texte sans la traduction, puis répondez oralement à la question : « Comment s’écrit le prénom de Léa ? »</p>
+      <div class="parallel-reading">${r.sentences.map((s,j)=>`<div class="reading-pair"><div class="reading-fr" lang="fr"><span class="micro">${String(j+1).padStart(2,'0')}</span><div class="reading-sentence">${annotate(s.fr)}</div>${speechButton(s.fr,'Écouter la phrase '+(j+1),'fr-FR','speech-compact')}</div><div class="reading-translation" lang="es" ${state.readingParallel?'':'hidden'}>${h(s.es)}</div></div>`).join('')}</div><p class="reading-hint">Objectif : relisez le texte sans la traduction, puis répondez oralement à la question : ${l.id==='d0-nombres'?'« Quel âge ont Nina et Hugo ? »':'« Comment s’écrit le prénom de Léa ? »'}</p>
     </section>`;
   }
 
