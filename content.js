@@ -87,6 +87,18 @@ window.LINGUA = {
         {id:"d0n2",q:"Comment écrit-on le nombre 16 ?",opts:["Seize","Sixante","Dix-six"],answer:0,why:"Le nombre 16 se dit « seize »."},
         {id:"d0n3",q:"Quel nombre est « dix-neuf » ?",opts:["9","19","29"],answer:1,why:"« Dix-neuf » correspond à 19."}
       ],
+      reading:{
+        title:"Un numéro pour la bibliothèque",
+        sentences:[
+          {fr:"Bonjour, je suis Nina. J’ai seize ans.",es:"Hola, soy Nina. Tengo dieciséis años."},
+          {fr:"Je suis à la bibliothèque avec mon ami Hugo.",es:"Estoy en la biblioteca con mi amigo Hugo."},
+          {fr:"Hugo a dix-huit ans. Il demande mon numéro.",es:"Hugo tiene dieciocho años. Me pide mi número."},
+          {fr:"Je réponds : « Zéro six, douze, quinze. » Il répète lentement.",es:"Respondo: «Cero seis, doce, quince». Él repite lentamente."}
+        ],
+        glossary:{
+          "bonjour":["hola","saludo"],"je":["yo","pronombre sujeto"],"suis":["soy / estoy","être, presente"],"nina":["Nina","nombre propio"],"j’ai":["tengo","avoir, presente"],"seize":["dieciséis","numeral"],"ans":["años","sustantivo plural"],"à":["en","preposición"],"la":["la","artículo definido"],"bibliothèque":["biblioteca","sustantivo femenino"],"avec":["con","preposición"],"mon":["mi","posesivo"],"ami":["amigo","sustantivo masculino"],"hugo":["Hugo","nombre propio"],"a":["tiene","avoir, presente"],"dix-huit":["dieciocho","numeral"],"il":["él","pronombre sujeto"],"demande":["pide","demander, presente"],"numéro":["número","sustantivo masculino"],"réponds":["respondo","répondre, presente"],"zéro":["cero","numeral"],"six":["seis","numeral"],"douze":["doce","numeral"],"quinze":["quince","numeral"],"répète":["repite","répéter, presente"],"lentement":["lentamente","adverbio"]
+        }
+      },
       writing:"Inventez une fiche avec un prénom, un âge, une ville et un numéro de téléphone fictif écrit en toutes lettres.",
       speaking:"Tu travailles dans une médiathèque. Demande-moi mes coordonnées en français A1. Je donne un numéro fictif lentement ; vérifie chaque groupe de chiffres. Corrige-moi à la fin."
     },
