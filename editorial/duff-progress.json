@@ -67,13 +67,12 @@
     "exercise_fields": "Implementados en lector por páginas con guardado privado; prácticas 1.5 y 1.6 con autocorrección (5 ítems cada una); teclado griego con espíritus y acentos. El resto de las prácticas todavía no tiene autocorrección."
   },
   "next_steps": [
-    "Validar con sesión real que el reloj compacto abre su panel y sigue contando al cambiar de página o pestaña",
-    "Comprobar en Chrome y Safari/iPad el PDF privado, guardado por página y controles de ejercicios",
-    "Continuar el curso de Duff en orden, agregando ejercicios por página y anotación bíblica contextual",
-    "Enriquecer fonética comparada con audios independientes para sonidos contrastivos solo cuando se verifique fuente y licencia",
-    "Completar autocorrección de prácticas 1.1–1.4"
+    "Verificar en sesión autenticada que la devolución de práctica 1.1 en página 39 se muestra correctamente y que Actualizar corrección funciona",
+    "Implementar teclado griego contextual y transliteración compatible con th/y/E según preferencia del usuario, sin penalizar variantes válidas",
+    "Continuar el manual en orden; ampliar autocorrección solo con enunciados cotejados y preservar PDF privado",
+    "Validar Chrome y Safari/iPad: PDF.js, temporizador, guardado y correcciones"
   ],
-  "last_updated": "2026-11-12",
+  "last_updated": "2026-11-13",
   "biblical_reader": {
     "location": "griego-biblico/ · aparece al llegar a las páginas físicas 46–48",
     "coverage": "Juan 1:1–2, 2 versículos y 24 tokens con fichas morfológicas (12 formas distintas) y traducción propia opcional",
@@ -124,7 +123,8 @@
     "keyboard": "Teclado griego plegable dentro de Ejercicios y Apuntes.",
     "pronunciation": "Atlas histórico en ventana independiente; no ocupa el cuaderno.",
     "responsive": "A <=1050px el cuaderno se superpone a la lectura cuando se abre, y arranca cerrado; en móviles se muestra como panel inferior. El reloj del temporizador ocupa un indicador pequeño a la derecha de la navegación de página.",
-    "save": "Se conserva guardado automático por página y cuenta autorizada."
+    "save": "Se conserva guardado automático por página y cuenta autorizada.",
+    "review": "Panel de corrección privada por página en pestaña Ejercicios, lee lingua_notes duff:review:p:<n> con filtro user_id autorizado, presenta secciones y fecha y permite actualizar sin alterar respuestas. Implementado en código; QA autenticado pendiente."
   },
   "study_timer": {
     "status": "implementado en griego-biblico/study-timer.js y reader.js",
