@@ -85,7 +85,10 @@ window.LINGUA = {
       exercises:[
         {id:"d0n1",q:"Quel nombre correspond à « douze » ?",opts:["2","12","20"],answer:1,why:"« Douze » est le nombre 12."},
         {id:"d0n2",q:"Comment écrit-on le nombre 16 ?",opts:["Seize","Sixante","Dix-six"],answer:0,why:"Le nombre 16 se dit « seize »."},
-        {id:"d0n3",q:"Quel nombre est « dix-neuf » ?",opts:["9","19","29"],answer:1,why:"« Dix-neuf » correspond à 19."}
+        {id:"d0n3",q:"Quel nombre est « dix-neuf » ?",opts:["9","19","29"],answer:1,why:"« Dix-neuf » correspond à 19."},
+        {id:"d0n4",q:"Nina dit : « J’ai seize ans. » Quel âge a-t-elle ?",opts:["6 ans","16 ans","18 ans"],answer:1,why:"« Seize » signifie 16 ; pour exprimer l’âge, le français utilise avoir : « j’ai seize ans »."},
+        {id:"d0n5",q:"Dans « Hugo a dix-huit ans », que signifie « a » ?",opts:["La lettre A","Le verbe avoir, 3e personne du singulier","La préposition à"],answer:1,why:"Sans accent, « a » est ici le présent du verbe avoir (il a). « À » avec accent est une préposition."},
+        {id:"d0n6",q:"Quel groupe correspond à « zéro six, douze, quinze » ?",opts:["06 12 15","60 12 50","06 20 15"],answer:0,why:"Zéro six = 06, douze = 12, quinze = 15. Il s’agit d’un numéro fictif incomplet, pas d’un numéro à appeler."}
       ],
       reading:{
         title:"Un numéro pour la bibliothèque",
