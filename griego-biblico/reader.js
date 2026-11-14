@@ -138,6 +138,7 @@ function practice(){
 
 function reviewPanel(p){
  var review=state.reviews[p];
+ if(review&&state.workTab==='exercise'&&state.page===p){try{localStorage.setItem('lv:duff:review-seen:'+p,String(review.reviewed_at));}catch(e){}}
  if(!review)return '<section class="duff-review" aria-label="Corrección del tutor"><h3>Corrección del tutor</h3><p>Esta página todavía no tiene una devolución guardada.</p><button type="button" class="btn btn-small" data-do="refresh-review">Buscar corrección</button></section>';
  var sections=review.sections||{};
  var items=Object.keys(sections).map(function(key){
@@ -255,16 +256,17 @@ function readingPanel(){
    +'<p class="note">'+h(data.notice)+'</p></section>';
 }
 
+function unreadReviews(){return Object.keys(state.reviews).filter(function(p){var r=state.reviews[p];try{return r&&r.reviewed_at&&localStorage.getItem('lv:duff:review-seen:'+p)!==String(r.reviewed_at);}catch(e){return false;}});}
 function workbook(){
  if(!state.workOpen)return '';
  var tabs=[['exercise','Ejercicios'],['notes','Apuntes'],['questions','Preguntas']];
  var body=state.workTab==='exercise'
-  ?(current()===0?'<div class="duff-index" aria-label="Ir a prácticas del capítulo 1"><button data-do="page" data-page="39">1.1</button><button data-do="page" data-page="41">1.2</button><button data-do="page" data-page="43">1.3–1.4</button><button data-do="page" data-page="45">1.5–1.6</button><button data-do="page" data-page="46">Ej. 1</button><button data-do="page" data-page="48">Ej. 2</button></div>':'')+practice()+keyboard()
+  ?(current()===0?'<div class="duff-index" aria-label="Ir a prácticas del capítulo 1"><button data-do="page" data-page="39">1.1</button><button data-do="page" data-page="41">1.2</button><button data-do="page" data-page="43">1.3–1.4</button><button data-do="page" data-page="45">1.5–1.6</button><button data-do="page" data-page="46">Ej. 1</button><button data-do="page" data-page="48">Ej. 2</button></div>':'')+practice()+keyboard()+'<div class="duff-save-actions"><button type="button" class="btn btn-small" data-do="save">Guardar ejercicios ahora</button><span id="duff-save-status" class="duff-status" role="status">'+h(state.saveStatus||'Guardado automático activado')+'</span></div>'
   :state.workTab==='notes'
   ?'<div class="duff-exercise"><h3>Mis apuntes · página '+state.page+'</h3><textarea id="duff-general" rows="7" placeholder="Anotá dudas, traducciones o lo que quieras…">'+h(note(state.page).general)+'</textarea><div id="duff-save-status" class="duff-status">'+h(state.saveStatus||'Los cambios se guardan automáticamente.')+'</div><button class="btn btn-small" data-do="save">Guardar ahora</button></div>'+keyboard()
   :questionPanel();
  return '<aside class="duff-work" id="duff-work" aria-label="Cuaderno personal"><div class="duff-work-head"><div><div class="micro">CUADERNO PERSONAL</div><h2>Capítulo '+(current()+1)+' · pág. '+state.page+'</h2></div><button type="button" class="btn btn-small" data-do="toggle-work" aria-label="Cerrar cuaderno">Ocultar ×</button></div>'
-  +'<div class="duff-work-tabs" role="group" aria-label="Secciones del cuaderno">'+tabs.map(function(t){return '<button type="button" data-do="work-tab" data-tab="'+t[0]+'" aria-pressed="'+(t[0]===state.workTab)+'">'+t[1]+'</button>';}).join('')+'</div>'
+  +(unreadReviews().length?'<button type="button" class="btn btn-small duff-new-reviews" data-do="show-new-reviews">● '+unreadReviews().length+' corrección(es) nueva(s)</button>':'')+'<div class="duff-work-tabs" role="group" aria-label="Secciones del cuaderno">'+tabs.map(function(t){return '<button type="button" data-do="work-tab" data-tab="'+t[0]+'" aria-pressed="'+(t[0]===state.workTab)+'">'+t[1]+'</button>';}).join('')+'</div>'
   +'<div class="duff-work-scroll">'+body+'</div></aside>';
 }
 function ensureTimer(){
@@ -373,6 +375,7 @@ app.addEventListener('click',async function(e){
  if(act==='phonetics-select'){state.phoneticsIndex=Number(b.dataset.index);updatePhoneticsModal();return;}
  if(act==='work-tab'){setWorkTab(b.dataset.tab);return;}
  if(act==='refresh-review'){await refreshReview();return;}
+ if(act==='show-new-reviews'){var pages=unreadReviews();if(pages.length){go(Number(pages[0]));state.workTab='exercise';render();}return;}
  if(act==='toggle-work'){state.workOpen=!state.workOpen;render();return;}
  if(act==='timer-toggle'){if(timer)timer.togglePause();return;}
  if(act==='logout'){await client.auth.signOut();return;}
@@ -383,11 +386,11 @@ app.addEventListener('click',async function(e){
  if(act==='pdf-fit'){state.pdfZoom=1;render();}
  if(act==='retry-pdf'){loadBook();}
  if(act==='next')go(state.page+1);
- if(act==='save')savePage(state.page);
+ if(act==='save'){clearTimeout(state.saveTimers[state.page]);await savePage(state.page);return;}
  if(act==='insert'){
   var input=state.lastInput;
   if(!input||!document.contains(input)){input=document.querySelector('[data-field],#duff-general');}
-  if(input){var ch=b.dataset.cp?String.fromCodePoint(parseInt(b.dataset.cp,16)):b.dataset.char;input.focus();var a=input.selectionStart||0,z=input.selectionEnd||a;input.setRangeText(ch,a,z,'end');input.dispatchEvent(new Event('input',{bubbles:true}));}
+  if(input){var ch=b.dataset.cp?String.fromCodePoint(parseInt(b.dataset.cp,16)):b.dataset.char;var a=input.selectionStart||0,z=input.selectionEnd||a;input.setRangeText(ch,a,z,'end');input.focus({preventScroll:true});input.dispatchEvent(new Event('input',{bubbles:true}));}
  }
  if(act==='check'){
   var id=b.dataset.ex,key=answerKeys[id],values=key.map(function(x,i){return note(state.page).answers[id+':'+(i+1)]||'';}),el=document.getElementById('check-'+id);
