@@ -64,11 +64,11 @@
       "ejercicios_finales": "46-48"
     },
     "pronunciation": "convención española del manual con aclaraciones rioplatenses: theta /θ/ no /s/, zeta /z/ no z castellana, chi /x/, eta /eː/, omega /oː/, upsilon /u/ didáctica",
-    "exercise_fields": "Implementados en lector por páginas con guardado privado; prácticas 1.5 y 1.6 con autocorrección (5 ítems cada una); teclado griego con espíritus y acentos. El resto de las prácticas todavía no tiene autocorrección."
+    "exercise_fields": "Implementados en lector por páginas con guardado privado; prácticas 1.5 y 1.6 con autocorrección (5 ítems cada una); teclado griego con espíritus y acentos. El resto de las prácticas todavía no tiene autocorrección. Teclado flotante contextual añadido como recurso separado; prueba autenticada pendiente."
   },
   "next_steps": [
+    "Probar teclado griego flotante en sesión autenticada (escritorio y móvil), especialmente foco, acentos y guardado",
     "Verificar en sesión autenticada que la devolución de práctica 1.1 en página 39 se muestra correctamente y que Actualizar corrección funciona",
-    "Implementar teclado griego contextual y transliteración compatible con th/y/E según preferencia del usuario, sin penalizar variantes válidas",
     "Continuar el manual en orden; ampliar autocorrección solo con enunciados cotejados y preservar PDF privado",
     "Validar Chrome y Safari/iPad: PDF.js, temporizador, guardado y correcciones"
   ],
