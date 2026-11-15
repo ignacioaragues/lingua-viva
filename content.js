@@ -1,4 +1,4 @@
-/* Lingua Viva · parcours original inspiré par la progression d'Alter Ego+ 1.
+/* Lengua Viva · parcours original inspiré par la progression d'Alter Ego+ 1.
    Ni les textes ni les exercices du manuel ne sont reproduits ici. */
 window.LINGUA = {
   audio: "https://alteregoplus.hachettefle.fr/alter-ego-%2B-1_livre-de-l-eleve_fr.html",
