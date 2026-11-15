@@ -1,4 +1,4 @@
-/* Lingua Viva · tiempo de estudio del griego bíblico.
+/* Lengua Viva · tiempo de estudio del griego bíblico.
    Reutiliza lingua_study_sessions y el slug griego-biblico del panel general.
    Se guarda un registro de recuperación local independiente para no sobrescribir
    las sesiones del francés si se abren ambos cursos en distintas pestañas. */
@@ -72,14 +72,14 @@ function create(config){
     if(history.get(id)&&Number(history.get(id).duration_seconds)>=Number(record.duration_seconds)){pending.delete(id);savePending(pending);continue;}
     var payload={...record,user_id:userId,updated_at:new Date().toISOString()};
     var result=await client.from('lingua_study_sessions').upsert(payload,{onConflict:'id'});
-    if(result.error){hadError=true;console.warn('Lingua Viva: no se pudo sincronizar el tiempo griego',result.error.message);break;}
+    if(result.error){hadError=true;console.warn('Lengua Viva: no se pudo sincronizar el tiempo griego',result.error.message);break;}
     var previous=history.get(id);
     if(!previous||previous.duration_seconds<=record.duration_seconds)history.set(id,record);
     var newer=pending.get(id);
     if(!newer||newer.duration_seconds<=record.duration_seconds)pending.delete(id);
     savePending(pending);
    }
-  }catch(e){hadError=true;console.warn('Lingua Viva: sincronización de tiempo pendiente',e);}
+  }catch(e){hadError=true;console.warn('Lengua Viva: sincronización de tiempo pendiente',e);}
   finally{flushing=false;updateUI();if(!hadError&&pending.size)Promise.resolve().then(persist);}
  }
  function flush(){putSession(session);return persist();}
@@ -88,13 +88,13 @@ function create(config){
   loaded=true;
   try{
    var result=await client.from('lingua_study_sessions').select('id,language,lesson_id,duration_seconds,started_at').eq('user_id',userId).eq('language',LANGUAGE).limit(3000);
-   if(result.error)console.warn('Lingua Viva: no se pudo cargar el tiempo griego',result.error.message);
+   if(result.error)console.warn('Lengua Viva: no se pudo cargar el tiempo griego',result.error.message);
    else{
     (result.data||[]).forEach(function(s){var old=history.get(s.id);if(!old||old.duration_seconds<s.duration_seconds)history.set(s.id,s);});
     pending.forEach(function(s,id){var remote=history.get(id);if(remote&&Number(remote.duration_seconds)>=Number(s.duration_seconds))pending.delete(id);});
     savePending(pending);
    }
-  }catch(e){console.warn('Lingua Viva: tiempo acumulado no disponible',e);}
+  }catch(e){console.warn('Lengua Viva: tiempo acumulado no disponible',e);}
   updateUI();return persist();
  }
  function markActivity(){if(!alive)return;lastActivity=Date.now();updateUI();}
