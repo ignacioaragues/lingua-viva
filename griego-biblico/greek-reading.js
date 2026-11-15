@@ -1,4 +1,4 @@
-/* Lectura bíblica anotada de Lingua Viva. Jn 1:1–2, formulación griega de tradición textual común.
+/* Lectura bíblica anotada de Lengua Viva. Jn 1:1–2, formulación griega de tradición textual común.
    Traducción y fichas morfológicas propias; no reproduce la edición de Duff. */
 window.GREEK_READER = {
   source:"Evangelio según Juan 1:1–2",
