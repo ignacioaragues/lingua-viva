@@ -1,4 +1,4 @@
-/* Lingua Viva — plain browser JS; GitHub Pages + optional Supabase account. */
+/* Lengua Viva — plain browser JS; GitHub Pages + optional Supabase account. */
 (() => {
   'use strict';
   const URL_SUPABASE = 'https://nzjdlqanbclsfwwstkwi.supabase.co';
@@ -90,12 +90,12 @@
   function header(){
     const account = state.user ? `<button class="btn btn-small" data-action="auth">${h(state.user.email.split('@')[0])} · ${t('Compte','Cuenta')}</button>` : `<button class="btn btn-small" data-action="auth">${t('Se connecter','Mi cuenta')}</button>`;
     const pathToCourse=page==='francais'?'#lecon':currentLessonLink()+'#lecon';
-    return `<header class="topbar"><div class="shell"><a class="brand" href="${root}">Lingua <em>Viva</em></a><nav class="topnav">${isFrench?`<a href="${pathToCourse}">Le parcours</a><a href="${link('flashcards/?idioma=francais')}">Cartes mémoire</a><a href="${link('estadisticas/?idioma=francais')}">Mon temps</a><a href="${link('')}">Langues</a>`:`<a href="${link('')}">Mis idiomas</a><a href="${link('flashcards/')}">Flashcards</a><a href="${link('estadisticas/')}">Mis tiempos</a>`}</nav><div class="toptools"><a class="btn btn-small btn-plain" href="${root}">${t('Toutes les langues','Inicio')}</a>${account}</div></div></header>`;
+    return `<header class="topbar"><div class="shell"><a class="brand" href="${root}">Lengua <em>Viva</em></a><nav class="topnav">${isFrench?`<a href="${pathToCourse}">Le parcours</a><a href="${link('flashcards/?idioma=francais')}">Cartes mémoire</a><a href="${link('estadisticas/?idioma=francais')}">Mon temps</a><a href="${link('')}">Langues</a>`:`<a href="${link('')}">Mis idiomas</a><a href="${link('flashcards/')}">Flashcards</a><a href="${link('estadisticas/')}">Mis tiempos</a>`}</nav><div class="toptools"><a class="btn btn-small btn-plain" href="${root}">${t('Toutes les langues','Inicio')}</a>${account}</div></div></header>`;
   }
-  function footer(){return `<footer class="shell footer"><span>Lingua Viva · ${t('Un espace pour apprendre les langues.','Un lugar para estudiar lenguas.')}</span><span>${t('Parcours original · Repères : Alter Ego+ 1','Material original · Referencia: Alter Ego+ 1')} · <a href="${link('')}">Accueil / Inicio</a></span></footer>`;}
+  function footer(){return `<footer class="shell footer"><span>Lengua Viva · ${t('Un espace pour apprendre les langues.','Un lugar para estudiar lenguas.')}</span><span>${t('Parcours original · Repères : Alter Ego+ 1','Material original · Referencia: Alter Ego+ 1')} · <a href="${link('')}">Accueil / Inicio</a></span></footer>`;}
 
   function renderHome(){
-    document.title = 'Lingua Viva · Centro de idiomas';
+    document.title = 'Lengua Viva · Centro de idiomas';
     const secs=statsTime(), french=statsTime('francais');
     $app.innerHTML=header()+`<main>
       <section class="hero"><div class="shell hero-grid"><div><div class="eyebrow">Tu espacio de aprendizaje</div><h1>Las lenguas<br><em>se viven.</em></h1><p>Un lugar para estudiar a tu ritmo, volver sobre las palabras y seguir el recorrido que vas construyendo. Cada idioma tiene sus lecciones, ejercicios, audios, tarjetas de repaso y registro de estudio.</p><div class="hero-actions"><a class="btn btn-primary" href="${currentLessonLink()}">Continuar francés <span>↗</span></a><a class="btn" href="${link('griego-biblico/')}">Griego bíblico</a><a class="btn" href="${link('flashcards/')}">Repasar vocabulario</a></div></div><div class="hero-aside"><div class="micro">Tu recorrido, hasta hoy</div><div class="rule"></div><div class="metricrow"><div><div class="metricnum">${completed()}<span style="font-size:15px;color:var(--muted)">/8</span></div><div class="metriclabel">Lecciones</div></div><div><div class="metricnum">${Math.floor(secs/60)}</div><div class="metriclabel">Minutos</div></div><div><div class="metricnum">${Object.values(state.cards).filter(c=>new Date(c.due_at)>new Date()).length}</div><div class="metriclabel">Tarjetas repasadas</div></div></div><div class="rule"></div><p>El contador se pone en marcha cuando estudiás dentro de una lección y se pausa si dejás de interactuar o cambiás de pestaña.</p></div></div></section>
@@ -139,7 +139,7 @@
 
   function renderCourse(){
     const l = lessonById(state.lessonId); const i=lessons.indexOf(l); const percent=Math.round(completed()/lessons.length*100);
-    document.title=l.title+' · Français A1 · Lingua Viva';
+    document.title=l.title+' · Français A1 · Lengua Viva';
     $app.innerHTML=header()+`<main><div class="shell"><section class="course-head"><div><div class="eyebrow">Français · Niveau A1</div><h1>Apprendre le <em>français.</em></h1><p>Un parcours autonome, construit autour des dossiers d’<i>Alter Ego+ 1</i>. Dialogues originaux, pratique de l’écrit et de l’oral, écoute et révisions.</p></div><div class="course-stat"><div class="micro">Progression du parcours</div><div class="metricnum">${percent}%</div><div class="track"><span style="width:${percent}%"></span></div></div></section>
     <div class="course-layout">${lessonNav()}
       <article class="lesson-main" id="lecon"><div class="lesson-kicker"><span class="micro">Dossier ${l.dossier} · ${String(i+1).padStart(2,'0')} / 08</span><span class="micro">Repère manuel : p. ${l.pages}</span></div><h2>${h(l.title)}</h2><div class="subtitle">${h(l.subtitle)}</div><div class="goal"><b>À la fin de cette leçon</b>${h(l.goal)}</div>
@@ -191,7 +191,7 @@
 
   function renderComing(){
     const l=languages.find(x=>x.slug===page)||languages[1];
-    $app.innerHTML=header()+`<main class="shell"><section class="coming"><div class="eyebrow">Biblioteca de lenguas / ${h(l.native)}</div><h1>${h(l.name)}<br><em style="color:var(--green)">en preparación.</em></h1><p>Este idioma ya tiene su propio espacio en Lingua Viva. Cuando incorporemos el curso, acá aparecerán las lecciones, los ejercicios, el estudio automático y tus tarjetas de vocabulario.</p><div class="placeholder-lessons"><span>Curso y unidades</span><span>Ejercicios</span><span>Audio y vídeo</span><span>Flashcards</span><span>Registro de estudio</span></div><div class="hero-actions"><a class="btn btn-primary" href="${link('flashcards/?idioma='+l.slug)}">Mis flashcards ↗</a><a class="btn" href="${root}">← Volver a todos los idiomas</a></div></section></main>`+footer();
+    $app.innerHTML=header()+`<main class="shell"><section class="coming"><div class="eyebrow">Biblioteca de lenguas / ${h(l.native)}</div><h1>${h(l.name)}<br><em style="color:var(--green)">en preparación.</em></h1><p>Este idioma ya tiene su propio espacio en Lengua Viva. Cuando incorporemos el curso, acá aparecerán las lecciones, los ejercicios, el estudio automático y tus tarjetas de vocabulario.</p><div class="placeholder-lessons"><span>Curso y unidades</span><span>Ejercicios</span><span>Audio y vídeo</span><span>Flashcards</span><span>Registro de estudio</span></div><div class="hero-actions"><a class="btn btn-primary" href="${link('flashcards/?idioma='+l.slug)}">Mis flashcards ↗</a><a class="btn" href="${root}">← Volver a todos los idiomas</a></div></section></main>`+footer();
   }
 
   function allFlashcards(language){
@@ -217,7 +217,7 @@
     const lang=languages.find(l=>l.slug===state.flashLang)||languages[0];
     const french=state.flashLang==='francais';
     const cards=unlockedCards(state.flashLang), due=dueCards(state.flashLang), current=currentFlashCard();
-    document.title=(french?'Cartes mémoire':'Flashcards')+' · Lingua Viva';
+    document.title=(french?'Cartes mémoire':'Flashcards')+' · Lengua Viva';
     $app.innerHTML=header()+`<main class="shell"><section class="flash-page"><div class="eyebrow">${french?'Révision du vocabulaire':'Repaso de vocabulario'}</div><h1>${french?'Cartes <em>mémoire.</em>':'Mis <em>flashcards.</em>'}</h1><p class="flash-intro">${french?'Les mots de vos leçons, prêts à être révisés à votre rythme. Les mots difficiles reviendront plus tôt.':'Repasá las palabras que ya encontraste en tus unidades. Las difíciles vuelven antes; las que recordás se espacian.'}</p>
       <div class="flash-toolbar"><label>${french?'Langue':'Idioma'} <select id="flashLanguage">${languages.map(l=>`<option value="${l.slug}" ${l.slug===state.flashLang?'selected':''}>${h(l.name)}</option>`).join('')}</select></label><div class="switch"><button data-action="flash-filter" data-filter="due" class="${state.flashFilter==='due'?'active':''}">${french?'À réviser':'Pendientes'} (${due.length})</button><button data-action="flash-filter" data-filter="all" class="${state.flashFilter==='all'?'active':''}">${french?'Tous':'Todos'} (${cards.length})</button></div><a class="btn btn-small" href="${link(lang.slug+'/')}">${french?'← Le cours':'← Volver al curso'}</a></div>
       ${current?`<div class="flash-study"><div class="micro">${french?'Cliquez pour retourner la carte':'Tocá la tarjeta para darla vuelta'}</div><button class="flash-card ${state.flashShow?'flipped':''}" data-action="flip" aria-label="${french?'Retourner la carte':'Girar tarjeta'}"><span class="flash-card-flag">${h(lang.native)} · ${h(current.lesson_id.replace('d','Dossier ').replace('-',' / '))}</span><span class="flash-card-front">${h(state.flashShow?current.back:current.front)}</span><span class="flash-card-hint">${state.flashShow?(french?'Sens / explication':'Significado / explicación'):(french?'Voir le sens ↗':'Ver respuesta ↗')}</span></button><div class="flash-speech">${speechButton(current.front,french?'Écouter le mot':'Escuchar la palabra','fr-FR')}</div>${state.flashShow?`<div class="flash-review-actions"><button class="btn" data-action="flash-review" data-quality="again">↶ ${french?'À revoir':'Otra vez'}</button><button class="btn btn-primary" data-action="flash-review" data-quality="good">✓ ${french?'Je connais':'La recordé'}</button></div>`:`<p class="hint" style="text-align:center">${french?'Pensez à la signification avant de retourner la carte.':'Intentá recordar la respuesta antes de darla vuelta.'}</p>`}</div>`:`<div class="empty" style="padding:45px;margin-top:26px">${cards.length?(french?'Bravo ! Aucune carte à réviser pour le moment.':'¡Muy bien! No tenés tarjetas pendientes por ahora.'):(french?'Les cartes apparaîtront après les premières leçons.':'Las tarjetas aparecerán cuando empieces las lecciones de este idioma.')} ${french?'<a href="'+link('francais/')+'">Continuer le cours ↗</a>':''}</div>`}
@@ -258,7 +258,7 @@
     const byLanguage=languages.map(l=>({language:l,seconds:totalSeconds(allSessions().filter(s=>s.language===l.slug))})).filter(x=>x.seconds>0);
     const maxLanguage=Math.max(60,...byLanguage.map(x=>x.seconds));
     const lastSessions=[...entries].sort((a,b)=>new Date(b.started_at)-new Date(a.started_at)).slice(0,15);
-    document.title=t('Mon temps d’étude','Mis tiempos')+' · Lingua Viva';
+    document.title=t('Mon temps d’étude','Mis tiempos')+' · Lengua Viva';
     $app.innerHTML=header()+`<main class="shell"><section class="statistics-page">
       <div class="eyebrow">${t('Journal d’apprentissage','Registro de aprendizaje')}</div>
       <div class="stats-head"><div><h1>${t('Mon temps <em>d’étude.</em>','Mis tiempos <em>de estudio.</em>')}</h1><p>${t('Un aperçu de votre pratique, jour après jour et semaine après semaine.','Un registro de tu práctica, día por día y semana por semana.')}</p></div><label class="stats-filter">${t('Afficher','Mostrar')}<select id="statsLanguage"><option value="all" ${state.statsLang==='all'?'selected':''}>${t('Toutes les langues','Todos los idiomas')}</option>${languages.map(l=>`<option value="${l.slug}" ${l.slug===state.statsLang?'selected':''}>${h(l.name)}</option>`).join('')}</select></label></div>
@@ -285,7 +285,7 @@
     const auth=state.authMode;
     const guest=state.user;
     const subtitle=guest?`${t('Connecté avec','Sesión de')} ${h(guest.email)}`:t('La même identité que dans Édition Viva.','La misma cuenta que en Edición Viva.');
-    document.body.insertAdjacentHTML('beforeend',`<div class="modal-backdrop"><div class="modal" role="dialog" aria-modal="true" aria-label="${t('Mon compte','Mi cuenta')}"><div class="modal-head"><div><div class="eyebrow">Lingua Viva</div><h2>${t('Mon compte','Mi cuenta')}</h2></div><button class="close" aria-label="Fermer" data-action="close-auth">×</button></div><p style="font-size:13px;color:var(--muted)">${subtitle}</p>${guest?`<button class="btn" data-action="signout">${t('Se déconnecter','Cerrar sesión')}</button>`:`<div class="auth-tabs"><button class="btn btn-small ${auth==='login'?'btn-primary':''}" data-action="auth-mode" data-mode="login">${t('Connexion','Ingresar')}</button><button class="btn btn-small ${auth==='signup'?'btn-primary':''}" data-action="auth-mode" data-mode="signup">${t('Créer un compte','Crear cuenta')}</button><button class="btn btn-small ${auth==='reset'?'btn-primary':''}" data-action="auth-mode" data-mode="reset">${t('Mot de passe','Contraseña')}</button></div><form id="authForm"><div class="field"><label for="authEmail">Email</label><input id="authEmail" name="email" type="email" required autocomplete="email"></div>${auth!=='reset'?`<div class="field"><label for="authPassword">${t('Mot de passe','Contraseña')}</label><input id="authPassword" name="password" type="password" required minlength="6" autocomplete="${auth==='signup'?'new-password':'current-password'}"></div>`:''}<button type="submit" class="btn btn-primary" style="width:100%">${auth==='login'?t('Se connecter','Ingresar'):auth==='signup'?t('Créer le compte','Crear cuenta'):t('Recevoir un lien','Enviar enlace')}</button></form>`}${state.authMessage?`<p class="notice ${state.authMessage.startsWith('⚠')?'error':''}">${h(state.authMessage)}</p>`:''}<p class="hint" style="margin-top:22px">${t('Les données de progression sont privées. Le compte est facultatif, mais nécessaire pour la synchronisation entre appareils.','Tus datos son privados. La cuenta es opcional, pero necesaria para sincronizar entre dispositivos.')}</p></div></div>`);
+    document.body.insertAdjacentHTML('beforeend',`<div class="modal-backdrop"><div class="modal" role="dialog" aria-modal="true" aria-label="${t('Mon compte','Mi cuenta')}"><div class="modal-head"><div><div class="eyebrow">Lengua Viva</div><h2>${t('Mon compte','Mi cuenta')}</h2></div><button class="close" aria-label="Fermer" data-action="close-auth">×</button></div><p style="font-size:13px;color:var(--muted)">${subtitle}</p>${guest?`<button class="btn" data-action="signout">${t('Se déconnecter','Cerrar sesión')}</button>`:`<div class="auth-tabs"><button class="btn btn-small ${auth==='login'?'btn-primary':''}" data-action="auth-mode" data-mode="login">${t('Connexion','Ingresar')}</button><button class="btn btn-small ${auth==='signup'?'btn-primary':''}" data-action="auth-mode" data-mode="signup">${t('Créer un compte','Crear cuenta')}</button><button class="btn btn-small ${auth==='reset'?'btn-primary':''}" data-action="auth-mode" data-mode="reset">${t('Mot de passe','Contraseña')}</button></div><form id="authForm"><div class="field"><label for="authEmail">Email</label><input id="authEmail" name="email" type="email" required autocomplete="email"></div>${auth!=='reset'?`<div class="field"><label for="authPassword">${t('Mot de passe','Contraseña')}</label><input id="authPassword" name="password" type="password" required minlength="6" autocomplete="${auth==='signup'?'new-password':'current-password'}"></div>`:''}<button type="submit" class="btn btn-primary" style="width:100%">${auth==='login'?t('Se connecter','Ingresar'):auth==='signup'?t('Créer le compte','Crear cuenta'):t('Recevoir un lien','Enviar enlace')}</button></form>`}${state.authMessage?`<p class="notice ${state.authMessage.startsWith('⚠')?'error':''}">${h(state.authMessage)}</p>`:''}<p class="hint" style="margin-top:22px">${t('Les données de progression sont privées. Le compte est facultatif, mais nécessaire pour la synchronisation entre appareils.','Tus datos son privados. La cuenta es opcional, pero necesaria para sincronizar entre dispositivos.')}</p></div></div>`);
     document.getElementById('authForm')?.addEventListener('submit',submitAuth);
   }
   async function submitAuth(e){
@@ -305,7 +305,7 @@
     if(!state.client||!state.user)return;
     const names=['lingua_study_sessions','lingua_lesson_progress','lingua_exercise_attempts','lingua_writings','lingua_notes','lingua_flashcard_reviews','lingua_user_state'];
     const result=await Promise.all(names.map(table=>state.client.from(table).select('*').eq('user_id',state.user.id).limit(3000)));
-    if(result.some(r=>r.error))console.warn('Lingua Viva: parte de los datos no se pudo cargar',result.filter(r=>r.error).map(r=>r.error.message));
+    if(result.some(r=>r.error))console.warn('Lengua Viva: parte de los datos no se pudo cargar',result.filter(r=>r.error).map(r=>r.error.message));
     const data=result.map(r=>r.data||[]);
     state.sessions=data[0];state.progress=Object.fromEntries(data[1].map(r=>[r.lesson_id,r.completed]));state.attempts=Object.fromEntries(data[2].map(r=>[r.exercise_id,r]));state.writings=data[3];state.notes=Object.fromEntries(data[4].map(r=>[r.lesson_id,r.body]));state.cards=Object.fromEntries(data[5].map(r=>[r.language+':'+r.card_id,r]));
     const remoteBookmark=data[6][0];
@@ -334,7 +334,7 @@
     const userId=state.user.id;
     bookmarkQueue=bookmarkQueue.catch(()=>{}).then(async()=>{
       const {error}=await state.client.from('lingua_user_state').upsert({user_id:userId,current_lesson_id:id,last_opened_at:at},{onConflict:'user_id'});
-      if(error)console.warn('Lingua Viva: signet de leçon non synchronisé',error.message);
+      if(error)console.warn('Lengua Viva: signet de leçon non synchronisé',error.message);
     });
     return bookmarkQueue;
   }
@@ -496,7 +496,7 @@
       const scope=b.dataset.scope,key=questionKey(scope),body=String(state.questionDrafts[key]||'').trim();
       if(!body){toast('Écrivez une question avant de l’ouvrir dans ChatGPT.',true);return;}
       const title=b.closest('.content-section')?.querySelector('h3')?.textContent?.trim()||'Leçon';
-      await copyText(`Estoy estudiando francés A1 en Lingua Viva, lección «${lessonById(state.lessonId).title}», sección «${title}». Respondé mi pregunta en español, con ejemplos sencillos en francés y una aclaración breve del punto gramatical cuando corresponda.\n\nMi pregunta:\n${body}`);
+      await copyText(`Estoy estudiando francés A1 en Lengua Viva, lección «${lessonById(state.lessonId).title}», sección «${title}». Respondé mi pregunta en español, con ejemplos sencillos en francés y una aclaración breve del punto gramatical cuando corresponda.\n\nMi pregunta:\n${body}`);
       window.open('https://chatgpt.com/','_blank','noopener');return;
     }
     if(a==='reading-mode'){
