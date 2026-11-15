@@ -1,4 +1,4 @@
-/* Lingua Viva · Jeremy Duff — private PDF, authenticated workbook. No book text or PDF in GitHub. */
+/* Lengua Viva · Jeremy Duff — private PDF, authenticated workbook. No book text or PDF in GitHub. */
 (function(){
 'use strict';
 var URL='https://nzjdlqanbclsfwwstkwi.supabase.co';
@@ -52,9 +52,9 @@ function chFor(p){var n=0;chapters.forEach(function(c,i){if(p>=c[1])n=i;});retur
 function chapterId(i){return 'duff-ch'+(i+1);}
 function current(){return chFor(state.page);}
 function note(p){if(!state.notes[p])state.notes[p]={general:'',answers:{}};return state.notes[p];}
-function header(){return '<header class="duff-header"><div class="duff-head-inner"><a class="brand" href="../">Lingua <em>Viva</em></a><span class="duff-crumb">Griego bíblico · Jeremy Duff · Curso privado</span><div class="duff-head-actions"><a class="btn btn-small" href="../">Mis idiomas</a>'+(state.user?'<button class="btn btn-small" data-do="logout">Salir de la cuenta</button>':'')+'</div></div></header>';}
-function auth(){return header()+'<main class="duff-auth"><div class="eyebrow">Biblioteca personal</div><h1 class="duff-title">Tu curso de griego bíblico</h1><p>Ingresá con la misma cuenta que usás en Lingua Viva. El libro y las respuestas solo están disponibles para tu cuenta autorizada.</p><form id="duff-login"><label for="duff-email">Correo electrónico</label><input id="duff-email" type="email" autocomplete="email" required><label for="duff-password">Contraseña</label><input id="duff-password" type="password" autocomplete="current-password" required><button class="btn btn-primary" type="submit">Iniciar sesión</button></form><p class="duff-message" role="status">'+h(state.authMessage)+'</p><p class="note">Si ya tenés la sesión iniciada en francés, se reconoce automáticamente.</p></main>';}
-function blocked(){return header()+'<main class="duff-auth"><h1 class="duff-title">Acceso privado</h1><p>Este curso está reservado para una cuenta concreta de Lingua Viva. La sesión actual no tiene permiso.</p><button class="btn" data-do="logout">Cambiar de cuenta</button></main>';}
+function header(){return '<header class="duff-header"><div class="duff-head-inner"><a class="brand" href="../">Lengua <em>Viva</em></a><span class="duff-crumb">Griego bíblico · Jeremy Duff · Curso privado</span><div class="duff-head-actions"><a class="btn btn-small" href="../">Mis idiomas</a>'+(state.user?'<button class="btn btn-small" data-do="logout">Salir de la cuenta</button>':'')+'</div></div></header>';}
+function auth(){return header()+'<main class="duff-auth"><div class="eyebrow">Biblioteca personal</div><h1 class="duff-title">Tu curso de griego bíblico</h1><p>Ingresá con la misma cuenta que usás en Lengua Viva. El libro y las respuestas solo están disponibles para tu cuenta autorizada.</p><form id="duff-login"><label for="duff-email">Correo electrónico</label><input id="duff-email" type="email" autocomplete="email" required><label for="duff-password">Contraseña</label><input id="duff-password" type="password" autocomplete="current-password" required><button class="btn btn-primary" type="submit">Iniciar sesión</button></form><p class="duff-message" role="status">'+h(state.authMessage)+'</p><p class="note">Si ya tenés la sesión iniciada en francés, se reconoce automáticamente.</p></main>';}
+function blocked(){return header()+'<main class="duff-auth"><h1 class="duff-title">Acceso privado</h1><p>Este curso está reservado para una cuenta concreta de Lengua Viva. La sesión actual no tiene permiso.</p><button class="btn" data-do="logout">Cambiar de cuenta</button></main>';}
 function nav(){return '<aside class="duff-nav"><small>ÍNDICE DEL MANUAL</small><div class="duff-nav-list">'+chapters.map(function(c,i){return '<button class="duff-chapter '+(i===current()?'active':'')+'" data-do="page" data-page="'+c[1]+'"><span class="duff-num">'+(i+1)+'.</span><span>'+h(c[0])+(state.done[chapterId(i)]?' ✓':'')+'</span></button>';}).join('')+'</div></aside>';}
 function uploadPanel(){return '<div class="duff-no-book"><h2>Conectar tu ejemplar</h2><p>El cuaderno está preparado, pero todavía no hay ningún PDF en tu biblioteca privada. Elegí el archivo de <b>Jeremy Duff · Curso de griego bíblico</b> desde este dispositivo <b>una sola vez</b>. Se guardará en un espacio de Supabase con acceso restringido a tu cuenta; <b>no se sube a GitHub</b>.</p><label for="duff-upload" class="btn btn-primary">Seleccionar PDF</label><input id="duff-upload" type="file" accept="application/pdf,.pdf" style="display:block"><p class="duff-message">'+h(state.bookError)+'</p></div>';}
 function pdf(){
@@ -218,7 +218,7 @@ function keyboard(){
 function greekResources(){
  return '<section class="duff-exercise" id="greek-resources"><h3>Recursos para escuchar y analizar</h3>'
   +'<div class="duff-resource"><b>Koine Foundations · Pronunciación del alfabeto</b><p>Escuchá las letras y compará θ, ζ y χ con las explicaciones de arriba. El modelo de pronunciación puede diferir del empleado por Duff.</p><a href="https://koinefoundations.com/instructor-videos/" target="_blank" rel="noopener noreferrer">Vídeos de pronunciación ↗</a></div>'
-  +'<div class="duff-resource"><b>STEP Bible · Análisis del NT</b><p>Buscá Juan 1:1 y compará el lema y el análisis de ἦν, λόγος y θεόν con las fichas de Lingua Viva.</p><a href="https://www.stepbible.org/" target="_blank" rel="noopener noreferrer">Abrir STEP Bible ↗</a></div></section>';
+  +'<div class="duff-resource"><b>STEP Bible · Análisis del NT</b><p>Buscá Juan 1:1 y compará el lema y el análisis de ἦν, λόγος y θεόν con las fichas de Lengua Viva.</p><a href="https://www.stepbible.org/" target="_blank" rel="noopener noreferrer">Abrir STEP Bible ↗</a></div></section>';
 }
 function closeGreekCard(){
  document.querySelector('.greek-card')?.remove();
@@ -328,7 +328,7 @@ async function loadBook(){
   if(state.page>state.pdfPageCount)state.page=state.pdfPageCount;
  }catch(e){
   state.pdfError=e&&e.message?e.message:String(e);
-  console.error('Lingua Viva PDF viewer:',e);
+  console.error('Lengua Viva PDF viewer:',e);
  }finally{state.pdfLoading=false;render();}
 }
 async function init(){
