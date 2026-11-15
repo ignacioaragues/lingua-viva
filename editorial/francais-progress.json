@@ -1,7 +1,7 @@
 {
   "course": "Français A1",
   "reference": "Alter Ego+ 1; verify lesson order and page references against supplied source before claiming exact alignment",
-  "updated": "2026-11-15",
+  "updated": "2026-11-16",
   "current_unit": "Dossier 0 — Les nombres (0–20)",
   "objectives": [
     "Comprendre et dire les nombres 0–20",
@@ -17,7 +17,7 @@
     "Un numéro pour la bibliothèque"
   ],
   "morphology": "Fichas contextuales existentes en francais/morphology.js para las dos lecturas; comprobar cada nueva forma antes de agregarla",
-  "phonetics": "Añadidos IPA y contrastes de liaison para six, dix, douze, quinze, seize; ejemplos de six aislado y six ans",
+  "phonetics": "Audio de nombres 0–20 con AFI; en alfabeto, botones ahora envían la letra aislada (C) al TTS, no el nombre ortográfico ('cé'), para reducir lecturas como 'c accent aigu'. Requiere comprobación auditiva real en navegador.",
   "resources": "Sin recursos externos nuevos en esta ejecución",
   "coverage": "Añadida tabla sistemática 0–20 con grafía, AFI y audio individual a d0-nombres; ejercicios y otras secciones requieren auditoría de autosuficiencia.",
   "known_issues": [
@@ -25,8 +25,9 @@
     "Comprobar propagación de GitHub Pages",
     "Alineación exacta con el índice del manual pendiente de cotejo",
     "Auditar cada lección como manual autónomo: inventarios completos, progresión sistemática, ejemplos, ejercicios y correcciones; no asumir uso paralelo de Alter Ego+ 1",
-    "Verificar audio individual de números y alfabeto en navegador real"
+    "Verificar audio individual de números y alfabeto en navegador real",
+    "Verificar con voz fr-FR real que la síntesis de letras aisladas pronuncia sus nombres correctamente; considerar grabaciones de referencia si falla"
   ],
-  "next_step": "Auditar Dossier 0 completo y después dossiers sucesivos para autosuficiencia; corregir pronunciación del alfabeto, revisión en página de ejercicios y contabilización de flashcards.",
+  "next_step": "Auditar autosuficiencia del Dossier 0; comprobar en navegador los 26 nombres de letras, completar ejemplos y corregir fallos detectados; revisar guardado y conteo de flashcards.",
   "privacy": "Sin cambios en autenticación, Supabase, griego ni materiales protegidos"
 }
