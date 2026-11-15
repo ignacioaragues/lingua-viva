@@ -1,4 +1,4 @@
-# Lingua Viva
+# Lengua Viva
 
 Centro personal de aprendizaje de idiomas, publicado en GitHub Pages. La portada es multilingüe; cada curso tiene su propio espacio.
 
