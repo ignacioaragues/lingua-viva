@@ -143,5 +143,12 @@
     "database": "Ampliado constraint lingua_study_sessions_language_check para aceptar griego-biblico sin retirar grec",
     "verification": "Sintaxis JavaScript y estructura de integración verificadas; el reloj desplegable fue integrado en toolbar y CSS, con cache busting. QA autenticado real en Chrome/iPad pendiente.",
     "notes": "No contar tiempo de páginas anteriores retroactivamente. La lectura pasiva sin interacción durante 90 segundos se pausa, igual que el francés."
+  },
+  "last_development_checkpoint": {
+    "date": "2026-11-15",
+    "scope": "Capítulo 1: teclado griego flotante contextual",
+    "verified": "GitHub main actualizado; teclado flotante existente mejorado con borrado, conservación del foco y reposicionamiento al desplazarse",
+    "limitations": "No se comprobó en sesión autenticada ni en navegador móvil; no se añadió ni reprodujo contenido protegido",
+    "next": "Probar entrada en páginas 39 y 43, espíritus/acentos y sincronización de respuestas; seguir capítulo 1 en orden"
   }
 }
