@@ -1,4 +1,4 @@
-/* Lingua Viva: contextual Greek keyboard, independent of the private PDF reader. */
+/* Lengua Viva: contextual Greek keyboard, independent of the private PDF reader. */
 (function(){
 'use strict';
 const chars='α β γ δ ε ζ η θ ι κ λ μ ν ξ ο π ρ σ τ υ φ χ ψ ω ς'.split(' ');
