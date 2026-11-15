@@ -19,12 +19,14 @@
   "morphology": "Fichas contextuales existentes en francais/morphology.js para las dos lecturas; comprobar cada nueva forma antes de agregarla",
   "phonetics": "Añadidos IPA y contrastes de liaison para six, dix, douze, quinze, seize; ejemplos de six aislado y six ans",
   "resources": "Sin recursos externos nuevos en esta ejecución",
-  "coverage": "Números 0–20 enriquecidos; no implica finalización de todo Dossier 0",
+  "coverage": "Añadida tabla sistemática 0–20 con grafía, AFI y audio individual a d0-nombres; ejercicios y otras secciones requieren auditoría de autosuficiencia.",
   "known_issues": [
     "Pruebas autenticadas y móviles pendientes",
     "Comprobar propagación de GitHub Pages",
-    "Alineación exacta con el índice del manual pendiente de cotejo"
+    "Alineación exacta con el índice del manual pendiente de cotejo",
+    "Auditar cada lección como manual autónomo: inventarios completos, progresión sistemática, ejemplos, ejercicios y correcciones; no asumir uso paralelo de Alter Ego+ 1",
+    "Verificar audio individual de números y alfabeto en navegador real"
   ],
-  "next_step": "Añadir ejercicios originales de escucha y discriminación six/dix en aislamiento, ante consonante y ante vocal; ampliar fichas de la próxima lectura comprobada",
+  "next_step": "Auditar Dossier 0 completo y después dossiers sucesivos para autosuficiencia; corregir pronunciación del alfabeto, revisión en página de ejercicios y contabilización de flashcards.",
   "privacy": "Sin cambios en autenticación, Supabase, griego ni materiales protegidos"
 }
