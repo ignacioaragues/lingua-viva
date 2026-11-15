@@ -1,4 +1,4 @@
-/* Fichas morfológicas revisadas para la primera lectura francesa de Lingua Viva.
+/* Fichas morfológicas revisadas para la primera lectura francesa de Lengua Viva.
    Las formas se interpretan en su contexto; no son un analizador automático general. */
 window.LINGUA_FR_MORPH = {
   "bonjour": {lemma:"bonjour",category:"Interjección",features:"Fórmula de saludo · invariable",meaning:"hola; buenos días",note:"Puede usarse durante el día en registros formales e informales."},
