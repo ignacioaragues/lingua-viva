@@ -2,7 +2,7 @@
 (function(){
 'use strict';
 const chars='α β γ δ ε ζ η θ ι κ λ μ ν ξ ο π ρ σ τ υ φ χ ψ ω ς'.split(' ');
-const extras=[['᾿','\u0313'],['῾','\u0314'],['´','\u0301'],['῀','\u0342'],['ͅ','\u0345'],['espacio',' ']];
+const extras=[['᾿','\u0313'],['῾','\u0314'],['´','\u0301'],['῀','\u0342'],['ͅ','\u0345'],['espacio',' '],['← borrar','BACKSPACE']];
 let target=null;
 const panel=document.createElement('section');
 panel.id='lv-greek-floating';
@@ -33,10 +33,12 @@ panel.addEventListener('click',e=>{
  if(e.target.closest('[data-close]')){panel.hidden=true;return;}
  const b=e.target.closest('[data-value]');if(!b||!target||!target.isConnected)return;
  const a=target.selectionStart??target.value.length,z=target.selectionEnd??a;
- target.setRangeText(b.dataset.value,a,z,'end');
+ if(b.dataset.value==='BACKSPACE'){const start=a===z?Math.max(0,a-1):a;target.setRangeText('',start,z,'end');}else{target.setRangeText(b.dataset.value,a,z,'end');}
  target.dispatchEvent(new Event('input',{bubbles:true}));
+ target.focus({preventScroll:true});
  place();
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)panel.hidden=true;});
 window.addEventListener('resize',place);
+window.addEventListener('scroll',()=>{if(!panel.hidden)place();},{passive:true});
 })();
