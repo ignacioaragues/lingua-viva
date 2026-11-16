@@ -124,7 +124,9 @@ function practice(){
     +field('ch2:free:1','Respuesta / ejercicio 1',true,2)
     +field('ch2:free:2','Respuesta / ejercicio 2',true,2)
     +field('ch2:free:3','Respuesta / ejercicio 3',true,2)
-    +'</div>';
+    +'<details class="duff-exercise"><summary>Más respuestas para esta página (4–10)</summary><p class="note">Usá estas casillas solo si la página tiene más apartados. Conservan el guardado privado por página.</p>'
+    +[4,5,6,7,8,9,10].map(function(n){return field('ch2:free:'+n,'Respuesta / ejercicio '+n,true,2);}).join('')
+    +'</details></div>';
   }
   return '<p class="note">En esta página podés tomar apuntes. Las prácticas numeradas tienen sus propias casillas en las páginas indicadas arriba.</p>';
  }
