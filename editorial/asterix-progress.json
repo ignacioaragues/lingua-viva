@@ -1,0 +1,22 @@
+{
+  "work": "Astérix et Cléopâtre · biblioteca privada de francés",
+  "date": "2026-11-16",
+  "pass": 1,
+  "status": "Lector local y cuaderno por página implementados, QA de navegador pendiente",
+  "source": "PDF escaneado de 50 páginas mencionado por el usuario; no localizado en los archivos accesibles de esta sesión, por lo que no se cotejaron páginas ni viñetas",
+  "implemented": [
+    "Página independiente accesible desde Lecturas",
+    "PDF.js con apertura local de PDF, sin subirlo a repositorio ni servidor",
+    "Paginación y visor canvas",
+    "Notas de traducción y vocabulario por página guardadas en localStorage",
+    "Alternar visibilidad de traducción y borrar notas con confirmación"
+  ],
+  "not_implemented": [
+    "Cotejo de las 50 páginas",
+    "Identificación y traducción de viñetas",
+    "Análisis de vocabulario contextual",
+    "Sincronización privada con Supabase y dispositivos",
+    "Prueba real de funcionamiento en navegador y móvil"
+  ],
+  "next": "Obtener acceso autorizado al PDF exacto y revisar páginas 1–5, segmentar viñetas y preparar anotaciones originales no públicas; después conectar notas a almacenamiento privado con RLS."
+}
