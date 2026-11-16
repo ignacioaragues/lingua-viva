@@ -303,7 +303,7 @@ async function savePage(p){
 }
 function scheduleSave(p){clearTimeout(state.saveTimers[p]);state.saveTimers[p]=setTimeout(function(){savePage(p);},900);var el=document.getElementById('duff-save-status');if(el)el.textContent='Guardando…';}
 async function bookmark(p){await client.from('lingua_notes').upsert({user_id:OWNER,lesson_id:'duff:bookmark',body:JSON.stringify({page:p}),updated_at:new Date().toISOString()},{onConflict:'user_id,lesson_id'});}
-function go(p){closeGreekCard();if(!state.user||state.user.id!==OWNER)return;p=Number(p);if(!Number.isFinite(p)||p<1||p>state.pdfPageCount)return;var oldChapter=current();state.page=Math.floor(p);if(timer&&current()!==oldChapter)timer.setLesson(chapterId(current()));state.workTab=exercises[state.page]?'exercise':'notes';state.lastInput=null;state.saveStatus='';render();bookmark(state.page);history.replaceState(null,'','#pagina='+state.page);}
+function go(p){closeGreekCard();if(!state.user||state.user.id!==OWNER)return;p=Number(p);if(!Number.isFinite(p)||p<1||p>state.pdfPageCount)return;var oldChapter=current();state.page=Math.floor(p);if(timer&&current()!==oldChapter)timer.setLesson(chapterId(current()));state.workTab=(exercises[state.page]||(state.page>=50&&state.page<=65))?'exercise':'notes';state.lastInput=null;state.saveStatus='';render();bookmark(state.page);history.replaceState(null,'','#pagina='+state.page);}
 async function loadData(){
  var notes=await client.from('lingua_notes').select('lesson_id,body').eq('user_id',OWNER).like('lesson_id','duff:%').limit(1000);
  if(notes.error)state.bookError='No se pudieron cargar los apuntes: '+notes.error.message;
