@@ -2,7 +2,7 @@
   "course": "Français A1",
   "reference": "Alter Ego+ 1; verify lesson order and page references against supplied source before claiming exact alignment",
   "updated": "2026-11-16",
-  "current_unit": "Dossier 0 — Les nombres (0–20)",
+  "current_unit": "Dossiers 0–1 · auditoría de audios y autosuficiencia",
   "objectives": [
     "Comprendre et dire les nombres 0–20",
     "Exprimer l'âge avec avoir",
@@ -18,16 +18,17 @@
   ],
   "morphology": "Fichas contextuales existentes en francais/morphology.js para las dos lecturas; comprobar cada nueva forma antes de agregarla",
   "phonetics": "Audio de nombres 0–20 con AFI; en alfabeto, botones ahora envían la letra aislada (C) al TTS, no el nombre ortográfico ('cé'), para reducir lecturas como 'c accent aigu'. Requiere comprobación auditiva real en navegador.",
-  "resources": "Sin recursos externos nuevos en esta ejecución",
-  "coverage": "Añadida tabla sistemática 0–20 con grafía, AFI y audio individual a d0-nombres; ejercicios y otras secciones requieren auditoría de autosuficiencia.",
+  "resources": "Enlace general oficial a audios del libro del alumno Alter Ego+ 1 añadido a las lecciones; actualizado francais/index.html para invalidar caché de app.js. Enlaces directos por actividad/pista aún pendientes de cotejo con el índice oficial.",
+  "coverage": "Añadida tabla sistemática 0–20 con grafía, AFI y audio individual a d0-nombres; ejercicios y otras secciones requieren auditoría de autosuficiencia. Enlace oficial de audio visible tras actualización de caché (pendiente prueba visual en navegador).",
   "known_issues": [
     "Pruebas autenticadas y móviles pendientes",
     "Comprobar propagación de GitHub Pages",
     "Alineación exacta con el índice del manual pendiente de cotejo",
     "Auditar cada lección como manual autónomo: inventarios completos, progresión sistemática, ejemplos, ejercicios y correcciones; no asumir uso paralelo de Alter Ego+ 1",
     "Verificar audio individual de números y alfabeto en navegador real",
-    "Verificar con voz fr-FR real que la síntesis de letras aisladas pronuncia sus nombres correctamente; considerar grabaciones de referencia si falla"
+    "Verificar con voz fr-FR real que la síntesis de letras aisladas pronuncia sus nombres correctamente; considerar grabaciones de referencia si falla",
+    "Los audios oficiales todavía no están asociados individualmente a cada ejercicio de Dossiers 0–1; no atribuir números de pista sin verificación."
   ],
-  "next_step": "Auditar autosuficiencia del Dossier 0; comprobar en navegador los 26 nombres de letras, completar ejemplos y corregir fallos detectados; revisar guardado y conteo de flashcards.",
+  "next_step": "Cotejar pista por pista Dossiers 0–1 en Hachette, incorporar enlaces contextuales verificados y continuar auditoría de contenidos A1 autónomos.",
   "privacy": "Sin cambios en autenticación, Supabase, griego ni materiales protegidos"
 }
