@@ -106,3 +106,6 @@
 .sound-contrast b{font:24px var(--serif);width:100%}
 .sound-contrast span{font-size:12px;color:var(--muted)}
 .sound-pair p{font-size:12px;line-height:1.65;color:var(--muted);margin:12px 0 0}
+
+/* Flashcard study clock */
+.flash-timer{display:flex;gap:18px;align-items:center;flex-wrap:wrap;padding:13px 18px;margin:20px 0 12px;background:#f1f4ef;border:1px solid var(--line,#d4dcd3);border-radius:8px}.flash-timer>div{display:flex;gap:5px;flex-direction:column}.flash-timer strong{font-variant-numeric:tabular-nums;font-size:23px;line-height:1.2}.flash-timer .hint{font-size:11px}.flash-timer .hint.paused{opacity:.65}@media(max-width:650px){.flash-timer{gap:10px}.flash-timer strong{font-size:19px}}
