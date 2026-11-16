@@ -67,12 +67,13 @@
     "exercise_fields": "Implementados en lector por páginas con guardado privado; prácticas 1.5 y 1.6 con autocorrección (5 ítems cada una); teclado griego con espíritus y acentos. El resto de las prácticas todavía no tiene autocorrección. Teclado flotante contextual añadido como recurso separado; prueba autenticada pendiente."
   },
   "next_steps": [
+    "Cotejar con PDF privado las prácticas reales de páginas 50–65 y reemplazar los campos provisionales sin publicar contenido protegido.",
     "Probar teclado griego flotante en sesión autenticada (escritorio y móvil), especialmente foco, acentos y guardado",
     "Verificar en sesión autenticada que la devolución de práctica 1.1 en página 39 se muestra correctamente y que Actualizar corrección funciona",
     "Continuar el manual en orden; ampliar autocorrección solo con enunciados cotejados y preservar PDF privado",
     "Validar Chrome y Safari/iPad: PDF.js, temporizador, guardado y correcciones"
   ],
-  "last_updated": "2026-11-13",
+  "last_updated": "2026-11-16",
   "biblical_reader": {
     "location": "griego-biblico/ · aparece al llegar a las páginas físicas 46–48",
     "coverage": "Juan 1:1–2, 2 versículos y 24 tokens con fichas morfológicas (12 formas distintas) y traducción propia opcional",
@@ -160,5 +161,11 @@
     "fields_per_page": 3,
     "storage": "Mismo guardado privado de respuestas por página (lingua_notes)",
     "next": "Verificar visualmente PDF autorizado y reemplazar campos genéricos por prácticas y número de ítems reales en orden, sin publicar el manual"
+  },
+  "chapter_2_navigation_fix": {
+    "date": "2026-11-16",
+    "change": "Al navegar a páginas 50–65 se selecciona automáticamente pestaña Ejercicios, mostrando campos provisionales ya implementados. Antes se abría Apuntes y los campos quedaban ocultos.",
+    "commit": "200671bfd2c37c0643665091730169778d1d7a77",
+    "limitations": "Los campos no reproducen prácticas cotejadas del capítulo 2; prueba autenticada y móvil pendiente."
   }
 }
