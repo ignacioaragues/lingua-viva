@@ -42,7 +42,9 @@ var exercises={
 43:[['1.3–1.4 · A','text','Nombres griegos en letras españolas',8],['1.3–1.4 · B','text','Nombres españoles en letras griegas',8],['1.3–1.4 · C','text','Padre Nuestro: transcripción fonética',1]],
 45:[['1.5','choice','Respiración suave: sí / no',5],['1.6','choice','¿Es una pregunta?: sí / no',5]],
 46:[['Ejercicios · 1','text','Juan 1:1–14: transcripción en letras españolas (continúa en la página siguiente)',1]],
-48:[['Ejercicios · 2','text','Juan 1:15–23: escribir el pasaje en griego',1]]
+48:[['Ejercicios · 2','text','Juan 1:15–23: escribir el pasaje en griego',1]],
+53:[['2.1 · griego → español','text','Práctica 2.1: traducir las seis formas griegas al español, según el PDF privado',6],['2.1 · español → griego','text','Práctica 2.1: escribir en griego las tres formas solicitadas en español, según el PDF privado',3]],
+55:[['2.2 · griego → español','text','Práctica 2.2: traducir las seis formas de verbos contractos al español, según el PDF privado',6],['2.2 · español → griego','text','Práctica 2.2: escribir en griego las tres formas solicitadas en español, según el PDF privado',3]]
 };
 var timer=null;
 var state={user:null,page:33,bookUrl:null,bookError:'',uploading:false,notes:{},reviews:{},done:{},questions:[],pron:7,greekTranslation:true,authMessage:'',loading:true,saveTimers:{},saveStatus:'',ready:false,lastInput:null,pdfDocument:null,pdfLoading:false,pdfError:'',pdfPageCount:522,pdfZoom:1,pdfRenderTask:null,pdfRenderTicket:0,workOpen:!(window.matchMedia&&window.matchMedia('(max-width:1050px)').matches),workTab:'notes',phoneticsOpen:false,phoneticsGroup:'letters',phoneticsIndex:7};
@@ -118,6 +120,7 @@ function field(key,label,greek,multi){
 }
 function practice(){
  var parts=exercises[state.page]||[];
+ if(state.page===53||state.page===55){var legacy=note(state.page).answers;var saved=Object.keys(legacy).filter(function(k){return k.indexOf('ch2:free:')===0&&String(legacy[k]||'').trim();});if(saved.length){var warning='<details class="duff-exercise"><summary>Respuestas anteriores en casillas provisionales ('+saved.length+')</summary><p class="note">Conservadas sin cambios. Podés trasladarlas a las casillas específicas cuando quieras.</p>'+saved.map(function(k){return '<p><b>'+h(k)+'</b>: '+h(legacy[k])+'</p>';}).join('')+'</details>';return parts.map(function(ex){var id=ex[0],count=ex[3],out='<div class="duff-exercise"><h3>Práctica '+h(id)+'</h3><p>'+h(ex[2])+'. Consultá los enunciados en el PDF privado.</p>';for(var i=1;i<=count;i++)out+=field(id+':'+i,'Ítem '+i,/español → griego/.test(id),2);return out+'</div>';}).join('')+warning+reviewPanel(state.page);}}
  if(!parts.length){
   if(state.page>=50&&state.page<=65){
    return '<div class="duff-exercise"><h3>Cuaderno libre · capítulo 2 · página '+state.page+'</h3><p class="note">Campos provisionales para responder mirando tu PDF privado. Todavía no se verificaron los enunciados ni la cantidad de ítems de esta página; no son una transcripción del libro. Si la página es solo teoría, podés dejarlos vacíos.</p>'
