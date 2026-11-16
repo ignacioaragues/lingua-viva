@@ -150,5 +150,15 @@
     "verified": "GitHub main actualizado; teclado flotante existente mejorado con borrado, conservación del foco y reposicionamiento al desplazarse",
     "limitations": "No se comprobó en sesión autenticada ni en navegador móvil; no se añadió ni reprodujo contenido protegido",
     "next": "Probar entrada en páginas 39 y 43, espíritus/acentos y sincronización de respuestas; seguir capítulo 1 en orden"
+  },
+  "chapter_2_provisional_workbook": {
+    "pdf_pages": [
+      50,
+      65
+    ],
+    "status": "Campos genéricos por página implementados; NO equivalen a ejercicios cotejados ni a cobertura didáctica del capítulo",
+    "fields_per_page": 3,
+    "storage": "Mismo guardado privado de respuestas por página (lingua_notes)",
+    "next": "Verificar visualmente PDF autorizado y reemplazar campos genéricos por prácticas y número de ítems reales en orden, sin publicar el manual"
   }
 }
