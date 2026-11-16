@@ -206,7 +206,7 @@ function updatePhoneticsModal(){
  });
 }
 function setWorkTab(tab){
- if(['exercise','notes','questions'].indexOf(tab)<0)return;
+ if(['exercise','notes','vocab','questions'].indexOf(tab)<0)return;
  state.workTab=tab;
  var work=document.getElementById('duff-work');if(work)work.outerHTML=workbook();
 }
@@ -268,14 +268,19 @@ function readingPanel(){
 }
 
 function unreadReviews(){return Object.keys(state.reviews).filter(function(p){var r=state.reviews[p];try{return r&&r.reviewed_at&&localStorage.getItem('lv:duff:review-seen:'+p)!==String(r.reviewed_at);}catch(e){return false;}});}
+function vocabCards(){try{return JSON.parse(localStorage.getItem('lv:duff:vocab:'+OWNER)||'[]');}catch(e){return [];}}
+function vocabPanel(){
+ var cards=vocabCards();
+ return '<section class="duff-exercise"><h3>Mis tarjetas · '+cards.length+'</h3><p class="note">Escribí o pegá palabras que encontrás en el PDF. Esta primera versión guarda las tarjetas en este navegador; la sincronización con Edición Viva y otros dispositivos está pendiente.</p><form id="duff-vocab-form"><label>Palabra griega<input name="form" lang="grc" required placeholder="λόγος"></label><label>Significado<input name="meaning" required placeholder="palabra, discurso"></label><label>Lema (opcional)<input name="lemma" lang="grc" placeholder="λόγος"></label><button type="submit" class="btn btn-small">Agregar tarjeta</button></form><p id="duff-vocab-message" role="status"></p><div class="duff-vocab-list">'+cards.map(function(c){return '<div class="duff-exercise"><b lang="grc">'+h(c.form)+'</b> · '+h(c.meaning)+'<p class="note">Lema: '+h(c.lemma||c.form)+' · Cap. '+c.chapter+' · pág. '+c.page+'</p><button type="button" class="btn btn-small" data-do="vocab-remove" data-id="'+h(c.id)+'">Quitar</button></div>';}).join('')+'</div></section>';
+}
 function workbook(){
  if(!state.workOpen)return '';
- var tabs=[['exercise','Ejercicios'],['notes','Apuntes'],['questions','Preguntas']];
+ var tabs=[['exercise','Ejercicios'],['notes','Apuntes'],['vocab','Tarjetas'],['questions','Preguntas']];
  var body=state.workTab==='exercise'
   ?(current()===0?'<div class="duff-index" aria-label="Ir a prácticas del capítulo 1"><button data-do="page" data-page="39">1.1</button><button data-do="page" data-page="41">1.2</button><button data-do="page" data-page="43">1.3–1.4</button><button data-do="page" data-page="45">1.5–1.6</button><button data-do="page" data-page="46">Ej. 1</button><button data-do="page" data-page="48">Ej. 2</button></div>':'')+practice()+keyboard()+'<div class="duff-save-actions"><button type="button" class="btn btn-small" data-do="save">Guardar ejercicios ahora</button><span id="duff-save-status" class="duff-status" role="status">'+h(state.saveStatus||'Guardado automático activado')+'</span></div>'
   :state.workTab==='notes'
   ?'<div class="duff-exercise"><h3>Mis apuntes · página '+state.page+'</h3><textarea id="duff-general" rows="7" placeholder="Anotá dudas, traducciones o lo que quieras…">'+h(note(state.page).general)+'</textarea><div id="duff-save-status" class="duff-status">'+h(state.saveStatus||'Los cambios se guardan automáticamente.')+'</div><button class="btn btn-small" data-do="save">Guardar ahora</button></div>'+keyboard()
-  :questionPanel();
+  :state.workTab==='vocab'?vocabPanel():questionPanel();
  return '<aside class="duff-work" id="duff-work" aria-label="Cuaderno personal"><div class="duff-work-head"><div><div class="micro">CUADERNO PERSONAL</div><h2>Capítulo '+(current()+1)+' · pág. '+state.page+'</h2></div><button type="button" class="btn btn-small" data-do="toggle-work" aria-label="Cerrar cuaderno">Ocultar ×</button></div>'
   +(unreadReviews().length?'<button type="button" class="btn btn-small duff-new-reviews" data-do="show-new-reviews">● '+unreadReviews().length+' corrección(es) nueva(s)</button>':'')+'<div class="duff-work-tabs" role="group" aria-label="Secciones del cuaderno">'+tabs.map(function(t){return '<button type="button" data-do="work-tab" data-tab="'+t[0]+'" aria-pressed="'+(t[0]===state.workTab)+'">'+t[1]+'</button>';}).join('')+'</div>'
   +'<div class="duff-work-scroll">'+body+'</div></aside>';
@@ -375,6 +380,16 @@ app.addEventListener('change',async function(e){
   await loadBook();
  }
 });
+app.addEventListener('submit',function(e){
+ if(e.target.id!=='duff-vocab-form')return;
+ e.preventDefault();
+ var data=new FormData(e.target),form=String(data.get('form')||'').trim(),meaning=String(data.get('meaning')||'').trim(),lemma=String(data.get('lemma')||'').trim();
+ if(!form||!meaning)return;
+ var cards=vocabCards(),key=(lemma||form).normalize('NFC').toLowerCase()+'|'+meaning.toLowerCase();
+ if(cards.some(function(c){return (c.lemma||c.form).normalize('NFC').toLowerCase()+'|'+c.meaning.toLowerCase()===key;})){document.getElementById('duff-vocab-message').textContent='Ya tenés una tarjeta con ese lema y significado.';return;}
+ cards.push({id:Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8),form:form,meaning:meaning,lemma:lemma,chapter:current()+1,page:state.page});
+ try{localStorage.setItem('lv:duff:vocab:'+OWNER,JSON.stringify(cards));setWorkTab('vocab');}catch(err){document.getElementById('duff-vocab-message').textContent='No se pudo guardar en este navegador.';}
+});
 app.addEventListener('click',async function(e){
  var b=e.target.closest('[data-do]');if(!b)return;var act=b.dataset.do;
  if(act==='greek-word'){showGreekCard(b);return;}
@@ -385,6 +400,7 @@ app.addEventListener('click',async function(e){
  if(act==='phonetics-group'){state.phoneticsGroup=b.dataset.group;state.phoneticsIndex=0;updatePhoneticsModal();return;}
  if(act==='phonetics-select'){state.phoneticsIndex=Number(b.dataset.index);updatePhoneticsModal();return;}
  if(act==='work-tab'){setWorkTab(b.dataset.tab);return;}
+ if(act==='vocab-remove'){var next=vocabCards().filter(function(c){return c.id!==b.dataset.id;});localStorage.setItem('lv:duff:vocab:'+OWNER,JSON.stringify(next));setWorkTab('vocab');return;}
  if(act==='refresh-review'){await refreshReview();return;}
  if(act==='show-new-reviews'){var pages=unreadReviews();if(pages.length){go(Number(pages[0]));state.workTab='exercise';render();}return;}
  if(act==='toggle-work'){state.workOpen=!state.workOpen;render();return;}
