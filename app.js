@@ -232,10 +232,12 @@
     const cards=unlockedCards(state.flashLang), due=dueCards(state.flashLang), current=currentFlashCard();
     document.title=(french?'Cartes mémoire':'Flashcards')+' · Lengua Viva';
     $app.innerHTML=header()+`<main class="shell"><section class="flash-page"><div class="eyebrow">${french?'Révision du vocabulaire':'Repaso de vocabulario'}</div><h1>${french?'Cartes <em>mémoire.</em>':'Mis <em>flashcards.</em>'}</h1><p class="flash-intro">${french?'Les mots de vos leçons, prêts à être révisés à votre rythme. Les mots difficiles reviendront plus tôt.':'Repasá las palabras que ya encontraste en tus unidades. Las difíciles vuelven antes; las que recordás se espacian.'}</p>
+      <div class="flash-timer" aria-label="Temporizador de repaso"><div><span class="micro">${french?'Temps de révision':'Tiempo de repaso'}</span><strong id="flashLiveTime">00:00</strong><span class="hint" id="flashTimerState">●</span></div><div><span class="micro">${french?'Total étudié':'Total estudiado'}</span><strong id="flashTotalTime">0h 00m</strong></div><button class="btn btn-small" id="flashTimerButton" data-action="timer-toggle">${french?'Pause':'Pausar'}</button><a class="btn btn-small btn-plain" href="${link('estadisticas/?idioma='+state.flashLang)}">${french?'Mon temps':'Mis tiempos'} ↗</a></div>
       <div class="flash-toolbar"><label>${french?'Langue':'Idioma'} <select id="flashLanguage">${languages.map(l=>`<option value="${l.slug}" ${l.slug===state.flashLang?'selected':''}>${h(l.name)}</option>`).join('')}</select></label><div class="switch"><button data-action="flash-filter" data-filter="due" class="${state.flashFilter==='due'?'active':''}">${french?'À réviser':'Pendientes'} (${due.length})</button><button data-action="flash-filter" data-filter="all" class="${state.flashFilter==='all'?'active':''}">${french?'Tous':'Todos'} (${cards.length})</button></div><a class="btn btn-small" href="${link(lang.slug+'/')}">${french?'← Le cours':'← Volver al curso'}</a></div>
       ${current?`<div class="flash-study"><div class="micro">${french?'Cliquez pour retourner la carte':'Tocá la tarjeta para darla vuelta'}</div><button class="flash-card ${state.flashShow?'flipped':''}" data-action="flip" aria-label="${french?'Retourner la carte':'Girar tarjeta'}"><span class="flash-card-flag">${h(lang.native)} · ${h(current.lesson_id.replace('d','Dossier ').replace('-',' / '))}</span><span class="flash-card-front">${h(state.flashShow?current.back:current.front)}</span><span class="flash-card-hint">${state.flashShow?(french?'Sens / explication':'Significado / explicación'):(french?'Voir le sens ↗':'Ver respuesta ↗')}</span></button><div class="flash-speech">${speechButton(current.front,french?'Écouter le mot':'Escuchar la palabra','fr-FR')}</div>${state.flashShow?`<div class="flash-review-actions"><button class="btn" data-action="flash-review" data-quality="again">↶ ${french?'À revoir':'Otra vez'}</button><button class="btn btn-primary" data-action="flash-review" data-quality="good">✓ ${french?'Je connais':'La recordé'}</button></div>`:`<p class="hint" style="text-align:center">${french?'Pensez à la signification avant de retourner la carte.':'Intentá recordar la respuesta antes de darla vuelta.'}</p>`}</div>`:`<div class="empty" style="padding:45px;margin-top:26px">${cards.length?(french?'Bravo ! Aucune carte à réviser pour le moment.':'¡Muy bien! No tenés tarjetas pendientes por ahora.'):(french?'Les cartes apparaîtront après les premières leçons.':'Las tarjetas aparecerán cuando empieces las lecciones de este idioma.')} ${french?'<a href="'+link('francais/')+'">Continuer le cours ↗</a>':''}</div>`}
       <div class="flash-help"><div><div class="micro">${french?'Votre progression':'Tu progreso'}</div><h3>${cards.length} ${french?'cartes disponibles':'tarjetas disponibles'}</h3><p>${due.length} ${french?'à réviser maintenant':'para repasar ahora'}. ${french?'Le parcours débloque progressivement votre vocabulaire.':'A medida que avancés, se desbloquea más vocabulario.'}</p></div><div><div class="micro">${french?'Répétition espacée':'Repaso espaciado'}</div><h3>${french?'Réviser au bon moment':'Repasar a tiempo'}</h3><p>${french?'Après une bonne réponse, la prochaine révision est programmée plus tard. Une erreur replace la carte dans les prochaines révisions.':'Si recordás la tarjeta, el próximo repaso se aleja. Si te cuesta, vuelve a aparecer pronto.'}</p></div></div>
     </section></main>`+footer();
+    renderTimerUI();
   }
 
   function studyDays(count, end = new Date()){
@@ -328,7 +330,7 @@
     if(!params.has('lecon') && remoteBookmark && remoteDate >= localDate && lessons.some(l=>l.id===remoteBookmark.current_lesson_id)){
       if(state.lessonId!==remoteBookmark.current_lesson_id){
         await flushSession();state.lessonId=remoteBookmark.current_lesson_id;
-        if(page==='francais')startSession();
+        if(page==='francais'||page==='flashcards')startSession();
       }
       state.lastLessonSavedAt=remoteBookmark.last_opened_at;
       localPut('lastLesson',state.lessonId);localPut('lastLessonSavedAt',state.lastLessonSavedAt);
@@ -378,12 +380,12 @@
     state.localSessions=state.localSessions.filter(x=>x.id!==s.id).concat({...s});localPut('sessions',state.localSessions);
   }
   function startSession(){
-    if(page!=='francais')return;
-    state.activeSession={id:crypto.randomUUID(),language:'francais',lesson_id:state.lessonId,duration_seconds:0,started_at:new Date().toISOString()};
+    if(page!=='francais' && page!=='flashcards')return;
+    state.activeSession={id:crypto.randomUUID(),language:page==='flashcards'?state.flashLang:'francais',lesson_id:page==='flashcards'?null:state.lessonId,duration_seconds:0,started_at:new Date().toISOString()};
     state.lastActivity=Date.now();state.tabFocused=true;state.userPaused=false;
     renderTimerUI();
   }
-  function timerRunning(){return page==='francais' && !!state.activeSession && !state.userPaused && !document.hidden && state.tabFocused && Date.now()-state.lastActivity<90000;}
+  function timerRunning(){return (page==='francais'||page==='flashcards') && !!state.activeSession && !state.userPaused && !document.hidden && state.tabFocused && Date.now()-state.lastActivity<90000;}
   let tickCount=0;
   function tick(){
     if(!state.activeSession)return;
@@ -392,13 +394,15 @@
     if(++tickCount%20===0)flushSession();
   }
   function renderTimerUI(){
-    const e=document.querySelector('#liveTime');if(!e)return;
+    const e=document.querySelector('#liveTime')||document.querySelector('#flashLiveTime');if(!e)return;
     const n=state.activeSession?.duration_seconds||0;
     e.textContent=`${String(Math.floor(n/60)).padStart(2,'0')}:${String(n%60).padStart(2,'0')}`;
     const running=timerRunning();
-    const status=document.querySelector('#timerState');if(status){status.textContent=running?'● Étude en cours':state.userPaused?'◌ Pause manuelle':'◌ Pause automatique';status.classList.toggle('paused',!running);}
-    const b=document.querySelector('#timerButton');if(b)b.textContent=state.userPaused?'Reprendre':'Faire une pause';
+    const status=document.querySelector('#timerState')||document.querySelector('#flashTimerState');if(status){status.textContent=running?'● Étude en cours':state.userPaused?'◌ Pause manuelle':'◌ Pause automatique';status.classList.toggle('paused',!running);}
+    const b=document.querySelector('#timerButton')||document.querySelector('#flashTimerButton');if(b)b.textContent=state.userPaused?'Reprendre':(page==='flashcards'?'Pausar':'Faire une pause');
     const total=document.querySelector('#courseTime');if(total)total.textContent=fmt(statsTime('francais'));
+    const flashTotal=document.querySelector('#flashTotalTime');if(flashTotal)flashTotal.textContent=fmt(totalSeconds(allSessions().filter(s=>s.language===state.flashLang)));
+
   }
   function markActive(){state.lastActivity=Date.now();if(!document.hidden)state.tabFocused=true;}
   function nextLesson(id){
@@ -554,7 +558,7 @@
     if(e.target.dataset?.questionDraft!==undefined){state.questionDrafts[questionKey(e.target.dataset.questionDraft)]=e.target.value;localPut('questionDrafts',state.questionDrafts);}
   });
   document.addEventListener('change',e=>{
-    if(e.target.id==='flashLanguage'){state.flashLang=e.target.value;isFrench=state.flashLang==='francais';state.flashShow=false;state.flashId=null;state.reviewedNow.clear();history.replaceState(null,'','?idioma='+encodeURIComponent(state.flashLang));render();}
+    if(e.target.id==='flashLanguage'){flushSession();state.flashLang=e.target.value;startSession();isFrench=state.flashLang==='francais';state.flashShow=false;state.flashId=null;state.reviewedNow.clear();history.replaceState(null,'','?idioma='+encodeURIComponent(state.flashLang));render();}
     if(e.target.id==='statsLanguage'){state.statsLang=e.target.value;isFrench=state.statsLang==='francais';history.replaceState(null,'',state.statsLang==='all'?location.pathname:'?idioma='+encodeURIComponent(state.statsLang));render();}
   });
   function renderWordCount(){const n=document.querySelector('#wordCount');const v=document.querySelector('#writingDraft');if(n&&v)n.textContent=v.value.trim()?v.value.trim().split(/\s+/).length+' mots':'0 mot';}
