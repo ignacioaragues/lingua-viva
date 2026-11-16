@@ -158,9 +158,11 @@
       65
     ],
     "status": "Campos genéricos por página implementados; NO equivalen a ejercicios cotejados ni a cobertura didáctica del capítulo",
-    "fields_per_page": 3,
+    "fields_per_page": "3 visibles y 7 adicionales desplegables (hasta 10), sin cambiar claves de guardado existentes",
     "storage": "Mismo guardado privado de respuestas por página (lingua_notes)",
-    "next": "Verificar visualmente PDF autorizado y reemplazar campos genéricos por prácticas y número de ítems reales en orden, sin publicar el manual"
+    "next": "Verificar visualmente PDF autorizado y reemplazar campos genéricos por prácticas y número de ítems reales en orden, sin publicar el manual",
+    "note": "Las respuestas 4–10 se despliegan a demanda; no equivalen a ejercicios cotejados.",
+    "last_commit": "f073c0e371271da90235b5598400d4c373ef726c"
   },
   "chapter_2_navigation_fix": {
     "date": "2026-11-16",
