@@ -118,7 +118,16 @@ function field(key,label,greek,multi){
 }
 function practice(){
  var parts=exercises[state.page]||[];
- if(!parts.length)return '<p class="note">En esta página podés tomar apuntes. Las prácticas numeradas tienen sus propias casillas en las páginas indicadas arriba.</p>';
+ if(!parts.length){
+  if(state.page>=50&&state.page<=65){
+   return '<div class="duff-exercise"><h3>Cuaderno libre · capítulo 2 · página '+state.page+'</h3><p class="note">Campos provisionales para responder mirando tu PDF privado. Todavía no se verificaron los enunciados ni la cantidad de ítems de esta página; no son una transcripción del libro. Si la página es solo teoría, podés dejarlos vacíos.</p>'
+    +field('ch2:free:1','Respuesta / ejercicio 1',true,2)
+    +field('ch2:free:2','Respuesta / ejercicio 2',true,2)
+    +field('ch2:free:3','Respuesta / ejercicio 3',true,2)
+    +'</div>';
+  }
+  return '<p class="note">En esta página podés tomar apuntes. Las prácticas numeradas tienen sus propias casillas en las páginas indicadas arriba.</p>';
+ }
  return parts.map(function(ex){
  var id=ex[0],type=ex[1],description=ex[2],count=ex[3],out='<div class="duff-exercise"><h3>Práctica '+h(id)+'</h3><p>'+h(description)+'. Leé el enunciado completo en la página del libro.</p>';
  if(type==='text'){
