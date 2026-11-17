@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Capítulo 9 textos, reflexivos y recíprocos",
-    "verified": "4 bloques, 25 fichas añadidas; total 23 bloques y 142 fichas",
-    "limitations": "QA autenticada pendiente",
-    "next": "Citas bíblicas y QA capítulo 9"
+    "scope": "Duff capítulo 9 textos: 8 pasajes breves anotados",
+    "verified": "47 fichas nuevas con cinco campos obligatorios; 31 bloques y 189 tokens acumulados",
+    "limitations": "Sin navegador autenticado; fase sigue abierta",
+    "next": "Cotejo final de fuentes y QA"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -817,15 +817,16 @@
       "qa": "Cotejo textual del PDF físico 162–176; 63 ítems en 13 grupos. Prueba de navegador autenticado pendiente.",
       "texts": {
         "status": "partial",
-        "blocks": 19,
-        "tokens": 117,
+        "blocks": 31,
+        "tokens": 189,
         "pages_with_initial_readings": 15,
-        "core_commit": "74cb08cfc97b164b80e05521e62c0162100533c4",
+        "core_commit": "4192c514ef03686e7865493596ab7e2893aa42a8",
         "integration_commit": "55e9169b4ebb8f75ff401a33e01015c2923b60bd",
         "entrypoint_commit": "21adecca3ccc8efc730c0e35985ddeafb0957d75",
-        "pending": "Reflexivos, citas restantes y QA autenticada"
+        "pending": "Revisión final de fuentes y QA funcional",
+        "biblical_passages_added": 8
       }
     }
   ],
-  "last_commit": "8624e15445720547f8e60e95749eb06965d07780"
+  "last_commit": "4192c514ef03686e7865493596ab7e2893aa42a8"
 }
