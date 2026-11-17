@@ -509,8 +509,8 @@
       "95": 13
     },
     "types": {
-      "translation": 36,
-      "greek": 25,
+      "translation": 43,
+      "greek": 18,
       "yesno": 4
     },
     "implementation": "griego-biblico/reader.js",
