@@ -7,24 +7,27 @@
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 11,
-  "phase": "exercises",
+  "phase": "texts",
   "phase_status": "pending",
   "start_page": 193,
-  "end_page": null,
+  "end_page": 209,
   "previous_phase": {
-    "chapter": 10,
-    "phase": "texts",
+    "chapter": 11,
+    "phase": "exercises",
     "status": "completed",
-    "blocks": 19,
-    "tokens": 103,
-    "commit": "ab861e5f3f6f8d89623c5df7c23e920db0d4513b"
+    "groups": 12,
+    "items": 70,
+    "commit": "762791d1d55cf45c5130a4778ba87add8aaa0aa3",
+    "pages_examined": "193–209"
   },
   "next_phase": {
     "chapter": 11,
-    "phase": "exercises",
+    "phase": "texts",
+    "start_page": 193,
+    "end_page": 209,
     "pending": [
-      "Confirmar páginas físicas del capítulo 11 en PDF",
-      "Cotejar todos los ejercicios e implementar campos específicos"
+      "Reexaminar las 17 páginas para seleccionar paradigmas y citas bíblicas",
+      "Crear fichas morfológicas y lecturas con atribución"
     ]
   },
   "hard_rules": [
@@ -235,7 +238,22 @@
         "content_commit": "ab861e5f3f6f8d89623c5df7c23e920db0d4513b",
         "qa": "16 páginas del PDF abiertas; 19 refs únicas, 103 fichas con cinco campos, script y lookup presentes. Sin navegador autenticado."
       }
+    },
+    {
+      "chapter": 11,
+      "name": "Verbos especiales",
+      "pdf_pages": [
+        193,
+        209
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 12,
+        "items": 70,
+        "commit": "762791d1d55cf45c5130a4778ba87add8aaa0aa3"
+      },
+      "qa": "Cotejo directo del PDF; no se probó navegador autenticado ni se ejecutó node --check."
     }
   ],
-  "last_commit": "ab861e5f3f6f8d89623c5df7c23e920db0d4513b"
+  "last_commit": "762791d1d55cf45c5130a4778ba87add8aaa0aa3"
 }
