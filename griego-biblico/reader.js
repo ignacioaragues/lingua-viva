@@ -785,7 +785,7 @@ function readingPanel(){
   });
   out+='<p class="note">En el ejercicio 1, Duff imprime Juan 1:1–14 (PDF pp. 46–47). En el ejercicio 2 propone reconstruir Juan 1:15–23 desde su transcripción fonética (PDF pp. 47–48). El texto griego de consulta se ofrece por separado y se puede ocultar la traducción.</p>';
  }else if(isTenth){
-    [['paradigm','Paradigmas y formas',true],['original','Ejemplos originales',true]].forEach(function(section){var selected=chapterTen.filter(function(v){return v.kind===section[0];});if(!selected.length)return;out+='<details class="duff-reading-group" '+(section[2]?'open':'')+'><summary>'+h(section[1])+' <span>('+selected.length+')</span></summary>';out+=selected.map(function(v){return greekVerseRow(v,true);}).join('');out+='</details>';});
+    [['paradigm','Paradigmas y formas',true],['lexicon','Vocabulario del capítulo',true],['original','Ejemplos originales',true]].forEach(function(section){var selected=chapterTen.filter(function(v){return v.kind===section[0];});if(!selected.length)return;out+='<details class="duff-reading-group" '+(section[2]?'open':'')+'><summary>'+h(section[1])+' <span>('+selected.length+')</span></summary>';out+=selected.map(function(v){return greekVerseRow(v,true);}).join('');out+='</details>';});
     out+='<p class="note">'+h(data.chapterTenMeta?.source||'')+' '+h(data.chapterTenMeta?.notice||'')+'</p>';
   }else if(isNinth){
    [['biblical','Referencia bíblica · consulta parcial',true],['paradigm','Paradigmas pronominales',true],['lexicon','Léxico y conjunciones',true],['original','Ejemplos propios',true]].forEach(function(section){
