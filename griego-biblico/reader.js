@@ -440,7 +440,46 @@ function chapterSevenPractice(){
  });
  return out+reviewPanel(p);
 }
+/* Duff, cap. 8 (PDF físico pp. 149–161): ejercicios cotejados contra el PDF privado.
+   Se publican solamente metadatos; las consignas y soluciones quedan en el libro privado. */
+var chapterEightExercises={
+ "151":[["8-1-1-morf","Práctica 8.1.1 · análisis morfológico","verb-analysis",1,9,"Analizá las nueve formas deponentes: lema, tiempo, modo, persona y número; para participios, género, caso y número."]],
+ "152":[["8-1-3-formas","Práctica 8.1.3 · formación verbal","greek-form",1,10,"Escribí la forma verbal griega pedida para cada uno de los diez lemas y rasgos del PDF."]],
+ "153":[["mitad-gr-es","Práctica a mitad de camino · griego → español","translation",1,8,"Traducí los ítems 1–8 del griego al español."],["mitad-es-gr","Práctica a mitad de camino · español → griego","greek",9,4,"Traducí los ítems 9–12 al griego."]],
+ "154":[["8-2-gr-es","Práctica 8.2 · griego → español","translation",1,5,"Traducí los ítems 1–5, prestando atención a εἰμί."],["8-2-es-gr","Práctica 8.2 · español → griego","greek",6,3,"Traducí los ítems 6–8 al griego."]],
+ "157":[["8-3-gr-es","Práctica 8.3 · griego → español","translation",1,4,"Traducí los ítems 1–4 con sustantivos de género no predecible por su terminación."],["8-3-es-gr","Práctica 8.3 · español → griego","greek",5,2,"Traducí los ítems 5–6 al griego, cuidando la concordancia."]],
+ "159":[["finalA-gr-es","Ejercicios finales · A · griego → español","translation",1,4,"Traducí los ítems 1–4 de la sección A."]],
+ "160":[["finalA-gr-es-cont","Ejercicios finales · A · griego → español (continuación)","translation",5,4,"Traducí los ítems 5–8 de la sección A."],["finalA-es-gr","Ejercicios finales · A · español → griego","greek",9,4,"Traducí los ítems 9–12 de la sección A."],["finalB-gr-es","Ejercicios finales · B · griego → español","translation",1,8,"Traducí los ítems 1–8 de la sección B."]],
+ "161":[["finalB-es-gr","Ejercicios finales · B · español → griego","greek",9,4,"Traducí los ítems 9–12 de la sección B."],["finalC-marcos4","Ejercicios finales · C · Marcos 4:1–2","translation",1,1,"Traducí el pasaje de Marcos 4:1–2 que aparece en el PDF; conservá las ayudas impresas en el libro como referencia."]]
+};
+function chapterEightPractice(){
+ var p=state.page,raw=chapterEightExercises[p]||[];
+ var nav=[[151,'8.1.1'],[152,'8.1.3'],[153,'Mitad'],[154,'8.2'],[157,'8.3'],[159,'Final A'],[160,'Final A/B'],[161,'Final B/C']];
+ var out='<nav class="duff-index duff-ch2-index" aria-label="Prácticas del capítulo 8">'+nav.map(function(x){return '<button type="button" data-do="page" data-page="'+x[0]+'" aria-current="'+(p===x[0]?'page':'false')+'">'+h(x[1])+'</button>';}).join('')+'</nav>';
+ if(!raw.length)out+='<p class="duff-ch2-note">Esta página contiene teoría, paradigmas, ejemplos o vocabulario. Elegí una práctica en el índice.</p>';
+ raw.forEach(function(a,index){
+  var id=a[0],label=a[1],type=a[2],start=a[3],count=a[4],description=a[5],answered=0;
+  for(var n=start;n<start+count;n++){
+   var key='duff-ch8:'+id+':'+n;
+   if(type==='verb-analysis'){
+    if(['lema','tiempo','modo','persona','numero','genero','caso'].some(function(part){return String(note(p).answers[key+':'+part]||'').trim();}))answered++;
+   }else if(String(note(p).answers[key]||'').trim())answered++;
+  }
+  out+='<details class="duff-exercise duff-ch2-group" '+(index===0?'open':'')+'><summary>'+h(label)+' <span class="duff-ch2-count">'+count+' ítems'+(answered?' · '+answered+' contestados':'')+'</span></summary><p>'+h(description)+' Consultá las consignas originales en el PDF privado. No hay autocorrección.</p>';
+  for(var n=start;n<start+count;n++){
+   var key='duff-ch8:'+id+':'+n,greek=type==='greek'||type==='greek-form';
+   out+='<div class="duff-answer-row"><div class="duff-answer-label">Ítem '+n+'</div>';
+   if(type==='verb-analysis'){
+    out+='<div class="duff-answer-pair"><div>'+field(key+':lema','Lema (griego)',true,false)+'</div><div>'+field(key+':tiempo','Tiempo',false,false)+'</div><div>'+field(key+':modo','Modo / forma no personal',false,false)+'</div><div>'+field(key+':persona','Persona (si corresponde)',false,false)+'</div><div>'+field(key+':numero','Número',false,false)+'</div><div>'+field(key+':genero','Género (si corresponde)',false,false)+'</div><div>'+field(key+':caso','Caso (si corresponde)',false,false)+'</div></div>';
+   }else out+=field(key,type==='greek-form'?'Forma verbal griega':greek?'Tu traducción al griego':'Tu traducción al español',greek,type==='translation'||type==='greek'?2:false);
+   out+='</div>';
+  }
+  out+='</details>';
+ });
+ return out+reviewPanel(p);
+}
 function practice(){
+ if(current()===7)return chapterEightPractice();
  if(current()===6)return chapterSevenPractice();
  if(current()===5)return chapterSixPractice();
  if(current()===4)return chapterFivePractice();
