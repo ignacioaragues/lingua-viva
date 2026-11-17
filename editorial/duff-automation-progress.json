@@ -7,24 +7,28 @@
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 10,
-  "phase": "exercises",
+  "phase": "texts",
   "phase_status": "pending",
   "start_page": 177,
-  "end_page": null,
+  "end_page": 192,
   "previous_phase": {
-    "chapter": 9,
-    "phase": "texts",
+    "chapter": 10,
+    "phase": "exercises",
     "status": "completed",
-    "blocks": 34,
-    "tokens": 204,
-    "commit": "f2a82b35d1057e1e6ea69b129f8b3816265978c6"
+    "items": 69,
+    "groups": 12,
+    "commit": "9bc930c282c13808738484d6aa3e0c833204a0e9",
+    "pages_examined": "177–192"
   },
   "next_phase": {
     "chapter": 10,
-    "phase": "exercises",
+    "phase": "texts",
+    "start_page": 177,
+    "end_page": 192,
     "pending": [
-      "Identificar páginas físicas exactas del capítulo 10 en PDF",
-      "Cotejar prácticas e implementar campos individuales"
+      "Cotejar las 16 páginas para citas, paradigmas y formas",
+      "Anotar textos y fichas sin revelar solución de Marcos 6:3–6",
+      "Prueba autenticada pendiente"
     ]
   },
   "hard_rules": [
@@ -214,7 +218,22 @@
         "final_commit": "f2a82b35d1057e1e6ea69b129f8b3816265978c6",
         "qa": "15 páginas del PDF reabiertas; 34 referencias únicas, 204 fichas con campos completos; integración en reader.js inspeccionada. Sin prueba autenticada."
       }
+    },
+    {
+      "chapter": 10,
+      "name": "Oraciones compuestas",
+      "pdf_pages": [
+        177,
+        192
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 12,
+        "items": 69,
+        "commit": "9bc930c282c13808738484d6aa3e0c833204a0e9"
+      },
+      "qa": "PDF físico pp.177–192 cotejado; navegador autenticado pendiente"
     }
   ],
-  "last_commit": "f2a82b35d1057e1e6ea69b129f8b3816265978c6"
+  "last_commit": "9bc930c282c13808738484d6aa3e0c833204a0e9"
 }
