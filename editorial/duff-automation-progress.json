@@ -7,43 +7,53 @@
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 7,
-  "phase": "exercises",
+  "phase": "texts",
   "phase_status": "pending",
   "start_page": 134,
   "end_page": 148,
   "previous_phase": {
-    "chapter": 6,
-    "phase": "texts",
+    "chapter": 7,
+    "phase": "exercises",
     "status": "completed",
     "date": "2026-11-17",
-    "pages_examined": "114–133",
-    "blocks": 30,
-    "annotated_tokens": 178,
-    "lemmas": 54,
-    "biblical_passages": 7,
-    "core_commit": "20d5836c532af61b484218a9190a6e43639ef48a",
-    "integration_commit": "a783ce17e43fb3efff1d14207212809c69e2d31b",
-    "live_entrypoint_commit": "0197a4db547490a8bf63860683ec5479f2609341",
+    "pages_examined": "134–148",
+    "groups": 16,
+    "items": 75,
+    "items_by_page": {
+      "137": 10,
+      "139": 18,
+      "141": 8,
+      "142": 6,
+      "143": 4,
+      "144": 4,
+      "146": 12,
+      "147": 13
+    },
+    "direction_counts": {
+      "greek_to_spanish": 52,
+      "spanish_to_greek": 15,
+      "morphological_analysis": 8
+    },
+    "core_commit": "d3024db13ff69be246a1443f98742f6a80886c80",
+    "live_entrypoint_commit": "c1803cdff689fb8f6188b39df4c614a37d4a357a",
     "files": [
-      "griego-biblico/chapter6-readings.js",
       "griego-biblico/reader.js",
-      "griego-biblico/index.html",
-      "flashcards/repository.js"
+      "griego-biblico/index.html"
     ],
-    "verified": "20/20 páginas renderizadas estáticamente, 178 fichas completas, sin solución Juan 9:13–21.",
-    "limitations": "Sin prueba real de sesión autenticada. Juan 9:13–21 se ofrece solo en dos extractos, no en pasaje completo, para evitar resolver ejercicio final."
+    "verified": "Sintaxis JS; 15/15 páginas, 16 grupos, 75 identificadores únicos, campos separados para tiempo/género/caso/número, teclados griegos en traducciones al griego y navegación estática.",
+    "limitations": "No se comprobó en navegador autenticado ni Supabase real."
   },
   "next_phase": {
     "chapter": 7,
-    "phase": "exercises",
+    "phase": "texts",
     "start_page": 134,
     "end_page": 148,
-    "instructions": "Cotejar capítulo 7 «Los modos de los verbos», PDF original pp.134–148, y crear campos específicos de todos los ejercicios reales sin autocorrección.",
+    "instructions": "Reabrir PDF 134–148. Cotejar citas Hechos 16:31, Mateo 27:42, Juan 16:12, Marcos 3:14–15, Filemón 4–5, Hechos 18:8, Mateo 4:18, Marcos 6:16, Marcos 4:14 y 4:18; paradigmas de imperativo, infinitivo y participio, vocabulario. Preparar textos independientes y fichas contextualizadas, sin revelar traducción completa de 1 Juan 3:4–10 (Sección C).",
     "pending": [
-      "Reabrir PDF pp.134–148",
-      "Inventariar ejercicios y consignas",
-      "Implementar campos y navegación sin cambiar identificadores previos",
-      "QA estática y actualizar checkpoint"
+      "Releer páginas físicas 134–148",
+      "Anotar textos y paradigmas token por token",
+      "Integrar lector y mazo Duff cap.7",
+      "Pruebas estáticas y checkpoint a cap.8 ejercicios"
     ]
   },
   "hard_rules": [
