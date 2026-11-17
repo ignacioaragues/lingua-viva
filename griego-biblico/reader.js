@@ -164,7 +164,90 @@ function chapterTwoPractice(){
  return out+reviewPanel(p);
 }
 
+
+/* Duff, capítulo 3: 106 consignas cotejadas directamente con el PDF
+   físico, páginas 66–80. Los ítems se identifican por sección y número;
+   el enunciado íntegro queda en el libro privado y nunca se publica aquí.
+   Las respuestas NO se califican ni se autocorrigen. */
+var chapterThreeExercises={
+ 67:[
+  {id:'3.1 · casos',label:'Práctica 3.1 · determinar el caso',type:'case',start:1,count:8,description:'Para cada oración, indicá el caso de la palabra subrayada en el PDF.'},
+  {id:'3.1 · morfología',label:'Práctica 3.1 · caso y número',type:'case-number',start:9,count:8,description:'Para cada forma griega, indicá caso y número.'}
+ ],
+ 69:[
+  {id:'3.2 · griego-español',label:'Práctica 3.2 · griego → español',type:'translation',start:1,count:4,description:'Traducción de los cuatro primeros ítems al español.'},
+  {id:'3.2 · español-griego',label:'Práctica 3.2 · español → griego',type:'greek',start:5,count:2,description:'Escritura en griego de los ítems 5 y 6.'},
+  {id:'mitad · griego-español',label:'Práctica a mitad de camino · griego → español',type:'translation',start:1,count:8,description:'Primera parte de la práctica intermedia.'},
+  {id:'mitad · español-griego',label:'Práctica a mitad de camino · español → griego',type:'greek',start:9,count:4,description:'Últimos cuatro ítems de la práctica intermedia.'}
+ ],
+ 71:[
+  {id:'3.3.2 · morfología',label:'Práctica 3.3.2 · caso y número',type:'case-number',start:1,count:8,description:'Clasificá las ocho formas nominales por caso y número.'}
+ ],
+ 72:[
+  {id:'3.3.3 · artículo',label:'Práctica 3.3.3 · artículo definido',type:'greek',start:1,count:8,description:'Escribí la forma griega del artículo que concuerda con cada palabra.'}
+ ],
+ 74:[
+  {id:'3.3.4-5 · explicar',label:'Prácticas 3.3.4 y 3.3.5 · análisis de formas',type:'analysis',start:1,count:9,description:'Explicá la forma de cada sustantivo o artículo (caso, número y, cuando corresponda, género).'},
+  {id:'3.3.4-5 · concordancia',label:'Prácticas 3.3.4 y 3.3.5 · concordancia',type:'yesno',start:10,count:9,description:'Decidí si la concordancia entre artículo y sustantivo es correcta (sin autocorrección).'}
+ ],
+ 75:[
+  {id:'3.4 · vocativo',label:'Práctica 3.4 · formas vocativas',type:'yesno',start:1,count:5,description:'Indicá si cada forma griega podría funcionar como vocativo.'}
+ ],
+ 77:[
+  {id:'3.6 · griego-español',label:'Práctica 3.6 · griego → español',type:'translation',start:1,count:5,description:'Traducí las primeras cinco oraciones del griego al español.'},
+  {id:'3.6 · español-griego',label:'Práctica 3.6 · español → griego',type:'greek',start:6,count:3,description:'Traducí las últimas tres oraciones al griego.'}
+ ],
+ 78:[
+  {id:'finalA · griego-español',label:'Ejercicios finales · Sección A, griego → español',type:'translation',start:1,count:8,description:'Sección A, ítems 1–8 (griego → español).'},
+  {id:'finalA · español-griego',label:'Ejercicios finales · Sección A, español → griego',type:'greek',start:9,count:4,description:'Sección A, ítems 9–12 (los ítems 11–12 aparecen al inicio de la página 79).'}
+ ],
+ 79:[
+  {id:'finalB · griego-español',label:'Ejercicios finales · Sección B, griego → español',type:'translation',start:1,count:8,description:'Sección B, ítems 1–8.'},
+  {id:'finalB · español-griego',label:'Ejercicios finales · Sección B, español → griego',type:'greek',start:9,count:4,description:'Sección B, ítems 9–12.'},
+  {id:'finalC · Marcos 1:1',label:'Ejercicios finales · Sección C, Marcos 1:1',type:'translation',start:1,count:1,description:'Traducí el versículo bíblico presentado en el PDF, sin anticipar una solución.'}
+ ]
+};
+function chapterThreePractice(){
+ var p=state.page,parts=chapterThreeExercises[p]||[];
+ var nav=[[67,'3.1'],[69,'3.2 + mitad'],[71,'3.3.2'],[72,'3.3.3'],[74,'3.3.4–5'],[75,'3.4'],[77,'3.6'],[78,'Final A'],[79,'Final B/C']];
+ var out='<nav class="duff-index duff-ch2-index" aria-label="Prácticas del capítulo 3">'
+  +nav.map(function(x){return '<button type="button" data-do="page" data-page="'+x[0]+'" aria-current="'+(p===x[0]?'page':'false')+'">'+h(x[1])+'</button>';}).join('')+'</nav>';
+ if(p===73)out+='<p class="duff-ch2-note">Las prácticas 3.3.4–3.3.5 empiezan al final de esta página y sus 18 ítems aparecen en la página 74. <button class="btn btn-small" type="button" data-do="page" data-page="74">Responder esas prácticas (p. 74)</button></p>';
+ else if(p===79)out+='<p class="duff-ch2-note">La Sección A comenzó en la página 78 y sus dos últimos ítems siguen aquí. <button class="btn btn-small" type="button" data-do="page" data-page="78">Abrir Sección A (p. 78)</button></p>';
+ else if(!parts.length)out+='<p class="duff-ch2-note">Esta página contiene explicación, paradigmas o vocabulario. Elegí una práctica en el índice o usá la pestaña Apuntes.</p>';
+ parts.forEach(function(ex,groupIndex){
+  var answered=0;
+  for(var n=ex.start;n<ex.start+ex.count;n++){
+    var key='duff-ch3:'+ex.id+':'+n;
+    if(ex.type==='case-number'){
+      if(String(note(p).answers[key+':caso']||'').trim()||String(note(p).answers[key+':numero']||'').trim())answered++;
+    }else if(String(note(p).answers[key]||'').trim())answered++;
+  }
+  out+='<details class="duff-exercise duff-ch2-group" '+(groupIndex===0?'open':'')+'>'
+   +'<summary>'+h(ex.label)+' <span class="duff-ch2-count">'+ex.count+' ítems'+(answered?' · '+answered+' contestados':'')+'</span></summary>'
+   +'<p>'+h(ex.description)+' Consultá el enunciado íntegro en el PDF privado; las respuestas se guardan sin revisión automática.</p>';
+  for(var i=ex.start;i<ex.start+ex.count;i++){
+   var itemKey='duff-ch3:'+ex.id+':'+i;
+   out+='<div class="duff-answer-row"><div class="duff-answer-label">Ítem '+i+'</div>';
+   if(ex.type==='case-number'){
+     out+='<div class="duff-answer-pair"><div>'+field(itemKey+':caso','Caso',false,false)+'</div><div>'+field(itemKey+':numero','Número',false,false)+'</div></div>';
+   }else if(ex.type==='yesno'){
+     var selected=note(p).answers[itemKey]||'';
+     out+='<div class="duff-toggle" role="group" aria-label="Respuesta para ítem '+i+'">'
+     +['sí','no'].map(function(v){return '<button type="button" data-do="choice" data-key="'+h(itemKey)+'" data-value="'+v+'" aria-pressed="'+(selected===v)+'">'+(v==='sí'?'Sí':'No')+'</button>';}).join('')+'</div>';
+   }else{
+     var label=ex.type==='case'?'Caso de la palabra subrayada':ex.type==='analysis'?'Análisis gramatical':ex.type==='greek'?'Tu traducción al griego':'Tu traducción al español';
+     out+=field(itemKey,label,ex.type==='greek',ex.type==='translation'||ex.type==='greek'?2:false);
+   }
+   out+='</div>';
+  }
+  out+='</details>';
+ });
+ return out+reviewPanel(p);
+}
+
 function practice(){
+ if(current()===2)return chapterThreePractice();
  if(current()===1)return chapterTwoPractice();
  var parts=exercises[state.page]||[];
  if(state.page===53||state.page===55){var legacy=note(state.page).answers;var saved=Object.keys(legacy).filter(function(k){return k.indexOf('ch2:free:')===0&&String(legacy[k]||'').trim();});if(saved.length){var warning='<details class="duff-exercise"><summary>Respuestas anteriores en casillas provisionales ('+saved.length+')</summary><p class="note">Conservadas sin cambios. Podés trasladarlas a las casillas específicas cuando quieras.</p>'+saved.map(function(k){return '<p><b>'+h(k)+'</b>: '+h(legacy[k])+'</p>';}).join('')+'</details>';return parts.map(function(ex){var id=ex[0],count=ex[3],out='<div class="duff-exercise"><h3>Práctica '+h(id)+'</h3><p>'+h(ex[2])+'. Consultá los enunciados en el PDF privado.</p>';for(var i=1;i<=count;i++)out+=field(id+':'+i,'Ítem '+i,/español → griego/.test(id),2);return out+'</div>';}).join('')+warning+reviewPanel(state.page);}}
@@ -491,7 +574,7 @@ async function savePage(p){
 }
 function scheduleSave(p){clearTimeout(state.saveTimers[p]);state.saveTimers[p]=setTimeout(function(){savePage(p);},900);var el=document.getElementById('duff-save-status');if(el)el.textContent='Guardando…';}
 async function bookmark(p){await client.from('lingua_notes').upsert({user_id:OWNER,lesson_id:'duff:bookmark',body:JSON.stringify({page:p}),updated_at:new Date().toISOString()},{onConflict:'user_id,lesson_id'});}
-function go(p){closeGreekCard();if(!state.user||state.user.id!==OWNER)return;p=Number(p);if(!Number.isFinite(p)||p<1||p>state.pdfPageCount)return;var oldChapter=current();state.page=Math.floor(p);if(timer&&current()!==oldChapter)timer.setLesson(chapterId(current()));state.workTab=(exercises[state.page]||(state.page>=50&&state.page<=65))?'exercise':'notes';state.lastInput=null;state.saveStatus='';render();bookmark(state.page);history.replaceState(null,'','#pagina='+state.page);}
+function go(p){closeGreekCard();if(!state.user||state.user.id!==OWNER)return;p=Number(p);if(!Number.isFinite(p)||p<1||p>state.pdfPageCount)return;var oldChapter=current();state.page=Math.floor(p);if(timer&&current()!==oldChapter)timer.setLesson(chapterId(current()));state.workTab=(exercises[state.page]||(state.page>=50&&state.page<=65)||(state.page>=66&&state.page<=80))?'exercise':'notes';state.lastInput=null;state.saveStatus='';render();bookmark(state.page);history.replaceState(null,'','#pagina='+state.page);}
 async function loadData(){
  var notes=await client.from('lingua_notes').select('lesson_id,body').eq('user_id',OWNER).like('lesson_id','duff:%').limit(1000);
  if(notes.error)state.bookError='No se pudieron cargar los apuntes: '+notes.error.message;
