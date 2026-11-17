@@ -837,14 +837,23 @@
         177,
         192
       ],
-      "status": "exercises_complete",
+      "status": "texts_in_progress",
       "exercises": {
         "groups": 12,
         "items": 69,
         "commit": "9bc930c282c13808738484d6aa3e0c833204a0e9"
       },
-      "next": "Capítulo 10 textos griegos"
+      "next": "Capítulo 10 textos griegos",
+      "texts": {
+        "status": "partial",
+        "blocks": 13,
+        "tokens": 58,
+        "core_commit": "448576ffac9c73d7c1c319dca16cfd05d3ddfcce",
+        "integration_commit": "0bb283cfb35928e50430d9d59d0d26d73a456b6c",
+        "entrypoint_commit": "9a7cbebc165ec73b65b19661a39ea43eb9208ce9",
+        "pending": "Léxico, citas y QA"
+      }
     }
   ],
-  "last_commit": "9bc930c282c13808738484d6aa3e0c833204a0e9"
+  "last_commit": "9a7cbebc165ec73b65b19661a39ea43eb9208ce9"
 }
