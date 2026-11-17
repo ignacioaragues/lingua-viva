@@ -1,0 +1,47 @@
+{
+  "updated": "2026-11-17",
+  "scope": "Repositorio único de tarjetas para Lengua Viva, independientemente de los cursos; mazos como vistas de un mismo ID",
+  "source_files": [
+    "flashcards/entries.js",
+    "flashcards/repository.js",
+    "app.js"
+  ],
+  "old_catalogue": {
+    "source": "content.js, lessons[].words",
+    "course": "curso-anterior",
+    "cards_checked": 51,
+    "identity": "id = lesson.id + '-' + index",
+    "languages": "francais",
+    "status": "Sin cambios en anverso/reverso, identificadores ni calendarios de revisión",
+    "decks": [
+      "curso-anterior",
+      "curso-anterior-d0",
+      "curso-anterior-d1"
+    ]
+  },
+  "new_course": {
+    "source": "francais/alter-ego-a1/",
+    "decks": [
+      "alter-ego-a1",
+      "alter-ego-a1-d0",
+      "alter-ego-a1-d1"
+    ],
+    "new_cards": 0,
+    "status": "Mazos creados y aún vacíos; se poblarán con unidades realmente desarrolladas"
+  },
+  "rules": [
+    "Una tarjeta = un ID estable por idioma y sentido; no duplicar tarjetas porque figuren en varios mazos",
+    "Se puede reutilizar una tarjeta previa agregando una nueva pertenencia a su ID en flashcards/entries.js, sin modificar sus datos",
+    "No fusionar automáticamente homógrafos ni sentidos distintos",
+    "No cambiar IDs ni claves existentes: Supabase/localStorage registran revisiones por language + ':' + card ID",
+    "La vista por mazo filtra tarjetas visibles; no mantiene un calendario de repetición independiente",
+    "Los datos personales de tarjetas seleccionadas por el usuario requieren almacenamiento privado con RLS; no incluirlos en repositorio público"
+  ],
+  "verified": {
+    "syntax": "app.js, content.js, repository.js y entries.js verificaron sintaxis JavaScript",
+    "catalogue": "51/51 tarjetas anteriores con anverso, reverso, ID y posición idénticos",
+    "cross_deck": "Simulación de añadir una tarjeta anterior al mazo Alter Ego dossier 0: 51 tarjetas totales y mismo ID/clave de revisión",
+    "live_browser": "Pendiente; la herramienta de consulta web no pudo abrir GitHub Pages"
+  },
+  "next": "Al desarrollar la primera unidad del nuevo Alter Ego A1, agregar sus tarjetas al catálogo común reutilizando IDs cuando se trate de la misma tarjeta; probar UI de mazos y sincronización autenticada."
+}
