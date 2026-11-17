@@ -6,28 +6,25 @@
   "timezone": "Europe/Berlin",
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
-  "chapter": 10,
-  "phase": "texts",
-  "phase_status": "in_progress",
-  "start_page": 177,
-  "end_page": 192,
+  "chapter": 11,
+  "phase": "exercises",
+  "phase_status": "pending",
+  "start_page": 193,
+  "end_page": null,
   "previous_phase": {
     "chapter": 10,
-    "phase": "exercises",
+    "phase": "texts",
     "status": "completed",
-    "items": 69,
-    "groups": 12,
-    "commit": "9bc930c282c13808738484d6aa3e0c833204a0e9",
-    "pages_examined": "177–192"
+    "blocks": 19,
+    "tokens": 103,
+    "commit": "ab861e5f3f6f8d89623c5df7c23e920db0d4513b"
   },
   "next_phase": {
-    "chapter": 10,
-    "phase": "texts",
-    "start_page": 177,
-    "end_page": 192,
+    "chapter": 11,
+    "phase": "exercises",
     "pending": [
-      "Añadir citas bíblicas breves de fuente permitida con atribución",
-      "Pruebas estáticas de ejecución y navegador autenticado"
+      "Confirmar páginas físicas del capítulo 11 en PDF",
+      "Cotejar todos los ejercicios e implementar campos específicos"
     ]
   },
   "hard_rules": [
@@ -225,24 +222,20 @@
         177,
         192
       ],
-      "status": "exercises_complete",
+      "status": "both_passes_complete",
       "exercises": {
         "groups": 12,
         "items": 69,
         "commit": "9bc930c282c13808738484d6aa3e0c833204a0e9"
       },
-      "qa": "PDF físico pp.177–192 cotejado; navegador autenticado pendiente"
+      "qa": "PDF físico pp.177–192 cotejado; navegador autenticado pendiente",
+      "texts": {
+        "blocks": 19,
+        "tokens": 103,
+        "content_commit": "ab861e5f3f6f8d89623c5df7c23e920db0d4513b",
+        "qa": "16 páginas del PDF abiertas; 19 refs únicas, 103 fichas con cinco campos, script y lookup presentes. Sin navegador autenticado."
+      }
     }
   ],
-  "last_commit": "552e12e9b78f9ead4b5ae8340a8910ef2cb13f4c",
-  "partial_phase": {
-    "chapter": 10,
-    "phase": "texts",
-    "blocks": 16,
-    "tokens": 87,
-    "core_commit": "6c2e32aa0786620d07598e60e8a6b8a8724e7e92",
-    "reader_commit": "552e12e9b78f9ead4b5ae8340a8910ef2cb13f4c",
-    "entrypoint_commit": "9a7cbebc165ec73b65b19661a39ea43eb9208ce9",
-    "qa": "29 fichas léxicas incorporadas y panel habilitado; falta prueba funcional autenticada"
-  }
+  "last_commit": "ab861e5f3f6f8d89623c5df7c23e920db0d4513b"
 }
