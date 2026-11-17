@@ -26,8 +26,8 @@
     "start_page": 162,
     "end_page": 176,
     "pending": [
-      "Revisión final de citas y fuentes de texto griego",
-      "QA funcional de fichas, traducciones, flashcards y navegador autenticado"
+      "Cotejar fuentes textuales y atribución de los 8 fragmentos",
+      "Prueba estática completa y navegador autenticado"
     ]
   },
   "hard_rules": [
@@ -218,10 +218,10 @@
     "tokens": 189,
     "pages_with_initial_readings": 15,
     "core_commit": "4192c514ef03686e7865493596ab7e2893aa42a8",
-    "reader_commit": "55e9169b4ebb8f75ff401a33e01015c2923b60bd",
+    "reader_commit": "77180a0713528e5290198919f0ddd59d4329d734",
     "entrypoint_commit": "21adecca3ccc8efc730c0e35985ddeafb0957d75",
-    "qa": "Estructura de 8 bloques y 47 fichas comprobada; falta prueba funcional autenticada",
+    "qa": "Corregida búsqueda de fichas capítulo 9 en reader.js; falta prueba en navegador autenticado",
     "biblical_passages_added": 8
   },
-  "last_commit": "4192c514ef03686e7865493596ab7e2893aa42a8"
+  "last_commit": "77180a0713528e5290198919f0ddd59d4329d734"
 }
