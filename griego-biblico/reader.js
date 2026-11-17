@@ -734,13 +734,15 @@ function readingPanel(){
  var isSixth=state.page>=114&&state.page<=133;
  var isSeventh=state.page>=134&&state.page<=148;
  var isEighth=state.page>=149&&state.page<=161;
+ var isNinth=state.page>=162&&state.page<=176;
+ var chapterNine=(data.chapterNine||[]).filter(function(v){return v.page===state.page;});
  var chapterEight=(data.chapterEight||[]).filter(function(v){return v.page===state.page;});
  var chapterSeven=(data.chapterSeven||[]).filter(function(v){return v.page===state.page;});
  var chapterFive=(data.chapterFive||[]).filter(function(v){return v.page===state.page;});
  var chapterSix=(data.chapterSix||[]).filter(function(v){return v.page===state.page;});
  var chapterFour=(data.chapterFour||[]).filter(function(v){return v.page===state.page;});
- if(!john&&!excerpts.length&&!supplemental.length&&!chapterThree.length&&!chapterFour.length&&!chapterFive.length&&!chapterSix.length&&!chapterSeven.length&&!chapterEight.length)return '';
- var head=john?'Juan 1:1–23 · lectura anotada':isThird?'Griego del capítulo 3 · lectura anotada':isFourth?'Griego del capítulo 4 · lectura anotada':isFifth?'Griego del capítulo 5 · lectura anotada':isSixth?'Griego del capítulo 6 · lectura anotada':isSeventh?'Griego del capítulo 7 · lectura anotada':isEighth?'Griego del capítulo 8 · lectura anotada':'Griego del capítulo 2 · lectura anotada';
+ if(!john&&!excerpts.length&&!supplemental.length&&!chapterThree.length&&!chapterFour.length&&!chapterFive.length&&!chapterSix.length&&!chapterSeven.length&&!chapterEight.length&&!chapterNine.length)return '';
+ var head=john?'Juan 1:1–23 · lectura anotada':isThird?'Griego del capítulo 3 · lectura anotada':isFourth?'Griego del capítulo 4 · lectura anotada':isFifth?'Griego del capítulo 5 · lectura anotada':isSixth?'Griego del capítulo 6 · lectura anotada':isSeventh?'Griego del capítulo 7 · lectura anotada':isEighth?'Griego del capítulo 8 · lectura anotada':isNinth?'Griego del capítulo 9 · lectura anotada':'Griego del capítulo 2 · lectura anotada';
  var out='<section class="duff-greek-reader" id="lectura-juan"><div class="grammar-head"><div><div class="micro">LECTURA FILOLÓGICA · '+(john?'EVANGELIO SEGÚN JUAN':'FORMAS, EJEMPLOS Y CITAS DEL CAPÍTULO')+'</div><h2>'+head+'</h2></div></div>'
  +'<p>Seleccioná una palabra para ver su glosa, lema y análisis morfológico. Podés guardar el lema en tus flashcards sin duplicarlo. Las explicaciones y lecturas complementarias no modifican tus respuestas.</p>'
  +'<div class="duff-reading-actions"><button type="button" class="btn btn-small" data-do="greek-translation" aria-pressed="'+state.greekTranslation+'">'+(state.greekTranslation?'Ocultar traducción':'Mostrar traducción')+'</button>'
@@ -754,6 +756,13 @@ function readingPanel(){
     out+='</details>';
   });
   out+='<p class="note">En el ejercicio 1, Duff imprime Juan 1:1–14 (PDF pp. 46–47). En el ejercicio 2 propone reconstruir Juan 1:15–23 desde su transcripción fonética (PDF pp. 47–48). El texto griego de consulta se ofrece por separado y se puede ocultar la traducción.</p>';
+ }else if(isNinth){
+   [['biblical','Referencia bíblica · consulta parcial',true],['paradigm','Paradigmas pronominales',true],['lexicon','Léxico y conjunciones',true],['original','Ejemplos propios',true]].forEach(function(section){
+     var selected=chapterNine.filter(function(v){return v.kind===section[0];});if(!selected.length)return;
+     out+='<details class="duff-reading-group" '+(section[2]?'open':'')+'><summary>'+h(section[1])+' <span>('+selected.length+')</span></summary>';
+     out+=selected.map(function(v){return greekVerseRow(v,true);}).join('');out+='</details>';
+   });
+   out+='<p class="note">'+h(data.chapterNineMeta?.source||'')+' '+h(data.chapterNineMeta?.notice||'')+'</p>';
  }else if(isEighth){
    var sections8=[['biblical','Citas bíblicas y ejercicio final',true],['paradigm','Deponentes, εἰμί y declinaciones',true],['lexicon','Vocabulario del capítulo',false],['original','Ejemplos originales',true]];
    sections8.forEach(function(section){
