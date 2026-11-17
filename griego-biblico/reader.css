@@ -216,3 +216,23 @@ body:has(.duff-phonetics-overlay){overflow:hidden}
 .duff-ch2-group textarea{min-height:66px;resize:vertical}
 .duff-ch2-group .duff-answer-row{margin:11px 0}
 @media(max-width:500px){.duff-ch2-group .duff-answer-pair{grid-template-columns:1fr}.duff-ch2-index button{flex:1 0 auto}}
+
+/* Edición de lectura filológica: Juan 1:1–23 y citas NT de Duff. */
+.duff-reading-actions{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 18px}
+.duff-reading-actions button[aria-pressed="true"]{background:var(--sage);border-color:#bdc9bb}
+.duff-reading-group{border:1px solid var(--line);margin:10px 0;background:#fff}
+.duff-reading-group summary{cursor:pointer;padding:11px 15px;font-weight:600;font-size:14px}
+.duff-reading-group summary span{font:500 11px var(--mono);color:var(--muted);margin-left:5px}
+.duff-reading-group[open] summary{border-bottom:1px solid var(--line);background:#f7f9f3}
+.duff-reading-group .greek-verse{padding:13px 15px}
+.duff-reading-group .greek-verse:first-of-type{border-top:0}
+.greek-token{display:inline-block;vertical-align:top;margin-right:0;padding-bottom:2px}
+.greek-verse-text.greek-verse-interlinear{font-size:22px;line-height:1.65}
+.greek-verse-interlinear .greek-token{margin-right:6px;margin-bottom:9px;text-align:center;min-width:20px;max-width:160px}
+.greek-token-gloss{display:block;max-width:160px;font:10px/1.25 var(--font);color:var(--muted);white-space:normal;overflow-wrap:break-word}
+.duff-excerpt-theme{display:inline-block;margin-left:10px;font-size:11px;color:var(--muted)}
+.duff-nt-excerpt{padding:14px;border:1px solid var(--line);margin:10px 0}
+.greek-card .greek-add-lemma{display:block;width:100%;margin:12px 0;text-align:center}
+.greek-card .greek-add-lemma:disabled{opacity:.8}
+.duff-greek-reader>.note{margin:12px 0}
+@media(max-width:650px){.duff-reading-group summary{padding:10px}.duff-reading-group .greek-verse{padding:9px}.greek-verse-interlinear .greek-token{max-width:130px}.greek-token-gloss{max-width:130px}}
