@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Capítulo 10 ejercicios",
-    "verified": "69 ítems en 12 grupos, pp.177–192",
-    "limitations": "Sin QA autenticada ni prueba JS ejecutada",
-    "next": "Capítulo 10 textos"
+    "scope": "Capítulo 10 textos",
+    "verified": "29 fichas léxicas en tres bloques; panel de vocabulario habilitado",
+    "limitations": "Sin prueba autenticada",
+    "next": "Citas bíblicas y QA capítulo 10"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -846,14 +846,16 @@
       "next": "Capítulo 10 textos griegos",
       "texts": {
         "status": "partial",
-        "blocks": 13,
-        "tokens": 58,
+        "blocks": 16,
+        "tokens": 87,
         "core_commit": "448576ffac9c73d7c1c319dca16cfd05d3ddfcce",
         "integration_commit": "0bb283cfb35928e50430d9d59d0d26d73a456b6c",
         "entrypoint_commit": "9a7cbebc165ec73b65b19661a39ea43eb9208ce9",
-        "pending": "Léxico, citas y QA"
+        "pending": "Citas bíblicas y QA",
+        "latest_content_commit": "6c2e32aa0786620d07598e60e8a6b8a8724e7e92",
+        "reader_commit": "552e12e9b78f9ead4b5ae8340a8910ef2cb13f4c"
       }
     }
   ],
-  "last_commit": "9a7cbebc165ec73b65b19661a39ea43eb9208ce9"
+  "last_commit": "552e12e9b78f9ead4b5ae8340a8910ef2cb13f4c"
 }
