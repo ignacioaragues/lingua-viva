@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Duff capítulo 6, textos griegos",
-    "verified": "30 bloques, 178 tokens, 54 lemas, 20 páginas; pasajes finales sin traducción completa",
-    "limitations": "Sin sesión autenticada; Juan 9:13–21 sólo dos fragmentos de consulta",
-    "next": "Capítulo 7, ejercicios, pp.134–148"
+    "scope": "Duff cap. 7, ejercicios",
+    "verified": "75 ítems de 16 grupos cotejados directamente con PDF 134–148; código y renderizado estático comprobados",
+    "limitations": "No prueba autenticada de Supabase o navegador móvil",
+    "next": "Capítulo 7, textos griegos, no avanzar aún a capítulo 8."
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -668,5 +668,53 @@
     },
     "verification": "Sintaxis JavaScript válida; 20/20 páginas, 178/178 fichas completas y lookup funcional en pruebas estáticas. Sin QA en navegador autenticado.",
     "next": "Capítulo 7, ejercicios, pp.134–148"
+  },
+  "chapter_7_exercises": {
+    "date": "2026-11-17",
+    "title": "Los modos de los verbos",
+    "pdf_pages": [
+      134,
+      148
+    ],
+    "status": "complete",
+    "groups": 16,
+    "items": 75,
+    "items_by_page": {
+      "137": 10,
+      "139": 18,
+      "141": 8,
+      "142": 6,
+      "143": 4,
+      "144": 4,
+      "146": 12,
+      "147": 13
+    },
+    "directions": {
+      "greek_to_spanish": 52,
+      "spanish_to_greek": 15,
+      "morphological_analysis": 8
+    },
+    "sections": [
+      "Práctica 7.2",
+      "Práctica 7.3",
+      "Práctica a mitad de camino",
+      "Práctica 7.4.1",
+      "Práctica 7.4.2",
+      "Práctica 7.4.3",
+      "Práctica 7.5",
+      "Final A",
+      "Final B",
+      "Final C (1 Juan 3:4–10)"
+    ],
+    "features": [
+      "Navegación por prácticas",
+      "Campos individuales y análisis de participio en cuatro campos",
+      "Teclado griego existente y guardado privado sin cambiar identificadores previos",
+      "Sin autocorrección ni soluciones"
+    ],
+    "commit": "d3024db13ff69be246a1443f98742f6a80886c80",
+    "entrypoint_commit": "c1803cdff689fb8f6188b39df4c614a37d4a357a",
+    "qa": "JS compilado, 15 páginas, 16 grupos, 75 ítems únicos, campos morfológicos y griegos comprobados mediante renderizado estático; sin QA autenticada real.",
+    "next": "Capítulo 7 segunda pasada de textos griegos, páginas 134–148."
   }
 }
