@@ -6,54 +6,38 @@
   "timezone": "Europe/Berlin",
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
-  "chapter": 7,
-  "phase": "texts",
+  "chapter": 8,
+  "phase": "exercises",
   "phase_status": "pending",
-  "start_page": 134,
-  "end_page": 148,
+  "start_page": 149,
+  "end_page": 161,
   "previous_phase": {
     "chapter": 7,
-    "phase": "exercises",
+    "phase": "texts",
     "status": "completed",
     "date": "2026-11-17",
     "pages_examined": "134–148",
-    "groups": 16,
-    "items": 75,
-    "items_by_page": {
-      "137": 10,
-      "139": 18,
-      "141": 8,
-      "142": 6,
-      "143": 4,
-      "144": 4,
-      "146": 12,
-      "147": 13
-    },
-    "direction_counts": {
-      "greek_to_spanish": 52,
-      "spanish_to_greek": 15,
-      "morphological_analysis": 8
-    },
-    "core_commit": "d3024db13ff69be246a1443f98742f6a80886c80",
-    "live_entrypoint_commit": "c1803cdff689fb8f6188b39df4c614a37d4a357a",
-    "files": [
-      "griego-biblico/reader.js",
-      "griego-biblico/index.html"
-    ],
-    "verified": "Sintaxis JS; 15/15 páginas, 16 grupos, 75 identificadores únicos, campos separados para tiempo/género/caso/número, teclados griegos en traducciones al griego y navegación estática.",
-    "limitations": "No se comprobó en navegador autenticado ni Supabase real."
+    "blocks": 30,
+    "annotated_tokens": 148,
+    "lemmas": 74,
+    "biblical_passages": 11,
+    "core_commit": "770a90daeb53d17b0603e1d02b2ba9cdd9c35289",
+    "integration_commit": "e5808f5325849244485c29d3d2698e835df07d2a",
+    "live_entrypoint_commit": "c4fe46c62826f0b54b604cfdba4f884cb9163e78",
+    "verified": "Sintaxis JS; 15/15 páginas con fichas, 148/148 tokens, 30 bloques; 1 Juan 3:4–10 sin solución; fichas accesibles por lookup.",
+    "limitations": "Sin QA visual o autenticada; citas cortas basadas en la identificación del manual y fuentes griegas independientes, variantes posibles."
   },
   "next_phase": {
-    "chapter": 7,
-    "phase": "texts",
-    "start_page": 134,
-    "end_page": 148,
-    "instructions": "Reabrir PDF 134–148. Cotejar citas Hechos 16:31, Mateo 27:42, Juan 16:12, Marcos 3:14–15, Filemón 4–5, Hechos 18:8, Mateo 4:18, Marcos 6:16, Marcos 4:14 y 4:18; paradigmas de imperativo, infinitivo y participio, vocabulario. Preparar textos independientes y fichas contextualizadas, sin revelar traducción completa de 1 Juan 3:4–10 (Sección C).",
+    "chapter": 8,
+    "phase": "exercises",
+    "start_page": 149,
+    "end_page": 161,
+    "instructions": "Reabrir PDF pp.149–161 y cotejar todas las prácticas y ejercicios del capítulo 8 «Otros patrones de sustantivos y verbos»; implementar campos precisos en reader.js sin autocorregir ni revelar respuestas.",
     "pending": [
-      "Releer páginas físicas 134–148",
-      "Anotar textos y paradigmas token por token",
-      "Integrar lector y mazo Duff cap.7",
-      "Pruebas estáticas y checkpoint a cap.8 ejercicios"
+      "Examinar páginas físicas 149–161",
+      "Inventariar ejercicios reales y direcciones de traducción",
+      "Implementar campos, navegación y guardado privado existente",
+      "Verificar JS e identificadores y después pasar a textos capítulo 8"
     ]
   },
   "hard_rules": [
@@ -167,6 +151,32 @@
         "entrypoint_commit": "0197a4db547490a8bf63860683ec5479f2609341"
       },
       "qa": "20/20 páginas con fichas y tokens renderizados en pruebas estáticas; 178/178 tokens completos; Juan 9:13–21 sin traducción completa. Sin navegador autenticado."
+    },
+    {
+      "chapter": 7,
+      "name": "Los modos de los verbos",
+      "pdf_pages": [
+        134,
+        148
+      ],
+      "status": "both_passes_complete",
+      "completed_on": "2026-11-17",
+      "exercises": {
+        "groups": 16,
+        "items": 75,
+        "core_commit": "d3024db13ff69be246a1443f98742f6a80886c80"
+      },
+      "texts": {
+        "blocks": 30,
+        "tokens": 148,
+        "lemmas": 74,
+        "passages": 11,
+        "pages_covered": 15,
+        "core_commit": "770a90daeb53d17b0603e1d02b2ba9cdd9c35289",
+        "integration_commit": "e5808f5325849244485c29d3d2698e835df07d2a",
+        "entrypoint_commit": "c4fe46c62826f0b54b604cfdba4f884cb9163e78"
+      },
+      "qa": "15/15 páginas renderizadas estáticamente; 148 fichas completas; 1 Juan 3:4–10 sin traducción; no QA autenticada."
     }
   ]
 }
