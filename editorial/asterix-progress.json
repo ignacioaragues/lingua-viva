@@ -1,8 +1,8 @@
 {
   "work": "Astérix et Cléopâtre · biblioteca privada de francés",
-  "date": "2026-11-16",
+  "date": "2026-11-17",
   "pass": 2,
-  "status": "Lector local con zoom, posición persistente y cuaderno por viñeta configurable; traducción editorial pendiente",
+  "status": "Prueba de lectura paralela con panel guiado para páginas 1–7 y persistencia local del PDF mediante IndexedDB; cobertura de traducción desigual, sin QA visual final.",
   "source": "PDF escaneado de 50 páginas aportado en conversación, disponible visualmente; no se ha transcrito ni cotejado globo por globo",
   "implemented": [
     "Página independiente accesible desde Lecturas",
@@ -13,15 +13,20 @@
     "Zoom 50–400 %, ajustar ancho y ocultar cuaderno",
     "Posición de página persistida localmente entre aperturas",
     "Anotaciones independientes por viñeta con cantidad configurable y compatibilidad con notas anteriores de página completa",
-    "Guías introductorias originales y breves para páginas 1–5, sin reproducción de diálogos"
+    "Guías introductorias originales y breves para páginas 1–5, sin reproducción de diálogos",
+    "Panel de lectura guiada para páginas 1–7, con contenido editorial de distinto nivel de detalle",
+    "Persistencia del PDF en IndexedDB del navegador tras primera selección, sin publicación en GitHub",
+    "Traducciones de los recuadros de personajes en página 4 y narración del mapa en página 3 (requieren auditoría de fidelidad)"
   ],
   "not_implemented": [
-    "Identificación y traducción de viñetas",
     "Análisis de vocabulario contextual",
     "Sincronización privada con Supabase y dispositivos",
     "Prueba real de funcionamiento en navegador y móvil",
     "Traducciones editoriales verificadas de los globos y segmentación exacta de viñetas",
-    "Prueba automatizada en navegador del flujo PDF local"
+    "Prueba automatizada en navegador del flujo PDF local",
+    "Traducción exhaustiva cotejada de todos los globos en páginas 5–7; las fichas actuales incluyen resúmenes",
+    "Eliminación del selector manual de número de viñetas y sustitución por correspondencia editorial",
+    "Verificación de recuperación IndexedDB y comportamiento móvil en sesión real"
   ],
-  "next": "Cotejar visualmente las viñetas reales de la página 5 en adelante y preparar glosas y paráfrasis breves sin reproducción sistemática de la traducción protegida; integrar sincronización privada autorizada sin subir PDF al repositorio."
+  "next": "Auditar texto de páginas 3–4 contra escaneo; completar correspondencia por viñetas de páginas 5–7 con extractos breves y glosas, sin publicar traducción integral de obra protegida. Verificar IndexedDB en navegador."
 }
