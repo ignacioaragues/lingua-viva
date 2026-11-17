@@ -26,8 +26,8 @@
     "start_page": 162,
     "end_page": 176,
     "pending": [
-      "Incorporar citas bíblicas restantes con fuentes permitidas",
-      "QA JS y navegador autenticado"
+      "Revisión final de citas y fuentes de texto griego",
+      "QA funcional de fichas, traducciones, flashcards y navegador autenticado"
     ]
   },
   "hard_rules": [
@@ -214,13 +214,14 @@
   "partial_phase": {
     "chapter": 9,
     "phase": "texts",
-    "blocks": 23,
-    "tokens": 142,
+    "blocks": 31,
+    "tokens": 189,
     "pages_with_initial_readings": 15,
-    "core_commit": "8624e15445720547f8e60e95749eb06965d07780",
+    "core_commit": "4192c514ef03686e7865493596ab7e2893aa42a8",
     "reader_commit": "55e9169b4ebb8f75ff401a33e01015c2923b60bd",
     "entrypoint_commit": "21adecca3ccc8efc730c0e35985ddeafb0957d75",
-    "qa": "25 fichas reflexivas y recíprocas incorporadas; prueba autenticada pendiente"
+    "qa": "Estructura de 8 bloques y 47 fichas comprobada; falta prueba funcional autenticada",
+    "biblical_passages_added": 8
   },
-  "last_commit": "8624e15445720547f8e60e95749eb06965d07780"
+  "last_commit": "4192c514ef03686e7865493596ab7e2893aa42a8"
 }
