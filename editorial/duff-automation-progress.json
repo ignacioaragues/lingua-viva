@@ -26,8 +26,8 @@
     "start_page": 162,
     "end_page": 176,
     "pending": [
-      "Cotejar fuentes textuales y atribución de los 8 fragmentos",
-      "Prueba estática completa y navegador autenticado"
+      "Cotejar fuente/licencia de las citas bíblicas",
+      "QA estática integral y navegador autenticado"
     ]
   },
   "hard_rules": [
@@ -214,14 +214,14 @@
   "partial_phase": {
     "chapter": 9,
     "phase": "texts",
-    "blocks": 31,
-    "tokens": 189,
+    "blocks": 34,
+    "tokens": 204,
     "pages_with_initial_readings": 15,
-    "core_commit": "4192c514ef03686e7865493596ab7e2893aa42a8",
+    "core_commit": "10d49b5bd0d79ea66a04f088aa83866318b752bc",
     "reader_commit": "77180a0713528e5290198919f0ddd59d4329d734",
     "entrypoint_commit": "21adecca3ccc8efc730c0e35985ddeafb0957d75",
-    "qa": "Corregida búsqueda de fichas capítulo 9 en reader.js; falta prueba en navegador autenticado",
+    "qa": "Tres oraciones originales añadidas con 15 fichas; QA autenticada pendiente",
     "biblical_passages_added": 8
   },
-  "last_commit": "77180a0713528e5290198919f0ddd59d4329d734"
+  "last_commit": "10d49b5bd0d79ea66a04f088aa83866318b752bc"
 }
