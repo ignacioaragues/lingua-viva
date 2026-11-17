@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Capítulo 9 textos",
-    "verified": "Tres oraciones originales con 15 fichas; 34 bloques, 204 fichas acumuladas",
-    "limitations": "Sin QA autenticada",
-    "next": "Revisión fuentes y QA"
+    "scope": "Cierre capítulo 9 textos",
+    "verified": "PDF 15 páginas, 34 referencias únicas, 204 fichas completas, integración reader.js inspeccionada",
+    "limitations": "Sin navegador autenticado",
+    "next": "Capítulo 10 ejercicios, cotejo directo PDF"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -807,7 +807,7 @@
         162,
         176
       ],
-      "status": "texts_in_progress",
+      "status": "both_passes_complete",
       "completed_on": "2026-11-17",
       "exercises": {
         "groups": 13,
@@ -816,19 +816,20 @@
       },
       "qa": "Cotejo textual del PDF físico 162–176; 63 ítems en 13 grupos. Prueba de navegador autenticado pendiente.",
       "texts": {
-        "status": "partial",
+        "status": "completed",
         "blocks": 34,
         "tokens": 204,
         "pages_with_initial_readings": 15,
         "core_commit": "4192c514ef03686e7865493596ab7e2893aa42a8",
         "integration_commit": "55e9169b4ebb8f75ff401a33e01015c2923b60bd",
         "entrypoint_commit": "21adecca3ccc8efc730c0e35985ddeafb0957d75",
-        "pending": "Fuentes/licencias bíblicas y QA",
+        "pending": "Ninguno bloqueante; navegador autenticado no probado",
         "biblical_passages_added": 8,
         "reader_fix_commit": "77180a0713528e5290198919f0ddd59d4329d734",
-        "latest_content_commit": "10d49b5bd0d79ea66a04f088aa83866318b752bc"
+        "latest_content_commit": "10d49b5bd0d79ea66a04f088aa83866318b752bc",
+        "final_commit": "f2a82b35d1057e1e6ea69b129f8b3816265978c6"
       }
     }
   ],
-  "last_commit": "10d49b5bd0d79ea66a04f088aa83866318b752bc"
+  "last_commit": "f2a82b35d1057e1e6ea69b129f8b3816265978c6"
 }
