@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Duff capítulo 9 textos: 8 pasajes breves anotados",
-    "verified": "47 fichas nuevas con cinco campos obligatorios; 31 bloques y 189 tokens acumulados",
-    "limitations": "Sin navegador autenticado; fase sigue abierta",
-    "next": "Cotejo final de fuentes y QA"
+    "scope": "Capítulo 9 · textos",
+    "verified": "Corregido lookup de fichas en reader.js para capítulo 9",
+    "limitations": "No se probó navegador autenticado",
+    "next": "Cotejo final y QA; mantener capítulo 9 textos"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -823,10 +823,11 @@
         "core_commit": "4192c514ef03686e7865493596ab7e2893aa42a8",
         "integration_commit": "55e9169b4ebb8f75ff401a33e01015c2923b60bd",
         "entrypoint_commit": "21adecca3ccc8efc730c0e35985ddeafb0957d75",
-        "pending": "Revisión final de fuentes y QA funcional",
-        "biblical_passages_added": 8
+        "pending": "Cotejo de fuentes textuales, QA funcional y navegador autenticado",
+        "biblical_passages_added": 8,
+        "reader_fix_commit": "77180a0713528e5290198919f0ddd59d4329d734"
       }
     }
   ],
-  "last_commit": "4192c514ef03686e7865493596ab7e2893aa42a8"
+  "last_commit": "77180a0713528e5290198919f0ddd59d4329d734"
 }
