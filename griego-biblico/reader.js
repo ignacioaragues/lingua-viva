@@ -304,7 +304,90 @@ function chapterThreePractice(){
  return out+reviewPanel(p);
 }
 
+
+/* Duff capítulo 5 · Los adjetivos · PDF privado, pp. 98–113.
+   El capítulo 6 comienza en la página física 114.
+   Los números y sentidos de cada consigna se cotejaron directamente con el PDF.
+   No se publican enunciados, respuestas ni traducciones del libro. */
+var chapterFiveExercises={
+ 99:[
+  {id:'5-1-morfologia',label:'Práctica 5.1 · análisis morfológico de adjetivos',type:'adjective-analysis',start:1,count:8,description:'Para cada forma adjetival, identificá género, caso y número; anotá las alternativas posibles cuando la forma sea ambigua.'}
+ ],
+ 100:[
+  {id:'5-2-gr-es',label:'Práctica 5.2 · griego → español',type:'translation',start:1,count:7,description:'Traducí las siete primeras oraciones al español; prestá atención a los adjetivos atributivos.'},
+  {id:'5-2-es-gr',label:'Práctica 5.2 · español → griego',type:'greek',start:8,count:3,description:'Traducí al griego los ítems 8–10, con concordancia de adjetivo y sustantivo.'}
+ ],
+ 101:[
+  {id:'5-3-eimi',label:'Práctica 5.3 · formas de εἰμί',type:'translation',start:1,count:5,description:'Traducí al español cinco formas del presente de εἰμί.'}
+ ],
+ 103:[
+  {id:'5-4-gr-es',label:'Práctica 5.4 · griego → español',type:'translation',start:1,count:5,description:'Traducí los ítems 1–5, incluidos adjetivos predicativos y oraciones interrogativas.'},
+  {id:'5-4-es-gr',label:'Práctica 5.4 · español → griego',type:'greek',start:6,count:3,description:'Traducí al griego los ítems 6–8.'},
+  {id:'mitad-gr-es',label:'Práctica a mitad de camino · griego → español',type:'translation',start:1,count:8,description:'Ítems 1–5 en la página 103 y 6–8 en la página 104.'},
+  {id:'mitad-es-gr',label:'Práctica a mitad de camino · español → griego',type:'greek',start:9,count:4,description:'Ítems 9–12 en la página 104.'}
+ ],
+ 105:[
+  {id:'5-5-sustantivacion',label:'Práctica 5.5 · adjetivos sustantivados',type:'translation',start:1,count:4,description:'Traducí al español cuatro oraciones con adjetivos sustantivados.'}
+ ],
+ 106:[
+  {id:'5-6-polys',label:'Práctica 5.6 · concordancia con πολύς',type:'greek-form',start:1,count:5,description:'Escribí la forma de πολύς que concuerda con cada uno de los cinco sustantivos del PDF.'},
+  {id:'5-6-megas',label:'Práctica 5.6 · concordancia con μέγας',type:'greek-form',start:6,count:5,description:'Escribí la forma de μέγας que concuerda con cada uno de los cinco sustantivos del PDF.'}
+ ],
+ 109:[
+  {id:'5-7-8',label:'Práctica 5.7 y 5.8 · orden y εἰμί',type:'translation',start:1,count:4,description:'Traducí las cuatro oraciones griegas al español; prestá atención a la posición de los constituyentes.'}
+ ],
+ 111:[
+  {id:'finalA-gr-es',label:'Ejercicios finales · Sección A, griego → español',type:'translation',start:1,count:8,description:'Ocho oraciones griegas, ítems 1–8; el texto está únicamente en el PDF privado.'},
+  {id:'finalA-es-gr',label:'Ejercicios finales · Sección A, español → griego',type:'greek',start:9,count:4,description:'Ítems 9–10 en la página 111 y 11–12 en la 112.'}
+ ],
+ 112:[
+  {id:'finalB-gr-es',label:'Ejercicios finales · Sección B, griego → español',type:'translation',start:1,count:8,description:'Ocho oraciones griegas de la Sección B.'},
+  {id:'finalB-es-gr',label:'Ejercicios finales · Sección B, español → griego',type:'greek',start:9,count:4,description:'Cuatro oraciones españolas de la Sección B.'},
+  {id:'finalC-mt12-35',label:'Ejercicios finales · Sección C, Mateo 12:35',type:'translation',start:1,count:1,description:'Traducí el pasaje bíblico de Mateo 12:35, sin anticipar la solución.'},
+  {id:'finalC-2co13-13',label:'Ejercicios finales · Sección C, 2 Corintios 13:13',type:'translation',start:2,count:1,description:'Traducí el pasaje bíblico de 2 Corintios 13:13, sin anticipar la solución.'}
+ ]
+};
+function chapterFivePractice(){
+ var p=state.page,parts=chapterFiveExercises[p]||[];
+ var nav=[[99,'5.1'],[100,'5.2'],[101,'5.3'],[103,'5.4 + mitad'],[105,'5.5'],[106,'5.6'],[109,'5.7–5.8'],[111,'Final A'],[112,'Final B/C']];
+ var out='<nav class="duff-index duff-ch2-index" aria-label="Prácticas del capítulo 5">'
+ +nav.map(function(x){return '<button type="button" data-do="page" data-page="'+x[0]+'" aria-current="'+(p===x[0]?'page':'false')+'">'+h(x[1])+'</button>';}).join('')+'</nav>';
+ if(p===104)out+='<p class="duff-ch2-note">La práctica a mitad de camino continúa aquí (ítems 6–12). Sus respuestas están agrupadas con el comienzo de la práctica. <button class="btn btn-small" type="button" data-do="page" data-page="103">Responder práctica intermedia</button></p>';
+ else if(p===112)out+='<p class="duff-ch2-note">La Sección A continúa aquí (ítems 11 y 12). <button class="btn btn-small" type="button" data-do="page" data-page="111">Responder Sección A</button></p>';
+ else if(!parts.length)out+='<p class="duff-ch2-note">Esta página contiene explicación, paradigmas, ejemplos, vocabulario o notas. Elegí una práctica en el índice.</p>';
+ parts.forEach(function(ex,groupIndex){
+  var answered=0;
+  for(var n=ex.start;n<ex.start+ex.count;n++){
+   var k='duff-ch5:'+ex.id+':'+n;
+   if(ex.type==='adjective-analysis'){
+    if(['genero','caso','numero','observaciones'].some(function(suffix){return String(note(p).answers[k+':'+suffix]||'').trim();}))answered++;
+   }else if(String(note(p).answers[k]||'').trim())answered++;
+  }
+  out+='<details class="duff-exercise duff-ch2-group" '+(groupIndex===0?'open':'')+'>'
+   +'<summary>'+h(ex.label)+' <span class="duff-ch2-count">'+ex.count+' ítems'+(answered?' · '+answered+' contestados':'')+'</span></summary>'
+   +'<p>'+h(ex.description)+' Consultá el PDF privado para ver los enunciados. Las respuestas no se califican ni autocorrigen.</p>';
+  for(var i=ex.start;i<ex.start+ex.count;i++){
+   var key='duff-ch5:'+ex.id+':'+i;
+   out+='<div class="duff-answer-row"><div class="duff-answer-label">Ítem '+i+'</div>';
+   if(ex.type==='adjective-analysis'){
+    out+='<div class="duff-answer-pair"><div>'+field(key+':genero','Género',false,false)+'</div>'
+      +'<div>'+field(key+':caso','Caso',false,false)+'</div>'
+      +'<div>'+field(key+':numero','Número',false,false)+'</div></div>'
+      +field(key+':observaciones','Otras lecturas posibles (si corresponde)',false,false);
+   }else{
+    var greek=ex.type==='greek'||ex.type==='greek-form';
+    var label=ex.type==='greek-form'?'Forma griega concordante':greek?'Tu traducción al griego':'Tu traducción al español';
+    out+=field(key,label,greek,ex.type==='translation'||ex.type==='greek'?2:false);
+   }
+   out+='</div>';
+  }
+  out+='</details>';
+ });
+ return out+reviewPanel(p);
+}
+
 function practice(){
+ if(current()===4)return chapterFivePractice();
  if(current()===3)return chapterFourPractice();
  if(current()===2)return chapterThreePractice();
  if(current()===1)return chapterTwoPractice();
