@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Duff capítulo 4, primera pasada de ejercicios",
-    "verified": "13 grupos, 65 consignas cotejadas con PDF, 65 claves únicas y sintaxis JS",
-    "limitations": "Sin prueba autenticada ni despliegue comprobado",
-    "next": "Capítulo 4, segunda pasada de textos griegos (PDF pp.81–97)"
+    "scope": "Duff capítulo 4 · segunda pasada, textos griegos",
+    "verified": "32 bloques, 209 tokens, 69 lemas y 5 referencias bíblicas en 17 páginas; sintaxis y renderización estática verificadas",
+    "limitations": "Sin prueba real autenticada ni confirmación de publicación Pages",
+    "next": "Capítulo 5: ejercicios; cotejar el PDF original."
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -517,5 +517,40 @@
     "commit": "22348e41125e574501ec5d17bf3d710bcd35df46",
     "qa": "PDF cotejado directamente 81–97; 65 claves únicas, 13 grupos, sintaxis JavaScript correcta; no autocorrección; prueba autenticada no realizada.",
     "next": "Capítulo 4, textos griegos: citas, vocabulario y paradigmas, sin revelar Juan 1:1–4 de sección C."
+  },
+  "chapter_4_annotated_texts": {
+    "date": "2026-11-17",
+    "pages": [
+      81,
+      97
+    ],
+    "coverage": {
+      "blocks": 32,
+      "tokens": 209,
+      "lemmas": 69,
+      "pages": 17,
+      "passages": 5
+    },
+    "references": [
+      "Marcos 12:41",
+      "Juan 18:28",
+      "Mateo 10:24",
+      "1 Corintios 15:3",
+      "Juan 1:1–4 (ejercicio C, traducción oculta)"
+    ],
+    "implementation": [
+      "griego-biblico/chapter4-readings.js",
+      "griego-biblico/reader.js",
+      "griego-biblico/index.html",
+      "flashcards/repository.js",
+      "flashcards/index.html"
+    ],
+    "commits": {
+      "dataset": "9914dc8cd26e63a94efb32a58e960bcf2c89df66",
+      "integration": "dfdaa1cf07fab5b22daa2df000bb3205663b3d0d",
+      "entrypoint": "b6ebada2cc0b780bef5243adb806e3e72d2e766c"
+    },
+    "qa": "PDF privado 81–97 cotejado; 17/17 páginas renderizadas estáticamente, 209 fichas completas, sin referencias duplicadas, lectura de capítulos 2–3 preservada, traducción completa de Juan 1:1–4 oculta; no se probó login real ni navegador.",
+    "next": "Capítulo 5: primera pasada de ejercicios, páginas provisionales 98–116, verificar los límites del capítulo directamente en PDF antes de declarar cobertura."
   }
 }
