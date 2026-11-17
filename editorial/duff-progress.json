@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Capítulo 3 de Duff · primera pasada, ejercicios",
-    "verified": "106 ejercicios numerados, 18 bloques, 9 páginas, UI y sintaxis JavaScript verificadas por pruebas estáticas",
-    "limitations": "QA autenticada real y publicación en GitHub Pages pendientes; subrayados de práctica 3.1 requieren consultar PDF visual",
-    "next": "Pasada de textos griegos del capítulo 3 antes de avanzar al capítulo 4."
+    "scope": "Duff capítulo 3, segunda pasada de textos griegos",
+    "verified": "44 bloques, 291 tokens con forma/lema/morfología/glosa y 7 citas; 15 páginas y guardado/deck por simulación; capítulo 3 terminado",
+    "limitations": "Verificación por código, no QA autenticada real en navegador ni publicación Pages",
+    "next": "Capítulo 4 «Las preposiciones», páginas PDF 81–97: primera pasada de ejercicios."
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -442,5 +442,54 @@
     "privacy": "Se conservan todas las claves existentes de respuestas de capítulos 1 y 2; para cap.3 se crean claves duff-ch3 específicas. Guardado privado por página sin respuestas automáticas.",
     "limitations": "No se efectuó prueba real de sesión Supabase ni visualización en navegador. Los materiales se cotejaron en PDF de texto; no se verificaron visualmente todos los subrayados.",
     "next": "Capítulo 3: fase textos, citas y paradigmas, pp.66–80; luego capítulo 4 fase ejercicios."
+  },
+  "chapter_3_annotated_texts": {
+    "date": "2026-11-17",
+    "source": "PDF Duff capítulo 3, páginas 66–80, cotejado con el original",
+    "implementation": [
+      "griego-biblico/chapter3-readings.js",
+      "griego-biblico/reader.js",
+      "griego-biblico/index.html",
+      "griego-biblico/reader.css",
+      "flashcards/repository.js"
+    ],
+    "coverage": {
+      "pages": "66–80 (15/15)",
+      "blocks": 44,
+      "annotated_tokens": 291,
+      "unique_lemmas": 60,
+      "short_biblical_references": 7,
+      "references": [
+        "Apocalipsis 19:1",
+        "Mateo 23:1",
+        "Marcos 13:31",
+        "Juan 4:11",
+        "Romanos 12:1",
+        "Mateo 17:15",
+        "Marcos 1:1 (ejercicio final C)"
+      ],
+      "paradigms": [
+        "Masculinos en -ος: nominativo, acusativo, genitivo y dativo; singular/plural",
+        "Femeninos en -η y -α",
+        "Neutros en -ον, con singular verbal para sujeto plural neutro",
+        "Artículos por género y caso",
+        "ἡμέρα y δόξα: variantes del femenino",
+        "Cinco casos de Ἰησοῦς",
+        "αὐτός en masculino, femenino y neutro",
+        "Lemas femeninos, neutros y nombres del vocabulario de capítulo 3"
+      ],
+      "other": "Ejemplos originales diferenciados de los del manual, sin completar ni resolver las prácticas"
+    },
+    "translation_policy": "Traducciones propias visibles u ocultables en las lecturas complementarias; Marcos 1:1 mantiene ficha de los 7 tokens pero no muestra traducción completa porque es el ejercicio C. Variantes: Duff incluye «υἱοῦ θεοῦ» mientras SBLGNT base omite esas dos palabras.",
+    "citation_policy": "Citas breves NT cotejadas con MorphGNT/SBLGNT donde el repositorio estuvo disponible; algunas referencias breves cotejadas también con el extracto del manual. No se reproduce texto extenso protegido del manual.",
+    "flashcards": "Todas las fichas permiten guardar el lema en repositorio privado común sin duplicar. Corregida asociación por capítulo: antes una tarjeta griega de cap.3 iba también a duff-ch2; ahora duff-ch3. Añadido mazo Duff · Capítulo 3.",
+    "commits": {
+      "dataset": "4197994c50989a9eeff70c6a360479c94932c657",
+      "reader": "7803dc487057b28ba2989cb51a9b9e9680f758ec",
+      "entrypoint": "ad991278797559f6202b5939bfe8d651ec0a61ee"
+    },
+    "verification": "Compilación de JS, dataset y 15/15 páginas renderizadas estáticamente (291 palabras), lookup de palabra, no filtración de solución de Marcos 1:1, no regresión en Juan 1 ni cap.2; simulación guardado de un lema en mazos cap.2 y cap.3 sin duplicar.",
+    "pending": "Prueba real con navegador autenticado y móvil para traducciones, popup, guardado y repetición. No se accedió a datos personales del usuario.",
+    "status": "Pasada de textos concluida; capítulos 1–3 cubiertos; próxima pasada capítulo 4 fase ejercicios"
   }
 }
