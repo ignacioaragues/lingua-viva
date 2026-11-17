@@ -6,28 +6,25 @@
   "timezone": "Europe/Berlin",
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
-  "chapter": 9,
-  "phase": "texts",
-  "phase_status": "in_progress",
-  "start_page": 162,
-  "end_page": 177,
+  "chapter": 10,
+  "phase": "exercises",
+  "phase_status": "pending",
+  "start_page": 177,
+  "end_page": null,
   "previous_phase": {
     "chapter": 9,
-    "phase": "exercises",
+    "phase": "texts",
     "status": "completed",
-    "items": 63,
-    "groups": 13,
-    "commit": "cae641aa133318a32b066a0f7ffe9f96c6edaeb1",
-    "pages_examined": "162–176"
+    "blocks": 34,
+    "tokens": 204,
+    "commit": "f2a82b35d1057e1e6ea69b129f8b3816265978c6"
   },
   "next_phase": {
-    "chapter": 9,
-    "phase": "texts",
-    "start_page": 162,
-    "end_page": 176,
+    "chapter": 10,
+    "phase": "exercises",
     "pending": [
-      "Cotejar fuente/licencia de las citas bíblicas",
-      "QA estática integral y navegador autenticado"
+      "Identificar páginas físicas exactas del capítulo 10 en PDF",
+      "Cotejar prácticas e implementar campos individuales"
     ]
   },
   "hard_rules": [
@@ -201,27 +198,23 @@
         162,
         176
       ],
-      "status": "exercises_complete",
+      "status": "both_passes_complete",
       "completed_on": "2026-11-17",
       "exercises": {
         "groups": 13,
         "items": 63,
         "core_commit": "cae641aa133318a32b066a0f7ffe9f96c6edaeb1"
       },
-      "qa": "Cotejo textual del PDF físico 162–176; 63 ítems en 13 grupos. Prueba de navegador autenticado pendiente."
+      "qa": "Cotejo textual del PDF físico 162–176; 63 ítems en 13 grupos. Prueba de navegador autenticado pendiente.",
+      "texts": {
+        "blocks": 34,
+        "tokens": 204,
+        "biblical_passages": 8,
+        "core_commit": "10d49b5bd0d79ea66a04f088aa83866318b752bc",
+        "final_commit": "f2a82b35d1057e1e6ea69b129f8b3816265978c6",
+        "qa": "15 páginas del PDF reabiertas; 34 referencias únicas, 204 fichas con campos completos; integración en reader.js inspeccionada. Sin prueba autenticada."
+      }
     }
   ],
-  "partial_phase": {
-    "chapter": 9,
-    "phase": "texts",
-    "blocks": 34,
-    "tokens": 204,
-    "pages_with_initial_readings": 15,
-    "core_commit": "10d49b5bd0d79ea66a04f088aa83866318b752bc",
-    "reader_commit": "77180a0713528e5290198919f0ddd59d4329d734",
-    "entrypoint_commit": "21adecca3ccc8efc730c0e35985ddeafb0957d75",
-    "qa": "Tres oraciones originales añadidas con 15 fichas; QA autenticada pendiente",
-    "biblical_passages_added": 8
-  },
-  "last_commit": "10d49b5bd0d79ea66a04f088aa83866318b752bc"
+  "last_commit": "f2a82b35d1057e1e6ea69b129f8b3816265978c6"
 }
