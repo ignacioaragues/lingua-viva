@@ -543,7 +543,32 @@ function chapterTenPractice(){
  return out+reviewPanel(p);
 }
 
+/* Duff 11, PDF físico pp. 193–209. Solo metadatos de ejercicios y respuestas privadas. */
+var chapterElevenExercises={"198":[["11-1-4","Práctica 11.1.4 · traducción","translation",8]],"199":[["11-1-5","Práctica 11.1.5 · morfología","morphology",8]],"201":[["11-1-6","Práctica 11.1.6 · traducción","translation",5],["mid-gr-es","Mitad · griego a español","translation",8],["mid-es-gr","Mitad · español a griego","greek",4,9]],"204":[["11-2-2-gr-es","Práctica 11.2.2 · griego a español","translation",8],["11-2-2-es-gr","Práctica 11.2.2 · español a griego","greek",4,9]],"206":[["finalA-gr-es","Final A · griego a español","translation",8],["finalA-es-gr","Final A · español a griego","greek",4,9]],"207":[["finalB-gr-es","Final B · griego a español","translation",8],["finalB-es-gr","Final B · español a griego","greek",4,9],["finalC-apoc","Final C · Apocalipsis 1:1–19","translation",1]]};
+function chapterElevenPractice(){
+ var p=state.page,raw=chapterElevenExercises[p]||[];
+ var nav=[[198,'11.1.4'],[199,'11.1.5'],[201,'11.1.6 / Mitad'],[204,'11.2.2'],[206,'Final A'],[207,'Final B/C']];
+ var out='<nav class="duff-index duff-ch2-index" aria-label="Prácticas del capítulo 11">'+nav.map(function(x){return '<button type="button" data-do="page" data-page="'+x[0]+'" aria-current="'+(p===x[0]?'page':'false')+'">'+h(x[1])+'</button>';}).join('')+'</nav>';
+ if(p===208)out+='<p class="duff-ch2-note">La lectura final continúa aquí; respondé desde la sección C de la página 207.</p>';
+ else if(!raw.length)out+='<p class="duff-ch2-note">Teoría o vocabulario. Elegí una práctica en el índice.</p>';
+ raw.forEach(function(a,index){
+  var id=a[0],label=a[1],type=a[2],count=a[3],start=a[4]||1;
+  var parts=type==='morphology'?['lema','tiempo','voz','modo','persona','numero','caso','genero']:null;
+  var labels={lema:'Lema griego',tiempo:'Tiempo / aspecto',voz:'Voz',modo:'Modo',persona:'Persona',numero:'Número',caso:'Caso (si corresponde)',genero:'Género (si corresponde)'};
+  var answered=0;
+  for(var n=start;n<start+count;n++){var key='duff-ch11:'+id+':'+n;if(parts?parts.some(function(part){return String(note(p).answers[key+':'+part]||'').trim();}):String(note(p).answers[key]||'').trim())answered++;}
+  out+='<details class="duff-exercise duff-ch2-group" '+(index===0?'open':'')+'><summary>'+h(label)+' <span class="duff-ch2-count">'+count+' ítems'+(answered?' · '+answered+' contestados':'')+'</span></summary><p>Consultá el PDF privado. Sin soluciones ni autocorrección.</p>';
+  for(var n=start;n<start+count;n++){var key='duff-ch11:'+id+':'+n;out+='<div class="duff-answer-row"><div class="duff-answer-label">Ítem '+n+'</div>';
+   if(parts)out+='<div class="duff-answer-pair">'+parts.map(function(part){return '<div>'+field(key+':'+part,labels[part],part==='lema',false)+'</div>';}).join('')+'</div>';
+   else out+=field(key,type==='greek'?'Tu traducción al griego':'Tu traducción al español',type==='greek',2);
+   out+='</div>';
+  }out+='</details>';
+ });
+ return out+reviewPanel(p);
+}
+
 function practice(){
+ if(current()===10)return chapterElevenPractice();
  if(current()===9)return chapterTenPractice();
  if(current()===8)return chapterNinePractice();
  if(current()===7)return chapterEightPractice();
