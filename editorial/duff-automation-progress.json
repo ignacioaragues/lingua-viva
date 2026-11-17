@@ -6,64 +6,54 @@
   "timezone": "Europe/Berlin",
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
-  "chapter": 3,
-  "phase": "texts",
+  "chapter": 4,
+  "phase": "exercises",
   "phase_status": "pending",
-  "start_page": 66,
-  "end_page": 80,
+  "start_page": 81,
+  "end_page": 97,
   "previous_phase": {
     "chapter": 3,
-    "phase": "exercises",
+    "phase": "texts",
     "status": "completed",
     "date": "2026-11-17",
     "pages_examined": "66–80",
-    "groups": 18,
-    "items": 106,
-    "items_by_page": {
-      "67": 16,
-      "69": 18,
-      "71": 8,
-      "72": 8,
-      "74": 18,
-      "75": 5,
-      "77": 8,
-      "78": 12,
-      "79": 13
-    },
-    "groups_by_section": {
-      "3.1": 16,
-      "3.2": 6,
-      "Práctica a mitad de camino": 12,
-      "3.3.2": 8,
-      "3.3.3": 8,
-      "3.3.4 y 3.3.5": 18,
-      "3.4": 5,
-      "3.6": 8,
-      "Final A": 12,
-      "Final B": 12,
-      "Final C": 1
-    },
-    "core_commit": "79ff197df6f7890ed5468f14dad427f8e225031d",
-    "live_entrypoint_commit": "3459c4bc817f447e9ca702ff7aba28bbd298dce5",
-    "files": [
-      "griego-biblico/reader.js",
-      "griego-biblico/index.html"
+    "blocks": 44,
+    "annotated_tokens": 291,
+    "lemmas": 60,
+    "biblical_passages": 7,
+    "reference_list": [
+      "Apocalipsis 19:1",
+      "Mateo 23:1",
+      "Marcos 13:31",
+      "Juan 4:11",
+      "Romanos 12:1",
+      "Mateo 17:15",
+      "Marcos 1:1 (ejercicio final, traducción retenida)"
     ],
-    "verified": "JavaScript sintaxis válida, 106 ítems en 18 bloques y 9 páginas de ejercicios con 106 claves lógicas únicas. Campos de caso/número duplican la casilla solo cuando la consigna exige ambos datos. Respuestas no autocorregidas.",
-    "caution": "En práctica 3.1 las palabras subrayadas se ven en PDF; el texto plano no permite identificar su subrayado, por lo que se usan campos referidos al ítem de la página original.",
-    "limitations": "No se comprobó inicio de sesión real, guardado Supabase en navegador ni publicación efectiva de GitHub Pages."
+    "core_commit": "4197994c50989a9eeff70c6a360479c94932c657",
+    "integration_commit": "7803dc487057b28ba2989cb51a9b9e9680f758ec",
+    "live_entrypoint_commit": "ad991278797559f6202b5939bfe8d651ec0a61ee",
+    "files": [
+      "griego-biblico/chapter3-readings.js",
+      "griego-biblico/reader.js",
+      "griego-biblico/index.html",
+      "griego-biblico/reader.css",
+      "flashcards/repository.js"
+    ],
+    "verified": "El JS carga; 44 bloques y 291 palabras, 60 lemas en 15/15 páginas, citas y paradigmas completos; acceso a popup, glosas, traducción opcional y botón de añadir lema. Marcos 1:1 no muestra la solución. Dedupl. de un lema en mazos cap. 2 y 3 mediante prueba con cliente simulado.",
+    "limitations": "No se realizó QA visual en navegador ni autenticación real de Supabase. Se revisaron las páginas físicas del PDF por texto; algunas diferencias gráficas/tipográficas precisan revisión visual si surgieran."
   },
   "next_phase": {
-    "chapter": 3,
-    "phase": "texts",
-    "start_page": 66,
-    "end_page": 80,
-    "instructions": "Abrir PDF original pp.66–80 y cotejar citas bíblicas, paradigmas y formas. En especial Marcos 1:1 en sección final C (p.79) y citas Ap 19:1, Mt 23:1, Mc 13:31, Jn 4:11, Ro 12:1, Mt 17:15; separar el pasaje de Marcos 1:1 de la producción del usuario y evitar mostrar una solución mientras practica. Preparar textos originales/permitidos debajo del PDF con fichas token a token y botón añadir lema a mazos compartidos. No copiar enunciados originales extensos ni autocorregir.",
+    "chapter": 4,
+    "phase": "exercises",
+    "start_page": 81,
+    "end_page": 97,
+    "instructions": "Cotejar TODAS las prácticas y ejercicios del capítulo 4 «Las preposiciones» con las páginas físicas PDF 81–97. Construir grupos e ítems precisos sin respuestas ni autocorrección, con guardado y teclado griego; actualizar estado sólo tras cambios reales. Siguiente pasada cap.4 textos griegos.",
     "pending": [
-      "Examinar formas y pasajes en cada una de las 15 páginas",
-      "Crear datos anotados para capítulo 3",
-      "Integrar lector y glosas en cada página relevante",
-      "Verificar sintaxis/renderización y actualizar checkpoint avanzando a capítulo 4 fase ejercicios"
+      "Reabrir PDF del usuario pp. 81–97",
+      "Inventariar ejercicios y texto de referencias del capítulo 4",
+      "Implementar campos precisos y navegación",
+      "Verificar código/ítems sin alterar el progreso anterior"
     ]
   },
   "hard_rules": [
@@ -72,5 +62,33 @@
     "Mantener acceso privado PDF y respuestas",
     "No duplicar tarjetas por lemma ni resetear historial",
     "Al finalizar capítulo 20 detener recurrente"
+  ],
+  "completed_chapters": [
+    {
+      "chapter": 3,
+      "name": "Los casos y el género",
+      "pdf_pages": [
+        66,
+        80
+      ],
+      "status": "both_passes_complete",
+      "completed_on": "2026-11-17",
+      "exercises": {
+        "groups": 18,
+        "items": 106,
+        "core_commit": "79ff197df6f7890ed5468f14dad427f8e225031d"
+      },
+      "texts": {
+        "blocks": 44,
+        "tokens": 291,
+        "lemmas": 60,
+        "passages": 7,
+        "pages_covered": 15,
+        "core_commit": "4197994c50989a9eeff70c6a360479c94932c657",
+        "integration_commit": "7803dc487057b28ba2989cb51a9b9e9680f758ec",
+        "entrypoint_commit": "ad991278797559f6202b5939bfe8d651ec0a61ee"
+      },
+      "qa": "JS sintaxis + carga de fuente + 15/15 páginas con fichas; Juan y cap. 2 sin regresión, Marcos 1:1 sin traducción completa, simulación de guardado/deduplicación privada de lemas. No prueba autenticada real."
+    }
   ]
 }
