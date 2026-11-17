@@ -18,7 +18,8 @@
       {id:'duff',label:'Duff · Todas'},
       {id:'duff-ch1',label:'Duff · Capítulo 1'},
       {id:'juan1',label:'Juan 1:1–23'},
-      {id:'duff-ch2',label:'Duff · Capítulo 2'}
+      {id:'duff-ch2',label:'Duff · Capítulo 2'},
+      {id:'duff-ch3',label:'Duff · Capítulo 3'}
     ]
   };
   function all(language, legacyLessons) {
