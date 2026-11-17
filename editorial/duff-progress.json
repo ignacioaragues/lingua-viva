@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Duff cap. 5 segunda pasada de textos",
-    "verified": "39 bloques, 231 fichas, 59 lemas, 10 extractos, 16 páginas; QA estática",
-    "limitations": "No QA en navegador autenticado",
-    "next": "Capítulo 6, primera pasada de ejercicios."
+    "scope": "Capítulo 6 ejercicios",
+    "verified": "96 ítems en 16 grupos cotejados con PDF original",
+    "limitations": "Sin QA autenticada",
+    "next": "Capítulo 6 textos"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -629,5 +629,18 @@
     "verification": "16/16 páginas con contenido, 231/231 tokens completos, 59 lemas, 10 extractos, lectura de Juan y cap.4 preservadas, no se muestra solución de sección C",
     "limitations": "No hay prueba de navegador autenticado ni de Supabase real.",
     "next": "Capítulo 6, ejercicios, páginas 114–133."
+  },
+  "chapter_6_exercises": {
+    "date": "2026-11-17",
+    "chapter": "Los tiempos de los verbos",
+    "pages": "114–133",
+    "groups": 16,
+    "items": 96,
+    "core_commit": "ee6dcee0c2cc664bf81c50549ae5e5135f4daee2",
+    "entrypoint_commit": "c1c133c7dfb5a66f229a39e50bbd8f636d586378",
+    "coverage": "Prácticas 6.2, 6.3 (dos consignas), 6.4, mitad de camino, 6.5, 6.6, 6.7, 6.8, finales A/B/C; 16 grupos y 96 ítems.",
+    "qa": "JS válido; 20/20 páginas renderizadas con cantidad exacta y 96 claves distintas.",
+    "limitations": "No prueba de Supabase autenticada ni navegador real.",
+    "next": "Capítulo 6, textos griegos, páginas 114–133."
   }
 }
