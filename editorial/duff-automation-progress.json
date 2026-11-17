@@ -26,8 +26,8 @@
     "start_page": 177,
     "end_page": 192,
     "pending": [
-      "Ampliar léxico de pp. 189–190 y citas permitidas del capítulo",
-      "QA estática de carga y navegador autenticado"
+      "Añadir citas bíblicas breves de fuente permitida con atribución",
+      "Pruebas estáticas de ejecución y navegador autenticado"
     ]
   },
   "hard_rules": [
@@ -234,15 +234,15 @@
       "qa": "PDF físico pp.177–192 cotejado; navegador autenticado pendiente"
     }
   ],
-  "last_commit": "9a7cbebc165ec73b65b19661a39ea43eb9208ce9",
+  "last_commit": "552e12e9b78f9ead4b5ae8340a8910ef2cb13f4c",
   "partial_phase": {
     "chapter": 10,
     "phase": "texts",
-    "blocks": 13,
-    "tokens": 58,
-    "core_commit": "448576ffac9c73d7c1c319dca16cfd05d3ddfcce",
-    "reader_commit": "0bb283cfb35928e50430d9d59d0d26d73a456b6c",
+    "blocks": 16,
+    "tokens": 87,
+    "core_commit": "6c2e32aa0786620d07598e60e8a6b8a8724e7e92",
+    "reader_commit": "552e12e9b78f9ead4b5ae8340a8910ef2cb13f4c",
     "entrypoint_commit": "9a7cbebc165ec73b65b19661a39ea43eb9208ce9",
-    "qa": "Estructura de 13 bloques con 58 fichas; navegador autenticado no probado"
+    "qa": "29 fichas léxicas incorporadas y panel habilitado; falta prueba funcional autenticada"
   }
 }
