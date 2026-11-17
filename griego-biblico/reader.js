@@ -518,7 +518,33 @@ function chapterNinePractice(){
  return out+reviewPanel(p);
 }
 
+
+/* Duff 10, PDF pp. 177–192: 69 ítems cotejados, sin enunciados ni soluciones. */
+var chapterTenExercises={"179":[["10-1-1","10.1.1 · dos oraciones y antecedente","clause",6]],"180":[["10-1-2","10.1.2 · análisis morfológico","relative",10]],"182":[["mid-gr-es","Mitad · griego → español","translation",8],["mid-es-gr","Mitad · español → griego","greek",4,9]],"184":[["10-2","10.2 · preguntas retóricas","translation",4]],"187":[["10-3","10.3 · estilo directo e indirecto","speech",6]],"188":[["10-4","10.4 · casos temporales","time",6]],"190":[["finalA-gr-es","Final A · griego → español","translation",8],["finalA-es-gr","Final A · español → griego","greek",4,9]],"191":[["finalB-gr-es","Final B · griego → español","translation",8],["finalB-es-gr","Final B · español → griego","greek",4,9],["finalC-mark","Final C · Marcos 6:3–6","translation",1]]};
+function chapterTenPractice(){
+ var p=state.page,raw=chapterTenExercises[p]||[];
+ var nav=[[179,'10.1.1'],[180,'10.1.2'],[182,'Mitad'],[184,'10.2'],[187,'10.3'],[188,'10.4'],[190,'Final A'],[191,'Final B/C']];
+ var out='<nav class="duff-index duff-ch2-index" aria-label="Prácticas del capítulo 10">'+nav.map(function(x){return '<button type="button" data-do="page" data-page="'+x[0]+'" aria-current="'+(p===x[0]?'page':'false')+'">'+h(x[1])+'</button>';}).join('')+'</nav>';
+ if(!raw.length)out+='<p class="duff-ch2-note">Teoría o continuación de una práctica anterior. Abrí el ejercicio desde el índice.</p>';
+ raw.forEach(function(a,index){
+  var id=a[0],label=a[1],type=a[2],count=a[3],start=a[4]||1;
+  var parts=type==='clause'?['oracion1','oracion2','antecedente']:type==='relative'?['lema','genero','caso','numero','ambiguedad']:type==='speech'?['estilo','tiempo']:type==='time'?['caso']:null;
+  var labels={oracion1:'Primera oración básica',oracion2:'Segunda oración básica',antecedente:'Antecedente',lema:'Lema griego',genero:'Género',caso:'Caso',numero:'Número',ambiguedad:'Ambigüedades',estilo:'Directo / indirecto',tiempo:'Tiempo verbal griego'};
+  var answered=0;
+  for(var n=start;n<start+count;n++){var key='duff-ch10:'+id+':'+n;if(parts?parts.some(function(part){return String(note(p).answers[key+':'+part]||'').trim();}):String(note(p).answers[key]||'').trim())answered++;}
+  out+='<details class="duff-exercise duff-ch2-group" '+(index===0?'open':'')+'><summary>'+h(label)+' <span class="duff-ch2-count">'+count+' ítems'+(answered?' · '+answered+' contestados':'')+'</span></summary><p>Consultá los enunciados en el PDF privado. No hay autocorrección.</p>';
+  for(var n=start;n<start+count;n++){
+   var key='duff-ch10:'+id+':'+n;out+='<div class="duff-answer-row"><div class="duff-answer-label">Ítem '+n+'</div>';
+   if(parts)out+='<div class="duff-answer-pair">'+parts.map(function(part){return '<div>'+field(key+':'+part,labels[part]||'Caso temporal',part==='lema',part==='oracion1'||part==='oracion2'?2:false)+'</div>';}).join('')+'</div>';
+   else out+=field(key,type==='greek'?'Tu traducción al griego':'Tu traducción al español',type==='greek',2);
+   out+='</div>';
+  }out+='</details>';
+ });
+ return out+reviewPanel(p);
+}
+
 function practice(){
+ if(current()===9)return chapterTenPractice();
  if(current()===8)return chapterNinePractice();
  if(current()===7)return chapterEightPractice();
  if(current()===6)return chapterSevenPractice();
