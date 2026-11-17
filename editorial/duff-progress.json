@@ -5,7 +5,7 @@
   "original_file": "Solo en archivo aportado por el usuario o en bucket privado de Supabase. NO subir PDF ni transcripciones extensas al repositorio público.",
   "site": "griego-biblico/",
   "privacy": "Supabase Storage bucket lingua-duff-private (public=false), RLS restringida a cuenta autorizada. Frontend GitHub Pages es público, no guardar libro allí.",
-  "status": "Manual PDF privado disponible en Supabase; visor PDF.js implementado. Cuaderno rediseñado con pestañas compactas y atlas histórico de pronunciación. QA real autenticado en Chrome/iPad pendiente.",
+  "status": "Capítulo 2: cuaderno de las 68 consignas cotejado contra las páginas 50–65 del PDF aportado; campos específicos y navegación implementados. PDF y respuestas siguen privados; pruebas autenticadas/móviles pendientes.",
   "chapter_starts_pdf": [
     33,
     50,
@@ -67,13 +67,12 @@
     "exercise_fields": "Implementados en lector por páginas con guardado privado; prácticas 1.5 y 1.6 con autocorrección (5 ítems cada una); teclado griego con espíritus y acentos. El resto de las prácticas todavía no tiene autocorrección. Teclado flotante contextual añadido como recurso separado; prueba autenticada pendiente."
   },
   "next_steps": [
-    "Continuar cotejo del PDF aportado desde página 56: identificar y estructurar cada práctica restante de capítulo 2.",
-    "Probar teclado griego flotante en sesión autenticada (escritorio y móvil), especialmente foco, acentos y guardado",
-    "Verificar en sesión autenticada que la devolución de práctica 1.1 en página 39 se muestra correctamente y que Actualizar corrección funciona",
-    "Continuar el manual en orden; ampliar autocorrección solo con enunciados cotejados y preservar PDF privado",
-    "Validar Chrome y Safari/iPad: PDF.js, temporizador, guardado y correcciones"
+    "QA autenticado (sin tocar respuestas): completar una casilla de prueba propia solo con autorización del usuario o en entorno de prueba; verificar RLS y sincronización entre dispositivos",
+    "Validar navegación, teclado griego y panel de respuestas del capítulo 2 en Chrome móvil/Safari iPad, sin tocar el PDF privado",
+    "No corregir, puntuar ni revisar producciones del usuario salvo que lo pida expresamente",
+    "Continuar con una unidad solo cuando el usuario lo solicite; no reactivar tareas recurrentes"
   ],
-  "last_updated": "2026-11-16",
+  "last_updated": "2026-11-17",
   "biblical_reader": {
     "location": "griego-biblico/ · aparece al llegar a las páginas físicas 46–48",
     "coverage": "Juan 1:1–2, 2 versículos y 24 tokens con fichas morfológicas (12 formas distintas) y traducción propia opcional",
@@ -146,23 +145,21 @@
     "notes": "No contar tiempo de páginas anteriores retroactivamente. La lectura pasiva sin interacción durante 90 segundos se pausa, igual que el francés."
   },
   "last_development_checkpoint": {
-    "date": "2026-11-15",
-    "scope": "Capítulo 1: teclado griego flotante contextual",
-    "verified": "GitHub main actualizado; teclado flotante existente mejorado con borrado, conservación del foco y reposicionamiento al desplazarse",
-    "limitations": "No se comprobó en sesión autenticada ni en navegador móvil; no se añadió ni reprodujo contenido protegido",
-    "next": "Probar entrada en páginas 39 y 43, espíritus/acentos y sincronización de respuestas; seguir capítulo 1 en orden"
+    "date": "2026-11-17",
+    "scope": "Capítulo 2 · campos de todas las prácticas y ejercicios finales",
+    "verified": "Cotejo del PDF pp. 50–65: 68 ítems y 76 campos específicos; código GitHub con tipos, orden y navegación; syntax JS y pruebas estáticas, sin copiar enunciados protegidos",
+    "limitations": "No se realizaron pruebas de escritura autenticada, sincronización ni visualización móvil",
+    "next": "Recibir indicaciones del usuario y probar funcionalidad real sin editar respuestas existentes."
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
       50,
       65
     ],
-    "status": "Campos genéricos por página implementados; NO equivalen a ejercicios cotejados ni a cobertura didáctica del capítulo",
-    "fields_per_page": "3 visibles y 7 adicionales desplegables (hasta 10), sin cambiar claves de guardado existentes",
-    "storage": "Mismo guardado privado de respuestas por página (lingua_notes)",
-    "next": "Verificar visualmente PDF autorizado y reemplazar campos genéricos por prácticas y número de ítems reales en orden, sin publicar el manual",
-    "note": "Las respuestas 4–10 se despliegan a demanda; no equivalen a ejercicios cotejados.",
-    "last_commit": "f073c0e371271da90235b5598400d4c373ef726c"
+    "status": "Casillas genéricas anteriores preservadas en un panel opcional por página, aunque todas las prácticas numeradas ya tienen su estructura específica cotejada.",
+    "fields_per_page": "10 casillas libres plegables, sin cambiar sus claves ch2:free:N.",
+    "storage": "Mismo guardado privado por página, lingua_notes",
+    "next": "Probar autenticado que campos específicos y libres se guardan y reaparecen entre sesiones y dispositivos; pedir correcciones solo ante solicitud del usuario."
   },
   "chapter_2_navigation_fix": {
     "date": "2026-11-16",
@@ -171,21 +168,89 @@
     "limitations": "Los campos no reproducen prácticas cotejadas del capítulo 2; prueba autenticada y móvil pendiente."
   },
   "chapter_2_verified_practices": {
-    "source": "PDF del usuario, páginas físicas 53 y 55 inspeccionadas el 16 noviembre 2026",
-    "practices": {
-      "2.1": {
-        "pdf_page": 53,
+    "source": "PDF original aportado por el usuario, páginas físicas 50–65 examinadas el 17 de noviembre de 2026; no se publican enunciados originales.",
+    "pdf_pages": [
+      50,
+      65
+    ],
+    "status": "68 ítems reales identificados, 68 entradas estructuradas (la práctica 2.3.1 pide dos datos por ítem, total 76 campos específicos). No hay autocorrección ni revisión automática.",
+    "exercises": [
+      {
+        "id": "2.1",
+        "pdf_pages": [
+          53,
+          54
+        ],
         "items": 9,
-        "structure": "6 griego a español; 3 español a griego",
-        "status": "campos específicos creados, no autocorrección"
+        "directions": "6 griego → español, 3 español → griego",
+        "answer_storage": "duff:p:53",
+        "status": "Campos específicos existentes, conservados"
       },
-      "2.2": {
-        "pdf_page": 55,
+      {
+        "id": "2.2",
+        "pdf_pages": [
+          55,
+          55
+        ],
         "items": 9,
-        "structure": "6 griego a español; 3 español a griego",
-        "status": "campos específicos creados, no autocorrección"
+        "directions": "6 griego → español, 3 español → griego",
+        "answer_storage": "duff:p:55",
+        "status": "Campos específicos existentes, conservados"
+      },
+      {
+        "id": "2.3.1",
+        "pdf_pages": [
+          57,
+          57
+        ],
+        "items": 8,
+        "directions": "identificar caso y número de ocho formas nominales",
+        "answer_storage": "duff:p:57",
+        "status": "16 casillas (2 por ítem) incorporadas"
+      },
+      {
+        "id": "2.3.3",
+        "pdf_pages": [
+          60,
+          60
+        ],
+        "items": 10,
+        "directions": "6 griego → español, 4 español → griego",
+        "answer_storage": "duff:p:60",
+        "status": "Campos específicos incorporados"
+      },
+      {
+        "id": "2.4 y 2.5",
+        "pdf_pages": [
+          62,
+          62
+        ],
+        "items": 8,
+        "directions": "5 griego → español, 3 español → griego",
+        "answer_storage": "duff:p:62",
+        "status": "Campos específicos incorporados"
+      },
+      {
+        "id": "Ejercicios finales · A y B",
+        "pdf_pages": [
+          63,
+          64
+        ],
+        "items": 24,
+        "directions": "secciones A y B: cada una con 8 griego → español y 4 español → griego",
+        "answer_storage": "duff:p:64",
+        "status": "Cuatro grupos desplegables incorporados"
       }
-    },
-    "limitations": "El resto de las páginas 50–65 aún conserva campos provisionales. No se copiaron enunciados protegidos al repositorio. Respuestas anteriores ch2:free conservadas."
+    ],
+    "implementation": "griego-biblico/reader.js, estilos en griego-biblico/reader.css, caché de entrada renovada en griego-biblico/index.html",
+    "preservation": "Claves previas 2.1/2.2 intactas; campos ch2:free:1–10 disponibles en un panel opcional por página, conservando respuestas anteriores; mismo Supabase lingua_notes con user_id OWNER y RLS.",
+    "features": [
+      "Índice directo de prácticas 2.1, 2.2, 2.3.1, 2.3.3, 2.4–2.5 y A/B",
+      "Páginas 54 y 63 enlazan con las prácticas que empiezan/continúan allí",
+      "Secciones plegables para no alargar el cuaderno",
+      "Teclado griego existente y guardado automático sin cambios",
+      "No se generan devoluciones ni calificaciones sin solicitud expresa"
+    ],
+    "verification": "Sintaxis JavaScript compilada y prueba estática de HTML de campos/contadores. QA real autenticada en navegador, guardado Supabase y móvil: pendientes."
   }
 }
