@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Cierre capítulo 9 textos",
-    "verified": "PDF 15 páginas, 34 referencias únicas, 204 fichas completas, integración reader.js inspeccionada",
-    "limitations": "Sin navegador autenticado",
-    "next": "Capítulo 10 ejercicios, cotejo directo PDF"
+    "scope": "Capítulo 10 ejercicios",
+    "verified": "69 ítems en 12 grupos, pp.177–192",
+    "limitations": "Sin QA autenticada ni prueba JS ejecutada",
+    "next": "Capítulo 10 textos"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -829,7 +829,22 @@
         "latest_content_commit": "10d49b5bd0d79ea66a04f088aa83866318b752bc",
         "final_commit": "f2a82b35d1057e1e6ea69b129f8b3816265978c6"
       }
+    },
+    {
+      "chapter": 10,
+      "name": "Oraciones compuestas",
+      "pdf_pages": [
+        177,
+        192
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 12,
+        "items": 69,
+        "commit": "9bc930c282c13808738484d6aa3e0c833204a0e9"
+      },
+      "next": "Capítulo 10 textos griegos"
     }
   ],
-  "last_commit": "f2a82b35d1057e1e6ea69b129f8b3816265978c6"
+  "last_commit": "9bc930c282c13808738484d6aa3e0c833204a0e9"
 }
