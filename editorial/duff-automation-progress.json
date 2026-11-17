@@ -7,51 +7,56 @@
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 5,
-  "phase": "exercises",
+  "phase": "texts",
   "phase_status": "pending",
   "start_page": 98,
-  "end_page": 116,
+  "end_page": 113,
   "previous_phase": {
-    "chapter": 4,
-    "phase": "texts",
+    "chapter": 5,
+    "phase": "exercises",
     "status": "completed",
     "date": "2026-11-17",
-    "pages_examined": "81–97",
-    "blocks": 32,
-    "annotated_tokens": 209,
-    "lemmas": 69,
-    "biblical_passages": 5,
-    "reference_list": [
-      "Marcos 12:41",
-      "Juan 18:28",
-      "Mateo 10:24",
-      "1 Corintios 15:3",
-      "Juan 1:1–4 (ejercicio final, sin solución)"
-    ],
-    "core_commit": "9914dc8cd26e63a94efb32a58e960bcf2c89df66",
-    "integration_commit": "dfdaa1cf07fab5b22daa2df000bb3205663b3d0d",
-    "live_entrypoint_commit": "b6ebada2cc0b780bef5243adb806e3e72d2e766c",
+    "pages_examined": "98–113",
+    "chapter_title": "Los adjetivos",
+    "groups": 18,
+    "items": 87,
+    "items_by_page": {
+      "99": 8,
+      "100": 10,
+      "101": 5,
+      "103": 20,
+      "105": 4,
+      "106": 10,
+      "109": 4,
+      "111": 12,
+      "112": 14
+    },
+    "directions": {
+      "adjective_analysis": 8,
+      "greek_to_spanish": 51,
+      "spanish_to_greek": 18,
+      "greek_form_agreement": 10
+    },
+    "core_commit": "579082eda8c49791fd894dd523be20d64db465eb",
+    "entrypoint_commit": "3708bdc24ab3b43c479c96689024f97801f65d4f",
     "files": [
-      "griego-biblico/chapter4-readings.js",
       "griego-biblico/reader.js",
-      "griego-biblico/index.html",
-      "flashcards/repository.js",
-      "flashcards/index.html"
+      "griego-biblico/index.html"
     ],
-    "verified": "17/17 páginas con bloques, 209 fichas morfológicas completas, 69 lemas, 5 referencias bíblicas, navegación y lookup; pruebas estáticas del lector de capítulos 2 y 3; no se muestran traducciones completas del ejercicio final.",
-    "limitations": "No se verificó el despliegue real ni la sesión autenticada de Supabase en navegador."
+    "verified": "PDF original pp.98–113 cotejado directamente; 18 grupos, 87 ítems, 87 claves lógicas únicas. 32 campos en práctica 5.1 (8 x 4), 79 campos restantes. Navegación y render estático 16/16 páginas, sintaxis JS válida. No autocorrección ni soluciones.",
+    "limitations": "No se verificó navegador autenticado ni persistencia real Supabase. Las secciones con ejercicios que continúan en la página siguiente están agrupadas en la página de inicio y enlazadas."
   },
   "next_phase": {
     "chapter": 5,
-    "phase": "exercises",
+    "phase": "texts",
     "start_page": 98,
-    "end_page": 116,
-    "instructions": "Reabrir el PDF original y cotejar todas las prácticas y ejercicios reales del capítulo 5 antes de implementarlos en el lector; preservar claves existentes y no corregir respuestas.",
+    "end_page": 113,
+    "instructions": "Volver a cotejar todas las páginas del capítulo 5 «Los adjetivos» y añadir lecturas griegas anotadas, paradigmas de adjetivos, εἰμί, πολύς, μέγας y referencias Ap 21:1–2, Mt 4:3, Ro 7:12, Mt 5:8, Mc 2:28, Jn 1:1, Mt 12:35, 2 Co 13:13. No revelar traducciones completas de la sección C final. Integrar a lector y mazo duff-ch5 sin duplicar tarjetas.",
     "pending": [
-      "Leer PDF páginas 98–116",
-      "Inventariar ejercicios y direcciones de traducción",
-      "Implementar campos precisos y navegación",
-      "Verificar sintaxis y datos; después pasar a capítulo 5 textos"
+      "Reabrir PDF original páginas 98–113 para la fase de textos",
+      "Implementar datos token por token y fuentes permitidas",
+      "Integrar lector, glosas y mazo capítulo 5",
+      "Verificar sintaxis y pruebas estáticas; avanzar a capítulo 6 ejercicios sólo al completar textos"
     ]
   },
   "hard_rules": [
