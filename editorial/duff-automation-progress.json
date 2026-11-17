@@ -8,7 +8,7 @@
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 10,
   "phase": "texts",
-  "phase_status": "pending",
+  "phase_status": "in_progress",
   "start_page": 177,
   "end_page": 192,
   "previous_phase": {
@@ -26,9 +26,8 @@
     "start_page": 177,
     "end_page": 192,
     "pending": [
-      "Cotejar las 16 páginas para citas, paradigmas y formas",
-      "Anotar textos y fichas sin revelar solución de Marcos 6:3–6",
-      "Prueba autenticada pendiente"
+      "Ampliar léxico de pp. 189–190 y citas permitidas del capítulo",
+      "QA estática de carga y navegador autenticado"
     ]
   },
   "hard_rules": [
@@ -235,5 +234,15 @@
       "qa": "PDF físico pp.177–192 cotejado; navegador autenticado pendiente"
     }
   ],
-  "last_commit": "9bc930c282c13808738484d6aa3e0c833204a0e9"
+  "last_commit": "9a7cbebc165ec73b65b19661a39ea43eb9208ce9",
+  "partial_phase": {
+    "chapter": 10,
+    "phase": "texts",
+    "blocks": 13,
+    "tokens": 58,
+    "core_commit": "448576ffac9c73d7c1c319dca16cfd05d3ddfcce",
+    "reader_commit": "0bb283cfb35928e50430d9d59d0d26d73a456b6c",
+    "entrypoint_commit": "9a7cbebc165ec73b65b19661a39ea43eb9208ce9",
+    "qa": "Estructura de 13 bloques con 58 fichas; navegador autenticado no probado"
+  }
 }
