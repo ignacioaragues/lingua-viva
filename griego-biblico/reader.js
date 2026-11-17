@@ -409,7 +409,39 @@ function chapterSixPractice(){
  });
  return out+reviewPanel(p);
 }
+
+/* Duff capítulo 7 · «Los modos de los verbos» · páginas físicas PDF 134–148.
+   Inventario cotejado directamente con el PDF privado el 17-11-2026.
+   Solo metadatos de consigna; el libro, los enunciados y las respuestas permanecen privados.
+   No hay autocorrección ni soluciones. */
+var chapterSevenExercises={"137":[["7-2-gr-es","Práctica 7.2 · griego → español","translation",1,7,"Traducí las formas y oraciones 1–7, distinguiendo imperativo e indicativo."],["7-2-es-gr","Práctica 7.2 · español → griego","greek",8,3,"Escribí las órdenes 8–10 en griego; conservá el aspecto solicitado."]],"139":[["7-3-gr-es","Práctica 7.3 · griego → español","translation",1,4,"Traducí las cuatro oraciones con infinitivo."],["7-3-es-gr","Práctica 7.3 · español → griego","greek",5,2,"Traducí las dos oraciones al griego con infinitivo."],["mitad-gr-es","Práctica intermedia · griego → español","translation",1,8,"Traducí las ocho oraciones de la práctica intermedia."],["mitad-es-gr","Práctica intermedia · español → griego","greek",9,4,"Traducí las oraciones 9–12 al griego, incluyendo negación y aspecto cuando corresponda."]],"141":[["7-4-1-morfologia","Práctica 7.4.1 · análisis de participios","participle-analysis",1,8,"Para cada forma, indicá tiempo, género, caso y número."]],"142":[["7-4-2-gr-es","Práctica 7.4.2 · participios en contexto","translation",1,6,"Traducí las seis oraciones, respetando la relación temporal entre participio y verbo principal."]],"143":[["7-4-3-gr-es","Práctica 7.4.3 · participios con complemento","translation",1,3,"Traducí las tres oraciones griegas con participios y complementos."],["7-4-3-es-gr","Práctica 7.4.3 · español → griego","greek",4,1,"Traducí al griego la oración 4."]],"144":[["7-5-gr-es","Práctica 7.5 · participios sustantivados","translation",1,4,"Traducí las cuatro oraciones con participios sustantivados."]],"146":[["finalA-gr-es","Ejercicios finales · Sección A, griego → español","translation",1,8,"Traducí los ocho primeros ítems; conservá las construcciones de modo y participio."],["finalA-es-gr","Ejercicios finales · Sección A, español → griego","greek",9,4,"Traducí al griego los ítems 9–12."]],"147":[["finalB-gr-es","Ejercicios finales · Sección B, griego → español","translation",1,8,"Traducí los ocho primeros ítems de la sección B."],["finalB-es-gr","Ejercicios finales · Sección B, español → griego","greek",9,4,"Traducí al griego los ítems 9–12."],["finalC-1juan3","Ejercicios finales · Sección C, 1 Juan 3:4–10","translation",1,1,"Traducí el pasaje griego completo del ejercicio final. Es una sola tarea de traducción; las glosas del libro están en el PDF privado."]]};
+function chapterSevenPractice(){
+ var p=state.page,raw=chapterSevenExercises[p]||[],nav=[[137,'7.2'],[139,'7.3 / Mitad'],[141,'7.4.1'],[142,'7.4.2'],[143,'7.4.3'],[144,'7.5'],[146,'Final A'],[147,'Final B/C']];
+ var out='<nav class="duff-index duff-ch2-index" aria-label="Prácticas del capítulo 7">'+nav.map(function(x){return '<button type="button" data-do="page" data-page="'+x[0]+'" aria-current="'+(p===x[0]?'page':'false')+'">'+h(x[1])+'</button>';}).join('')+'</nav>';
+ if(!raw.length)out+='<p class="duff-ch2-note">Esta página contiene teoría, ejemplos, vocabulario o notas. Elegí una práctica en el índice.</p>';
+ raw.forEach(function(a,index){
+  var id=a[0],label=a[1],type=a[2],start=a[3],count=a[4],description=a[5],answered=0;
+  for(var n=start;n<start+count;n++){
+   var key='duff-ch7:'+id+':'+n;
+   if(type==='participle-analysis'){
+    if(['tiempo','genero','caso','numero'].some(function(part){return String(note(p).answers[key+':'+part]||'').trim();}))answered++;
+   }else if(String(note(p).answers[key]||'').trim())answered++;
+  }
+  out+='<details class="duff-exercise duff-ch2-group" '+(index===0?'open':'')+'><summary>'+h(label)+' <span class="duff-ch2-count">'+count+' ítems'+(answered?' · '+answered+' contestados':'')+'</span></summary><p>'+h(description)+' Consultá los enunciados en el PDF privado. No hay autocorrección.</p>';
+  for(var n=start;n<start+count;n++){
+   var key='duff-ch7:'+id+':'+n,greek=type==='greek';
+   out+='<div class="duff-answer-row"><div class="duff-answer-label">Ítem '+n+'</div>';
+   if(type==='participle-analysis'){
+    out+='<div class="duff-answer-pair"><div>'+field(key+':tiempo','Tiempo (presente / aoristo)',false,false)+'</div><div>'+field(key+':genero','Género',false,false)+'</div><div>'+field(key+':caso','Caso',false,false)+'</div><div>'+field(key+':numero','Número',false,false)+'</div></div>';
+   }else out+=field(key,greek?'Tu traducción al griego':'Tu traducción al español',greek,type==='translation'||greek?2:false);
+   out+='</div>';
+  }
+  out+='</details>';
+ });
+ return out+reviewPanel(p);
+}
 function practice(){
+ if(current()===6)return chapterSevenPractice();
  if(current()===5)return chapterSixPractice();
  if(current()===4)return chapterFivePractice();
  if(current()===3)return chapterFourPractice();
