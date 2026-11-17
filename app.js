@@ -34,7 +34,7 @@
   const localPut = (k, value) => { try { localStorage.setItem('lv:'+k, JSON.stringify(value)); } catch {} };
   const state = {
     user:null, client:null, authModal:false, authMode:'login', authMessage:'', loading:true,
-    sessions:[], progress:{}, attempts:{}, notes:{}, writings:[], cards:{},
+    sessions:[], progress:{}, attempts:{}, notes:{}, writings:[], cards:{}, personalGreekCards:[],
     lessonId:lessonById(params.get('lecon') || localGet('lastLesson','d0-bonjour')).id,
     lastLessonSavedAt:localGet('lastLessonSavedAt',null),
     grammar:localGet('grammar','fr'), revealed:new Set(), readingParallel:localGet('readingParallel',true),
@@ -208,9 +208,24 @@
   }
 
   function allFlashcards(language){
-    if(window.LV_FLASHCARD_REPOSITORY) return window.LV_FLASHCARD_REPOSITORY.all(language,lessons);
-    if(language!=='francais') return [];
-    return lessons.flatMap((l,idx)=>l.words.map(([front,back],n)=>({id:l.id+'-'+n,lesson_id:l.id,order:idx,front,back})));
+    const publicCards=window.LV_FLASHCARD_REPOSITORY?.all(language,lessons)
+      || (language==='francais'?lessons.flatMap((l,idx)=>l.words.map(([front,back],n)=>({id:l.id+'-'+n,lesson_id:l.id,order:idx,front,back}))):[]);
+    if(language!=='griego-biblico')return publicCards;
+    // Saved privately as a single user-owned JSON record, not in public JS.
+    const byId=new Map(publicCards.map(card=>[card.id,card]));
+    if(state.user?.id==='1f7ce59b-bd9e-4a22-89f5-984ed85bbab5'){
+      state.personalGreekCards.forEach(card=>{
+        if(!card?.id||!card?.meaning)return;
+        const chapter=Number(card.chapter)||1;
+        const decks=[...new Set((card.decks||[]).concat(['duff','duff-ch'+chapter]))];
+        byId.set(card.id,{
+          id:card.id,front:card.lemma||card.form,back:card.meaning,
+          language:'griego-biblico',lesson_id:'duff-ch'+chapter,
+          course:'duff',decks,order:chapter-1
+        });
+      });
+    }
+    return [...byId.values()];
   }
   function unlockedCards(language){
     const cards=allFlashcards(language);
@@ -242,7 +257,7 @@
     $app.innerHTML=header()+`<main class="shell"><section class="flash-page"><div class="eyebrow">${french?'Révision du vocabulaire':'Repaso de vocabulario'}</div><h1>${french?'Cartes <em>mémoire.</em>':'Mis <em>flashcards.</em>'}</h1><p class="flash-intro">${french?'Les mots de vos leçons, prêts à être révisés à votre rythme. Les mots difficiles reviendront plus tôt.':'Repasá las palabras que ya encontraste en tus unidades. Las difíciles vuelven antes; las que recordás se espacian.'}</p>
       <div class="flash-timer" aria-label="Temporizador de repaso"><div><span class="micro">${french?'Temps de révision':'Tiempo de repaso'}</span><strong id="flashLiveTime">00:00</strong><span class="hint" id="flashTimerState">●</span></div><div><span class="micro">${french?'Total étudié':'Total estudiado'}</span><strong id="flashTotalTime">0h 00m</strong></div><button class="btn btn-small" id="flashTimerButton" data-action="timer-toggle">${french?'Pause':'Pausar'}</button><a class="btn btn-small btn-plain" href="${link('estadisticas/?idioma='+state.flashLang)}">${french?'Mon temps':'Mis tiempos'} ↗</a></div>
       <div class="flash-toolbar"><label>${french?'Langue':'Idioma'} <select id="flashLanguage">${languages.map(l=>`<option value="${l.slug}" ${l.slug===state.flashLang?'selected':''}>${h(l.name)}</option>`).join('')}</select></label><label>Mazo <select id="flashDeck">${decks.map(d=>`<option value="${h(d.id)}" ${d.id===state.flashDeck?'selected':''}>${h(d.label)}</option>`).join('')}</select></label><div class="switch"><button data-action="flash-filter" data-filter="due" class="${state.flashFilter==='due'?'active':''}">${french?'À réviser':'Pendientes'} (${due.length})</button><button data-action="flash-filter" data-filter="all" class="${state.flashFilter==='all'?'active':''}">${french?'Tous':'Todos'} (${cards.length})</button></div><a class="btn btn-small" href="${link(lang.slug==='francais'?'francais/accueil.html':lang.slug+'/accueil.html')}">${french?'← Les cours':'← Volver a los cursos'}</a></div>
-      ${current?`<div class="flash-study"><div class="micro">${french?'Cliquez pour retourner la carte':'Tocá la tarjeta para darla vuelta'}</div><button class="flash-card ${state.flashShow?'flipped':''}" data-action="flip" aria-label="${french?'Retourner la carte':'Girar tarjeta'}"><span class="flash-card-flag">${h(lang.native)} · ${h(current.lesson_id.replace('d','Dossier ').replace('-',' / '))}</span><span class="flash-card-front">${h(state.flashShow?current.back:current.front)}</span><span class="flash-card-hint">${state.flashShow?(french?'Sens / explication':'Significado / explicación'):(french?'Voir le sens ↗':'Ver respuesta ↗')}</span></button><div class="flash-speech">${speechButton(current.front,french?'Écouter le mot':'Escuchar la palabra','fr-FR')}</div>${state.flashShow?`<div class="flash-review-actions"><button class="btn" data-action="flash-review" data-quality="again">↶ ${french?'À revoir':'Otra vez'}</button><button class="btn btn-primary" data-action="flash-review" data-quality="good">✓ ${french?'Je connais':'La recordé'}</button></div>`:`<p class="hint" style="text-align:center">${french?'Pensez à la signification avant de retourner la carte.':'Intentá recordar la respuesta antes de darla vuelta.'}</p>`}</div>`:`<div class="empty" style="padding:45px;margin-top:26px">${cards.length?(french?'Bravo ! Aucune carte à réviser pour le moment.':'¡Muy bien! No tenés tarjetas pendientes por ahora.'):(french?'Les cartes apparaîtront après les premières leçons.':'Las tarjetas aparecerán cuando empieces las lecciones de este idioma.')} ${french?'<a href="'+link('francais/')+'">Continuer le cours ↗</a>':''}</div>`}
+      ${current?`<div class="flash-study"><div class="micro">${french?'Cliquez pour retourner la carte':'Tocá la tarjeta para darla vuelta'}</div><button class="flash-card ${state.flashShow?'flipped':''}" data-action="flip" aria-label="${french?'Retourner la carte':'Girar tarjeta'}"><span class="flash-card-flag">${h(lang.native)} · ${h(french?current.lesson_id.replace('d','Dossier ').replace('-',' / '):'Duff · '+current.lesson_id.replace('duff-ch','Capítulo '))}</span><span class="flash-card-front">${h(state.flashShow?current.back:current.front)}</span><span class="flash-card-hint">${state.flashShow?(french?'Sens / explication':'Significado / explicación'):(french?'Voir le sens ↗':'Ver respuesta ↗')}</span></button><div class="flash-speech">${speechButton(current.front,french?'Écouter le mot':'Escuchar (voz moderna)','fr-FR'===state.flashLang?'fr-FR':'el-GR')}</div>${state.flashShow?`<div class="flash-review-actions"><button class="btn" data-action="flash-review" data-quality="again">↶ ${french?'À revoir':'Otra vez'}</button><button class="btn btn-primary" data-action="flash-review" data-quality="good">✓ ${french?'Je connais':'La recordé'}</button></div>`:`<p class="hint" style="text-align:center">${french?'Pensez à la signification avant de retourner la carte.':'Intentá recordar la respuesta antes de darla vuelta.'}</p>`}</div>`:`<div class="empty" style="padding:45px;margin-top:26px">${cards.length?(french?'Bravo ! Aucune carte à réviser pour le moment.':'¡Muy bien! No tenés tarjetas pendientes por ahora.'):(french?'Les cartes apparaîtront après les premières leçons.':'Las tarjetas aparecerán cuando empieces las lecciones de este idioma.')} ${french?'<a href="'+link('francais/')+'">Continuer le cours ↗</a>':''}</div>`}
       <div class="flash-help"><div><div class="micro">${french?'Votre progression':'Tu progreso'}</div><h3>${cards.length} ${french?'cartes disponibles':'tarjetas disponibles'}</h3><p>${due.length} ${french?'à réviser maintenant':'para repasar ahora'}. ${french?'Le parcours débloque progressivement votre vocabulaire.':'A medida que avancés, se desbloquea más vocabulario.'}</p></div><div><div class="micro">${french?'Répétition espacée':'Repaso espaciado'}</div><h3>${french?'Réviser au bon moment':'Repasar a tiempo'}</h3><p>${french?'Après une bonne réponse, la prochaine révision est programmée plus tard. Une erreur replace la carte dans les prochaines révisions.':'Si recordás la tarjeta, el próximo repaso se aleja. Si te cuesta, vuelve a aparecer pronto.'}</p></div></div>
     </section></main>`+footer();
     renderTimerUI();
@@ -332,6 +347,18 @@
     if(result.some(r=>r.error))console.warn('Lengua Viva: parte de los datos no se pudo cargar',result.filter(r=>r.error).map(r=>r.error.message));
     const data=result.map(r=>r.data||[]);
     state.sessions=data[0];state.progress=Object.fromEntries(data[1].map(r=>[r.lesson_id,r.completed]));state.attempts=Object.fromEntries(data[2].map(r=>[r.exercise_id,r]));state.writings=data[3];state.notes=Object.fromEntries(data[4].map(r=>[r.lesson_id,r.body]));state.cards=Object.fromEntries(data[5].map(r=>[r.language+':'+r.card_id,r]));
+    // Greek lemmata saved by the authenticated Duff reader. Do not expose the
+    // private list in the public course catalogue or to another account.
+    state.personalGreekCards=[];
+    if(state.user?.id==='1f7ce59b-bd9e-4a22-89f5-984ed85bbab5'){
+      let stored=[];
+      try{const a=JSON.parse(state.notes['duff:cards']||'[]');if(Array.isArray(a))stored=a;}catch{}
+      let local=[];
+      try{const a=JSON.parse(localStorage.getItem('lv:duff:vocab:'+state.user.id)||'[]');if(Array.isArray(a))local=a;}catch{}
+      const merge=new Map();
+      [...stored,...local].forEach(card=>{if(card?.id&&!merge.has(card.id))merge.set(card.id,card);});
+      state.personalGreekCards=[...merge.values()];
+    }
     const remoteBookmark=data[6][0];
     const localDate=new Date(state.lastLessonSavedAt||0).getTime();
     const remoteDate=new Date(remoteBookmark?.last_opened_at||0).getTime();
