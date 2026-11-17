@@ -855,7 +855,22 @@
         "latest_content_commit": "ab861e5f3f6f8d89623c5df7c23e920db0d4513b",
         "reader_commit": "552e12e9b78f9ead4b5ae8340a8910ef2cb13f4c"
       }
+    },
+    {
+      "chapter": 11,
+      "name": "Verbos especiales",
+      "pdf_pages": [
+        193,
+        209
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 12,
+        "items": 70,
+        "commit": "762791d1d55cf45c5130a4778ba87add8aaa0aa3"
+      },
+      "next": "Capítulo 11 textos griegos"
     }
   ],
-  "last_commit": "ab861e5f3f6f8d89623c5df7c23e920db0d4513b"
+  "last_commit": "762791d1d55cf45c5130a4778ba87add8aaa0aa3"
 }
