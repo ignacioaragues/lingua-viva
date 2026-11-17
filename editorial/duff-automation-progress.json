@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "course": "Jeremy Duff · Griego bíblico",
+  "repo": "ignacioaragues/lingua-viva",
+  "branch": "main",
+  "timezone": "Europe/Berlin",
+  "updated_at": "2026-11-17",
+  "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
+  "chapter": 3,
+  "phase": "texts",
+  "phase_status": "pending",
+  "start_page": 66,
+  "end_page": 80,
+  "previous_phase": {
+    "chapter": 3,
+    "phase": "exercises",
+    "status": "completed",
+    "date": "2026-11-17",
+    "pages_examined": "66–80",
+    "groups": 18,
+    "items": 106,
+    "items_by_page": {
+      "67": 16,
+      "69": 18,
+      "71": 8,
+      "72": 8,
+      "74": 18,
+      "75": 5,
+      "77": 8,
+      "78": 12,
+      "79": 13
+    },
+    "groups_by_section": {
+      "3.1": 16,
+      "3.2": 6,
+      "Práctica a mitad de camino": 12,
+      "3.3.2": 8,
+      "3.3.3": 8,
+      "3.3.4 y 3.3.5": 18,
+      "3.4": 5,
+      "3.6": 8,
+      "Final A": 12,
+      "Final B": 12,
+      "Final C": 1
+    },
+    "core_commit": "79ff197df6f7890ed5468f14dad427f8e225031d",
+    "live_entrypoint_commit": "3459c4bc817f447e9ca702ff7aba28bbd298dce5",
+    "files": [
+      "griego-biblico/reader.js",
+      "griego-biblico/index.html"
+    ],
+    "verified": "JavaScript sintaxis válida, 106 ítems en 18 bloques y 9 páginas de ejercicios con 106 claves lógicas únicas. Campos de caso/número duplican la casilla solo cuando la consigna exige ambos datos. Respuestas no autocorregidas.",
+    "caution": "En práctica 3.1 las palabras subrayadas se ven en PDF; el texto plano no permite identificar su subrayado, por lo que se usan campos referidos al ítem de la página original.",
+    "limitations": "No se comprobó inicio de sesión real, guardado Supabase en navegador ni publicación efectiva de GitHub Pages."
+  },
+  "next_phase": {
+    "chapter": 3,
+    "phase": "texts",
+    "start_page": 66,
+    "end_page": 80,
+    "instructions": "Abrir PDF original pp.66–80 y cotejar citas bíblicas, paradigmas y formas. En especial Marcos 1:1 en sección final C (p.79) y citas Ap 19:1, Mt 23:1, Mc 13:31, Jn 4:11, Ro 12:1, Mt 17:15; separar el pasaje de Marcos 1:1 de la producción del usuario y evitar mostrar una solución mientras practica. Preparar textos originales/permitidos debajo del PDF con fichas token a token y botón añadir lema a mazos compartidos. No copiar enunciados originales extensos ni autocorregir.",
+    "pending": [
+      "Examinar formas y pasajes en cada una de las 15 páginas",
+      "Crear datos anotados para capítulo 3",
+      "Integrar lector y glosas en cada página relevante",
+      "Verificar sintaxis/renderización y actualizar checkpoint avanzando a capítulo 4 fase ejercicios"
+    ]
+  },
+  "hard_rules": [
+    "No pasar de fase si no se implementaron cambios sustantivos a esa fase",
+    "No corregir respuestas sin pedido expreso",
+    "Mantener acceso privado PDF y respuestas",
+    "No duplicar tarjetas por lemma ni resetear historial",
+    "Al finalizar capítulo 20 detener recurrente"
+  ]
+}
