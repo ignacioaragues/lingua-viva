@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Capítulo 11 textos",
-    "verified": "18 bloques, 68 fichas completas, 17 páginas, integración estática",
-    "limitations": "Sin navegador autenticado ni node --check",
-    "next": "Capítulo 12 ejercicios, cotejo PDF"
+    "scope": "Capítulo 12 ejercicios",
+    "verified": "PDF pp. 210–223, 16 grupos y 75 ítems, sintaxis JS compilada",
+    "limitations": "Sin prueba de navegador autenticado",
+    "next": "Capítulo 12 textos griegos"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -880,7 +880,22 @@
         "entrypoint_commit": "57405820f9c4fb9dbc207f602391755187a5044c",
         "qa": "18 refs únicas; 68 fichas con 5 campos; 17/17 páginas cubiertas; lookup y carga inspeccionados. Sin prueba de sintaxis JS independiente ni navegador autenticado."
       }
+    },
+    {
+      "chapter": 12,
+      "name": "La tercera declinación – Primera parte",
+      "pdf_pages": [
+        210,
+        223
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 16,
+        "items": 75,
+        "commit": "92a03aeed623bfd75d5f58247f54137bf0a0ba3f",
+        "qa": "PDF físico 210–223 cotejado; 16 grupos, 75 ítems; sintaxis JS compilada con new Function. Sin navegador autenticado."
+      }
     }
   ],
-  "last_commit": "57405820f9c4fb9dbc207f602391755187a5044c"
+  "last_commit": "92a03aeed623bfd75d5f58247f54137bf0a0ba3f"
 }
