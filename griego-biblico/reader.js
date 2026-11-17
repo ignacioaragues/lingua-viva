@@ -51,7 +51,7 @@ var exercises={
 64:[['Final · A · griego → español','text','Sección A: traducí ocho oraciones del griego al español',8],['Final · A · español → griego','text','Sección A: escribí cuatro oraciones en griego',4],['Final · B · griego → español','text','Sección B: traducí ocho oraciones del griego al español',8],['Final · B · español → griego','text','Sección B: escribí cuatro oraciones en griego',4]]
 };
 var timer=null;
-var state={user:null,page:33,bookUrl:null,bookError:'',uploading:false,notes:{},reviews:{},done:{},questions:[],pron:7,greekTranslation:true,authMessage:'',loading:true,saveTimers:{},saveStatus:'',ready:false,lastInput:null,pdfDocument:null,pdfLoading:false,pdfError:'',pdfPageCount:522,pdfZoom:1,pdfRenderTask:null,pdfRenderTicket:0,workOpen:!(window.matchMedia&&window.matchMedia('(max-width:1050px)').matches),workTab:'notes',phoneticsOpen:false,phoneticsGroup:'letters',phoneticsIndex:7};
+var state={user:null,page:33,bookUrl:null,bookError:'',uploading:false,notes:{},reviews:{},done:{},questions:[],pron:7,greekTranslation:true,greekInterlinear:false,vocabCards:[],vocabMessage:'',authMessage:'',loading:true,saveTimers:{},saveStatus:'',ready:false,lastInput:null,pdfDocument:null,pdfLoading:false,pdfError:'',pdfPageCount:522,pdfZoom:1,pdfRenderTask:null,pdfRenderTicket:0,workOpen:!(window.matchMedia&&window.matchMedia('(max-width:1050px)').matches),workTab:'notes',phoneticsOpen:false,phoneticsGroup:'letters',phoneticsIndex:7};
 var answerKeys={'1.5':['no','sí','no','no','sí'],'1.6':['sí','no','no','sí','no']};
 function h(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function chFor(p){var n=0;chapters.forEach(function(c,i){if(p>=c[1])n=i;});return n;}
@@ -285,17 +285,73 @@ function closeGreekCard(){
  document.querySelector('.greek-card')?.remove();
  document.querySelectorAll('.greek-word[aria-expanded="true"]').forEach(function(x){x.setAttribute('aria-expanded','false');});
 }
+
+function morphologyES(entry){
+ if(!entry)return 'Análisis todavía no disponible';
+ if(entry.morph)return entry.morph;
+ var codes=entry.parse||'--------',cat=entry.cat||'';
+ var casa={N:'nominativo',G:'genitivo',D:'dativo',A:'acusativo',V:'vocativo'};
+ var generos={M:'masculino',F:'femenino',N:'neutro'};
+ var numero={S:'singular',P:'plural'};
+ var tiempos={P:'presente',I:'imperfecto',F:'futuro',A:'aoristo',X:'perfecto',Y:'pluscuamperfecto'};
+ var voces={A:'activa',M:'media',P:'pasiva'};
+ var modos={I:'indicativo',D:'imperativo',S:'subjuntivo',O:'optativo',N:'infinitivo',P:'participio'};
+ if(cat==='V-'){
+  var p=[];
+  if(tiempos[codes[1]])p.push(tiempos[codes[1]]);
+  if(voces[codes[2]])p.push('voz '+voces[codes[2]]);
+  if(modos[codes[3]])p.push(modos[codes[3]]);
+  if(/[123]/.test(codes[0]))p.push(codes[0]+'.ª persona');
+  if(numero[codes[5]])p.push(numero[codes[5]]);
+  if(casa[codes[4]])p.push(casa[codes[4]]);
+  if(generos[codes[6]])p.push(generos[codes[6]]);
+  return p.join(' · ')||'Verbo · forma sin desambiguar';
+ }
+ var p=[];
+ if(casa[codes[4]])p.push(casa[codes[4]]);
+ if(numero[codes[5]])p.push(numero[codes[5]]);
+ if(generos[codes[6]])p.push(generos[codes[6]]);
+ return p.join(' · ')||'Invariable';
+}
+function categoriaES(code){
+ return ({'A-':'Adjetivo','C-':'Conjunción','D-':'Adverbio','I-':'Interjección','N-':'Sustantivo','P-':'Preposición',
+ 'RA':'Artículo definido','RD':'Pronombre demostrativo','RI':'Pronombre interrogativo/indefinido','RP':'Pronombre personal',
+ 'RR':'Pronombre relativo','V-':'Verbo','X-':'Partícula'})[code]||'Palabra griega';
+}
+function greekToken(entry,ref,index){
+ var raw=entry.form||'',form=raw.replace(/[.,·;:!?()«»]+$/u,''),punct=raw.slice(form.length),display=entry.gloss||'';
+ return '<span class="greek-token"><button type="button" class="greek-word" data-do="greek-word" data-ref="'+h(ref)+'" data-index="'+index+'" data-form="'+h(form)+'" aria-expanded="false" title="Ver lema y morfología">'+h(form)+'</button>'+h(punct)
+  +(state.greekInterlinear?'<span class="greek-token-gloss" lang="es">'+h(display)+'</span>':'')+'</span> ';
+}
+function greekVerseRow(v,small){
+ return '<div class="greek-verse'+(small?' duff-nt-excerpt':'')+'"><span class="micro">'+h(v.ref)+'</span>'
+   +(v.theme?'<span class="duff-excerpt-theme">'+h(v.theme)+'</span>':'')
+   +'<div class="greek-verse-text'+(state.greekInterlinear?' greek-verse-interlinear':'')+'" lang="grc">'+v.words.map(function(w,i){return greekToken(w,v.ref,i);}).join('')+'</div>'
+   +(state.greekTranslation?'<div class="greek-translation" lang="es">'+h(v.translation)+'</div>':'')+'</div>';
+}
+function readingLookup(button){
+ var data=window.GREEK_READER;
+ if(!data)return null;
+ var v=(data.verses||[]).concat(data.chapterTwo||[]).find(function(row){return row.ref===button.dataset.ref;});
+ return v&&v.words ? v.words[Number(button.dataset.index)] : null;
+}
 function showGreekCard(button){
- var data=window.GREEK_READER,word=button.dataset.form,entry=data&&data.lexicon[word],opened=button.getAttribute('aria-expanded')==='true';
+ var word=button.dataset.form,entry=readingLookup(button);
+ var data=window.GREEK_READER,opened=button.getAttribute('aria-expanded')==='true';
+ if(!entry)entry=data&&data.lexicon&&data.lexicon[word];
  closeGreekCard();if(opened||!entry)return;
  button.setAttribute('aria-expanded','true');
+ var noteOld=data&&data.lexicon&&data.lexicon[word],noteText=noteOld&&noteOld.note||'';
+ var lemma=entry.lemma||word,category=entry.category||categoriaES(entry.cat),morph=morphologyES(entry);
+ var already=vocabCards().some(function(card){return greekLemmaKey(card.lemma||card.form)===greekLemmaKey(lemma);});
  var pop=document.createElement('div');pop.className='greek-card';pop.setAttribute('role','dialog');pop.setAttribute('aria-label','Análisis de '+word);
- pop.innerHTML='<div class="micro">FICHA MORFOLÓGICA · JUAN</div><strong lang="grc">'+h(word)+'</strong>'
-   +'<div class="greek-card-row"><b>Lema</b><span lang="grc">'+h(entry.lemma)+'</span></div>'
-   +'<div class="greek-card-row"><b>Categoría</b><span>'+h(entry.category)+'</span></div>'
-   +'<div class="greek-card-row"><b>Morfología</b><span>'+h(entry.morph)+'</span></div>'
-   +'<div class="greek-card-row"><b>Sentido</b><span>'+h(entry.gloss)+'</span></div>'
-   +'<p>'+h(entry.note)+'</p>'
+ pop.innerHTML='<div class="micro">FICHA MORFOLÓGICA · '+h(button.dataset.ref||'JUAN')+'</div><strong lang="grc">'+h(word)+'</strong>'
+   +'<div class="greek-card-row"><b>Lema</b><span lang="grc">'+h(lemma)+'</span></div>'
+   +'<div class="greek-card-row"><b>Categoría</b><span>'+h(category)+'</span></div>'
+   +'<div class="greek-card-row"><b>Morfología</b><span>'+h(morph)+'</span></div>'
+   +'<div class="greek-card-row"><b>Sentido</b><span>'+h(entry.gloss||'Pendiente')+'</span></div>'
+   +(noteText?'<p>'+h(noteText)+'</p>':'')
+   +'<button type="button" class="btn btn-small greek-add-lemma" data-do="add-greek-lemma" data-lemma="'+h(lemma)+'" data-gloss="'+h(entry.gloss||'')+'" data-form="'+h(word)+'" data-category="'+h(category)+'" '+(already?'disabled':'')+'>'+(already?'✓ Lema en mis tarjetas':'＋ Añadir lema a mis tarjetas')+'</button>'
    +'<a href="https://www.stepbible.org/" target="_blank" rel="noopener noreferrer">Consultar en STEP Bible ↗</a>'
    +'<button type="button" class="duff-close" data-do="close-card" aria-label="Cerrar ficha">×</button>';
  document.body.append(pop);
@@ -304,17 +360,28 @@ function showGreekCard(button){
  pop.style.top=(rect.bottom+10+ph>window.innerHeight?Math.max(12,rect.top-ph-10):rect.bottom+10)+'px';
 }
 function readingPanel(){
- if(state.page<46||state.page>48)return '';
- var data=window.GREEK_READER;if(!data)return '';
- return '<section class="duff-greek-reader" id="lectura-juan"><div class="grammar-head"><div><div class="micro">LECTURA FILOLÓGICA · EVANGELIO SEGÚN JUAN</div><h2>Juan 1:1–2 · texto anotado</h2></div><button type="button" class="btn btn-small" data-do="greek-translation" aria-pressed="'+state.greekTranslation+'">'+(state.greekTranslation?'Ocultar traducción':'Mostrar traducción')+'</button></div>'
-   +'<p>Seleccioná cualquier palabra griega para ver su lema, función y análisis morfológico. Esta es una lectura complementaria: no reemplaza los ejercicios de Duff.</p>'
-   +data.verses.map(function(v){
-      return '<div class="greek-verse"><span class="micro">'+h(v.ref)+'</span><div class="greek-verse-text" lang="grc">'+v.tokens.map(function(raw){
-        var form=raw.replace(/[.,·;]$/u,''),punct=raw.slice(form.length);
-        return '<button type="button" class="greek-word" data-do="greek-word" data-form="'+h(form)+'" aria-expanded="false">'+h(form)+'</button>'+h(punct)+' ';
-      }).join('')+'</div>'+(state.greekTranslation?'<div class="greek-translation" lang="es">'+h(v.translation)+'</div>':'')+'</div>';
-    }).join('')
-   +'<p class="note">'+h(data.notice)+'</p></section>';
+ var data=window.GREEK_READER;
+ if(!data)return '';
+ var john=state.page>=46&&state.page<=48;
+ var excerpts=(data.chapterTwo||[]).filter(function(v){return v.page===state.page;});
+ if(!john&&!excerpts.length)return '';
+ var head=john?'Juan 1:1–23 · lectura anotada':'Citas del Nuevo Testamento · capítulo 2';
+ var out='<section class="duff-greek-reader" id="lectura-juan"><div class="grammar-head"><div><div class="micro">LECTURA FILOLÓGICA · '+(john?'EVANGELIO SEGÚN JUAN':'PASAJES CITADOS POR DUFF')+'</div><h2>'+head+'</h2></div></div>'
+ +'<p>Seleccioná una palabra para leer su traducción, lema y morfología; podés añadir el lema a tus tarjetas sin duplicarlo. El texto griego es de una edición independiente del libro.</p>'
+ +'<div class="duff-reading-actions"><button type="button" class="btn btn-small" data-do="greek-translation" aria-pressed="'+state.greekTranslation+'">'+(state.greekTranslation?'Ocultar traducción':'Mostrar traducción')+'</button>'
+ +'<button type="button" class="btn btn-small" data-do="greek-interlinear" aria-pressed="'+state.greekInterlinear+'">'+(state.greekInterlinear?'Ocultar glosas':'Ver glosas palabra por palabra')+'</button></div>';
+ if(john){
+  var groups=[[1,7],[8,14],[15,19],[20,23]];
+  groups.forEach(function(g){
+    var shouldOpen=state.page===46?g[0]===1:state.page===47?g[0]===8: g[0]===20;
+    out+='<details class="duff-reading-group" '+(shouldOpen?'open':'')+'><summary>Juan 1:'+g[0]+'–'+g[1]+' <span>('+ (g[1]-g[0]+1)+' versículos)</span></summary>';
+    out+=data.verses.filter(function(v){return v.n>=g[0]&&v.n<=g[1];}).map(function(v){return greekVerseRow(v,false);}).join('');
+    out+='</details>';
+  });
+  out+='<p class="note">En el ejercicio 1, Duff imprime Juan 1:1–14 (PDF pp. 46–47). En el ejercicio 2 propone reconstruir Juan 1:15–23 desde su transcripción fonética (PDF pp. 47–48). El texto griego de consulta se ofrece por separado y se puede ocultar la traducción.</p>';
+ }else out+=excerpts.map(function(v){return greekVerseRow(v,true);}).join('');
+ out+='<p class="note">'+h(data.notice)+'</p></section>';
+ return out;
 }
 
 function unreadReviews(){return Object.keys(state.reviews).filter(function(p){var r=state.reviews[p];try{return r&&r.reviewed_at&&localStorage.getItem('lv:duff:review-seen:'+p)!==String(r.reviewed_at);}catch(e){return false;}});}
@@ -445,6 +512,7 @@ app.addEventListener('click',async function(e){
  if(act==='greek-word'){showGreekCard(b);return;}
  if(act==='close-card'){closeGreekCard();return;}
  if(act==='greek-translation'){state.greekTranslation=!state.greekTranslation;closeGreekCard();render();return;}
+ if(act==='greek-interlinear'){state.greekInterlinear=!state.greekInterlinear;closeGreekCard();render();return;}
  if(act==='phonetics-open'){openPhonetics();return;}
  if(act==='phonetics-close'){closePhonetics();return;}
  if(act==='phonetics-group'){state.phoneticsGroup=b.dataset.group;state.phoneticsIndex=0;updatePhoneticsModal();return;}
