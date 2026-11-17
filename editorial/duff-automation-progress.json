@@ -7,36 +7,28 @@
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 9,
-  "phase": "exercises",
+  "phase": "texts",
   "phase_status": "pending",
   "start_page": 162,
   "end_page": 177,
   "previous_phase": {
-    "chapter": 8,
-    "phase": "texts",
+    "chapter": 9,
+    "phase": "exercises",
     "status": "completed",
-    "date": "2026-11-17",
-    "pages_examined": "149–161",
-    "blocks": 32,
-    "annotated_tokens": 167,
-    "lemmas": 48,
-    "biblical_passages": 3,
-    "core_commit": "e159f0a1efa490e4fcc51f8155768a24936d929f",
-    "integration_commit": "79d983c2712d397916063e382b69c0b02e166165",
-    "verified": "13/13 páginas, 167/167 tokens, lectura y lookup en pruebas estáticas; ejercicio final sin traducción",
-    "limitations": "Sin navegador autenticado ni QA visual; fragmentos bíblicos cortos y ejemplos propios."
+    "items": 63,
+    "groups": 13,
+    "commit": "cae641aa133318a32b066a0f7ffe9f96c6edaeb1",
+    "pages_examined": "162–176"
   },
   "next_phase": {
     "chapter": 9,
-    "phase": "exercises",
+    "phase": "texts",
     "start_page": 162,
-    "end_page": 177,
-    "instructions": "Abrir PDF capítulo 9, cotejar todas las prácticas y crear campos específicos sin soluciones; no avanzar sin prueba.",
+    "end_page": 176,
     "pending": [
-      "Cotejar páginas físicas 162–177",
-      "Implementar ejercicios reales",
-      "Verificar renderizado, guardado y claves",
-      "Actualizar checkpoints"
+      "Cotejar todas las citas, paradigmas y formas del capítulo",
+      "Añadir fichas contextualizadas por token y glosas opcionales",
+      "Probar lectura y guardado de lemas sin duplicación"
     ]
   },
   "hard_rules": [
@@ -202,6 +194,22 @@
         "entrypoint_commit": "2c3e85d6875b0171a21e6220488b82d63de3d8ea"
       },
       "qa": "13/13 páginas renderizadas estáticamente; 167/167 fichas completas; Marcos 4:1–2 sin traducción; sin QA autenticada."
+    },
+    {
+      "chapter": 9,
+      "name": "Pronombres y conjunciones",
+      "pdf_pages": [
+        162,
+        176
+      ],
+      "status": "exercises_complete",
+      "completed_on": "2026-11-17",
+      "exercises": {
+        "groups": 13,
+        "items": 63,
+        "core_commit": "cae641aa133318a32b066a0f7ffe9f96c6edaeb1"
+      },
+      "qa": "Cotejo textual del PDF físico 162–176; 63 ítems en 13 grupos. Prueba de navegador autenticado pendiente."
     }
   ]
 }
