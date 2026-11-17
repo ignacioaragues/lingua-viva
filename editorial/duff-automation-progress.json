@@ -6,57 +6,45 @@
   "timezone": "Europe/Berlin",
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
-  "chapter": 5,
-  "phase": "texts",
+  "chapter": 6,
+  "phase": "exercises",
   "phase_status": "pending",
-  "start_page": 98,
-  "end_page": 113,
+  "start_page": 114,
+  "end_page": 133,
   "previous_phase": {
     "chapter": 5,
-    "phase": "exercises",
+    "phase": "texts",
     "status": "completed",
     "date": "2026-11-17",
     "pages_examined": "98–113",
     "chapter_title": "Los adjetivos",
-    "groups": 18,
-    "items": 87,
-    "items_by_page": {
-      "99": 8,
-      "100": 10,
-      "101": 5,
-      "103": 20,
-      "105": 4,
-      "106": 10,
-      "109": 4,
-      "111": 12,
-      "112": 14
-    },
-    "directions": {
-      "adjective_analysis": 8,
-      "greek_to_spanish": 51,
-      "spanish_to_greek": 18,
-      "greek_form_agreement": 10
-    },
-    "core_commit": "579082eda8c49791fd894dd523be20d64db465eb",
-    "entrypoint_commit": "3708bdc24ab3b43c479c96689024f97801f65d4f",
+    "blocks": 39,
+    "tokens": 231,
+    "lemmas": 59,
+    "biblical_passages": 10,
+    "core_commit": "f16cbc7a677c257c127f2f892bca6601333fc7d1",
+    "integration_commit": "b756d34f53374bb90562302f932818fe63c14705",
+    "entrypoint_commit": "7484414a988fde022b66463b434819c007e38f90",
     "files": [
+      "griego-biblico/chapter5-readings.js",
       "griego-biblico/reader.js",
-      "griego-biblico/index.html"
+      "griego-biblico/index.html",
+      "flashcards/repository.js"
     ],
-    "verified": "PDF original pp.98–113 cotejado directamente; 18 grupos, 87 ítems, 87 claves lógicas únicas. 32 campos en práctica 5.1 (8 x 4), 79 campos restantes. Navegación y render estático 16/16 páginas, sintaxis JS válida. No autocorrección ni soluciones.",
-    "limitations": "No se verificó navegador autenticado ni persistencia real Supabase. Las secciones con ejercicios que continúan en la página siguiente están agrupadas en la página de inicio y enlazadas."
+    "verified": "JS válido, 16/16 páginas con 231 fichas, 10 extractos, 59 lemas, traducciones finales ocultas; navegación previa preservada.",
+    "limitations": "No se verificó en navegador autenticado ni persistencia real de Supabase."
   },
   "next_phase": {
-    "chapter": 5,
-    "phase": "texts",
-    "start_page": 98,
-    "end_page": 113,
-    "instructions": "Volver a cotejar todas las páginas del capítulo 5 «Los adjetivos» y añadir lecturas griegas anotadas, paradigmas de adjetivos, εἰμί, πολύς, μέγας y referencias Ap 21:1–2, Mt 4:3, Ro 7:12, Mt 5:8, Mc 2:28, Jn 1:1, Mt 12:35, 2 Co 13:13. No revelar traducciones completas de la sección C final. Integrar a lector y mazo duff-ch5 sin duplicar tarjetas.",
+    "chapter": 6,
+    "phase": "exercises",
+    "start_page": 114,
+    "end_page": 133,
+    "instructions": "Cotejar directamente todas las páginas PDF 114–133 del capítulo 6 «Los tiempos de los verbos»; construir campos específicos por práctica, guardar claves privadas sin autocorrección; verificar y sólo después pasar a textos.",
     "pending": [
-      "Reabrir PDF original páginas 98–113 para la fase de textos",
-      "Implementar datos token por token y fuentes permitidas",
-      "Integrar lector, glosas y mazo capítulo 5",
-      "Verificar sintaxis y pruebas estáticas; avanzar a capítulo 6 ejercicios sólo al completar textos"
+      "Reabrir el PDF original pp.114–133",
+      "Inventariar todos los ejercicios con numeración y dirección",
+      "Implementar campos específicos y navegación",
+      "QA estática y actualizar progreso"
     ]
   },
   "hard_rules": [
@@ -118,6 +106,32 @@
         "entrypoint_commit": "b6ebada2cc0b780bef5243adb806e3e72d2e766c"
       },
       "qa": "17/17 páginas renderizadas estáticamente, 209 fichas completas, cero referencias duplicadas; capítulos 2 y 3 preservados, Juan 1:1–4 sin traducción completa. Sin prueba autenticada real."
+    },
+    {
+      "chapter": 5,
+      "name": "Los adjetivos",
+      "pdf_pages": [
+        98,
+        113
+      ],
+      "status": "both_passes_complete",
+      "completed_on": "2026-11-17",
+      "exercises": {
+        "groups": 18,
+        "items": 87,
+        "core_commit": "579082eda8c49791fd894dd523be20d64db465eb"
+      },
+      "texts": {
+        "blocks": 39,
+        "tokens": 231,
+        "lemmas": 59,
+        "passages": 10,
+        "pages_covered": 16,
+        "core_commit": "f16cbc7a677c257c127f2f892bca6601333fc7d1",
+        "integration_commit": "b756d34f53374bb90562302f932818fe63c14705",
+        "entrypoint_commit": "7484414a988fde022b66463b434819c007e38f90"
+      },
+      "qa": "16/16 páginas renderizadas en pruebas estáticas; fichas 231/231, lookup, Juan y cap.4 preservados, sección C sin solución. No se probó navegador autenticado."
     }
   ]
 }
