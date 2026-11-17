@@ -26,9 +26,9 @@
     "start_page": 162,
     "end_page": 176,
     "pending": [
-      "Completar paradigmas exhaustivos de demostrativos y pronombres personales",
-      "Anotar citas bíblicas restantes de páginas 162–176 con texto permitido y morfología contextual",
-      "Verificar JS y renderizado en entorno ejecutable; QA autenticada de Supabase"
+      "Completar paradigmas reflexivos y recíprocos",
+      "Incorporar citas bíblicas restantes con fuentes permitidas",
+      "QA JS en ejecución y navegador autenticado"
     ]
   },
   "hard_rules": [
@@ -215,12 +215,13 @@
   "partial_phase": {
     "chapter": 9,
     "phase": "texts",
-    "blocks": 15,
-    "tokens": 53,
+    "blocks": 19,
+    "tokens": 117,
     "pages_with_initial_readings": 15,
-    "core_commit": "b8430becc9acd8f38b1d942fe01c81cd3526bf02",
+    "core_commit": "74cb08cfc97b164b80e05521e62c0162100533c4",
     "reader_commit": "55e9169b4ebb8f75ff401a33e01015c2923b60bd",
     "entrypoint_commit": "21adecca3ccc8efc730c0e35985ddeafb0957d75",
-    "qa": "Comprobada estructura de 15 bloques y 53 fichas en datos; no se ejecutó prueba de navegador autenticado ni prueba JS local completa."
-  }
+    "qa": "Datos JSON y 64 fichas nuevas estructuradas; QA autenticada pendiente"
+  },
+  "last_commit": "74cb08cfc97b164b80e05521e62c0162100533c4"
 }
