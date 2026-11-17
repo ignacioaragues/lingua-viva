@@ -236,3 +236,7 @@ body:has(.duff-phonetics-overlay){overflow:hidden}
 .greek-card .greek-add-lemma:disabled{opacity:.8}
 .duff-greek-reader>.note{margin:12px 0}
 @media(max-width:650px){.duff-reading-group summary{padding:10px}.duff-reading-group .greek-verse{padding:9px}.greek-verse-interlinear .greek-token{max-width:130px}.greek-token-gloss{max-width:130px}}
+
+/* Capítulo 3 · lector anotado: distinguir citas y no revelar el ejercicio final */
+.duff-ch3-solution-note{margin:9px 0 3px!important;font-size:11px!important;line-height:1.55;color:var(--muted);font-style:italic}
+.duff-reading-source-note{margin:5px 0 0!important;font-size:11px!important;color:var(--muted);line-height:1.5}
