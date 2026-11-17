@@ -15,7 +15,10 @@
     ],
     'griego-biblico': [
       {id:'all',label:'Todas las tarjetas'},
-      {id:'duff',label:'Curso Duff'}
+      {id:'duff',label:'Duff · Todas'},
+      {id:'duff-ch1',label:'Duff · Capítulo 1'},
+      {id:'juan1',label:'Juan 1:1–23'},
+      {id:'duff-ch2',label:'Duff · Capítulo 2'}
     ]
   };
   function all(language, legacyLessons) {
