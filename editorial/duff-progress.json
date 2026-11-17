@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Capítulo 10 textos",
-    "verified": "16 páginas consultadas; 19 referencias únicas, 103 fichas estructuradas, script y lookup integrados",
-    "limitations": "No hubo prueba en navegador autenticado ni cotejo externo de citas bíblicas; no se añadieron citas bíblicas nuevas",
-    "next": "Capítulo 11 ejercicios"
+    "scope": "Capítulo 11 textos",
+    "verified": "18 bloques, 68 fichas completas, 17 páginas, integración estática",
+    "limitations": "Sin navegador autenticado ni node --check",
+    "next": "Capítulo 12 ejercicios, cotejo PDF"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -863,14 +863,24 @@
         193,
         209
       ],
-      "status": "exercises_complete",
+      "status": "both_passes_complete",
       "exercises": {
         "groups": 12,
         "items": 70,
         "commit": "762791d1d55cf45c5130a4778ba87add8aaa0aa3"
       },
-      "next": "Capítulo 11 textos griegos"
+      "next": "Capítulo 11 textos griegos",
+      "texts": {
+        "blocks": 18,
+        "tokens": 68,
+        "pages_covered": 17,
+        "biblical_fragments": 3,
+        "content_commit": "82536b5ea601a5753a158a41d5c9c75b537c99a3",
+        "integration_commit": "9792a2a012621c54983cbc1ac287eca35d6dabbd",
+        "entrypoint_commit": "57405820f9c4fb9dbc207f602391755187a5044c",
+        "qa": "18 refs únicas; 68 fichas con 5 campos; 17/17 páginas cubiertas; lookup y carga inspeccionados. Sin prueba de sintaxis JS independiente ni navegador autenticado."
+      }
     }
   ],
-  "last_commit": "762791d1d55cf45c5130a4778ba87add8aaa0aa3"
+  "last_commit": "57405820f9c4fb9dbc207f602391755187a5044c"
 }
