@@ -207,6 +207,64 @@ var chapterThreeExercises={
   {id:'finalC-marcos1-1',label:'Ejercicios finales · Sección C, Marcos 1:1',type:'translation',start:1,count:1,description:'Traducí el versículo bíblico presentado en el PDF, sin anticipar una solución.'}
  ]
 };
+/* Duff, capítulo 4 · Las preposiciones (PDF privado pp. 81–97).
+   Consignas cotejadas con el ejemplar del usuario; no reproducir enunciados.
+   Las claves duff-ch4 son nuevas: las respuestas anteriores no se alteran. */
+var chapterFourExercises={
+ 83:[
+  {id:'4-1-gr-es',label:'Práctica 4.1 · griego → español',type:'translation',start:1,count:6,description:'Seis sintagmas preposicionales griegos: traducí al español.'},
+  {id:'4-1-es-gr',label:'Práctica 4.1 · español → griego',type:'greek',start:7,count:3,description:'Tres sintagmas españoles: escribí la preposición y la forma griega correspondiente.'}
+ ],
+ 87:[
+  {id:'4-2-gr-es',label:'Práctica 4.2 · griego → español',type:'translation',start:1,count:6,description:'Seis sintagmas con preposiciones y distintos casos; traducí al español.'},
+  {id:'4-2-es-gr',label:'Práctica 4.2 · español → griego',type:'greek',start:7,count:3,description:'Tres sintagmas españoles: traducí al griego respetando el caso exigido.'},
+  {id:'mitad-gr-es',label:'Práctica a mitad de camino · griego → español',type:'translation',start:1,count:8,description:'Ocho oraciones griegas, ítems 1–3 al final de la página 87 y 4–8 en la página 88.'},
+  {id:'mitad-es-gr',label:'Práctica a mitad de camino · español → griego',type:'greek',start:9,count:4,description:'Cuatro oraciones españolas de la página 88, ítems 9–12.'}
+ ],
+ 89:[
+  {id:'4-3-instrumental',label:'Práctica 4.3 · dativo instrumental',type:'yesno',start:1,count:4,description:'Para cada una de las cuatro oraciones, indicá si se emplearía dativo instrumental en griego.'}
+ ],
+ 92:[
+  {id:'4-5-6-gr-es',label:'Prácticas 4.5 y 4.6 · griego → español',type:'translation',start:1,count:6,description:'Seis oraciones griegas: preguntas y negaciones. Traducí cada una al español.'}
+ ],
+ 94:[
+  {id:'finalA-gr-es',label:'Ejercicios finales · Sección A, griego → español',type:'translation',start:1,count:8,description:'Ocho oraciones griegas de la Sección A.'},
+  {id:'finalA-es-gr',label:'Ejercicios finales · Sección A, español → griego',type:'greek',start:9,count:4,description:'Cuatro oraciones españolas de la Sección A.'}
+ ],
+ 95:[
+  {id:'finalB-gr-es',label:'Ejercicios finales · Sección B, griego → español',type:'translation',start:1,count:8,description:'Ocho oraciones griegas de la Sección B.'},
+  {id:'finalB-es-gr',label:'Ejercicios finales · Sección B, español → griego',type:'greek',start:9,count:4,description:'Cuatro oraciones españolas de la Sección B.'},
+  {id:'finalC-juan1-1-4',label:'Ejercicios finales · Sección C, Juan 1:1–4',type:'translation',start:1,count:1,description:'Traducción del extracto de Juan 1:1–4 que aparece en el PDF. No se muestra ninguna solución.'}
+ ]
+};
+function chapterFourPractice(){
+ var p=state.page,parts=chapterFourExercises[p]||[];
+ var nav=[[83,'4.1'],[87,'4.2 + mitad'],[89,'4.3'],[92,'4.5–4.6'],[94,'Final A'],[95,'Final B/C']];
+ var out='<nav class="duff-index duff-ch2-index" aria-label="Prácticas del capítulo 4">'
+ +nav.map(function(x){return '<button type="button" data-do="page" data-page="'+x[0]+'" aria-current="'+(p===x[0]?'page':'false')+'">'+h(x[1])+'</button>';}).join('')+'</nav>';
+ if(p===88)out+='<p class="duff-ch2-note">La práctica a mitad de camino continúa aquí (ítems 4–12); sus casillas están reunidas en la página 87. <button class="btn btn-small" type="button" data-do="page" data-page="87">Responder práctica intermedia</button></p>';
+ else if(!parts.length)out+='<p class="duff-ch2-note">Esta página contiene explicación, ejemplos, paradigmas, vocabulario o notas. Elegí una práctica en el índice.</p>';
+ parts.forEach(function(ex,groupIndex){
+  var answered=0;
+  for(var n=ex.start;n<ex.start+ex.count;n++)if(String(note(p).answers['duff-ch4:'+ex.id+':'+n]||'').trim())answered++;
+  out+='<details class="duff-exercise duff-ch2-group" '+(groupIndex===0?'open':'')+'>'
+  +'<summary>'+h(ex.label)+' <span class="duff-ch2-count">'+ex.count+' ítems'+(answered?' · '+answered+' contestados':'')+'</span></summary>'
+  +'<p>'+h(ex.description)+' Consultá el texto íntegro en el PDF privado; no se califican las respuestas.</p>';
+  for(var i=ex.start;i<ex.start+ex.count;i++){
+   var itemKey='duff-ch4:'+ex.id+':'+i;
+   out+='<div class="duff-answer-row"><div class="duff-answer-label">Ítem '+i+'</div>';
+   if(ex.type==='yesno'){
+    var selected=note(p).answers[itemKey]||'';
+    out+='<div class="duff-toggle" role="group" aria-label="Dativo instrumental en el ítem '+i+'">'
+    +['sí','no'].map(function(v){return '<button type="button" data-do="choice" data-key="'+h(itemKey)+'" data-value="'+v+'" aria-pressed="'+(selected===v)+'">'+(v==='sí'?'Sí':'No')+'</button>';}).join('')+'</div>';
+   }else out+=field(itemKey,ex.type==='greek'?'Tu traducción al griego':'Tu traducción al español',ex.type==='greek',2);
+   out+='</div>';
+  }
+  out+='</details>';
+ });
+ return out+reviewPanel(p);
+}
+
 function chapterThreePractice(){
  var p=state.page,parts=chapterThreeExercises[p]||[];
  var nav=[[67,'3.1'],[69,'3.2 + mitad'],[71,'3.3.2'],[72,'3.3.3'],[74,'3.3.4–5'],[75,'3.4'],[77,'3.6'],[78,'Final A'],[79,'Final B/C']];
@@ -247,6 +305,7 @@ function chapterThreePractice(){
 }
 
 function practice(){
+ if(current()===3)return chapterFourPractice();
  if(current()===2)return chapterThreePractice();
  if(current()===1)return chapterTwoPractice();
  var parts=exercises[state.page]||[];
