@@ -478,7 +478,48 @@ function chapterEightPractice(){
  });
  return out+reviewPanel(p);
 }
+
+/* Duff cap. 9 · Pronombres y conjunciones, PDF físico pp. 162–176.
+   Ejercicios cotejados directamente: solo metadatos y casillas privadas. */
+var chapterNineExercises={
+ 163:[['9-1-1-analysis','Práctica 9.1.1 · análisis de demostrativos','pronoun-analysis',1,8,'Analizá ocho formas: lema, género, caso y número; registrá las ambigüedades.']],
+ 164:[['9-1-2-gr-es','Práctica 9.1.2 · griego → español','translation',1,6,'Seis oraciones; el sexto ítem continúa en la página 165.']],
+ 166:[['mitad-gr-es','Práctica a mitad de camino · griego → español','translation',1,8,'Los ocho primeros ítems aparecen en la página 167.'],['mitad-es-gr','Práctica a mitad de camino · español → griego','greek',9,4,'Ítems 9–12 de la página 167.']],
+ 169:[['9-3-gr-es','Práctica 9.3 · griego → español','translation',1,4,'Primeras cuatro oraciones con pronombres personales.'],['9-3-es-gr','Práctica 9.3 · español → griego','greek',5,2,'Ítems 5–6.']],
+ 171:[['9-4-gr-es','Práctica 9.4 · griego → español','translation',1,5,'Primeros cinco ítems con conjunciones y pospositivas.'],['9-4-es-gr','Práctica 9.4 · español → griego','greek',6,1,'El sexto ítem continúa en la página 172.']],
+ 173:[['finalA-gr-es','Ejercicios finales · A · griego → español','translation',1,8,'Ítems 1–8; los dos últimos continúan en la página 174.'],['finalA-es-gr','Ejercicios finales · A · español → griego','greek',9,4,'Ítems 9–12 de la página 174.']],
+ 174:[['finalB-gr-es','Ejercicios finales · B · griego → español','translation',1,8,'Ítems 1–8.'],['finalB-es-gr','Ejercicios finales · B · español → griego','greek',9,4,'Ítems 9–12.']],
+ 175:[['finalC-mateo16','Ejercicios finales · C · Mateo 16:13–18','translation',1,1,'Traducción personal del pasaje final, sin soluciones ni autocorrección.']]
+};
+function chapterNinePractice(){
+ var p=state.page,raw=chapterNineExercises[p]||[];
+ var nav=[[163,'9.1.1'],[164,'9.1.2'],[166,'Mitad'],[169,'9.3'],[171,'9.4'],[173,'Final A'],[174,'Final B'],[175,'Final C']];
+ var out='<nav class="duff-index duff-ch2-index" aria-label="Prácticas del capítulo 9">'+nav.map(function(x){return '<button type="button" data-do="page" data-page="'+x[0]+'" aria-current="'+(p===x[0]?'page':'false')+'">'+h(x[1])+'</button>';}).join('')+'</nav>';
+ if([165,167,172].indexOf(p)!==-1)out+='<p class="duff-ch2-note">Esta página continúa una práctica anterior; abrí la práctica desde el índice para responder sin duplicar claves.</p>';
+ else if(!raw.length)out+='<p class="duff-ch2-note">Teoría, ejemplos, paradigmas o vocabulario. Elegí una práctica en el índice.</p>';
+ raw.forEach(function(a,index){
+  var id=a[0],label=a[1],type=a[2],start=a[3],count=a[4],description=a[5],answered=0;
+  for(var n=start;n<start+count;n++){
+   var key='duff-ch9:'+id+':'+n;
+   if(type==='pronoun-analysis'){
+    if(['lema','genero','caso','numero'].some(function(part){return String(note(p).answers[key+':'+part]||'').trim();}))answered++;
+   }else if(String(note(p).answers[key]||'').trim())answered++;
+  }
+  out+='<details class="duff-exercise duff-ch2-group" '+(index===0?'open':'')+'><summary>'+h(label)+' <span class="duff-ch2-count">'+count+' ítems'+(answered?' · '+answered+' contestados':'')+'</span></summary><p>'+h(description)+' Consultá el original en el PDF privado. Las respuestas no se califican.</p>';
+  for(var n=start;n<start+count;n++){
+   var key='duff-ch9:'+id+':'+n,greek=type==='greek';
+   out+='<div class="duff-answer-row"><div class="duff-answer-label">Ítem '+n+'</div>';
+   if(type==='pronoun-analysis')out+='<div class="duff-answer-pair"><div>'+field(key+':lema','Lema (griego)',true,false)+'</div><div>'+field(key+':genero','Género',false,false)+'</div><div>'+field(key+':caso','Caso',false,false)+'</div><div>'+field(key+':numero','Número',false,false)+'</div></div>';
+   else out+=field(key,greek?'Tu traducción al griego':'Tu traducción al español',greek,2);
+   out+='</div>';
+  }
+  out+='</details>';
+ });
+ return out+reviewPanel(p);
+}
+
 function practice(){
+ if(current()===8)return chapterNinePractice();
  if(current()===7)return chapterEightPractice();
  if(current()===6)return chapterSevenPractice();
  if(current()===5)return chapterSixPractice();
