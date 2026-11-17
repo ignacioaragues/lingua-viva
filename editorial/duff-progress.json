@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Duff capítulo 7, textos griegos",
-    "verified": "30 bloques, 148 tokens, 74 lemas y 11 citas cortas; 15 páginas renderizadas estáticamente",
-    "limitations": "Sin QA en navegador autenticado o guardado real Supabase",
-    "next": "Capítulo 8 ejercicios, pp.149–161"
+    "scope": "Capítulo 8, pasada de ejercicios",
+    "verified": "70 ítems en 14 grupos, cotejados con PDF privado pp.149–161; 70 claves únicas y JS válido",
+    "limitations": "No QA autenticada real",
+    "next": "Capítulo 8, textos griegos"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -741,5 +741,36 @@
       "entrypoint": "c4fe46c62826f0b54b604cfdba4f884cb9163e78"
     },
     "verification": "15/15 páginas con renderizado estático; 148/148 fichas con forma/lema/categoría/morfología/glosa; 30 bloques; lectura final sin traducción; no QA autenticada."
+  },
+  "chapter_8_exercises": {
+    "chapter": 8,
+    "title": "Otros patrones de sustantivos y verbos",
+    "pdf_pages": [
+      149,
+      161
+    ],
+    "phase": "exercises",
+    "status": "completed",
+    "groups": 14,
+    "items": 70,
+    "by_type": {
+      "morphological_analysis": 9,
+      "greek_form_production": 10,
+      "greek_to_spanish": 34,
+      "spanish_to_greek": 17
+    },
+    "by_page": {
+      "151": 9,
+      "152": 10,
+      "153": 12,
+      "154": 8,
+      "157": 6,
+      "159": 4,
+      "160": 16,
+      "161": 5
+    },
+    "commit": "9a737647fcba7bc643d465f7df39ead8e95b6d08",
+    "qa": "JavaScript sintaxis válida, 70/70 identificadores únicos, navegación y fields existentes. Sin QA autenticada o visual en navegador.",
+    "next": "Capítulo 8 · textos griegos, páginas 149–161; reservar traducción Marcos 4:1–2."
   }
 }
