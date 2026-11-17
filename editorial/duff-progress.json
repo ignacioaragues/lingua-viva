@@ -166,9 +166,9 @@
   "last_development_checkpoint": {
     "date": "2026-11-17",
     "scope": "Capítulo 10 textos",
-    "verified": "29 fichas léxicas en tres bloques; panel de vocabulario habilitado",
-    "limitations": "Sin prueba autenticada",
-    "next": "Citas bíblicas y QA capítulo 10"
+    "verified": "16 páginas consultadas; 19 referencias únicas, 103 fichas estructuradas, script y lookup integrados",
+    "limitations": "No hubo prueba en navegador autenticado ni cotejo externo de citas bíblicas; no se añadieron citas bíblicas nuevas",
+    "next": "Capítulo 11 ejercicios"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -837,7 +837,7 @@
         177,
         192
       ],
-      "status": "texts_in_progress",
+      "status": "both_passes_complete",
       "exercises": {
         "groups": 12,
         "items": 69,
@@ -845,17 +845,17 @@
       },
       "next": "Capítulo 10 textos griegos",
       "texts": {
-        "status": "partial",
-        "blocks": 16,
-        "tokens": 87,
+        "status": "completed",
+        "blocks": 19,
+        "tokens": 103,
         "core_commit": "448576ffac9c73d7c1c319dca16cfd05d3ddfcce",
         "integration_commit": "0bb283cfb35928e50430d9d59d0d26d73a456b6c",
         "entrypoint_commit": "9a7cbebc165ec73b65b19661a39ea43eb9208ce9",
-        "pending": "Citas bíblicas y QA",
-        "latest_content_commit": "6c2e32aa0786620d07598e60e8a6b8a8724e7e92",
+        "pending": "Sin bloqueos; QA autenticada no realizada",
+        "latest_content_commit": "ab861e5f3f6f8d89623c5df7c23e920db0d4513b",
         "reader_commit": "552e12e9b78f9ead4b5ae8340a8910ef2cb13f4c"
       }
     }
   ],
-  "last_commit": "552e12e9b78f9ead4b5ae8340a8910ef2cb13f4c"
+  "last_commit": "ab861e5f3f6f8d89623c5df7c23e920db0d4513b"
 }
