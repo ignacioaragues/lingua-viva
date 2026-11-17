@@ -385,10 +385,52 @@ function readingPanel(){
 }
 
 function unreadReviews(){return Object.keys(state.reviews).filter(function(p){var r=state.reviews[p];try{return r&&r.reviewed_at&&localStorage.getItem('lv:duff:review-seen:'+p)!==String(r.reviewed_at);}catch(e){return false;}});}
-function vocabCards(){try{return JSON.parse(localStorage.getItem('lv:duff:vocab:'+OWNER)||'[]');}catch(e){return [];}}
+
+function greekLemmaKey(lemma){
+ return String(lemma||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/ς/g,'σ').trim();
+}
+function vocabCards(){
+ var local=[];try{local=JSON.parse(localStorage.getItem('lv:duff:vocab:'+OWNER)||'[]');}catch(e){}
+ var remote=Array.isArray(state.vocabCards)?state.vocabCards:[];
+ var ids={};return remote.concat(local).filter(function(c){
+   if(!c||!c.id||ids[c.id])return false;
+   ids[c.id]=true;return true;
+ });
+}
+function persistVocabCards(cards){
+ if(!state.user||state.user.id!==OWNER||!client)return Promise.resolve({error:'No hay una sesión autorizada.'});
+ return client.from('lingua_notes').upsert({
+  user_id:OWNER,lesson_id:'duff:cards',body:JSON.stringify(cards),updated_at:new Date().toISOString()
+ },{onConflict:'user_id,lesson_id'}).then(function(result){
+  if(result.error)return {error:result.error.message};
+  state.vocabCards=cards;
+  try{localStorage.setItem('lv:duff:vocab:'+OWNER,JSON.stringify(cards));}catch(e){}
+  return {error:null};
+ });
+}
+function greekCardId(lemma){
+ return 'lemma-'+Array.from(greekLemmaKey(lemma)).map(function(ch){return ch.codePointAt(0).toString(16);}).join('-');
+}
+async function addGreekLemma(lemma,form,gloss,category){
+ if(!lemma)return {error:'No se pudo determinar el lema.'};
+ var cards=vocabCards(),key=greekLemmaKey(lemma);
+ var existing=cards.find(function(c){return greekLemmaKey(c.lemma||c.form)===key;});
+ var bookDeck='duff-ch'+(current()+1),pageRef=state.page>=46&&state.page<=48?'juan1':'duff-ch2';
+ var decks=['duff',bookDeck,pageRef];
+ if(existing){
+  var nextDecks=[...new Set((existing.decks||[]).concat(decks))];
+  if(nextDecks.length===(existing.decks||[]).length)return {already:true,error:null};
+  cards=cards.map(function(c){return c.id===existing.id?Object.assign({},c,{decks:nextDecks}):c;});
+ }else{
+  cards.push({id:greekCardId(lemma),language:'griego-biblico',lemma:lemma,form:form||lemma,meaning:gloss||'Sin glosa',category:category||'',chapter:current()+1,page:state.page,decks:decks});
+ }
+ var result=await persistVocabCards(cards);
+ return result.error?result:{already:Boolean(existing),error:null};
+}
+
 function vocabPanel(){
  var cards=vocabCards();
- return '<section class="duff-exercise"><h3>Mis tarjetas · '+cards.length+'</h3><p class="note">Escribí o pegá palabras que encontrás en el PDF. Esta primera versión guarda las tarjetas en este navegador; la sincronización con Edición Viva y otros dispositivos está pendiente.</p><form id="duff-vocab-form"><label>Palabra griega<input name="form" lang="grc" required placeholder="λόγος"></label><label>Significado<input name="meaning" required placeholder="palabra, discurso"></label><label>Lema (opcional)<input name="lemma" lang="grc" placeholder="λόγος"></label><button type="submit" class="btn btn-small">Agregar tarjeta</button></form><p id="duff-vocab-message" role="status"></p><div class="duff-vocab-list">'+cards.map(function(c){return '<div class="duff-exercise"><b lang="grc">'+h(c.form)+'</b> · '+h(c.meaning)+'<p class="note">Lema: '+h(c.lemma||c.form)+' · Cap. '+c.chapter+' · pág. '+c.page+'</p><button type="button" class="btn btn-small" data-do="vocab-remove" data-id="'+h(c.id)+'">Quitar</button></div>';}).join('')+'</div></section>';
+ return '<section class="duff-exercise"><h3>Mis tarjetas · '+cards.length+'</h3><p class="note">Escribí o pegá palabras que encontrás en el PDF. Las tarjetas se guardan de forma privada en tu cuenta de Lengua Viva y se pueden repasar en el mazo común. Los lemas no se duplican al encontrarlos en diferentes pasajes.</p><form id="duff-vocab-form"><label>Palabra griega<input name="form" lang="grc" required placeholder="λόγος"></label><label>Significado<input name="meaning" required placeholder="palabra, discurso"></label><label>Lema (opcional)<input name="lemma" lang="grc" placeholder="λόγος"></label><button type="submit" class="btn btn-small">Agregar tarjeta</button></form><p id="duff-vocab-message" role="status"></p><div class="duff-vocab-list">'+cards.map(function(c){return '<div class="duff-exercise"><b lang="grc">'+h(c.form)+'</b> · '+h(c.meaning)+'<p class="note">Lema: '+h(c.lemma||c.form)+' · Cap. '+c.chapter+' · pág. '+c.page+'</p><button type="button" class="btn btn-small" data-do="vocab-remove" data-id="'+h(c.id)+'">Quitar</button></div>';}).join('')+'</div></section>';
 }
 function workbook(){
  if(!state.workOpen)return '';
@@ -433,6 +475,7 @@ async function loadData(){
  if(notes.error)state.bookError='No se pudieron cargar los apuntes: '+notes.error.message;
  (notes.data||[]).forEach(function(r){
   if(r.lesson_id==='duff:bookmark'&&!location.hash){try{state.page=JSON.parse(r.body).page||33;}catch(e){}}
+  else if(r.lesson_id==='duff:cards'){try{var parsed=JSON.parse(r.body);if(Array.isArray(parsed))state.vocabCards=parsed;}catch(e){}}
   else if(r.lesson_id.indexOf('duff:review:p:')===0){try{state.reviews[Number(r.lesson_id.slice('duff:review:p:'.length))]=JSON.parse(r.body);}catch(e){}}
   else if(r.lesson_id.indexOf('duff:p:')===0){try{state.notes[Number(r.lesson_id.slice(7))]=JSON.parse(r.body);}catch(e){}}
  });
@@ -497,15 +540,15 @@ app.addEventListener('change',async function(e){
   await loadBook();
  }
 });
-app.addEventListener('submit',function(e){
+app.addEventListener('submit',async function(e){
  if(e.target.id!=='duff-vocab-form')return;
  e.preventDefault();
  var data=new FormData(e.target),form=String(data.get('form')||'').trim(),meaning=String(data.get('meaning')||'').trim(),lemma=String(data.get('lemma')||'').trim();
  if(!form||!meaning)return;
- var cards=vocabCards(),key=(lemma||form).normalize('NFC').toLowerCase()+'|'+meaning.toLowerCase();
- if(cards.some(function(c){return (c.lemma||c.form).normalize('NFC').toLowerCase()+'|'+c.meaning.toLowerCase()===key;})){document.getElementById('duff-vocab-message').textContent='Ya tenés una tarjeta con ese lema y significado.';return;}
- cards.push({id:Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8),form:form,meaning:meaning,lemma:lemma,chapter:current()+1,page:state.page});
- try{localStorage.setItem('lv:duff:vocab:'+OWNER,JSON.stringify(cards));setWorkTab('vocab');}catch(err){document.getElementById('duff-vocab-message').textContent='No se pudo guardar en este navegador.';}
+ var response=await addGreekLemma(lemma||form,form,meaning,'Vocabulario personal');
+ if(response.error){var msg=document.getElementById('duff-vocab-message');if(msg)msg.textContent='No se guardó en la cuenta: '+response.error;return;}
+ if(response.already){var msg=document.getElementById('duff-vocab-message');if(msg)msg.textContent='Ese lema ya está en tus tarjetas; no se duplicó.';return;}
+ setWorkTab('vocab');
 });
 app.addEventListener('click',async function(e){
  var b=e.target.closest('[data-do]');if(!b)return;var act=b.dataset.do;
@@ -518,7 +561,7 @@ app.addEventListener('click',async function(e){
  if(act==='phonetics-group'){state.phoneticsGroup=b.dataset.group;state.phoneticsIndex=0;updatePhoneticsModal();return;}
  if(act==='phonetics-select'){state.phoneticsIndex=Number(b.dataset.index);updatePhoneticsModal();return;}
  if(act==='work-tab'){setWorkTab(b.dataset.tab);return;}
- if(act==='vocab-remove'){var next=vocabCards().filter(function(c){return c.id!==b.dataset.id;});localStorage.setItem('lv:duff:vocab:'+OWNER,JSON.stringify(next));setWorkTab('vocab');return;}
+ if(act==='vocab-remove'){var next=vocabCards().filter(function(c){return c.id!==b.dataset.id;});var outcome=await persistVocabCards(next);if(outcome.error){alert('No se pudo quitar la tarjeta: '+outcome.error);return;}setWorkTab('vocab');return;}
  if(act==='refresh-review'){await refreshReview();return;}
  if(act==='show-new-reviews'){var pages=unreadReviews();if(pages.length){go(Number(pages[0]));state.workTab='exercise';render();}return;}
  if(act==='toggle-work'){state.workOpen=!state.workOpen;render();return;}
@@ -561,7 +604,7 @@ app.addEventListener('click',async function(e){
   state.questions.unshift(res.data);render();
  }
 });
-document.addEventListener('click',function(e){if(e.target.closest('.duff-close')){closeGreekCard();return;}if(!e.target.closest('[data-do="greek-word"],.greek-card'))closeGreekCard();});
+document.addEventListener('click',async function(e){var add=e.target.closest('[data-do="add-greek-lemma"]');if(add){add.disabled=true;add.textContent='Guardando…';var result=await addGreekLemma(add.dataset.lemma,add.dataset.form,add.dataset.gloss,add.dataset.category);if(result.error){add.disabled=false;add.textContent='Error: '+result.error+' · Reintentar';}else{add.textContent=result.already?'✓ Lema ya guardado':'✓ Lema añadido a mis tarjetas';add.disabled=true;}return;}if(e.target.closest('.duff-close')){closeGreekCard();return;}if(!e.target.closest('[data-do="greek-word"],.greek-card'))closeGreekCard();});
 window.addEventListener('scroll',closeGreekCard,{passive:true});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(state.phoneticsOpen){closePhonetics();return;}closeGreekCard();}if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;if(e.key==='ArrowRight')go(state.page+1);if(e.key==='ArrowLeft')go(state.page-1);});
 window.addEventListener('resize',function(){if(state.pdfDocument&&state.user&&state.user.id===OWNER)renderPdfPage();});
