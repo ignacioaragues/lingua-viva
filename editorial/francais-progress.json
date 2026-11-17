@@ -1,7 +1,7 @@
 {
-  "course": "Français A1",
+  "course": "Curso anterior · Français A1",
   "reference": "Alter Ego+ 1; verify lesson order and page references against supplied source before claiming exact alignment",
-  "updated": "2026-11-16",
+  "updated": "2026-11-17",
   "current_unit": "Dossiers 0–1 · auditoría de audios y autosuficiencia",
   "objectives": [
     "Comprendre et dire les nombres 0–20",
@@ -30,6 +30,7 @@
     "Verificar con voz fr-FR real que la síntesis de letras aisladas pronuncia sus nombres correctamente; considerar grabaciones de referencia si falla",
     "Los audios oficiales todavía no están asociados individualmente a cada ejercicio de Dossiers 0–1; no atribuir números de pista sin verificación."
   ],
-  "next_step": "Continuar auditoría de autosuficiencia Dossier 0 (alfabeto, números), luego Dossier 1; cotejar pistas Hachette por actividad sin inventar números.",
-  "privacy": "Sin cambios en autenticación, Supabase, griego ni materiales protegidos"
+  "next_step": "El usuario desarrollará el nuevo Alter Ego A1 unidad por unidad, en editorial/alter-ego-a1-progress.json; este curso anterior se preserva.",
+  "privacy": "Sin cambios en autenticación, Supabase, griego ni materiales protegidos",
+  "status": "Conservado como curso anterior, sin cambiar IDs, contenidos, tarjetas ni progreso."
 }
