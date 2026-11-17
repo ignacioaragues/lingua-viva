@@ -7,44 +7,39 @@
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 6,
-  "phase": "exercises",
+  "phase": "texts",
   "phase_status": "pending",
   "start_page": 114,
   "end_page": 133,
   "previous_phase": {
-    "chapter": 5,
-    "phase": "texts",
+    "chapter": 6,
+    "phase": "exercises",
     "status": "completed",
     "date": "2026-11-17",
-    "pages_examined": "98–113",
-    "chapter_title": "Los adjetivos",
-    "blocks": 39,
-    "tokens": 231,
-    "lemmas": 59,
-    "biblical_passages": 10,
-    "core_commit": "f16cbc7a677c257c127f2f892bca6601333fc7d1",
-    "integration_commit": "b756d34f53374bb90562302f932818fe63c14705",
-    "entrypoint_commit": "7484414a988fde022b66463b434819c007e38f90",
+    "pages_examined": "114–133",
+    "chapter_title": "Los tiempos de los verbos",
+    "groups": 16,
+    "items": 96,
+    "core_commit": "ee6dcee0c2cc664bf81c50549ae5e5135f4daee2",
+    "entrypoint_commit": "c1c133c7dfb5a66f229a39e50bbd8f636d586378",
     "files": [
-      "griego-biblico/chapter5-readings.js",
       "griego-biblico/reader.js",
-      "griego-biblico/index.html",
-      "flashcards/repository.js"
+      "griego-biblico/index.html"
     ],
-    "verified": "JS válido, 16/16 páginas con 231 fichas, 10 extractos, 59 lemas, traducciones finales ocultas; navegación previa preservada.",
-    "limitations": "No se verificó en navegador autenticado ni persistencia real de Supabase."
+    "verified": "PDF original pp.114–133 cotejado; 16 grupos, 96 claves únicas, 20/20 páginas renderizadas estáticamente con conteo exacto; sintaxis JS válida. Sección C Juan 9:13–21 sin soluciones.",
+    "limitations": "No se comprobó guardado autenticado real ni visualización en navegador."
   },
   "next_phase": {
     "chapter": 6,
-    "phase": "exercises",
+    "phase": "texts",
     "start_page": 114,
     "end_page": 133,
-    "instructions": "Cotejar directamente todas las páginas PDF 114–133 del capítulo 6 «Los tiempos de los verbos»; construir campos específicos por práctica, guardar claves privadas sin autocorrección; verificar y sólo después pasar a textos.",
+    "instructions": "Reabrir todas las páginas 114–133 y anotar paradigmas de presente, futuro, imperfecto y aoristo; referencias Juan 14:1, 11:48, 7:5, 4:50, Mateo 5:2 y selección Juan 9:13–21. Mantener oculta traducción completa de la sección C.",
     "pending": [
-      "Reabrir el PDF original pp.114–133",
-      "Inventariar todos los ejercicios con numeración y dirección",
-      "Implementar campos específicos y navegación",
-      "QA estática y actualizar progreso"
+      "Cotejar textos y paradigmas del PDF original",
+      "Incorporar lecturas con fichas token a token y licencia",
+      "Integrar lector, mazo duff-ch6 y traducciones ocultables",
+      "QA y actualizar ambos checkpoints"
     ]
   },
   "hard_rules": [
