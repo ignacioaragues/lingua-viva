@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Capítulo 9 textos, continuación",
-    "verified": "4 paradigmas añadidos, 64 fichas; total 19 bloques, 117 tokens",
-    "limitations": "Sin QA autenticada",
-    "next": "Continuar capítulo 9 textos"
+    "scope": "Capítulo 9 textos, reflexivos y recíprocos",
+    "verified": "4 bloques, 25 fichas añadidas; total 23 bloques y 142 fichas",
+    "limitations": "QA autenticada pendiente",
+    "next": "Citas bíblicas y QA capítulo 9"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -827,5 +827,5 @@
       }
     }
   ],
-  "last_commit": "74cb08cfc97b164b80e05521e62c0162100533c4"
+  "last_commit": "8624e15445720547f8e60e95749eb06965d07780"
 }
