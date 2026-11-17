@@ -807,14 +807,24 @@
         162,
         176
       ],
-      "status": "exercises_complete",
+      "status": "texts_in_progress",
       "completed_on": "2026-11-17",
       "exercises": {
         "groups": 13,
         "items": 63,
         "core_commit": "cae641aa133318a32b066a0f7ffe9f96c6edaeb1"
       },
-      "qa": "Cotejo textual del PDF físico 162–176; 63 ítems en 13 grupos. Prueba de navegador autenticado pendiente."
+      "qa": "Cotejo textual del PDF físico 162–176; 63 ítems en 13 grupos. Prueba de navegador autenticado pendiente.",
+      "texts": {
+        "status": "partial",
+        "blocks": 15,
+        "tokens": 53,
+        "pages_with_initial_readings": 15,
+        "core_commit": "b8430becc9acd8f38b1d942fe01c81cd3526bf02",
+        "integration_commit": "55e9169b4ebb8f75ff401a33e01015c2923b60bd",
+        "entrypoint_commit": "21adecca3ccc8efc730c0e35985ddeafb0957d75",
+        "pending": "Completar paradigmas, referencias bíblicas y QA de navegador autenticado"
+      }
     }
   ]
 }
