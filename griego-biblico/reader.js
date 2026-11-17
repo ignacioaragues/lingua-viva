@@ -386,7 +386,31 @@ function chapterFivePractice(){
  return out+reviewPanel(p);
 }
 
+
+/* Duff capítulo 6, páginas físicas 114–133: inventario de consignas cotejado con el PDF privado.
+   Solo metadatos; no se publican enunciados ni soluciones. */
+var chapterSixExercises={"116":[{"id":"6-2-identificar","label":"Práctica 6.2 · reconocer tiempo","type":"tense","start":1,"count":6,"description":"Identificá el tiempo de cada verbo."}],"119":[{"id":"6-3-equivalencias","label":"Práctica 6.3 · equivalencias castellanas","type":"tense","start":1,"count":6,"description":"Indicá el tiempo griego correspondiente a cada expresión castellana."},{"id":"6-3-traduccion","label":"Práctica 6.3 · traducción","type":"translation","start":1,"count":6,"description":"Traducí las seis formas griegas al español."}],"120":[{"id":"6-4-gr-es","label":"Práctica 6.4 · griego → español","type":"translation","start":1,"count":6,"description":"Traducí las seis formas griegas."},{"id":"6-4-es-gr","label":"Práctica 6.4 · español → griego","type":"greek","start":7,"count":3,"description":"Escribí las formas griegas de los ítems 7–9."}],"121":[{"id":"mitad-gr-es","label":"Práctica intermedia · griego → español","type":"translation","start":1,"count":8,"description":"Traducí las oraciones 1–8."},{"id":"mitad-es-gr","label":"Práctica intermedia · español → griego","type":"greek","start":9,"count":4,"description":"Traducí las oraciones 9–12."}],"124":[{"id":"6-5-imperfecto","label":"Práctica 6.5 · formar imperfecto","type":"greek-form","start":1,"count":8,"description":"Transformá cada verbo en imperfecto activo, primera persona singular."}],"126":[{"id":"6-6-aoristo","label":"Práctica 6.6 · formar aoristo","type":"greek-form","start":1,"count":8,"description":"Transformá cada verbo en aoristo activo, primera persona singular."}],"127":[{"id":"6-7-identificar","label":"Práctica 6.7 · identificar tiempos","type":"tense","start":1,"count":8,"description":"Identificá el tiempo de cada forma, considerando aumentos y sufijos."}],"128":[{"id":"6-8-traduccion","label":"Práctica 6.8 · verbos en -έω","type":"translation","start":1,"count":8,"description":"Traducí las ocho formas verbales."}],"130":[{"id":"finalA-gr-es","label":"Ejercicios finales · A, griego → español","type":"translation","start":1,"count":8,"description":"Traducí los ítems 1–8; el octavo continúa en la página 131."},{"id":"finalA-es-gr","label":"Ejercicios finales · A, español → griego","type":"greek","start":9,"count":4,"description":"Traducí los ítems 9–12, situados en la página 131."}],"131":[{"id":"finalB-gr-es","label":"Ejercicios finales · B, griego → español","type":"translation","start":1,"count":8,"description":"Traducí los ítems 1–8."},{"id":"finalB-es-gr","label":"Ejercicios finales · B, español → griego","type":"greek","start":9,"count":4,"description":"Traducí los ítems 9–12."},{"id":"finalC-juan9","label":"Ejercicios finales · C, Juan 9:13–21","type":"translation","start":1,"count":1,"description":"Traducí el pasaje seleccionado de Juan 9:13–21, que continúa en la página 132."}]};
+function chapterSixPractice(){
+ var p=state.page,parts=chapterSixExercises[p]||[];
+ var nav=[[116,'6.2'],[119,'6.3'],[120,'6.4'],[121,'Mitad'],[124,'6.5'],[126,'6.6'],[127,'6.7'],[128,'6.8'],[130,'Final A'],[131,'Final B/C']];
+ var out='<nav class="duff-index duff-ch2-index" aria-label="Prácticas del capítulo 6">'+nav.map(function(x){return '<button type="button" data-do="page" data-page="'+x[0]+'" aria-current="'+(p===x[0]?'page':'false')+'">'+h(x[1])+'</button>';}).join('')+'</nav>';
+ if(p===132)out+='<p class="duff-ch2-note">El pasaje de Juan 9:13–21 continúa aquí. <button type="button" class="btn btn-small" data-do="page" data-page="131">Responder Sección C</button></p>';
+ else if(!parts.length)out+='<p class="duff-ch2-note">Página de teoría, ejemplos, vocabulario o notas. Elegí una práctica en el índice.</p>';
+ parts.forEach(function(ex,i){
+  var answered=0;
+  for(var n=ex.start;n<ex.start+ex.count;n++)if(String(note(p).answers['duff-ch6:'+ex.id+':'+n]||'').trim())answered++;
+  out+='<details class="duff-exercise duff-ch2-group" '+(i===0?'open':'')+'><summary>'+h(ex.label)+' <span class="duff-ch2-count">'+ex.count+' ítems'+(answered?' · '+answered+' contestados':'')+'</span></summary><p>'+h(ex.description)+' Consultá los enunciados en el PDF privado. Sin autocorrección.</p>';
+  for(var n=ex.start;n<ex.start+ex.count;n++){
+   var greek=ex.type==='greek'||ex.type==='greek-form';
+   var label=ex.type==='tense'?'Tiempo griego':ex.type==='greek-form'?'Forma griega solicitada':greek?'Tu traducción al griego':'Tu traducción al español';
+   out+='<div class="duff-answer-row"><div class="duff-answer-label">Ítem '+n+'</div>'+field('duff-ch6:'+ex.id+':'+n,label,greek,ex.type==='translation'||ex.type==='greek'?2:false)+'</div>';
+  }
+  out+='</details>';
+ });
+ return out+reviewPanel(p);
+}
 function practice(){
+ if(current()===5)return chapterSixPractice();
  if(current()===4)return chapterFivePractice();
  if(current()===3)return chapterFourPractice();
  if(current()===2)return chapterThreePractice();
