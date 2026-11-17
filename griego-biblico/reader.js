@@ -44,7 +44,11 @@ var exercises={
 46:[['Ejercicios · 1','text','Juan 1:1–14: transcripción en letras españolas (continúa en la página siguiente)',1]],
 48:[['Ejercicios · 2','text','Juan 1:15–23: escribir el pasaje en griego',1]],
 53:[['2.1 · griego → español','text','Práctica 2.1: traducir las seis formas griegas al español, según el PDF privado',6],['2.1 · español → griego','text','Práctica 2.1: escribir en griego las tres formas solicitadas en español, según el PDF privado',3]],
-55:[['2.2 · griego → español','text','Práctica 2.2: traducir las seis formas de verbos contractos al español, según el PDF privado',6],['2.2 · español → griego','text','Práctica 2.2: escribir en griego las tres formas solicitadas en español, según el PDF privado',3]]
+55:[['2.2 · griego → español','text','Práctica 2.2: seis traducciones de formas verbales contractas',6],['2.2 · español → griego','text','Práctica 2.2: tres formas verbales que escribir en griego',3]],
+57:[['2.3.1','case-number','Práctica 2.3.1: identificá caso y número de ocho formas nominales',8]],
+60:[['2.3.3 · griego → español','text','Práctica 2.3.3: traducí seis oraciones del griego al español',6],['2.3.3 · español → griego','text','Práctica 2.3.3: escribí cuatro oraciones en griego',4]],
+62:[['2.4–2.5 · griego → español','text','Prácticas 2.4 y 2.5: cinco traducciones del griego al español',5],['2.4–2.5 · español → griego','text','Prácticas 2.4 y 2.5: tres traducciones del español al griego',3]],
+64:[['Final · A · griego → español','text','Sección A: traducí ocho oraciones del griego al español',8],['Final · A · español → griego','text','Sección A: escribí cuatro oraciones en griego',4],['Final · B · griego → español','text','Sección B: traducí ocho oraciones del griego al español',8],['Final · B · español → griego','text','Sección B: escribí cuatro oraciones en griego',4]]
 };
 var timer=null;
 var state={user:null,page:33,bookUrl:null,bookError:'',uploading:false,notes:{},reviews:{},done:{},questions:[],pron:7,greekTranslation:true,authMessage:'',loading:true,saveTimers:{},saveStatus:'',ready:false,lastInput:null,pdfDocument:null,pdfLoading:false,pdfError:'',pdfPageCount:522,pdfZoom:1,pdfRenderTask:null,pdfRenderTicket:0,workOpen:!(window.matchMedia&&window.matchMedia('(max-width:1050px)').matches),workTab:'notes',phoneticsOpen:false,phoneticsGroup:'letters',phoneticsIndex:7};
@@ -118,7 +122,50 @@ function field(key,label,greek,multi){
  var val=note(state.page).answers[key]||'';
  return '<label for="field-'+h(key)+'">'+h(label)+'</label>'+(multi?'<textarea id="field-'+h(key)+'" '+(greek?'class="greek-answer" ':'')+'data-field="'+h(key)+'" rows="'+(multi===2?8:3)+'">'+h(val)+'</textarea>':'<input type="text" id="field-'+h(key)+'" '+(greek?'class="greek-answer" ':'')+'data-field="'+h(key)+'" value="'+h(val)+'">');
 }
+
+// Las prácticas del capítulo 2 se cotejaron con el PDF privado aportado,
+// páginas físicas 50–65. Sólo publicamos estructura, tipos y casillas:
+// NO transcribimos el texto protegido del manual ni autocorregimos respuestas.
+function chapterTwoPractice(){
+ var p=state.page,parts=exercises[p]||[];
+ var jumping=[[53,'2.1'],[55,'2.2'],[57,'2.3.1'],[60,'2.3.3'],[62,'2.4–2.5'],[64,'Final A/B']];
+ var out='<nav class="duff-index duff-ch2-index" aria-label="Prácticas del capítulo 2">'
+  +jumping.map(function(x){return '<button type="button" data-do="page" data-page="'+x[0]+'" aria-current="'+(p===x[0]?'page':'false')+'">'+h(x[1])+'</button>';}).join('')+'</nav>';
+ if(p===54)out+='<p class="duff-ch2-note">La práctica 2.1 comienza en la página 53 y continúa en esta página. Todas sus respuestas se guardan juntas: <button type="button" class="btn btn-small" data-do="page" data-page="53">Abrir práctica 2.1 (p. 53)</button></p>';
+ else if(p===63)out+='<p class="duff-ch2-note">El encabezado de los ejercicios finales aparece aquí; los 24 ítems de las secciones A y B están en la página siguiente. <button type="button" class="btn btn-small" data-do="page" data-page="64">Abrir ejercicios finales (p. 64)</button></p>';
+ else if(!parts.length)out+='<p class="duff-ch2-note">Esta página corresponde a la explicación, las tablas o el vocabulario. Seleccioná una práctica arriba para escribir tus respuestas, o utilizá Apuntes para las notas libres.</p>';
+ parts.forEach(function(ex,ix){
+  var id=ex[0],type=ex[1],description=ex[2],count=ex[3];
+  var greek=id.indexOf('español → griego')>=0;
+  var savedCount=0;
+  for(var i=1;i<=count;i++){if(String(note(p).answers[id+':'+i]||'').trim())savedCount++;}
+  out+='<details class="duff-exercise duff-ch2-group" '+(ix===0?'open':'')+'>'
+    +'<summary>'+h(id)+' <span class="duff-ch2-count">'+count+' ítems'+(savedCount?' · '+savedCount+' con respuesta':'')+'</span></summary>'
+    +'<p>'+h(description)+'. Consultá los enunciados en el PDF privado, a la izquierda. Las respuestas se guardan por página y no se corrigen hasta que lo pidas.</p>';
+  if(type==='case-number'){
+    for(var c=1;c<=count;c++){
+      out+='<div class="duff-answer-row"><div class="duff-answer-label">Ítem '+c+'</div><div class="duff-answer-pair">'
+        +'<div>'+field(id+':'+c+':caso','Caso (nominativo / acusativo)',false,false)+'</div>'
+        +'<div>'+field(id+':'+c+':numero','Número (singular / plural)',false,false)+'</div>'
+        +'</div></div>';
+    }
+  }else{
+    for(var j=1;j<=count;j++){
+      out+='<div class="duff-answer-row">'+field(id+':'+j,'Ítem '+j,greek,true)+'</div>';
+    }
+  }
+  out+='</details>';
+ });
+ var legacy=Object.keys(note(p).answers).filter(function(k){return k.indexOf('ch2:free:')===0&&String(note(p).answers[k]||'').trim();});
+ if(legacy.length){
+   out+='<details class="duff-exercise duff-ch2-group"><summary>Respuestas anteriores en casillas provisionales ('+legacy.length+')</summary><p>No se borraron ni se trasladaron automáticamente. Podés copiarlas a las prácticas numeradas cuando quieras.</p>'
+   +legacy.map(function(k){return field(k,k.replace('ch2:free:','Casilla '),true,true);}).join('')+'</details>';
+ }
+ return out+reviewPanel(p);
+}
+
 function practice(){
+ if(current()===1)return chapterTwoPractice();
  var parts=exercises[state.page]||[];
  if(state.page===53||state.page===55){var legacy=note(state.page).answers;var saved=Object.keys(legacy).filter(function(k){return k.indexOf('ch2:free:')===0&&String(legacy[k]||'').trim();});if(saved.length){var warning='<details class="duff-exercise"><summary>Respuestas anteriores en casillas provisionales ('+saved.length+')</summary><p class="note">Conservadas sin cambios. Podés trasladarlas a las casillas específicas cuando quieras.</p>'+saved.map(function(k){return '<p><b>'+h(k)+'</b>: '+h(legacy[k])+'</p>';}).join('')+'</details>';return parts.map(function(ex){var id=ex[0],count=ex[3],out='<div class="duff-exercise"><h3>Práctica '+h(id)+'</h3><p>'+h(ex[2])+'. Consultá los enunciados en el PDF privado.</p>';for(var i=1;i<=count;i++)out+=field(id+':'+i,'Ítem '+i,/español → griego/.test(id),2);return out+'</div>';}).join('')+warning+reviewPanel(state.page);}}
  if(!parts.length){
