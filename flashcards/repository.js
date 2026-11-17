@@ -21,7 +21,8 @@
       {id:'duff-ch2',label:'Duff · Capítulo 2'},
       {id:'duff-ch3',label:'Duff · Capítulo 3'},
       {id:'duff-ch4',label:'Duff · Capítulo 4'},
-      {id:'duff-ch5',label:'Duff · Capítulo 5'}
+      {id:'duff-ch5',label:'Duff · Capítulo 5'},
+      {id:'duff-ch6',label:'Duff · Capítulo 6'}
     ]
   };
   function all(language, legacyLessons) {
