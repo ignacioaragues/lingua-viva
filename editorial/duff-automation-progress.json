@@ -6,50 +6,37 @@
   "timezone": "Europe/Berlin",
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
-  "chapter": 8,
-  "phase": "texts",
+  "chapter": 9,
+  "phase": "exercises",
   "phase_status": "pending",
-  "start_page": 149,
-  "end_page": 161,
+  "start_page": 162,
+  "end_page": 177,
   "previous_phase": {
     "chapter": 8,
-    "phase": "exercises",
+    "phase": "texts",
     "status": "completed",
     "date": "2026-11-17",
     "pages_examined": "149–161",
-    "groups": 14,
-    "items": 70,
-    "items_by_type": {
-      "morphology": 9,
-      "greek_forms": 10,
-      "translation_to_spanish": 34,
-      "translation_to_greek": 17
-    },
-    "items_by_page": {
-      "151": 9,
-      "152": 10,
-      "153": 12,
-      "154": 8,
-      "157": 6,
-      "159": 4,
-      "160": 16,
-      "161": 5
-    },
-    "core_commit": "9a737647fcba7bc643d465f7df39ead8e95b6d08",
-    "verified": "Sintaxis JS válida; 70 claves únicas, 14 grupos, navegación en 8 páginas y guardado con field() existente; no se accedió a cuenta autenticada ni se probó en navegador real.",
-    "limitations": "Cotejo con texto extraído directamente de las 13 páginas del PDF; no prueba visual del subrayado o formato del PDF."
+    "blocks": 32,
+    "annotated_tokens": 167,
+    "lemmas": 48,
+    "biblical_passages": 3,
+    "core_commit": "e159f0a1efa490e4fcc51f8155768a24936d929f",
+    "integration_commit": "79d983c2712d397916063e382b69c0b02e166165",
+    "verified": "13/13 páginas, 167/167 tokens, lectura y lookup en pruebas estáticas; ejercicio final sin traducción",
+    "limitations": "Sin navegador autenticado ni QA visual; fragmentos bíblicos cortos y ejemplos propios."
   },
   "next_phase": {
-    "chapter": 8,
-    "phase": "texts",
-    "start_page": 149,
-    "end_page": 161,
-    "instructions": "Releer todas las páginas físicas del capítulo 8 y anotar deponentes, paradigmas de εἰμί, sustantivos de género irregular, referencias bíblicas y vocabulario, sin revelar la traducción del ejercicio final Marcos 4:1–2.",
+    "chapter": 9,
+    "phase": "exercises",
+    "start_page": 162,
+    "end_page": 177,
+    "instructions": "Abrir PDF capítulo 9, cotejar todas las prácticas y crear campos específicos sin soluciones; no avanzar sin prueba.",
     "pending": [
-      "Reexaminar PDF pp.149–161",
-      "Crear fichas token a token y traducciones propias ocultables",
-      "Integrar lector en las 13 páginas y mazo Duff capítulo 8",
-      "Verificar sintaxis, carga, claves y no mostrar solución final"
+      "Cotejar páginas físicas 162–177",
+      "Implementar ejercicios reales",
+      "Verificar renderizado, guardado y claves",
+      "Actualizar checkpoints"
     ]
   },
   "hard_rules": [
@@ -189,6 +176,32 @@
         "entrypoint_commit": "c4fe46c62826f0b54b604cfdba4f884cb9163e78"
       },
       "qa": "15/15 páginas renderizadas estáticamente; 148 fichas completas; 1 Juan 3:4–10 sin traducción; no QA autenticada."
+    },
+    {
+      "chapter": 8,
+      "name": "Otros patrones de sustantivos y verbos",
+      "pdf_pages": [
+        149,
+        161
+      ],
+      "status": "both_passes_complete",
+      "completed_on": "2026-11-17",
+      "exercises": {
+        "groups": 14,
+        "items": 70,
+        "core_commit": "9a737647fcba7bc643d465f7df39ead8e95b6d08"
+      },
+      "texts": {
+        "blocks": 32,
+        "tokens": 167,
+        "lemmas": 48,
+        "biblical_passages": 3,
+        "pages_covered": 13,
+        "core_commit": "e159f0a1efa490e4fcc51f8155768a24936d929f",
+        "integration_commit": "79d983c2712d397916063e382b69c0b02e166165",
+        "entrypoint_commit": "2c3e85d6875b0171a21e6220488b82d63de3d8ea"
+      },
+      "qa": "13/13 páginas renderizadas estáticamente; 167/167 fichas completas; Marcos 4:1–2 sin traducción; sin QA autenticada."
     }
   ]
 }
