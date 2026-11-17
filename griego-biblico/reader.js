@@ -416,7 +416,7 @@ async function addGreekLemma(lemma,form,gloss,category){
  var cards=vocabCards(),key=greekLemmaKey(lemma);
  var existing=cards.find(function(c){return greekLemmaKey(c.lemma||c.form)===key;});
  var bookDeck='duff-ch'+(current()+1),pageRef=state.page>=46&&state.page<=48?'juan1':'duff-ch2';
- var decks=['duff',bookDeck,pageRef];
+ var decks=[...new Set(['duff',bookDeck,pageRef])];
  if(existing){
   var nextDecks=[...new Set((existing.decks||[]).concat(decks))];
   if(nextDecks.length===(existing.decks||[]).length)return {already:true,error:null};
