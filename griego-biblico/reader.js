@@ -171,40 +171,40 @@ function chapterTwoPractice(){
    Las respuestas NO se califican ni se autocorrigen. */
 var chapterThreeExercises={
  67:[
-  {id:'3.1 · casos',label:'Práctica 3.1 · determinar el caso',type:'case',start:1,count:8,description:'Para cada oración, indicá el caso de la palabra subrayada en el PDF.'},
-  {id:'3.1 · morfología',label:'Práctica 3.1 · caso y número',type:'case-number',start:9,count:8,description:'Para cada forma griega, indicá caso y número.'}
+  {id:'3-1-casos',label:'Práctica 3.1 · determinar el caso',type:'case',start:1,count:8,description:'Para cada oración, indicá el caso de la palabra subrayada en el PDF.'},
+  {id:'3-1-morfologia',label:'Práctica 3.1 · caso y número',type:'case-number',start:9,count:8,description:'Para cada forma griega, indicá caso y número.'}
  ],
  69:[
-  {id:'3.2 · griego-español',label:'Práctica 3.2 · griego → español',type:'translation',start:1,count:4,description:'Traducción de los cuatro primeros ítems al español.'},
-  {id:'3.2 · español-griego',label:'Práctica 3.2 · español → griego',type:'greek',start:5,count:2,description:'Escritura en griego de los ítems 5 y 6.'},
-  {id:'mitad · griego-español',label:'Práctica a mitad de camino · griego → español',type:'translation',start:1,count:8,description:'Primera parte de la práctica intermedia.'},
-  {id:'mitad · español-griego',label:'Práctica a mitad de camino · español → griego',type:'greek',start:9,count:4,description:'Últimos cuatro ítems de la práctica intermedia.'}
+  {id:'3-2-gr-es',label:'Práctica 3.2 · griego → español',type:'translation',start:1,count:4,description:'Traducción de los cuatro primeros ítems al español.'},
+  {id:'3-2-es-gr',label:'Práctica 3.2 · español → griego',type:'greek',start:5,count:2,description:'Escritura en griego de los ítems 5 y 6.'},
+  {id:'mitad-gr-es',label:'Práctica a mitad de camino · griego → español',type:'translation',start:1,count:8,description:'Primera parte de la práctica intermedia.'},
+  {id:'mitad-es-gr',label:'Práctica a mitad de camino · español → griego',type:'greek',start:9,count:4,description:'Últimos cuatro ítems de la práctica intermedia.'}
  ],
  71:[
-  {id:'3.3.2 · morfología',label:'Práctica 3.3.2 · caso y número',type:'case-number',start:1,count:8,description:'Clasificá las ocho formas nominales por caso y número.'}
+  {id:'3-3-2-morfologia',label:'Práctica 3.3.2 · caso y número',type:'case-number',start:1,count:8,description:'Clasificá las ocho formas nominales por caso y número.'}
  ],
  72:[
-  {id:'3.3.3 · artículo',label:'Práctica 3.3.3 · artículo definido',type:'greek',start:1,count:8,description:'Escribí la forma griega del artículo que concuerda con cada palabra.'}
+  {id:'3-3-3-articulo',label:'Práctica 3.3.3 · artículo definido',type:'greek',start:1,count:8,description:'Escribí la forma griega del artículo que concuerda con cada palabra.'}
  ],
  74:[
-  {id:'3.3.4-5 · explicar',label:'Prácticas 3.3.4 y 3.3.5 · análisis de formas',type:'analysis',start:1,count:9,description:'Explicá la forma de cada sustantivo o artículo (caso, número y, cuando corresponda, género).'},
-  {id:'3.3.4-5 · concordancia',label:'Prácticas 3.3.4 y 3.3.5 · concordancia',type:'yesno',start:10,count:9,description:'Decidí si la concordancia entre artículo y sustantivo es correcta (sin autocorrección).'}
+  {id:'3-3-4-5-analisis',label:'Prácticas 3.3.4 y 3.3.5 · análisis de formas',type:'analysis',start:1,count:9,description:'Explicá la forma de cada sustantivo o artículo (caso, número y, cuando corresponda, género).'},
+  {id:'3-3-4-5-concordancia',label:'Prácticas 3.3.4 y 3.3.5 · concordancia',type:'yesno',start:10,count:9,description:'Decidí si la concordancia entre artículo y sustantivo es correcta (sin autocorrección).'}
  ],
  75:[
-  {id:'3.4 · vocativo',label:'Práctica 3.4 · formas vocativas',type:'yesno',start:1,count:5,description:'Indicá si cada forma griega podría funcionar como vocativo.'}
+  {id:'3-4-vocativo',label:'Práctica 3.4 · formas vocativas',type:'yesno',start:1,count:5,description:'Indicá si cada forma griega podría funcionar como vocativo.'}
  ],
  77:[
-  {id:'3.6 · griego-español',label:'Práctica 3.6 · griego → español',type:'translation',start:1,count:5,description:'Traducí las primeras cinco oraciones del griego al español.'},
-  {id:'3.6 · español-griego',label:'Práctica 3.6 · español → griego',type:'greek',start:6,count:3,description:'Traducí las últimas tres oraciones al griego.'}
+  {id:'3-6-gr-es',label:'Práctica 3.6 · griego → español',type:'translation',start:1,count:5,description:'Traducí las primeras cinco oraciones del griego al español.'},
+  {id:'3-6-es-gr',label:'Práctica 3.6 · español → griego',type:'greek',start:6,count:3,description:'Traducí las últimas tres oraciones al griego.'}
  ],
  78:[
-  {id:'finalA · griego-español',label:'Ejercicios finales · Sección A, griego → español',type:'translation',start:1,count:8,description:'Sección A, ítems 1–8 (griego → español).'},
-  {id:'finalA · español-griego',label:'Ejercicios finales · Sección A, español → griego',type:'greek',start:9,count:4,description:'Sección A, ítems 9–12 (los ítems 11–12 aparecen al inicio de la página 79).'}
+  {id:'finalA-gr-es',label:'Ejercicios finales · Sección A, griego → español',type:'translation',start:1,count:8,description:'Sección A, ítems 1–8 (griego → español).'},
+  {id:'finalA-es-gr',label:'Ejercicios finales · Sección A, español → griego',type:'greek',start:9,count:4,description:'Sección A, ítems 9–12 (los ítems 11–12 aparecen al inicio de la página 79).'}
  ],
  79:[
-  {id:'finalB · griego-español',label:'Ejercicios finales · Sección B, griego → español',type:'translation',start:1,count:8,description:'Sección B, ítems 1–8.'},
-  {id:'finalB · español-griego',label:'Ejercicios finales · Sección B, español → griego',type:'greek',start:9,count:4,description:'Sección B, ítems 9–12.'},
-  {id:'finalC · Marcos 1:1',label:'Ejercicios finales · Sección C, Marcos 1:1',type:'translation',start:1,count:1,description:'Traducí el versículo bíblico presentado en el PDF, sin anticipar una solución.'}
+  {id:'finalB-gr-es',label:'Ejercicios finales · Sección B, griego → español',type:'translation',start:1,count:8,description:'Sección B, ítems 1–8.'},
+  {id:'finalB-es-gr',label:'Ejercicios finales · Sección B, español → griego',type:'greek',start:9,count:4,description:'Sección B, ítems 9–12.'},
+  {id:'finalC-marcos1-1',label:'Ejercicios finales · Sección C, Marcos 1:1',type:'translation',start:1,count:1,description:'Traducí el versículo bíblico presentado en el PDF, sin anticipar una solución.'}
  ]
 };
 function chapterThreePractice(){
