@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Duff capítulo 2: anotación de textos griegos, frases originales y paradigmas, páginas 50–65",
-    "verified": "Datos 44 ejemplos/175 tokens; 16 páginas con sección de lectura, glosas y acceso a tarjetas; sintaxis y renderización estática comprobadas",
-    "limitations": "Sin prueba autenticada visual ni en iPad; materiales auxiliares no son respuestas a ejercicios",
-    "next": "Prueba manual cuando el usuario acceda; futuras correcciones solo si solicita expresamente"
+    "scope": "Capítulo 3 de Duff · primera pasada, ejercicios",
+    "verified": "106 ejercicios numerados, 18 bloques, 9 páginas, UI y sintaxis JavaScript verificadas por pruebas estáticas",
+    "limitations": "QA autenticada real y publicación en GitHub Pages pendientes; subrayados de práctica 3.1 requieren consultar PDF visual",
+    "next": "Pasada de textos griegos del capítulo 3 antes de avanzar al capítulo 4."
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -319,5 +319,128 @@
     ],
     "verification": "Javascript compilado; 44 bloques, 175 tokens con datos morfológicos, referencias únicas y 16/16 páginas con botón de lectura. Conservadas 23 versículos anotados de Juan y 5 citas bíblicas. No hubo prueba autenticada en navegador o iPad.",
     "next": "Probar lectura, popover, traducción y guardado autenticado en las páginas 50, 52, 55, 61, 63 y 64 y revisar posibles detalles morfológicos señalados por el usuario."
+  },
+  "chapter_3_verified_practices": {
+    "date": "2026-11-17",
+    "original_pdf": "Jeremy Duff, Curso de griego bíblico, capítulo 3 («Los casos y el género»), páginas PDF 66–80",
+    "status": "Ejercicios completados en código (106 ítems específicos, 18 bloques), pendiente QA autenticada de interfaz/guardado; siguiente fase: textos griegos",
+    "pages_with_exercises": [
+      67,
+      69,
+      71,
+      72,
+      74,
+      75,
+      77,
+      78,
+      79
+    ],
+    "groups": [
+      {
+        "section": "3.1",
+        "page": 67,
+        "items": 16,
+        "subgroups": [
+          "1–8 casos de palabras subrayadas",
+          "9–16 caso y número"
+        ]
+      },
+      {
+        "section": "3.2",
+        "page": 69,
+        "items": 6,
+        "subgroups": [
+          "1–4 griego → español",
+          "5–6 español → griego"
+        ]
+      },
+      {
+        "section": "Práctica a mitad de camino",
+        "page": 69,
+        "items": 12,
+        "subgroups": [
+          "1–8 griego → español",
+          "9–12 español → griego"
+        ]
+      },
+      {
+        "section": "3.3.2",
+        "page": 71,
+        "items": 8,
+        "subgroups": [
+          "1–8 caso y número"
+        ]
+      },
+      {
+        "section": "3.3.3",
+        "page": 72,
+        "items": 8,
+        "subgroups": [
+          "1–8 artículo definido en griego"
+        ]
+      },
+      {
+        "section": "3.3.4 y 3.3.5",
+        "page": 74,
+        "items": 18,
+        "subgroups": [
+          "1–9 explicar la forma gramatical",
+          "10–18 concordancia sí/no"
+        ]
+      },
+      {
+        "section": "3.4",
+        "page": 75,
+        "items": 5,
+        "subgroups": [
+          "1–5 vocativo posible sí/no"
+        ]
+      },
+      {
+        "section": "3.6",
+        "page": 77,
+        "items": 8,
+        "subgroups": [
+          "1–5 griego → español",
+          "6–8 español → griego"
+        ]
+      },
+      {
+        "section": "Final A",
+        "page": 78,
+        "items": 12,
+        "subgroups": [
+          "1–8 griego → español",
+          "9–12 español → griego (11–12 continúan en p.79)"
+        ]
+      },
+      {
+        "section": "Final B",
+        "page": 79,
+        "items": 12,
+        "subgroups": [
+          "1–8 griego → español",
+          "9–12 español → griego"
+        ]
+      },
+      {
+        "section": "Final C",
+        "page": 79,
+        "items": 1,
+        "subgroups": [
+          "Marcos 1:1, traducción"
+        ]
+      }
+    ],
+    "implementation": [
+      "griego-biblico/reader.js",
+      "griego-biblico/index.html"
+    ],
+    "core_commit": "79ff197df6f7890ed5468f14dad427f8e225031d",
+    "entrypoint_commit": "3459c4bc817f447e9ca702ff7aba28bbd298dce5",
+    "verification": "Sintaxis JS válida; 106 ítems y 18 grupos; 9 páginas con campos; 106 claves de ítem sin duplicados; 3.1 palabras subrayadas se dejan referenciadas al PDF porque el texto extraído no conserva subrayado.",
+    "privacy": "Se conservan todas las claves existentes de respuestas de capítulos 1 y 2; para cap.3 se crean claves duff-ch3 específicas. Guardado privado por página sin respuestas automáticas.",
+    "limitations": "No se efectuó prueba real de sesión Supabase ni visualización en navegador. Los materiales se cotejaron en PDF de texto; no se verificaron visualmente todos los subrayados.",
+    "next": "Capítulo 3: fase textos, citas y paradigmas, pp.66–80; luego capítulo 4 fase ejercicios."
   }
 }
