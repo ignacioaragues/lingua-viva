@@ -6,40 +6,44 @@
   "timezone": "Europe/Berlin",
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
-  "chapter": 6,
-  "phase": "texts",
+  "chapter": 7,
+  "phase": "exercises",
   "phase_status": "pending",
-  "start_page": 114,
-  "end_page": 133,
+  "start_page": 134,
+  "end_page": 148,
   "previous_phase": {
     "chapter": 6,
-    "phase": "exercises",
+    "phase": "texts",
     "status": "completed",
     "date": "2026-11-17",
     "pages_examined": "114–133",
-    "chapter_title": "Los tiempos de los verbos",
-    "groups": 16,
-    "items": 96,
-    "core_commit": "ee6dcee0c2cc664bf81c50549ae5e5135f4daee2",
-    "entrypoint_commit": "c1c133c7dfb5a66f229a39e50bbd8f636d586378",
+    "blocks": 30,
+    "annotated_tokens": 178,
+    "lemmas": 54,
+    "biblical_passages": 7,
+    "core_commit": "20d5836c532af61b484218a9190a6e43639ef48a",
+    "integration_commit": "a783ce17e43fb3efff1d14207212809c69e2d31b",
+    "live_entrypoint_commit": "0197a4db547490a8bf63860683ec5479f2609341",
     "files": [
+      "griego-biblico/chapter6-readings.js",
       "griego-biblico/reader.js",
-      "griego-biblico/index.html"
+      "griego-biblico/index.html",
+      "flashcards/repository.js"
     ],
-    "verified": "PDF original pp.114–133 cotejado; 16 grupos, 96 claves únicas, 20/20 páginas renderizadas estáticamente con conteo exacto; sintaxis JS válida. Sección C Juan 9:13–21 sin soluciones.",
-    "limitations": "No se comprobó guardado autenticado real ni visualización en navegador."
+    "verified": "20/20 páginas renderizadas estáticamente, 178 fichas completas, sin solución Juan 9:13–21.",
+    "limitations": "Sin prueba real de sesión autenticada. Juan 9:13–21 se ofrece solo en dos extractos, no en pasaje completo, para evitar resolver ejercicio final."
   },
   "next_phase": {
-    "chapter": 6,
-    "phase": "texts",
-    "start_page": 114,
-    "end_page": 133,
-    "instructions": "Reabrir todas las páginas 114–133 y anotar paradigmas de presente, futuro, imperfecto y aoristo; referencias Juan 14:1, 11:48, 7:5, 4:50, Mateo 5:2 y selección Juan 9:13–21. Mantener oculta traducción completa de la sección C.",
+    "chapter": 7,
+    "phase": "exercises",
+    "start_page": 134,
+    "end_page": 148,
+    "instructions": "Cotejar capítulo 7 «Los modos de los verbos», PDF original pp.134–148, y crear campos específicos de todos los ejercicios reales sin autocorrección.",
     "pending": [
-      "Cotejar textos y paradigmas del PDF original",
-      "Incorporar lecturas con fichas token a token y licencia",
-      "Integrar lector, mazo duff-ch6 y traducciones ocultables",
-      "QA y actualizar ambos checkpoints"
+      "Reabrir PDF pp.134–148",
+      "Inventariar ejercicios y consignas",
+      "Implementar campos y navegación sin cambiar identificadores previos",
+      "QA estática y actualizar checkpoint"
     ]
   },
   "hard_rules": [
@@ -127,6 +131,32 @@
         "entrypoint_commit": "7484414a988fde022b66463b434819c007e38f90"
       },
       "qa": "16/16 páginas renderizadas en pruebas estáticas; fichas 231/231, lookup, Juan y cap.4 preservados, sección C sin solución. No se probó navegador autenticado."
+    },
+    {
+      "chapter": 6,
+      "name": "Los tiempos de los verbos",
+      "pdf_pages": [
+        114,
+        133
+      ],
+      "status": "both_passes_complete",
+      "completed_on": "2026-11-17",
+      "exercises": {
+        "groups": 16,
+        "items": 96,
+        "core_commit": "ee6dcee0c2cc664bf81c50549ae5e5135f4daee2"
+      },
+      "texts": {
+        "blocks": 30,
+        "tokens": 178,
+        "lemmas": 54,
+        "passages": 7,
+        "pages_covered": 20,
+        "core_commit": "20d5836c532af61b484218a9190a6e43639ef48a",
+        "integration_commit": "a783ce17e43fb3efff1d14207212809c69e2d31b",
+        "entrypoint_commit": "0197a4db547490a8bf63860683ec5479f2609341"
+      },
+      "qa": "20/20 páginas con fichas y tokens renderizados en pruebas estáticas; 178/178 tokens completos; Juan 9:13–21 sin traducción completa. Sin navegador autenticado."
     }
   ]
 }
