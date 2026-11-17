@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Duff capítulo 5, primera pasada de ejercicios",
-    "verified": "18 grupos y 87 ítems cotejados con el PDF original; navegación y campos por tipo, 111 campos HTML en total, JS válido",
-    "limitations": "Sin prueba de sesión autenticada en navegador ni persistencia real Supabase",
-    "next": "Capítulo 5 textos, páginas físicas 98–113"
+    "scope": "Duff cap. 5 segunda pasada de textos",
+    "verified": "39 bloques, 231 fichas, 59 lemas, 10 extractos, 16 páginas; QA estática",
+    "limitations": "No QA en navegador autenticado",
+    "next": "Capítulo 6, primera pasada de ejercicios."
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -591,5 +591,43 @@
     "privacy": "Se preserva el guardado privado preexistente, las claves anteriores y el teclado griego. El PDF no se publica.",
     "limitations": "Prueba estática, no prueba de navegador autenticado/Supabase real.",
     "next": "Capítulo 5, segunda pasada: textos griegos y paradigmas tokenizados; luego capítulo 6 ejercicios."
+  },
+  "chapter_5_annotated_texts": {
+    "date": "2026-11-17",
+    "pdf_pages": [
+      98,
+      113
+    ],
+    "title": "Los adjetivos",
+    "coverage": {
+      "pages": 16,
+      "blocks": 39,
+      "tokens": 231,
+      "unique_lemmas": 59,
+      "biblical_passages": 10
+    },
+    "features": [
+      "Declinación completa de ἀγαθός y ἅγιος en los tres géneros",
+      "εἰμί presente completo",
+      "πολύς y μέγας en los tres géneros",
+      "Adjetivo atributivo, predicativo, sustantivado, orden de palabras y existenciales",
+      "Vocabulario del capítulo 5",
+      "10 extractos bíblicos con ficha contextual; traducción final de Mateo 12:35 y 2 Corintios 13:13 reservada",
+      "Mazo compartido duff-ch5 sin duplicación de lemas"
+    ],
+    "files": [
+      "griego-biblico/chapter5-readings.js",
+      "griego-biblico/reader.js",
+      "griego-biblico/index.html",
+      "flashcards/repository.js"
+    ],
+    "commits": {
+      "dataset": "f16cbc7a677c257c127f2f892bca6601333fc7d1",
+      "reader": "b756d34f53374bb90562302f932818fe63c14705",
+      "entrypoint": "7484414a988fde022b66463b434819c007e38f90"
+    },
+    "verification": "16/16 páginas con contenido, 231/231 tokens completos, 59 lemas, 10 extractos, lectura de Juan y cap.4 preservadas, no se muestra solución de sección C",
+    "limitations": "No hay prueba de navegador autenticado ni de Supabase real.",
+    "next": "Capítulo 6, ejercicios, páginas 114–133."
   }
 }
