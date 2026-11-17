@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Pasajes griegos: capítulo 1 Juan completo hasta 1:23 y referencias bíblicas cap.2",
-    "verified": "Cotejado el PDF del usuario con 5 referencias cap.2 y 2 ejercicios de Juan cap.1; 337 tokens de Juan con lema, morfología y glosa desde edición independiente; simulaciones estáticas de lectura y persistencia sin errores",
-    "limitations": "No se realizó prueba visual real ni escritura autenticada a Supabase; diferencias textuales con el manual posibles (SBLGNT ≠ edición Duff)",
-    "next": "Ajustes de interfaz a partir de prueba del usuario; no efectuar correcciones de ejercicios sin autorización explícita."
+    "scope": "Duff capítulo 2: anotación de textos griegos, frases originales y paradigmas, páginas 50–65",
+    "verified": "Datos 44 ejemplos/175 tokens; 16 páginas con sección de lectura, glosas y acceso a tarjetas; sintaxis y renderización estática comprobadas",
+    "limitations": "Sin prueba autenticada visual ni en iPad; materiales auxiliares no son respuestas a ejercicios",
+    "next": "Prueba manual cuando el usuario acceda; futuras correcciones solo si solicita expresamente"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -279,5 +279,45 @@
     "logic": "Claves permanentes de tarjetas antiguas sin modificar. Nuevos lemas griegos se normalizan (acentos, sigma final) para deduplicar. Una misma tarjeta puede vincularse a varios mazos. El lector usa ese registro privado; la página global de flashcards lo carga al iniciar sesión y mantiene la repetición espaciada por el mismo ID.",
     "scope": "Tarjetas de usuario: privadas y nunca publicadas; catálogo francés anterior no alterado.",
     "qa": "Simulación con cliente falso: crear lema, reencontrarlo en otro capítulo sin duplicar, asociar mazos y conservar las 51 tarjetas francesas. Falta probar guardado real/sincronización entre dispositivos."
+  },
+  "chapter_2_reading_expansion": {
+    "date": "2026-11-17",
+    "source": "PDF Duff del usuario, pp. 50–65, verificado página por página",
+    "code": [
+      "griego-biblico/chapter2-readings.js",
+      "griego-biblico/reader.js",
+      "griego-biblico/index.html"
+    ],
+    "coverage": {
+      "pages": "50–65, todas las 16 páginas tienen como mínimo un bloque de lectura suplementaria",
+      "original_learning_blocks": 44,
+      "original_annotated_tokens": 175,
+      "bible_quotes_existing": 5,
+      "biblical_quote_tokens_existing": 15,
+      "distinct_lemmas_from_word_entries": "Distribuidos por paradigmas, ejemplos originales y un inventario de 31 lemas griegos; el artículo se registra también en p. 61",
+      "topics": [
+        "Presente de λύω",
+        "-ν móvil",
+        "Conjugación de λέγω y βλέπω",
+        "Contracción de -έω",
+        "Paradigma de φιλέω",
+        "Nominativo y acusativo de λόγος y otros masculinos",
+        "Sujeto, objeto y concordancia",
+        "Artículo masculino",
+        "Usos del artículo en nombres propios y conceptos",
+        "Léxico de capítulo 2",
+        "Ocho ejemplos complementarios de práctica sin soluciones"
+      ]
+    },
+    "methodology": "Los paradigmas son formas gramaticales comunes; frases originales compuestas para Lengua Viva, diferenciadas de las citas bíblicas procedentes de una edición independiente. No se reproducen ejercicios ni soluciones de Duff. En la página 64 los ejemplos de práctica son originales y distintos de los del PDF.",
+    "features": [
+      "Fichas por token con lema, categoría, morfología y glosa contextual, clic en cada palabra",
+      "Traducciones españolas independientes que pueden ocultarse",
+      "Glosas interlineales opcionales",
+      "Añadir lema a flashcards privadas mediante el flujo existente; deduplicación por lema y mazos compartidos",
+      "Lecturas desplegables en secciones por página debajo del PDF"
+    ],
+    "verification": "Javascript compilado; 44 bloques, 175 tokens con datos morfológicos, referencias únicas y 16/16 páginas con botón de lectura. Conservadas 23 versículos anotados de Juan y 5 citas bíblicas. No hubo prueba autenticada en navegador o iPad.",
+    "next": "Probar lectura, popover, traducción y guardado autenticado en las páginas 50, 52, 55, 61, 63 y 64 y revisar posibles detalles morfológicos señalados por el usuario."
   }
 }
