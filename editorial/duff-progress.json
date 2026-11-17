@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Capítulo 8, pasada de ejercicios",
-    "verified": "70 ítems en 14 grupos, cotejados con PDF privado pp.149–161; 70 claves únicas y JS válido",
-    "limitations": "No QA autenticada real",
-    "next": "Capítulo 8, textos griegos"
+    "scope": "Duff capítulo 8, segunda pasada de textos",
+    "verified": "32 bloques, 167 tokens, 48 lemas, 13/13 páginas; sintaxis y búsqueda de tokens",
+    "limitations": "Sin QA visual ni autenticada real",
+    "next": "Capítulo 9, ejercicios, páginas 162–177"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -772,5 +772,31 @@
     "commit": "9a737647fcba7bc643d465f7df39ead8e95b6d08",
     "qa": "JavaScript sintaxis válida, 70/70 identificadores únicos, navegación y fields existentes. Sin QA autenticada o visual en navegador.",
     "next": "Capítulo 8 · textos griegos, páginas 149–161; reservar traducción Marcos 4:1–2."
+  },
+  "chapter_8_annotated_texts": {
+    "date": "2026-11-17",
+    "source": "Duff PDF privado páginas físicas 149–161, cotejo directo",
+    "coverage": {
+      "pages": "149–161",
+      "blocks": 32,
+      "tokens": 167,
+      "unique_lemmas": 48,
+      "biblical_references": 3,
+      "notable": "Deponentes en cuatro tiempos y modos no indicativos, εἰμί, masculinos primera declinación, femeninos segunda declinación, vocabulario."
+    },
+    "privacy": "Marcos 4:1–2 solo fragmento de siete tokens, sin traducción completa; sin alterar respuestas ni PDF.",
+    "files": [
+      "griego-biblico/chapter8-readings.js",
+      "griego-biblico/reader.js",
+      "griego-biblico/index.html",
+      "flashcards/repository.js"
+    ],
+    "commits": {
+      "dataset": "e159f0a1efa490e4fcc51f8155768a24936d929f",
+      "integration": "79d983c2712d397916063e382b69c0b02e166165",
+      "entrypoint": "2c3e85d6875b0171a21e6220488b82d63de3d8ea"
+    },
+    "verification": "13/13 páginas y 167/167 fichas en renderizado estático; lookup y carga verificados; sin navegador autenticado.",
+    "next": "Capítulo 9, ejercicios, páginas 162–177."
   }
 }
