@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Duff capítulo 3, segunda pasada de textos griegos",
-    "verified": "44 bloques, 291 tokens con forma/lema/morfología/glosa y 7 citas; 15 páginas y guardado/deck por simulación; capítulo 3 terminado",
-    "limitations": "Verificación por código, no QA autenticada real en navegador ni publicación Pages",
-    "next": "Capítulo 4 «Las preposiciones», páginas PDF 81–97: primera pasada de ejercicios."
+    "scope": "Duff capítulo 4, primera pasada de ejercicios",
+    "verified": "13 grupos, 65 consignas cotejadas con PDF, 65 claves únicas y sintaxis JS",
+    "limitations": "Sin prueba autenticada ni despliegue comprobado",
+    "next": "Capítulo 4, segunda pasada de textos griegos (PDF pp.81–97)"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -491,5 +491,31 @@
     "verification": "Compilación de JS, dataset y 15/15 páginas renderizadas estáticamente (291 palabras), lookup de palabra, no filtración de solución de Marcos 1:1, no regresión en Juan 1 ni cap.2; simulación guardado de un lema en mazos cap.2 y cap.3 sin duplicar.",
     "pending": "Prueba real con navegador autenticado y móvil para traducciones, popup, guardado y repetición. No se accedió a datos personales del usuario.",
     "status": "Pasada de textos concluida; capítulos 1–3 cubiertos; próxima pasada capítulo 4 fase ejercicios"
+  },
+  "chapter_4_exercises": {
+    "date": "2026-11-17",
+    "pages": [
+      81,
+      97
+    ],
+    "groups": 13,
+    "items": 65,
+    "items_by_page": {
+      "83": 9,
+      "87": 21,
+      "89": 4,
+      "92": 6,
+      "94": 12,
+      "95": 13
+    },
+    "types": {
+      "translation": 36,
+      "greek": 25,
+      "yesno": 4
+    },
+    "implementation": "griego-biblico/reader.js",
+    "commit": "22348e41125e574501ec5d17bf3d710bcd35df46",
+    "qa": "PDF cotejado directamente 81–97; 65 claves únicas, 13 grupos, sintaxis JavaScript correcta; no autocorrección; prueba autenticada no realizada.",
+    "next": "Capítulo 4, textos griegos: citas, vocabulario y paradigmas, sin revelar Juan 1:1–4 de sección C."
   }
 }
