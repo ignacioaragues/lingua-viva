@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Duff capítulo 8, segunda pasada de textos",
-    "verified": "32 bloques, 167 tokens, 48 lemas, 13/13 páginas; sintaxis y búsqueda de tokens",
-    "limitations": "Sin QA visual ni autenticada real",
-    "next": "Capítulo 9, ejercicios, páginas 162–177"
+    "scope": "Capítulo 9 textos, continuación",
+    "verified": "4 paradigmas añadidos, 64 fichas; total 19 bloques, 117 tokens",
+    "limitations": "Sin QA autenticada",
+    "next": "Continuar capítulo 9 textos"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -817,14 +817,15 @@
       "qa": "Cotejo textual del PDF físico 162–176; 63 ítems en 13 grupos. Prueba de navegador autenticado pendiente.",
       "texts": {
         "status": "partial",
-        "blocks": 15,
-        "tokens": 53,
+        "blocks": 19,
+        "tokens": 117,
         "pages_with_initial_readings": 15,
-        "core_commit": "b8430becc9acd8f38b1d942fe01c81cd3526bf02",
+        "core_commit": "74cb08cfc97b164b80e05521e62c0162100533c4",
         "integration_commit": "55e9169b4ebb8f75ff401a33e01015c2923b60bd",
         "entrypoint_commit": "21adecca3ccc8efc730c0e35985ddeafb0957d75",
-        "pending": "Completar paradigmas, referencias bíblicas y QA de navegador autenticado"
+        "pending": "Reflexivos, citas restantes y QA autenticada"
       }
     }
-  ]
+  ],
+  "last_commit": "74cb08cfc97b164b80e05521e62c0162100533c4"
 }
