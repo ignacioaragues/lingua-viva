@@ -798,5 +798,23 @@
     },
     "verification": "13/13 páginas y 167/167 fichas en renderizado estático; lookup y carga verificados; sin navegador autenticado.",
     "next": "Capítulo 9, ejercicios, páginas 162–177."
-  }
+  },
+  "completed_chapters": [
+    {
+      "chapter": 9,
+      "name": "Pronombres y conjunciones",
+      "pdf_pages": [
+        162,
+        176
+      ],
+      "status": "exercises_complete",
+      "completed_on": "2026-11-17",
+      "exercises": {
+        "groups": 13,
+        "items": 63,
+        "core_commit": "cae641aa133318a32b066a0f7ffe9f96c6edaeb1"
+      },
+      "qa": "Cotejo textual del PDF físico 162–176; 63 ítems en 13 grupos. Prueba de navegador autenticado pendiente."
+    }
+  ]
 }
