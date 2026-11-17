@@ -7,53 +7,49 @@
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 4,
-  "phase": "exercises",
+  "phase": "texts",
   "phase_status": "pending",
   "start_page": 81,
   "end_page": 97,
   "previous_phase": {
-    "chapter": 3,
-    "phase": "texts",
+    "chapter": 4,
+    "phase": "exercises",
     "status": "completed",
     "date": "2026-11-17",
-    "pages_examined": "66–80",
-    "blocks": 44,
-    "annotated_tokens": 291,
-    "lemmas": 60,
-    "biblical_passages": 7,
-    "reference_list": [
-      "Apocalipsis 19:1",
-      "Mateo 23:1",
-      "Marcos 13:31",
-      "Juan 4:11",
-      "Romanos 12:1",
-      "Mateo 17:15",
-      "Marcos 1:1 (ejercicio final, traducción retenida)"
-    ],
-    "core_commit": "4197994c50989a9eeff70c6a360479c94932c657",
-    "integration_commit": "7803dc487057b28ba2989cb51a9b9e9680f758ec",
-    "live_entrypoint_commit": "ad991278797559f6202b5939bfe8d651ec0a61ee",
+    "pages_examined": "81–97",
+    "groups": 13,
+    "items": 65,
+    "items_by_page": {
+      "83": 9,
+      "87": 21,
+      "89": 4,
+      "92": 6,
+      "94": 12,
+      "95": 13
+    },
+    "types": {
+      "translation": 36,
+      "greek": 25,
+      "yesno": 4
+    },
+    "core_commit": "22348e41125e574501ec5d17bf3d710bcd35df46",
     "files": [
-      "griego-biblico/chapter3-readings.js",
-      "griego-biblico/reader.js",
-      "griego-biblico/index.html",
-      "griego-biblico/reader.css",
-      "flashcards/repository.js"
+      "griego-biblico/reader.js"
     ],
-    "verified": "El JS carga; 44 bloques y 291 palabras, 60 lemas en 15/15 páginas, citas y paradigmas completos; acceso a popup, glosas, traducción opcional y botón de añadir lema. Marcos 1:1 no muestra la solución. Dedupl. de un lema en mazos cap. 2 y 3 mediante prueba con cliente simulado.",
-    "limitations": "No se realizó QA visual en navegador ni autenticación real de Supabase. Se revisaron las páginas físicas del PDF por texto; algunas diferencias gráficas/tipográficas precisan revisión visual si surgieran."
+    "verified": "13 grupos, 65 consignas con 65 claves nuevas únicas y tipos específicos; JavaScript compila. Cotejadas directamente las páginas PDF 81–97, sin enunciados extensos ni soluciones. Conservado guardado privado y teclado griego del lector.",
+    "limitations": "No hubo prueba autenticada en navegador ni confirmación de despliegue GitHub Pages."
   },
   "next_phase": {
     "chapter": 4,
-    "phase": "exercises",
+    "phase": "texts",
     "start_page": 81,
     "end_page": 97,
-    "instructions": "Cotejar TODAS las prácticas y ejercicios del capítulo 4 «Las preposiciones» con las páginas físicas PDF 81–97. Construir grupos e ítems precisos sin respuestas ni autocorrección, con guardado y teclado griego; actualizar estado sólo tras cambios reales. Siguiente pasada cap.4 textos griegos.",
+    "instructions": "Reabrir y cotejar el PDF Duff 81–97; anotar citas (Mc 12:41, Jn 18:28, Mt 10:24, 1Co 15:3, Jn 1:1–4) y paradigmas/preposiciones, glosas por token y lemas sin duplicados. No mostrar solución de Juan 1:1–4, Sección C. Conservar ejercicios y avanzar a capítulo 5 solo al terminar.",
     "pending": [
-      "Reabrir PDF del usuario pp. 81–97",
-      "Inventariar ejercicios y texto de referencias del capítulo 4",
-      "Implementar campos precisos y navegación",
-      "Verificar código/ítems sin alterar el progreso anterior"
+      "Cotejar citas y vocabulario de las 17 páginas",
+      "Crear dataset capítulo 4 de textos originales y citas permitidas",
+      "Integrar lector, fichas y mazo único duff-ch4",
+      "Pruebas estáticas y checkpoint a capítulo 5"
     ]
   },
   "hard_rules": [
