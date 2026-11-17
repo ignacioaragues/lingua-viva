@@ -567,7 +567,31 @@ function chapterElevenPractice(){
  return out+reviewPanel(p);
 }
 
+/* Duff 12, PDF físico pp. 210–223. Índice cotejado; sin enunciados ni soluciones. */
+var chapterTwelveExercises={"213":[["12-2-morph","12.2 · análisis morfológico","morphology",8]],"214":[["12-2-form","12.2 · formar casos","form",8,9]],"215":[["12-3-morph","12.3 · análisis morfológico","morphology",4],["12-3-form","12.3 · formar casos","form",4,5],["mid-gr-es","Mitad · griego a español","translation",8],["mid-es-gr","Mitad · español a griego","greek",4,9]],"216":[["12-4","12.4 · traducción","translation",2]],"217":[["12-4-cont","12.4 · traducción (continuación)","translation",2,3]],"219":[["12-5-gr-es","12.5 · griego a español","translation",6],["12-5-es-gr","12.5 · español a griego","greek",4,7]],"221":[["finalA-gr-es","Final A · griego a español","translation",8],["finalA-es-gr","Final A · español a griego","greek",1,9]],"222":[["finalA-es-gr-cont","Final A · español a griego (continuación)","greek",3,10],["finalB-gr-es","Final B · griego a español","translation",8],["finalB-es-gr","Final B · español a griego","greek",4,9]],"223":[["finalC-marcos","Final C · Marcos 3:32–35","translation",1]]};
+function chapterTwelvePractice(){
+ var p=state.page,raw=chapterTwelveExercises[p]||[];
+ var nav=[[213,'12.2'],[215,'12.3 / Mitad'],[216,'12.4'],[219,'12.5'],[221,'Final A'],[222,'Final A/B'],[223,'Final C']];
+ var out='<nav class="duff-index duff-ch2-index" aria-label="Prácticas del capítulo 12">'+nav.map(function(x){return '<button type="button" data-do="page" data-page="'+x[0]+'" aria-current="'+(p===x[0]?'page':'false')+'">'+h(x[1])+'</button>';}).join('')+'</nav>';
+ if(!raw.length)out+='<p class="duff-ch2-note">Teoría o vocabulario. Elegí una práctica en el índice.</p>';
+ raw.forEach(function(a,index){
+  var id=a[0],label=a[1],type=a[2],count=a[3],start=a[4]||1;
+  var parts=type==='morphology'?['lema','caso','numero','genero']:type==='form'?['forma']:null;
+  var labels={lema:'Lema griego',caso:'Caso',numero:'Número',genero:'Género',forma:'Forma griega solicitada'};
+  var answered=0;
+  for(var n=start;n<start+count;n++){var key='duff-ch12:'+id+':'+n;if(parts?parts.some(function(part){return String(note(p).answers[key+':'+part]||'').trim();}):String(note(p).answers[key]||'').trim())answered++;}
+  out+='<details class="duff-exercise duff-ch2-group" '+(index===0?'open':'')+'><summary>'+h(label)+' <span class="duff-ch2-count">'+count+' ítems'+(answered?' · '+answered+' contestados':'')+'</span></summary><p>Consultá el PDF privado. Sin soluciones ni autocorrección.</p>';
+  for(var n=start;n<start+count;n++){var key='duff-ch12:'+id+':'+n;out+='<div class="duff-answer-row"><div class="duff-answer-label">Ítem '+n+'</div>';
+   if(parts)out+='<div class="duff-answer-pair">'+parts.map(function(part){return '<div>'+field(key+':'+part,labels[part],part==='lema'||part==='forma',false)+'</div>';}).join('')+'</div>';
+   else out+=field(key,type==='greek'?'Tu traducción al griego':'Tu traducción al español',type==='greek',2);
+   out+='</div>';
+  }out+='</details>';
+ });
+ return out+reviewPanel(p);
+}
+
 function practice(){
+ if(current()===11)return chapterTwelvePractice();
  if(current()===10)return chapterElevenPractice();
  if(current()===9)return chapterTenPractice();
  if(current()===8)return chapterNinePractice();
