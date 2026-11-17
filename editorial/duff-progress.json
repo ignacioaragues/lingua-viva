@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Capítulo 6 ejercicios",
-    "verified": "96 ítems en 16 grupos cotejados con PDF original",
-    "limitations": "Sin QA autenticada",
-    "next": "Capítulo 6 textos"
+    "scope": "Duff capítulo 6, textos griegos",
+    "verified": "30 bloques, 178 tokens, 54 lemas, 20 páginas; pasajes finales sin traducción completa",
+    "limitations": "Sin sesión autenticada; Juan 9:13–21 sólo dos fragmentos de consulta",
+    "next": "Capítulo 7, ejercicios, pp.134–148"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -642,5 +642,31 @@
     "qa": "JS válido; 20/20 páginas renderizadas con cantidad exacta y 96 claves distintas.",
     "limitations": "No prueba de Supabase autenticada ni navegador real.",
     "next": "Capítulo 6, textos griegos, páginas 114–133."
+  },
+  "chapter_6_annotated_texts": {
+    "date": "2026-11-17",
+    "source": "PDF Duff capítulo 6 pp.114–133",
+    "coverage": {
+      "pages": "114–133",
+      "blocks": 30,
+      "tokens": 178,
+      "lemmas": 54,
+      "biblical_excerpts": 7,
+      "notes": "Juan 9:13 y 9:21 solo en fragmentos de consulta sin traducción completa. No se publica el ejercicio final."
+    },
+    "features": "Presente, futuro, imperfecto, aoristo; aumento, sigma y asimilación, verbos en -έω, 17 lemas verbales y adverbios temporales; fichas token por token y mazo Duff cap.6.",
+    "files": [
+      "griego-biblico/chapter6-readings.js",
+      "griego-biblico/reader.js",
+      "griego-biblico/index.html",
+      "flashcards/repository.js"
+    ],
+    "commits": {
+      "core": "20d5836c532af61b484218a9190a6e43639ef48a",
+      "reader": "a783ce17e43fb3efff1d14207212809c69e2d31b",
+      "entrypoint": "0197a4db547490a8bf63860683ec5479f2609341"
+    },
+    "verification": "Sintaxis JavaScript válida; 20/20 páginas, 178/178 fichas completas y lookup funcional en pruebas estáticas. Sin QA en navegador autenticado.",
+    "next": "Capítulo 7, ejercicios, pp.134–148"
   }
 }
