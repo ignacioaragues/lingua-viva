@@ -23,7 +23,8 @@
       {id:'duff-ch4',label:'Duff · Capítulo 4'},
       {id:'duff-ch5',label:'Duff · Capítulo 5'},
       {id:'duff-ch6',label:'Duff · Capítulo 6'},
-      {id:'duff-ch7',label:'Duff · Capítulo 7'}
+      {id:'duff-ch7',label:'Duff · Capítulo 7'},
+      {id:'duff-ch8',label:'Duff · Capítulo 8'}
     ]
   };
   function all(language, legacyLessons) {
