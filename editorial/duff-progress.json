@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Duff capítulo 4 · segunda pasada, textos griegos",
-    "verified": "32 bloques, 209 tokens, 69 lemas y 5 referencias bíblicas en 17 páginas; sintaxis y renderización estática verificadas",
-    "limitations": "Sin prueba real autenticada ni confirmación de publicación Pages",
-    "next": "Capítulo 5: ejercicios; cotejar el PDF original."
+    "scope": "Duff capítulo 5, primera pasada de ejercicios",
+    "verified": "18 grupos y 87 ítems cotejados con el PDF original; navegación y campos por tipo, 111 campos HTML en total, JS válido",
+    "limitations": "Sin prueba de sesión autenticada en navegador ni persistencia real Supabase",
+    "next": "Capítulo 5 textos, páginas físicas 98–113"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -552,5 +552,44 @@
     },
     "qa": "PDF privado 81–97 cotejado; 17/17 páginas renderizadas estáticamente, 209 fichas completas, sin referencias duplicadas, lectura de capítulos 2–3 preservada, traducción completa de Juan 1:1–4 oculta; no se probó login real ni navegador.",
     "next": "Capítulo 5: primera pasada de ejercicios, páginas provisionales 98–116, verificar los límites del capítulo directamente en PDF antes de declarar cobertura."
+  },
+  "chapter_5_exercises": {
+    "title": "Los adjetivos",
+    "pdf_pages": [
+      98,
+      113
+    ],
+    "pdf_verified": "Directamente contra el PDF original del usuario, páginas físicas 98–113. La página 114 inicia el capítulo 6.",
+    "groups": 18,
+    "items": 87,
+    "types": {
+      "morphological_analysis": 8,
+      "greek_to_spanish": 51,
+      "spanish_to_greek": 18,
+      "greek_agreement_forms": 10
+    },
+    "by_page": {
+      "99": 8,
+      "100": 10,
+      "101": 5,
+      "103": 20,
+      "105": 4,
+      "106": 10,
+      "109": 4,
+      "111": 12,
+      "112": 14
+    },
+    "files": [
+      "griego-biblico/reader.js",
+      "griego-biblico/index.html"
+    ],
+    "commits": {
+      "reader": "579082eda8c49791fd894dd523be20d64db465eb",
+      "entrypoint": "3708bdc24ab3b43c479c96689024f97801f65d4f"
+    },
+    "verification": "JavaScript sintaxis válida, 87 claves lógicas únicas; 16/16 páginas con navegación y 111 campos renderizados (8 análisis con 4 campos, 79 ítems con uno); no autocorrección ni soluciones.",
+    "privacy": "Se preserva el guardado privado preexistente, las claves anteriores y el teclado griego. El PDF no se publica.",
+    "limitations": "Prueba estática, no prueba de navegador autenticado/Supabase real.",
+    "next": "Capítulo 5, segunda pasada: textos griegos y paradigmas tokenizados; luego capítulo 6 ejercicios."
   }
 }
