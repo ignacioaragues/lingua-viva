@@ -6,50 +6,52 @@
   "timezone": "Europe/Berlin",
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
-  "chapter": 4,
-  "phase": "texts",
+  "chapter": 5,
+  "phase": "exercises",
   "phase_status": "pending",
-  "start_page": 81,
-  "end_page": 97,
+  "start_page": 98,
+  "end_page": 116,
   "previous_phase": {
     "chapter": 4,
-    "phase": "exercises",
+    "phase": "texts",
     "status": "completed",
     "date": "2026-11-17",
     "pages_examined": "81–97",
-    "groups": 13,
-    "items": 65,
-    "items_by_page": {
-      "83": 9,
-      "87": 21,
-      "89": 4,
-      "92": 6,
-      "94": 12,
-      "95": 13
-    },
-    "types": {
-      "translation": 43,
-      "greek": 18,
-      "yesno": 4
-    },
-    "core_commit": "22348e41125e574501ec5d17bf3d710bcd35df46",
-    "files": [
-      "griego-biblico/reader.js"
+    "blocks": 32,
+    "annotated_tokens": 209,
+    "lemmas": 69,
+    "biblical_passages": 5,
+    "reference_list": [
+      "Marcos 12:41",
+      "Juan 18:28",
+      "Mateo 10:24",
+      "1 Corintios 15:3",
+      "Juan 1:1–4 (ejercicio final, sin solución)"
     ],
-    "verified": "13 grupos, 65 consignas con 65 claves nuevas únicas y tipos específicos; JavaScript compila. Cotejadas directamente las páginas PDF 81–97, sin enunciados extensos ni soluciones. Conservado guardado privado y teclado griego del lector.",
-    "limitations": "No hubo prueba autenticada en navegador ni confirmación de despliegue GitHub Pages."
+    "core_commit": "9914dc8cd26e63a94efb32a58e960bcf2c89df66",
+    "integration_commit": "dfdaa1cf07fab5b22daa2df000bb3205663b3d0d",
+    "live_entrypoint_commit": "b6ebada2cc0b780bef5243adb806e3e72d2e766c",
+    "files": [
+      "griego-biblico/chapter4-readings.js",
+      "griego-biblico/reader.js",
+      "griego-biblico/index.html",
+      "flashcards/repository.js",
+      "flashcards/index.html"
+    ],
+    "verified": "17/17 páginas con bloques, 209 fichas morfológicas completas, 69 lemas, 5 referencias bíblicas, navegación y lookup; pruebas estáticas del lector de capítulos 2 y 3; no se muestran traducciones completas del ejercicio final.",
+    "limitations": "No se verificó el despliegue real ni la sesión autenticada de Supabase en navegador."
   },
   "next_phase": {
-    "chapter": 4,
-    "phase": "texts",
-    "start_page": 81,
-    "end_page": 97,
-    "instructions": "Reabrir y cotejar el PDF Duff 81–97; anotar citas (Mc 12:41, Jn 18:28, Mt 10:24, 1Co 15:3, Jn 1:1–4) y paradigmas/preposiciones, glosas por token y lemas sin duplicados. No mostrar solución de Juan 1:1–4, Sección C. Conservar ejercicios y avanzar a capítulo 5 solo al terminar.",
+    "chapter": 5,
+    "phase": "exercises",
+    "start_page": 98,
+    "end_page": 116,
+    "instructions": "Reabrir el PDF original y cotejar todas las prácticas y ejercicios reales del capítulo 5 antes de implementarlos en el lector; preservar claves existentes y no corregir respuestas.",
     "pending": [
-      "Cotejar citas y vocabulario de las 17 páginas",
-      "Crear dataset capítulo 4 de textos originales y citas permitidas",
-      "Integrar lector, fichas y mazo único duff-ch4",
-      "Pruebas estáticas y checkpoint a capítulo 5"
+      "Leer PDF páginas 98–116",
+      "Inventariar ejercicios y direcciones de traducción",
+      "Implementar campos precisos y navegación",
+      "Verificar sintaxis y datos; después pasar a capítulo 5 textos"
     ]
   },
   "hard_rules": [
@@ -85,6 +87,32 @@
         "entrypoint_commit": "ad991278797559f6202b5939bfe8d651ec0a61ee"
       },
       "qa": "JS sintaxis + carga de fuente + 15/15 páginas con fichas; Juan y cap. 2 sin regresión, Marcos 1:1 sin traducción completa, simulación de guardado/deduplicación privada de lemas. No prueba autenticada real."
+    },
+    {
+      "chapter": 4,
+      "name": "Las preposiciones",
+      "pdf_pages": [
+        81,
+        97
+      ],
+      "status": "both_passes_complete",
+      "completed_on": "2026-11-17",
+      "exercises": {
+        "groups": 13,
+        "items": 65,
+        "core_commit": "22348e41125e574501ec5d17bf3d710bcd35df46"
+      },
+      "texts": {
+        "blocks": 32,
+        "tokens": 209,
+        "lemmas": 69,
+        "passages": 5,
+        "pages_covered": 17,
+        "core_commit": "9914dc8cd26e63a94efb32a58e960bcf2c89df66",
+        "integration_commit": "dfdaa1cf07fab5b22daa2df000bb3205663b3d0d",
+        "entrypoint_commit": "b6ebada2cc0b780bef5243adb806e3e72d2e766c"
+      },
+      "qa": "17/17 páginas renderizadas estáticamente, 209 fichas completas, cero referencias duplicadas; capítulos 2 y 3 preservados, Juan 1:1–4 sin traducción completa. Sin prueba autenticada real."
     }
   ]
 }
