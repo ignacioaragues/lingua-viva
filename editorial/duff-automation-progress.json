@@ -8,7 +8,7 @@
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 9,
   "phase": "texts",
-  "phase_status": "pending",
+  "phase_status": "in_progress",
   "start_page": 162,
   "end_page": 177,
   "previous_phase": {
@@ -26,9 +26,9 @@
     "start_page": 162,
     "end_page": 176,
     "pending": [
-      "Cotejar todas las citas, paradigmas y formas del capítulo",
-      "Añadir fichas contextualizadas por token y glosas opcionales",
-      "Probar lectura y guardado de lemas sin duplicación"
+      "Completar paradigmas exhaustivos de demostrativos y pronombres personales",
+      "Anotar citas bíblicas restantes de páginas 162–176 con texto permitido y morfología contextual",
+      "Verificar JS y renderizado en entorno ejecutable; QA autenticada de Supabase"
     ]
   },
   "hard_rules": [
@@ -211,5 +211,16 @@
       },
       "qa": "Cotejo textual del PDF físico 162–176; 63 ítems en 13 grupos. Prueba de navegador autenticado pendiente."
     }
-  ]
+  ],
+  "partial_phase": {
+    "chapter": 9,
+    "phase": "texts",
+    "blocks": 15,
+    "tokens": 53,
+    "pages_with_initial_readings": 15,
+    "core_commit": "b8430becc9acd8f38b1d942fe01c81cd3526bf02",
+    "reader_commit": "55e9169b4ebb8f75ff401a33e01015c2923b60bd",
+    "entrypoint_commit": "21adecca3ccc8efc730c0e35985ddeafb0957d75",
+    "qa": "Comprobada estructura de 15 bloques y 53 fichas en datos; no se ejecutó prueba de navegador autenticado ni prueba JS local completa."
+  }
 }
