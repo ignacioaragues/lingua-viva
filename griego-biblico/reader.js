@@ -410,12 +410,13 @@ function greekVerseRow(v,small){
  return '<div class="greek-verse'+(small?' duff-nt-excerpt':'')+'"><span class="micro">'+h(v.ref)+'</span>'
    +(v.theme?'<span class="duff-excerpt-theme">'+h(v.theme)+'</span>':'')
    +'<div class="greek-verse-text'+(state.greekInterlinear?' greek-verse-interlinear':'')+'" lang="grc">'+v.words.map(function(w,i){return greekToken(w,v.ref,i);}).join('')+'</div>'
-   +(state.greekTranslation?'<div class="greek-translation" lang="es">'+h(v.translation)+'</div>':'')+'</div>';
+   +(v.hideTranslation?'<p class="duff-ch3-solution-note">'+h(v.readingNote||'Esta lectura corresponde a un ejercicio pendiente: se reserva la traducción completa.')+'</p>':(state.greekTranslation&&v.translation?'<div class="greek-translation" lang="es">'+h(v.translation)+'</div>':''))
+   +(!v.hideTranslation&&v.readingNote?'<p class="duff-reading-source-note">'+h(v.readingNote)+'</p>':'')+'</div>';
 }
 function readingLookup(button){
  var data=window.GREEK_READER;
  if(!data)return null;
- var v=(data.verses||[]).concat(data.chapterTwo||[],data.chapterTwoExtra||[]).find(function(row){return row.ref===button.dataset.ref;});
+ var v=(data.verses||[]).concat(data.chapterTwo||[],data.chapterTwoExtra||[],data.chapterThree||[]).find(function(row){return row.ref===button.dataset.ref;});
  return v&&v.words ? v.words[Number(button.dataset.index)] : null;
 }
 function showGreekCard(button){
@@ -448,8 +449,10 @@ function readingPanel(){
  var john=state.page>=46&&state.page<=48;
  var excerpts=(data.chapterTwo||[]).filter(function(v){return v.page===state.page;});
  var supplemental=(data.chapterTwoExtra||[]).filter(function(v){return v.page===state.page;});
- if(!john&&!excerpts.length&&!supplemental.length)return '';
- var head=john?'Juan 1:1–23 · lectura anotada':'Griego del capítulo 2 · lectura anotada';
+ var chapterThree=(data.chapterThree||[]).filter(function(v){return v.page===state.page;});
+ var isThird=state.page>=66&&state.page<=80;
+ if(!john&&!excerpts.length&&!supplemental.length&&!chapterThree.length)return '';
+ var head=john?'Juan 1:1–23 · lectura anotada':isThird?'Griego del capítulo 3 · lectura anotada':'Griego del capítulo 2 · lectura anotada';
  var out='<section class="duff-greek-reader" id="lectura-juan"><div class="grammar-head"><div><div class="micro">LECTURA FILOLÓGICA · '+(john?'EVANGELIO SEGÚN JUAN':'FORMAS, EJEMPLOS Y CITAS DEL CAPÍTULO')+'</div><h2>'+head+'</h2></div></div>'
  +'<p>Seleccioná una palabra para ver su glosa, lema y análisis morfológico. Podés guardar el lema en tus flashcards sin duplicarlo. Las explicaciones y lecturas complementarias no modifican tus respuestas.</p>'
  +'<div class="duff-reading-actions"><button type="button" class="btn btn-small" data-do="greek-translation" aria-pressed="'+state.greekTranslation+'">'+(state.greekTranslation?'Ocultar traducción':'Mostrar traducción')+'</button>'
@@ -463,6 +466,23 @@ function readingPanel(){
     out+='</details>';
   });
   out+='<p class="note">En el ejercicio 1, Duff imprime Juan 1:1–14 (PDF pp. 46–47). En el ejercicio 2 propone reconstruir Juan 1:15–23 desde su transcripción fonética (PDF pp. 47–48). El texto griego de consulta se ofrece por separado y se puede ocultar la traducción.</p>';
+ }else if(isThird){
+   var sections=[
+     ['biblical','Textos bíblicos',true],
+     ['paradigm','Paradigmas y flexión',false],
+     ['lexicon','Vocabulario y lemas',false],
+     ['original','Ejemplos originales',true]
+   ];
+   sections.forEach(function(section){
+      var selected=chapterThree.filter(function(v){return v.kind===section[0];});
+      if(!selected.length)return;
+      var startOpen=section[2]||(!chapterThree.some(function(v){return v.kind==='biblical'||v.kind==='original';})&&section[0]==='paradigm')
+       ||(section[0]==='lexicon'&&!chapterThree.some(function(v){return v.kind!=='lexicon';}));
+      out+='<details class="duff-reading-group" '+(startOpen?'open':'')+'><summary>'+h(section[1])+' <span>('+selected.length+')</span></summary>';
+      out+=selected.map(function(v){return greekVerseRow(v,true);}).join('');
+      out+='</details>';
+   });
+   out+='<p class="note">'+h(data.chapterThreeMeta?.source||'Lecturas griegas complementarias.')+' '+h(data.chapterThreeMeta?.notice||'')+'</p>';
  }else{
    if(excerpts.length){
      out+='<details class="duff-reading-group" open><summary>Citas bíblicas breves <span>('+excerpts.length+')</span></summary>';
@@ -520,7 +540,7 @@ async function addGreekLemma(lemma,form,gloss,category){
  if(!lemma)return {error:'No se pudo determinar el lema.'};
  var cards=vocabCards(),key=greekLemmaKey(lemma);
  var existing=cards.find(function(c){return greekLemmaKey(c.lemma||c.form)===key;});
- var bookDeck='duff-ch'+(current()+1),pageRef=state.page>=46&&state.page<=48?'juan1':'duff-ch2';
+ var bookDeck='duff-ch'+(current()+1),pageRef=state.page>=46&&state.page<=48?'juan1':bookDeck;
  var decks=[...new Set(['duff',bookDeck,pageRef])];
  if(existing){
   var nextDecks=[...new Set((existing.decks||[]).concat(decks))];
