@@ -67,23 +67,42 @@
     "exercise_fields": "Implementados en lector por páginas con guardado privado; prácticas 1.5 y 1.6 con autocorrección (5 ítems cada una); teclado griego con espíritus y acentos. El resto de las prácticas todavía no tiene autocorrección. Teclado flotante contextual añadido como recurso separado; prueba autenticada pendiente."
   },
   "next_steps": [
-    "QA autenticado (sin tocar respuestas): completar una casilla de prueba propia solo con autorización del usuario o en entorno de prueba; verificar RLS y sincronización entre dispositivos",
-    "Validar navegación, teclado griego y panel de respuestas del capítulo 2 en Chrome móvil/Safari iPad, sin tocar el PDF privado",
-    "No corregir, puntuar ni revisar producciones del usuario salvo que lo pida expresamente",
-    "Continuar con una unidad solo cuando el usuario lo solicite; no reactivar tareas recurrentes"
+    "Pedir al usuario que pruebe la página 46 (Juan 1:1–23) y las 50, 54, 55 del capítulo 2 con su sesión",
+    "Verificar desde la UI autenticada la selección de palabras y la aparición de lemas en Flashcards > Griego > Juan 1",
+    "No revisar ni corregir sus respuestas salvo solicitud expresa",
+    "Para futuras lecciones, identificar pasajes griegos del PDF, introducir texto independiente con atribución, anotar palabra por palabra y habilitar añadir lema a mazos existentes sin duplicarlo"
   ],
   "last_updated": "2026-11-17",
   "biblical_reader": {
-    "location": "griego-biblico/ · aparece al llegar a las páginas físicas 46–48",
-    "coverage": "Juan 1:1–2, 2 versículos y 24 tokens con fichas morfológicas (12 formas distintas) y traducción propia opcional",
+    "location": "griego-biblico/ · panel de lectura debajo del PDF privado, capítulo 1 en páginas 46–48, capítulo 2 en páginas 50, 54 y 55",
+    "coverage": "Juan 1:1–23: 23 versículos, 337 tokens y 109 lemas distintos; 5 extractos breves del capítulo 2, 15 tokens adicionales.",
     "features": [
-      "selección de palabra con ficha contextual cerca del texto",
-      "lema, categoría, rasgos morfológicos, glosa y nota",
-      "traducción propia visible/oculta",
-      "enlace externo a STEP Bible"
+      "Secciones plegables Juan 1:1–7, 1:8–14, 1:15–19, 1:20–23",
+      "Cada palabra tiene ficha contextual con lema, categoría y análisis morfológico según su token individual",
+      "Glosas españolas opcionales directamente bajo las palabras y traducciones propias completas por versículo con mostrar/ocultar",
+      "Selección de lema para añadirlo a tarjetas privadas sin duplicar raíces/lemas ya registrados",
+      "Mazos compartidos «Duff · todas», «Duff · capítulo 1», «Juan 1:1–23» y «Duff · capítulo 2» sin copiar tarjetas ni resetear revisiones",
+      "Conservadas fichas ampliadas preexistentes de Juan 1:1–2 y sus traducciones",
+      "Cinco citas breves del NT que aparecen en Duff: Marcos 11:4 (p. 50); Lucas 13:15 (p. 50); 1 Juan 1:10 (p. 54); Juan 6:24 (p. 55); Marcos 6:34 (p. 55)"
     ],
-    "scope": "Solo Juan 1:1–2 está anotado; NO afirmar cobertura del resto de Juan 1:1–23 ni del NT.",
-    "source": "Texto bíblico breve de tradición griega común, no reproducción de la edición del manual."
+    "source": {
+      "greek": "SBL Greek New Testament (Michael W. Holmes, ©2010 Logos / SBL), CC BY 4.0, https://sblgnt.com/",
+      "morphology": "MorphGNT SBLGNT, James K. Tauber (2017), v6.12, CC BY-SA 3.0, https://github.com/morphgnt/sblgnt, DOI 10.5281/zenodo.376200",
+      "spanish": "Traducciones originales de Lengua Viva; glosario de 109 lemas revisado para el pasaje.",
+      "original_manual": "PDF Duff cap. 1 pp. 46–48: Juan 1:1–14 impreso en griego, Juan 1:15–23 en transliteración; cap. 2 pp. 50,54,55 contiene las cinco citas.",
+      "copyright": "Ningún texto largo del manual se publica en GitHub; texto bíblico obtenido de fuente independiente con atribución y licencia; variantes editoriales pueden diferir de Duff."
+    },
+    "scope": "Se anotaron por token los 337 vocablos de Juan 1:1–23; el análisis se basa en esa edición, no pretende fijar todas las variantes. Los cinco fragmentos del capítulo 2 son breves y didácticos; el resto de la prosa de Duff no se transcribió.",
+    "verification": "Sintaxis JavaScript compilada. Datos de Juan 23/23 versículos con glosa, lema y etiqueta morfológica en 337/337 tokens. Renderizado estático en PDF pp. 46–48 y 50,54,55. Simulación sin datos reales de guardado del lema en Supabase y deduplicación cruzada por mazo. QA autenticada de Supabase, flujo visual y móvil aún pendientes.",
+    "files": [
+      "griego-biblico/greek-reading.js (base 1:1–2)",
+      "griego-biblico/john1-extended.js (extensión 1:1–23 y referencias)",
+      "griego-biblico/reader.js",
+      "griego-biblico/reader.css",
+      "griego-biblico/index.html",
+      "app.js",
+      "flashcards/repository.js"
+    ]
   },
   "pronunciation_enrichment": {
     "coverage": "24 letras, 11 secuencias vocálicas/diptongos, 4 grupos consonánticos, 3 signos. Tabla comparativa con AFI/IPA ático clásico (s. V–IV a.C.), koiné bíblica (aprox. s. I–II d.C., con evolución y variación regional) y griego moderno, con alternativas, notas, ejemplos y convención didáctica de Duff por letra.",
@@ -146,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Capítulo 2 · campos de todas las prácticas y ejercicios finales",
-    "verified": "Cotejo del PDF pp. 50–65: 68 ítems y 76 campos específicos; código GitHub con tipos, orden y navegación; syntax JS y pruebas estáticas, sin copiar enunciados protegidos",
-    "limitations": "No se realizaron pruebas de escritura autenticada, sincronización ni visualización móvil",
-    "next": "Recibir indicaciones del usuario y probar funcionalidad real sin editar respuestas existentes."
+    "scope": "Pasajes griegos: capítulo 1 Juan completo hasta 1:23 y referencias bíblicas cap.2",
+    "verified": "Cotejado el PDF del usuario con 5 referencias cap.2 y 2 ejercicios de Juan cap.1; 337 tokens de Juan con lema, morfología y glosa desde edición independiente; simulaciones estáticas de lectura y persistencia sin errores",
+    "limitations": "No se realizó prueba visual real ni escritura autenticada a Supabase; diferencias textuales con el manual posibles (SBLGNT ≠ edición Duff)",
+    "next": "Ajustes de interfaz a partir de prueba del usuario; no efectuar correcciones de ejercicios sin autorización explícita."
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -252,5 +271,13 @@
       "No se generan devoluciones ni calificaciones sin solicitud expresa"
     ],
     "verification": "Sintaxis JavaScript compilada y prueba estática de HTML de campos/contadores. QA real autenticada en navegador, guardado Supabase y móvil: pendientes."
+  },
+  "flashcards_unified": {
+    "date": "2026-11-17",
+    "status": "Implementación conectada por código, prueba real autenticada pendiente",
+    "storage": "Supabase public.lingua_notes, lesson_id='duff:cards', user_id propietario, RLS existente (no se cambiaron políticas). Respaldo de tarjetas locales en lv:duff:vocab:<uid>.",
+    "logic": "Claves permanentes de tarjetas antiguas sin modificar. Nuevos lemas griegos se normalizan (acentos, sigma final) para deduplicar. Una misma tarjeta puede vincularse a varios mazos. El lector usa ese registro privado; la página global de flashcards lo carga al iniciar sesión y mantiene la repetición espaciada por el mismo ID.",
+    "scope": "Tarjetas de usuario: privadas y nunca publicadas; catálogo francés anterior no alterado.",
+    "qa": "Simulación con cliente falso: crear lema, reencontrarlo en otro capítulo sin duplicar, asociar mazos y conservar las 51 tarjetas francesas. Falta probar guardado real/sincronización entre dispositivos."
   }
 }
