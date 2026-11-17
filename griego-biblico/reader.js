@@ -694,7 +694,7 @@ function greekVerseRow(v,small){
 function readingLookup(button){
  var data=window.GREEK_READER;
  if(!data)return null;
- var v=(data.verses||[]).concat(data.chapterTwo||[],data.chapterTwoExtra||[],data.chapterThree||[],data.chapterFour||[],data.chapterFive||[],data.chapterSix||[],data.chapterSeven||[],data.chapterEight||[]).find(function(row){return row.ref===button.dataset.ref;});
+ var v=(data.verses||[]).concat(data.chapterTwo||[],data.chapterTwoExtra||[],data.chapterThree||[],data.chapterFour||[],data.chapterFive||[],data.chapterSix||[],data.chapterSeven||[],data.chapterEight||[],data.chapterNine||[]).find(function(row){return row.ref===button.dataset.ref;});
  return v&&v.words ? v.words[Number(button.dataset.index)] : null;
 }
 function showGreekCard(button){
