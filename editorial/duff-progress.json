@@ -165,10 +165,10 @@
   },
   "last_development_checkpoint": {
     "date": "2026-11-17",
-    "scope": "Duff cap. 7, ejercicios",
-    "verified": "75 ítems de 16 grupos cotejados directamente con PDF 134–148; código y renderizado estático comprobados",
-    "limitations": "No prueba autenticada de Supabase o navegador móvil",
-    "next": "Capítulo 7, textos griegos, no avanzar aún a capítulo 8."
+    "scope": "Duff capítulo 7, textos griegos",
+    "verified": "30 bloques, 148 tokens, 74 lemas y 11 citas cortas; 15 páginas renderizadas estáticamente",
+    "limitations": "Sin QA en navegador autenticado o guardado real Supabase",
+    "next": "Capítulo 8 ejercicios, pp.149–161"
   },
   "chapter_2_provisional_workbook": {
     "pdf_pages": [
@@ -716,5 +716,30 @@
     "entrypoint_commit": "c1803cdff689fb8f6188b39df4c614a37d4a357a",
     "qa": "JS compilado, 15 páginas, 16 grupos, 75 ítems únicos, campos morfológicos y griegos comprobados mediante renderizado estático; sin QA autenticada real.",
     "next": "Capítulo 7 segunda pasada de textos griegos, páginas 134–148."
+  },
+  "chapter_7_annotated_texts": {
+    "date": "2026-11-17",
+    "source": "Jeremy Duff capítulo 7, PDF privado pp.134–148 cotejado directamente",
+    "coverage": {
+      "pages": "134–148",
+      "blocks": 30,
+      "tokens": 148,
+      "unique_lemmas": 74,
+      "biblical_references": 11,
+      "notable": "Imperativo presente/aoristo; infinitivo presente/aoristo; participio presente/aoristo; 14 sustantivos y 13 verbos de vocabulario; negativos no indicativos."
+    },
+    "privacy": "1 Juan 3:4–10: solo 5 tokens de consulta; traducción completa retenida. Sin alterar PDF ni respuestas privadas.",
+    "files": [
+      "griego-biblico/chapter7-readings.js",
+      "griego-biblico/reader.js",
+      "griego-biblico/index.html",
+      "flashcards/repository.js"
+    ],
+    "commits": {
+      "dataset": "770a90daeb53d17b0603e1d02b2ba9cdd9c35289",
+      "integration": "e5808f5325849244485c29d3d2698e835df07d2a",
+      "entrypoint": "c4fe46c62826f0b54b604cfdba4f884cb9163e78"
+    },
+    "verification": "15/15 páginas con renderizado estático; 148/148 fichas con forma/lema/categoría/morfología/glosa; 30 bloques; lectura final sin traducción; no QA autenticada."
   }
 }
