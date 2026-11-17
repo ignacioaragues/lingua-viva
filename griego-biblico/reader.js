@@ -138,7 +138,7 @@ function chapterTwoPractice(){
   var id=ex[0],type=ex[1],description=ex[2],count=ex[3];
   var greek=id.indexOf('español → griego')>=0;
   var savedCount=0;
-  for(var i=1;i<=count;i++){if(String(note(p).answers[id+':'+i]||'').trim())savedCount++;}
+  for(var i=1;i<=count;i++){if(type==='case-number'){if(String(note(p).answers[id+':'+i+':caso']||'').trim()||String(note(p).answers[id+':'+i+':numero']||'').trim())savedCount++;}else if(String(note(p).answers[id+':'+i]||'').trim())savedCount++;}
   out+='<details class="duff-exercise duff-ch2-group" '+(ix===0?'open':'')+'>'
     +'<summary>'+h(id)+' <span class="duff-ch2-count">'+count+' ítems'+(savedCount?' · '+savedCount+' con respuesta':'')+'</span></summary>'
     +'<p>'+h(description)+'. Consultá los enunciados en el PDF privado, a la izquierda. Las respuestas se guardan por página y no se corrigen hasta que lo pidas.</p>';
@@ -157,9 +157,9 @@ function chapterTwoPractice(){
   out+='</details>';
  });
  var legacy=Object.keys(note(p).answers).filter(function(k){return k.indexOf('ch2:free:')===0&&String(note(p).answers[k]||'').trim();});
- if(legacy.length){
-   out+='<details class="duff-exercise duff-ch2-group"><summary>Respuestas anteriores en casillas provisionales ('+legacy.length+')</summary><p>No se borraron ni se trasladaron automáticamente. Podés copiarlas a las prácticas numeradas cuando quieras.</p>'
-   +legacy.map(function(k){return field(k,k.replace('ch2:free:','Casilla '),true,true);}).join('')+'</details>';
+ if(legacy.length||!parts.length){
+   out+='<details class="duff-exercise duff-ch2-group"><summary>Cuaderno libre de esta página'+(legacy.length?' · '+legacy.length+' respuesta(s) anterior(es)':'')+'</summary><p>Casillas opcionales conservadas del cuaderno anterior. No se borraron ni se trasladaron respuestas. Para las prácticas numeradas, usá las secciones de arriba.</p>'
+   +[1,2,3,4,5,6,7,8,9,10].map(function(n){return field('ch2:free:'+n,'Casilla libre '+n,true,true);}).join('')+'</details>';
  }
  return out+reviewPanel(p);
 }
