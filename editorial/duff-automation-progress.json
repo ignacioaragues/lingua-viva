@@ -6,28 +6,25 @@
   "timezone": "Europe/Berlin",
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
-  "chapter": 11,
-  "phase": "texts",
+  "chapter": 12,
+  "phase": "exercises",
   "phase_status": "pending",
-  "start_page": 193,
-  "end_page": 209,
+  "start_page": 210,
+  "end_page": null,
   "previous_phase": {
     "chapter": 11,
-    "phase": "exercises",
+    "phase": "texts",
     "status": "completed",
-    "groups": 12,
-    "items": 70,
-    "commit": "762791d1d55cf45c5130a4778ba87add8aaa0aa3",
-    "pages_examined": "193–209"
+    "blocks": 18,
+    "tokens": 68,
+    "commit": "57405820f9c4fb9dbc207f602391755187a5044c"
   },
   "next_phase": {
-    "chapter": 11,
-    "phase": "texts",
-    "start_page": 193,
-    "end_page": 209,
+    "chapter": 12,
+    "phase": "exercises",
     "pending": [
-      "Reexaminar las 17 páginas para seleccionar paradigmas y citas bíblicas",
-      "Crear fichas morfológicas y lecturas con atribución"
+      "Determinar extensión exacta del capítulo 12 desde PDF original",
+      "Cotejar todas las prácticas e implementar respuestas específicas"
     ]
   },
   "hard_rules": [
@@ -246,14 +243,24 @@
         193,
         209
       ],
-      "status": "exercises_complete",
+      "status": "both_passes_complete",
       "exercises": {
         "groups": 12,
         "items": 70,
         "commit": "762791d1d55cf45c5130a4778ba87add8aaa0aa3"
       },
-      "qa": "Cotejo directo del PDF; no se probó navegador autenticado ni se ejecutó node --check."
+      "qa": "Cotejo directo del PDF; no se probó navegador autenticado ni se ejecutó node --check.",
+      "texts": {
+        "blocks": 18,
+        "tokens": 68,
+        "pages_covered": 17,
+        "biblical_fragments": 3,
+        "content_commit": "82536b5ea601a5753a158a41d5c9c75b537c99a3",
+        "integration_commit": "9792a2a012621c54983cbc1ac287eca35d6dabbd",
+        "entrypoint_commit": "57405820f9c4fb9dbc207f602391755187a5044c",
+        "qa": "18 refs únicas; 68 fichas con 5 campos; 17/17 páginas cubiertas; lookup y carga inspeccionados. Sin prueba de sintaxis JS independiente ni navegador autenticado."
+      }
     }
   ],
-  "last_commit": "762791d1d55cf45c5130a4778ba87add8aaa0aa3"
+  "last_commit": "57405820f9c4fb9dbc207f602391755187a5044c"
 }
