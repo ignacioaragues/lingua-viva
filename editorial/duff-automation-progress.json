@@ -7,27 +7,25 @@
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 20,
-  "phase": "exercises",
+  "phase": "texts",
   "phase_status": "pending",
   "previous_phase": {
-    "chapter": 19,
-    "phase": "texts",
+    "chapter": 20,
+    "phase": "exercises",
     "status": "completed",
-    "blocks": 23,
-    "tokens": 98,
-    "biblical_blocks": 6,
-    "content_commit": "69b4e27b1191e03bef1ed7dae66b429a6fe8c23f",
-    "integration_commit": "bdd2aa882790bab97e9de22cdd98650fbe1eedea",
-    "entrypoint_commit": "a91a6c2d57ce301bad1f08f16c5d750f09bb8838",
-    "qa": "JS sintaxis OK, 23 refs únicas, 98 fichas completas; integración estática y carga verificadas; navegador autenticado no probado."
+    "groups": 12,
+    "items": 54,
+    "commit": "fb1a5d4ffbbac69a383ef5636ea843280cda5529"
   },
   "next_phase": {
     "chapter": 20,
-    "phase": "exercises",
+    "phase": "texts",
+    "start_page": 332,
+    "end_page": 344,
     "pending": [
-      "Cotejar páginas físicas capítulo 20",
-      "Implementar prácticas y ejercicios reales",
-      "QA y actualizar checkpoints"
+      "Seleccionar fragmentos bíblicos y ejemplos de condicionales, genitivo absoluto, perífrasis, grados y optativo",
+      "Anotar cada token, traducir e integrar",
+      "QA y cierre definitivo de recurrente tras completar capítulo 20"
     ]
   },
   "hard_rules": [
@@ -457,9 +455,24 @@
         "entrypoint_commit": "a91a6c2d57ce301bad1f08f16c5d750f09bb8838",
         "qa": "JS sintaxis OK, 23 refs únicas, 98 fichas completas; integración estática y carga verificadas; navegador autenticado no probado."
       }
+    },
+    {
+      "chapter": 20,
+      "name": "Condicionales, genitivo absoluto, perífrasis, grados y optativo",
+      "pdf_pages": [
+        332,
+        344
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 12,
+        "items": 54,
+        "commit": "fb1a5d4ffbbac69a383ef5636ea843280cda5529",
+        "qa": "PDF físico pp.332–344 examinado; prácticas y secciones finales cotejadas por página, número y dirección; sintaxis JS OK; navegador autenticado no probado."
+      }
     }
   ],
-  "last_commit": "a91a6c2d57ce301bad1f08f16c5d750f09bb8838",
+  "last_commit": "fb1a5d4ffbbac69a383ef5636ea843280cda5529",
   "start_page": 237,
   "end_page": null
 }
