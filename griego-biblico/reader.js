@@ -610,7 +610,27 @@ function chapterFourteenPractice(){
  out+='</div>'; }out+='</details>';});return out+reviewPanel(p);
 }
 
+
+/* Duff 15 · Voz pasiva y media · PDF físico pp. 252–266. Enunciados solo en PDF privado. */
+var chapterFifteenExercises={"254":[["15-3","15.3 · tiempos, voces y modo","alternatives",8]],"257":[["15-5-1-2","15.5.1–2 · análisis morfológico","morphology",6]],"258":[["15-5-3","15.5.3 · pasivos irregulares: morfología","morphology",6],["mid-gr-es","Mitad · griego a español","translation",8]],"259":[["mid-es-gr","Mitad · español a griego","greek",4,9]],"262":[["15-7","15.7 · traducción","translation",4]],"263":[["finalA-gr-es","Final A · griego a español (inicio)","translation",1]],"264":[["finalA-gr-es-cont","Final A · griego a español (continuación)","translation",7,2],["finalA-es-gr","Final A · español a griego","greek",4,9],["finalB-gr-es","Final B · griego a español (inicio)","translation",3]],"265":[["finalB-gr-es-cont","Final B · griego a español (continuación)","translation",5,4],["finalB-es-gr","Final B · español a griego","greek",4,9],["finalC-mateo","Final C · Mateo 11:2–5","translation",1]]};
+function chapterFifteenPractice(){
+ var p=state.page,raw=chapterFifteenExercises[p]||[];
+ var nav=[[254,'15.3'],[257,'15.5.1–2'],[258,'15.5.3 / Mitad'],[259,'Mitad · continuación'],[262,'15.7'],[263,'Final A'],[264,'Final A/B'],[265,'Final B/C']];
+ var out='<nav class="duff-index duff-ch2-index" aria-label="Prácticas del capítulo 15">'+nav.map(function(x){return '<button type="button" data-do="page" data-page="'+x[0]+'" aria-current="'+(p===x[0]?'page':'false')+'">'+h(x[1])+'</button>';}).join('')+'</nav>';
+ if(!raw.length)out+='<p class="duff-ch2-note">Teoría o vocabulario. Elegí una práctica en el índice.</p>';
+ raw.forEach(function(a,index){var id=a[0],label=a[1],type=a[2],count=a[3],start=a[4]||1;
+ var parts=type==='morphology'?['lema','tiempo','voz','modo','persona','numero','caso','genero']:type==='alternatives'?['tiempos_posibles','voces_posibles','modo']:null;
+ var labels={lema:'Lema griego',tiempo:'Tiempo / aspecto',voz:'Voz',modo:'Modo (indicativo u otros modos)',persona:'Persona (si corresponde)',numero:'Número',caso:'Caso (si corresponde)',genero:'Género (si corresponde)',tiempos_posibles:'Todos los tiempos posibles',voces_posibles:'Todas las voces posibles'};
+ var answered=0;for(var n=start;n<start+count;n++){var key='duff-ch15:'+id+':'+n;if(parts?parts.some(function(part){return String(note(p).answers[key+':'+part]||'').trim();}):String(note(p).answers[key]||'').trim())answered++;}
+ out+='<details class="duff-exercise duff-ch2-group" '+(index===0?'open':'')+'><summary>'+h(label)+' <span class="duff-ch2-count">'+count+' ítems'+(answered?' · '+answered+' contestados':'')+'</span></summary><p>Consultá el PDF privado. Sin soluciones ni autocorrección.</p>';
+ for(var n=start;n<start+count;n++){var key='duff-ch15:'+id+':'+n;out+='<div class="duff-answer-row"><div class="duff-answer-label">Ítem '+n+'</div>';
+ if(parts)out+='<div class="duff-answer-pair">'+parts.map(function(part){return '<div>'+field(key+':'+part,labels[part],part==='lema',false)+'</div>';}).join('')+'</div>';
+ else out+=field(key,type==='greek'?'Tu traducción al griego':'Tu traducción al español',type==='greek',2);
+ out+='</div>'; }out+='</details>';});return out+reviewPanel(p);
+}
+
 function practice(){
+ if(current()===14)return chapterFifteenPractice();
  if(current()===13)return chapterFourteenPractice();
  if(current()===11)return chapterTwelvePractice();
  if(current()===10)return chapterElevenPractice();
