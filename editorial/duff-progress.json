@@ -975,7 +975,22 @@
         "entrypoint_commit": "8ff2cffa207a3d0278bb65d19afed35c67183371",
         "qa": "JS sintaxis independiente OK; 18 refs únicas, 95 fichas completas; lookup/render y carga estática comprobados. Navegador autenticado no probado."
       }
+    },
+    {
+      "chapter": 16,
+      "name": "El perfecto",
+      "pdf_pages": [
+        267,
+        281
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 12,
+        "items": 53,
+        "commit": "9271bb423346c1702ecde724d3bf9b89d27e1d16",
+        "qa": "PDF pp.267–281 examinado, numeración y dirección cotejadas, JS sintaxis OK; navegador autenticado no probado."
+      }
     }
   ],
-  "last_commit": "8ff2cffa207a3d0278bb65d19afed35c67183371"
+  "last_commit": "9271bb423346c1702ecde724d3bf9b89d27e1d16"
 }
