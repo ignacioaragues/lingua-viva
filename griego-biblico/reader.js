@@ -871,7 +871,7 @@ function greekVerseRow(v,small){
 function readingLookup(button){
  var data=window.GREEK_READER;
  if(!data)return null;
- var v=(data.verses||[]).concat(data.chapterTwo||[],data.chapterTwoExtra||[],data.chapterThree||[],data.chapterFour||[],data.chapterFive||[],data.chapterSix||[],data.chapterSeven||[],data.chapterEight||[],data.chapterNine||[],data.chapterTen||[],data.chapterEleven||[],data.chapterTwelve||[],data.chapterThirteen||[],data.chapterFourteen||[],data.chapterFifteen||[],data.chapterSixteen||[],data.chapterSeventeen||[]).find(function(row){return row.ref===button.dataset.ref;});
+ var v=(data.verses||[]).concat(data.chapterTwo||[],data.chapterTwoExtra||[],data.chapterThree||[],data.chapterFour||[],data.chapterFive||[],data.chapterSix||[],data.chapterSeven||[],data.chapterEight||[],data.chapterNine||[],data.chapterTen||[],data.chapterEleven||[],data.chapterTwelve||[],data.chapterThirteen||[],data.chapterFourteen||[],data.chapterFifteen||[],data.chapterSixteen||[],data.chapterSeventeen||[],data.chapterEighteen||[]).find(function(row){return row.ref===button.dataset.ref;});
  return v&&v.words ? v.words[Number(button.dataset.index)] : null;
 }
 function showGreekCard(button){
@@ -913,6 +913,8 @@ function readingPanel(){
  var isEighth=state.page>=149&&state.page<=161;
  var isNinth=state.page>=162&&state.page<=176;
  var isTenth=state.page>=177&&state.page<=192;
+  var isEighteenth=state.page>=298&&state.page<=317;
+  var chapterEighteen=(data.chapterEighteen||[]).filter(function(v){return v.page===state.page;});
   var isSeventeenth=state.page>=282&&state.page<=297;
   var chapterSeventeen=(data.chapterSeventeen||[]).filter(function(v){return v.page===state.page;});
   var isSixteenth=state.page>=267&&state.page<=281;
@@ -934,8 +936,8 @@ function readingPanel(){
  var chapterFive=(data.chapterFive||[]).filter(function(v){return v.page===state.page;});
  var chapterSix=(data.chapterSix||[]).filter(function(v){return v.page===state.page;});
  var chapterFour=(data.chapterFour||[]).filter(function(v){return v.page===state.page;});
- if(!john&&!excerpts.length&&!supplemental.length&&!chapterThree.length&&!chapterFour.length&&!chapterFive.length&&!chapterSix.length&&!chapterSeven.length&&!chapterEight.length&&!chapterNine.length&&!chapterTen.length&&!chapterEleven.length&&!chapterTwelve.length&&!chapterThirteen.length&&!chapterFourteen.length&&!chapterFifteen.length&&!chapterSixteen.length&&!chapterSeventeen.length)return '';
- var head=john?'Juan 1:1–23 · lectura anotada':isThird?'Griego del capítulo 3 · lectura anotada':isFourth?'Griego del capítulo 4 · lectura anotada':isFifth?'Griego del capítulo 5 · lectura anotada':isSixth?'Griego del capítulo 6 · lectura anotada':isSeventh?'Griego del capítulo 7 · lectura anotada':isEighth?'Griego del capítulo 8 · lectura anotada':isNinth?'Griego del capítulo 9 · lectura anotada':isTenth?'Griego del capítulo 10 · lectura anotada':isEleventh?'Griego del capítulo 11 · lectura anotada':isTwelfth?'Griego del capítulo 12 · lectura anotada':isThirteenth?'Griego del capítulo 13 · lectura anotada':isFourteenth?'Griego del capítulo 14 · lectura anotada':isFifteenth?'Griego del capítulo 15 · lectura anotada':isSixteenth?'Griego del capítulo 16 · lectura anotada':isSeventeenth?'Griego del capítulo 17 · lectura anotada':'Griego del capítulo 2 · lectura anotada';
+ if(!john&&!excerpts.length&&!supplemental.length&&!chapterThree.length&&!chapterFour.length&&!chapterFive.length&&!chapterSix.length&&!chapterSeven.length&&!chapterEight.length&&!chapterNine.length&&!chapterTen.length&&!chapterEleven.length&&!chapterTwelve.length&&!chapterThirteen.length&&!chapterFourteen.length&&!chapterFifteen.length&&!chapterSixteen.length&&!chapterSeventeen.length&&!chapterEighteen.length)return '';
+ var head=john?'Juan 1:1–23 · lectura anotada':isThird?'Griego del capítulo 3 · lectura anotada':isFourth?'Griego del capítulo 4 · lectura anotada':isFifth?'Griego del capítulo 5 · lectura anotada':isSixth?'Griego del capítulo 6 · lectura anotada':isSeventh?'Griego del capítulo 7 · lectura anotada':isEighth?'Griego del capítulo 8 · lectura anotada':isNinth?'Griego del capítulo 9 · lectura anotada':isTenth?'Griego del capítulo 10 · lectura anotada':isEleventh?'Griego del capítulo 11 · lectura anotada':isTwelfth?'Griego del capítulo 12 · lectura anotada':isThirteenth?'Griego del capítulo 13 · lectura anotada':isFourteenth?'Griego del capítulo 14 · lectura anotada':isFifteenth?'Griego del capítulo 15 · lectura anotada':isSixteenth?'Griego del capítulo 16 · lectura anotada':isSeventeenth?'Griego del capítulo 17 · lectura anotada':isEighteenth?'Griego del capítulo 18 · lectura anotada':'Griego del capítulo 2 · lectura anotada';
  var out='<section class="duff-greek-reader" id="lectura-juan"><div class="grammar-head"><div><div class="micro">LECTURA FILOLÓGICA · '+(john?'EVANGELIO SEGÚN JUAN':'FORMAS, EJEMPLOS Y CITAS DEL CAPÍTULO')+'</div><h2>'+head+'</h2></div></div>'
  +'<p>Seleccioná una palabra para ver su glosa, lema y análisis morfológico. Podés guardar el lema en tus flashcards sin duplicarlo. Las explicaciones y lecturas complementarias no modifican tus respuestas.</p>'
  +'<div class="duff-reading-actions"><button type="button" class="btn btn-small" data-do="greek-translation" aria-pressed="'+state.greekTranslation+'">'+(state.greekTranslation?'Ocultar traducción':'Mostrar traducción')+'</button>'
@@ -949,7 +951,10 @@ function readingPanel(){
     out+='</details>';
   });
   out+='<p class="note">En el ejercicio 1, Duff imprime Juan 1:1–14 (PDF pp. 46–47). En el ejercicio 2 propone reconstruir Juan 1:15–23 desde su transcripción fonética (PDF pp. 47–48). El texto griego de consulta se ofrece por separado y se puede ocultar la traducción.</p>';
- }else if(isSeventeenth){
+ }else if(isEighteenth){
+    [['biblical','Fragmentos bíblicos breves'],['paradigm','Paradigmas y partes principales'],['original','Ejemplos originales']].forEach(function(section){var selected=chapterEighteen.filter(function(v){return v.kind===section[0];});if(!selected.length)return;out+='<details class="duff-reading-group" open><summary>'+h(section[1])+' <span>('+selected.length+')</span></summary>';out+=selected.map(function(v){return greekVerseRow(v,true);}).join('');out+='</details>';});
+    out+='<p class="note">'+h(data.chapterEighteenMeta?.source||'')+' '+h(data.chapterEighteenMeta?.notice||'')+'</p>';
+  }else if(isSeventeenth){
     [['biblical','Fragmentos bíblicos breves'],['paradigm','Paradigmas del subjuntivo'],['original','Ejemplos originales']].forEach(function(section){var selected=chapterSeventeen.filter(function(v){return v.kind===section[0];});if(!selected.length)return;out+='<details class="duff-reading-group" open><summary>'+h(section[1])+' <span>('+selected.length+')</span></summary>';out+=selected.map(function(v){return greekVerseRow(v,true);}).join('');out+='</details>';});
     out+='<p class="note">'+h(data.chapterSeventeenMeta?.source||'')+' '+h(data.chapterSeventeenMeta?.notice||'')+'</p>';
   }else if(isSixteenth){
