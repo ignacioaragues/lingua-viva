@@ -6,25 +6,26 @@
   "timezone": "Europe/Berlin",
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
-  "chapter": 14,
-  "phase": "texts",
-  "phase_status": "in_progress",
+  "chapter": 15,
+  "phase": "exercises",
+  "phase_status": "pending",
   "previous_phase": {
     "chapter": 14,
-    "phase": "exercises",
+    "phase": "texts",
     "status": "completed",
-    "groups": 12,
-    "items": 64,
-    "commit": "601d53088cae52f40a2389129c510dc799026095"
+    "blocks": 20,
+    "tokens": 109,
+    "biblical_blocks": 5,
+    "content_commit": "289a132f87452183ed217e449d456e9a98ac8660",
+    "integration_commit": "3ca3be8cba653c5806063fed46bb3dc6422c9b6e",
+    "qa": "Sintaxis JS independiente OK; 20 refs únicas, 109 fichas completas; index carga archivo y lector tiene lookup/render. Navegador autenticado no probado."
   },
   "next_phase": {
-    "chapter": 14,
-    "phase": "texts",
-    "start_page": 237,
-    "end_page": 251,
+    "chapter": 15,
+    "phase": "exercises",
     "pending": [
-      "Incorporar fragmentos bíblicos breves del capítulo con atribución",
-      "QA de sintaxis y datos; navegador autenticado no disponible"
+      "Determinar páginas físicas del capítulo 15",
+      "Cotejar e implementar prácticas y ejercicios en PDF original"
     ]
   },
   "hard_rules": [
@@ -313,27 +314,25 @@
         237,
         251
       ],
-      "status": "exercises_complete",
+      "status": "both_passes_complete",
       "exercises": {
         "groups": 12,
         "items": 64,
         "commit": "601d53088cae52f40a2389129c510dc799026095",
         "qa": "PDF físico 237–251 cotejado. Sintaxis y navegador autenticado pendientes de prueba independiente."
+      },
+      "texts": {
+        "status": "completed",
+        "blocks": 20,
+        "tokens": 109,
+        "biblical_blocks": 5,
+        "content_commit": "289a132f87452183ed217e449d456e9a98ac8660",
+        "integration_commit": "3ca3be8cba653c5806063fed46bb3dc6422c9b6e",
+        "qa": "Sintaxis JS independiente OK; 20 refs únicas, 109 fichas completas; index carga archivo y lector tiene lookup/render. Navegador autenticado no probado."
       }
     }
   ],
-  "last_commit": "b1a1211670515e8aa0cccc75a4abd0acc1365254",
+  "last_commit": "289a132f87452183ed217e449d456e9a98ac8660",
   "start_page": 237,
-  "end_page": null,
-  "partial_phase": {
-    "chapter": 14,
-    "phase": "texts",
-    "status": "partial",
-    "blocks": 15,
-    "tokens": 83,
-    "content_commit": "beb82fecbe66c8382ac3c3271fc97539458a3fa5",
-    "integration_commit": "3ca3be8cba653c5806063fed46bb3dc6422c9b6e",
-    "entrypoint_commit": "b1a1211670515e8aa0cccc75a4abd0acc1365254",
-    "pending": "Fragmentos bíblicos breves con licencia y QA independiente; navegador autenticado no probado"
-  }
+  "end_page": null
 }
