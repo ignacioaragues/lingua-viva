@@ -6,26 +6,27 @@
   "timezone": "Europe/Berlin",
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
-  "chapter": 15,
-  "phase": "texts",
+  "chapter": 16,
+  "phase": "exercises",
   "phase_status": "pending",
   "previous_phase": {
     "chapter": 15,
-    "phase": "exercises",
+    "phase": "texts",
     "status": "completed",
-    "groups": 13,
-    "items": 61,
-    "commit": "c5e67626805c699f59ed44fc32b939054baf3a77"
+    "blocks": 18,
+    "tokens": 95,
+    "biblical_blocks": 4,
+    "content_commit": "15f550a1a462b384eae17247f11e57c142e13830",
+    "integration_commit": "5c9eaf23cf1550b3f538b4d446cf10dbc471d29f",
+    "entrypoint_commit": "8ff2cffa207a3d0278bb65d19afed35c67183371",
+    "qa": "JS sintaxis independiente OK; 18 refs únicas, 95 fichas completas; lookup/render y carga estática comprobados. Navegador autenticado no probado."
   },
   "next_phase": {
-    "chapter": 15,
-    "phase": "texts",
-    "start_page": 252,
-    "end_page": 266,
+    "chapter": 16,
+    "phase": "exercises",
     "pending": [
-      "Revisar todas las páginas del capítulo para citas y paradigmas",
-      "Anotar textos y formas token por token",
-      "Comprobar integración y sintaxis"
+      "Determinar límites PDF capítulo 16",
+      "Cotejar prácticas e implementar respuestas específicas"
     ]
   },
   "hard_rules": [
@@ -338,16 +339,26 @@
         252,
         266
       ],
-      "status": "exercises_complete",
+      "status": "both_passes_complete",
       "exercises": {
         "groups": 13,
         "items": 61,
         "commit": "c5e67626805c699f59ed44fc32b939054baf3a77",
         "qa": "PDF físico pp. 252–266 examinado; grupos y direcciones cotejados; sintaxis JS verificada; navegador autenticado no probado."
+      },
+      "texts": {
+        "status": "completed",
+        "blocks": 18,
+        "tokens": 95,
+        "biblical_blocks": 4,
+        "content_commit": "15f550a1a462b384eae17247f11e57c142e13830",
+        "integration_commit": "5c9eaf23cf1550b3f538b4d446cf10dbc471d29f",
+        "entrypoint_commit": "8ff2cffa207a3d0278bb65d19afed35c67183371",
+        "qa": "JS sintaxis independiente OK; 18 refs únicas, 95 fichas completas; lookup/render y carga estática comprobados. Navegador autenticado no probado."
       }
     }
   ],
-  "last_commit": "c5e67626805c699f59ed44fc32b939054baf3a77",
+  "last_commit": "8ff2cffa207a3d0278bb65d19afed35c67183371",
   "start_page": 237,
   "end_page": null
 }
