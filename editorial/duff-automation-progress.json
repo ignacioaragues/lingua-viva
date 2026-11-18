@@ -6,25 +6,23 @@
   "timezone": "Europe/Berlin",
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
-  "chapter": 13,
-  "phase": "texts",
-  "phase_status": "in_progress",
+  "chapter": 14,
+  "phase": "exercises",
+  "phase_status": "pending",
   "previous_phase": {
     "chapter": 13,
-    "phase": "exercises",
+    "phase": "texts",
     "status": "completed",
-    "groups": 16,
-    "items": 73,
-    "commit": "b851ceedced8ae2e0f8c297fa85381e427fca974"
+    "blocks": 23,
+    "tokens": 130,
+    "commit": "24e30f67d2d7b7f89f3857688aeb4574cd4fd782"
   },
   "next_phase": {
-    "chapter": 13,
-    "phase": "texts",
-    "start_page": 224,
-    "end_page": 236,
+    "chapter": 14,
+    "phase": "exercises",
     "pending": [
-      "Citas bíblicas breves con atribución",
-      "QA sintaxis independiente; navegador autenticado"
+      "Determinar límites físicos del capítulo 14 en PDF",
+      "Cotejar ejercicios y crear campos específicos"
     ]
   },
   "hard_rules": [
@@ -291,25 +289,23 @@
         224,
         236
       ],
-      "status": "texts_in_progress",
+      "status": "both_passes_complete",
       "exercises": {
         "groups": 16,
         "items": 73,
         "commit": "b851ceedced8ae2e0f8c297fa85381e427fca974"
       },
       "texts": {
-        "status": "partial",
-        "blocks": 19,
-        "tokens": 115,
-        "content_commit": "905896f98e12d9cede5cbe907efad07387cfa2a3",
-        "integration_commit": "cde868c28da6e250c4e77ffd42e7e881af1cae35",
-        "entrypoint_commit": "14dbc21101209515ea9c8f637dd8137e28daebef",
-        "pending": [
-          "Citas bíblicas breves con atribución",
-          "QA sintaxis independiente; navegador autenticado"
-        ]
+        "status": "completed",
+        "blocks": 23,
+        "tokens": 130,
+        "content_commit": "e97b7616864f690deaf5c57bb3f5d71fb4999b1e",
+        "integration_commit": "24e30f67d2d7b7f89f3857688aeb4574cd4fd782",
+        "qa": "23 referencias únicas, 130 fichas completas; script cargado, lookup y render bíblico verificados estáticamente; sin compilación JS independiente ni navegador autenticado."
       }
     }
   ],
-  "last_commit": "14dbc21101209515ea9c8f637dd8137e28daebef"
+  "last_commit": "24e30f67d2d7b7f89f3857688aeb4574cd4fd782",
+  "start_page": 237,
+  "end_page": null
 }
