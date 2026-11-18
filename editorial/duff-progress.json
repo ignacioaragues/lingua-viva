@@ -1083,14 +1083,24 @@
         332,
         344
       ],
-      "status": "exercises_complete",
+      "status": "both_passes_complete",
       "exercises": {
         "groups": 12,
         "items": 54,
         "commit": "fb1a5d4ffbbac69a383ef5636ea843280cda5529",
         "qa": "PDF físico pp.332–344 examinado; prácticas y secciones finales cotejadas por página, número y dirección; sintaxis JS OK; navegador autenticado no probado."
+      },
+      "texts": {
+        "status": "completed",
+        "blocks": 25,
+        "tokens": 92,
+        "biblical_blocks": 7,
+        "content_commit": "2e7d1ac5995abba01fb99ab027f3cd41a8ef0198",
+        "integration_commit": "f7e63615be55713ac2c412c2720a50a40ca27f3f",
+        "entrypoint_commit": "a023376a9951554eb61043a9d77ff0a3adf7ff79",
+        "qa": "Sintaxis JS OK; 25 refs únicas, 92 fichas completas; integración estática y carga verificadas; navegador autenticado no probado."
       }
     }
   ],
-  "last_commit": "fb1a5d4ffbbac69a383ef5636ea843280cda5529"
+  "last_commit": "a023376a9951554eb61043a9d77ff0a3adf7ff79"
 }
