@@ -649,7 +649,27 @@ function chapterSixteenPractice(){
  out+='</div>'; }out+='</details>';});return out+reviewPanel(p);
 }
 
+
+/* Duff 17 · Subjuntivo · PDF físico pp. 282–297. Enunciados solo en PDF privado. */
+var chapterSeventeenExercises={"285":[["17-2","17.2 · análisis morfológico del subjuntivo","morphology",12]],"289":[["mid-gr-es","Mitad · griego a español","translation",8],["mid-es-gr","Mitad · español a griego","greek",4,9]],"293":[["17-3-3-7","17.3.3–17.3.7 · traducción de construcciones","translation",6]],"294":[["finalA-gr-es","Final A · griego a español (inicio)","translation",3]],"295":[["finalA-gr-es-cont","Final A · griego a español (continuación)","translation",5,4],["finalA-es-gr","Final A · español a griego","greek",4,9],["finalB-gr-es","Final B · griego a español (inicio)","translation",4]],"296":[["finalB-gr-es-cont","Final B · griego a español (continuación)","translation",4,5],["finalB-es-gr","Final B · español a griego","greek",4,9],["finalC-juan","Final C · Juan 6:28–30","translation",1]]};
+function chapterSeventeenPractice(){
+ var p=state.page,raw=chapterSeventeenExercises[p]||[];
+ var nav=[[285,'17.2'],[289,'Mitad'],[293,'17.3.3–7'],[294,'Final A'],[295,'Final A/B'],[296,'Final B/C']];
+ var out='<nav class="duff-index duff-ch2-index" aria-label="Prácticas del capítulo 17">'+nav.map(function(x){return '<button type="button" data-do="page" data-page="'+x[0]+'" aria-current="'+(p===x[0]?'page':'false')+'">'+h(x[1])+'</button>';}).join('')+'</nav>';
+ if(!raw.length)out+='<p class="duff-ch2-note">Teoría o vocabulario. Elegí una práctica en el índice.</p>';
+ raw.forEach(function(a,index){var id=a[0],label=a[1],type=a[2],count=a[3],start=a[4]||1;
+ var parts=type==='morphology'?['lema','tiempo','voz','modo','persona','numero']:null;
+ var labels={lema:'Lema griego',tiempo:'Tiempo / aspecto',voz:'Voz',modo:'Modo',persona:'Persona',numero:'Número'};
+ var answered=0;for(var n=start;n<start+count;n++){var key='duff-ch17:'+id+':'+n;if(parts?parts.some(function(part){return String(note(p).answers[key+':'+part]||'').trim();}):String(note(p).answers[key]||'').trim())answered++;}
+ out+='<details class="duff-exercise duff-ch2-group" '+(index===0?'open':'')+'><summary>'+h(label)+' <span class="duff-ch2-count">'+count+' ítems'+(answered?' · '+answered+' contestados':'')+'</span></summary><p>Consultá el PDF privado. Sin soluciones ni autocorrección.</p>';
+ for(var n=start;n<start+count;n++){var key='duff-ch17:'+id+':'+n;out+='<div class="duff-answer-row"><div class="duff-answer-label">Ítem '+n+'</div>';
+ if(parts)out+='<div class="duff-answer-pair">'+parts.map(function(part){return '<div>'+field(key+':'+part,labels[part],part==='lema',false)+'</div>';}).join('')+'</div>';
+ else out+=field(key,type==='greek'?'Tu traducción al griego':'Tu traducción al español',type==='greek',2);
+ out+='</div>'; }out+='</details>';});return out+reviewPanel(p);
+}
+
 function practice(){
+ if(current()===16)return chapterSeventeenPractice();
  if(current()===15)return chapterSixteenPractice();
  if(current()===14)return chapterFifteenPractice();
  if(current()===13)return chapterFourteenPractice();
