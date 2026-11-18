@@ -7,26 +7,25 @@
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 16,
-  "phase": "exercises",
+  "phase": "texts",
   "phase_status": "pending",
   "previous_phase": {
-    "chapter": 15,
-    "phase": "texts",
+    "chapter": 16,
+    "phase": "exercises",
     "status": "completed",
-    "blocks": 18,
-    "tokens": 95,
-    "biblical_blocks": 4,
-    "content_commit": "15f550a1a462b384eae17247f11e57c142e13830",
-    "integration_commit": "5c9eaf23cf1550b3f538b4d446cf10dbc471d29f",
-    "entrypoint_commit": "8ff2cffa207a3d0278bb65d19afed35c67183371",
-    "qa": "JS sintaxis independiente OK; 18 refs únicas, 95 fichas completas; lookup/render y carga estática comprobados. Navegador autenticado no probado."
+    "groups": 12,
+    "items": 53,
+    "commit": "9271bb423346c1702ecde724d3bf9b89d27e1d16"
   },
   "next_phase": {
     "chapter": 16,
-    "phase": "exercises",
+    "phase": "texts",
+    "start_page": 267,
+    "end_page": 281,
     "pending": [
-      "Determinar límites PDF capítulo 16",
-      "Cotejar prácticas e implementar respuestas específicas"
+      "Cotejar pasajes y paradigmas del capítulo",
+      "Añadir lecturas originales y fichas de perfecto",
+      "QA e integración"
     ]
   },
   "hard_rules": [
@@ -356,9 +355,24 @@
         "entrypoint_commit": "8ff2cffa207a3d0278bb65d19afed35c67183371",
         "qa": "JS sintaxis independiente OK; 18 refs únicas, 95 fichas completas; lookup/render y carga estática comprobados. Navegador autenticado no probado."
       }
+    },
+    {
+      "chapter": 16,
+      "name": "El perfecto",
+      "pdf_pages": [
+        267,
+        281
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 12,
+        "items": 53,
+        "commit": "9271bb423346c1702ecde724d3bf9b89d27e1d16",
+        "qa": "PDF pp.267–281 examinado, numeración y dirección cotejadas, JS sintaxis OK; navegador autenticado no probado."
+      }
     }
   ],
-  "last_commit": "8ff2cffa207a3d0278bb65d19afed35c67183371",
+  "last_commit": "9271bb423346c1702ecde724d3bf9b89d27e1d16",
   "start_page": 237,
   "end_page": null
 }
