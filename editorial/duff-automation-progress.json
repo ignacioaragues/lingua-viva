@@ -7,27 +7,21 @@
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 20,
-  "phase": "texts",
-  "phase_status": "pending",
+  "phase": "completed",
+  "phase_status": "completed",
   "previous_phase": {
     "chapter": 20,
-    "phase": "exercises",
-    "status": "completed",
-    "groups": 12,
-    "items": 54,
-    "commit": "fb1a5d4ffbbac69a383ef5636ea843280cda5529"
-  },
-  "next_phase": {
-    "chapter": 20,
     "phase": "texts",
-    "start_page": 332,
-    "end_page": 344,
-    "pending": [
-      "Seleccionar fragmentos bíblicos y ejemplos de condicionales, genitivo absoluto, perífrasis, grados y optativo",
-      "Anotar cada token, traducir e integrar",
-      "QA y cierre definitivo de recurrente tras completar capítulo 20"
-    ]
+    "status": "completed",
+    "blocks": 25,
+    "tokens": 92,
+    "biblical_blocks": 7,
+    "content_commit": "2e7d1ac5995abba01fb99ab027f3cd41a8ef0198",
+    "integration_commit": "f7e63615be55713ac2c412c2720a50a40ca27f3f",
+    "entrypoint_commit": "a023376a9951554eb61043a9d77ff0a3adf7ff79",
+    "qa": "Sintaxis JS OK; 25 refs únicas, 92 fichas completas; integración estática y carga verificadas; navegador autenticado no probado."
   },
+  "next_phase": null,
   "hard_rules": [
     "No pasar de fase si no se implementaron cambios sustantivos a esa fase",
     "No corregir respuestas sin pedido expreso",
@@ -463,16 +457,28 @@
         332,
         344
       ],
-      "status": "exercises_complete",
+      "status": "both_passes_complete",
       "exercises": {
         "groups": 12,
         "items": 54,
         "commit": "fb1a5d4ffbbac69a383ef5636ea843280cda5529",
         "qa": "PDF físico pp.332–344 examinado; prácticas y secciones finales cotejadas por página, número y dirección; sintaxis JS OK; navegador autenticado no probado."
+      },
+      "texts": {
+        "status": "completed",
+        "blocks": 25,
+        "tokens": 92,
+        "biblical_blocks": 7,
+        "content_commit": "2e7d1ac5995abba01fb99ab027f3cd41a8ef0198",
+        "integration_commit": "f7e63615be55713ac2c412c2720a50a40ca27f3f",
+        "entrypoint_commit": "a023376a9951554eb61043a9d77ff0a3adf7ff79",
+        "qa": "Sintaxis JS OK; 25 refs únicas, 92 fichas completas; integración estática y carga verificadas; navegador autenticado no probado."
       }
     }
   ],
-  "last_commit": "fb1a5d4ffbbac69a383ef5636ea843280cda5529",
+  "last_commit": "a023376a9951554eb61043a9d77ff0a3adf7ff79",
   "start_page": 237,
-  "end_page": null
+  "end_page": null,
+  "course_status": "completed_chapters_3_to_20",
+  "automation_shutdown": "requested_after_final_QA"
 }
