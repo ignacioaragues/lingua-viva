@@ -1,6 +1,6 @@
 {
   "project": "Lengua Viva · Alter Ego A1",
-  "version": "2026-11-18-d1-l1",
+  "version": "2026-11-18-d1-l2",
   "repository": "ignacioaragues/lingua-viva",
   "branch": "main",
   "coursePath": "francais/alter-ego-a1/",
@@ -13,27 +13,26 @@
     "visibility": "Local private PDF only; never commit scans, pages, or commercial source content to the public repository"
   },
   "editorial": {
-    "current": "Dossier 1 · Leçon 1 · Contacts",
-    "status": "dossier_0_and_d1_lesson_1_workbook_published",
+    "current": "Dossier 1 · Leçon 2 · M comme médiathèque",
+    "status": "dossier_0_and_d1_lessons_1_2_workbooks_published",
     "next": {
-      "id": "d1-l2-mediatheque",
-      "title": "M comme médiathèque",
+      "id": "d1-l3-tv5",
+      "title": "En direct de TV5",
       "printedPages": [
-        30,
-        33
+        34,
+        37
       ],
       "pdfPages": [
-        31,
-        34
+        35,
+        38
       ],
-      "goal": "Read all four scans visually; implement each numbered activity with suitable form controls plus notes, article indéfini, identité / quel, telephone numbers 70+, email punctuation, project task 2; ensure checkpoint and no overwrites."
+      "goal": "Render and inspect all four pages visually; cover numbered activities and appropriate points langue/culture and task 3, then checkpoint, preserving D0 and Contacts/Médiathèque."
     },
     "futureOrder": [
-      "D1 L3 · En direct de TV5 · pp. 34–37",
-      "D1 Carnet de voyage · pp. 38–39",
+      "D1 Carnet de voyage · La France en Europe · pp. 38–39",
       "D1 S’exercer · pp. 40–41",
       "D1 Vers le DELF A1 · p. 42",
-      "Dossiers 2–9, three lessons each plus Carnet de voyage, S’exercer, DELF and projects, with dates/page ranges read from book."
+      "Dossiers 2–9: three book lessons plus carnet, révision, DELF and project, check actual printed page ranges"
     ],
     "review": {
       "sourceVisualPagesInspected": [
@@ -51,12 +50,16 @@
         26,
         27,
         28,
-        29
+        29,
+        30,
+        31,
+        32,
+        33
       ],
-      "codeSyntacticValidation": "Current index inline scripts parsed (3 inline scripts) using new Function before commit; static duplicate-ID check passed.",
-      "deployment": "GitHub main index and contacts.js written; verify actual Pages separately; do not imply browser E2E tested",
-      "audio": "References p26 pistes 25–29, p27 pistes 30–31, p29 pistes 32–33 and editor website; individual recordings not downloaded or embedded.",
-      "note": "Keep localStorage key lv:alter-ego-a1:d0:v1 intentionally to preserve prior D0 learner answers. All 56 activities share the current reader; 38 D0 + 18 Contacts."
+      "codeSyntacticValidation": "Inline scripts in updated index parse with new Function; mediatheque.js parses; reader initialization simulated for preexisting D0, Contacts, new L2 listening and grammar; activity IDs 76 unique, DOM identifiers non-duplicated.",
+      "deployment": "GitHub main contains updated index and mediatheque.js. Live site could not be independently opened by the browsing tool (not evidence of deployment failure).",
+      "audio": "Referenced printed book tracks 34–43, not audio embedded; external portal from original course retained.",
+      "note": "Preserved storage key lv:alter-ego-a1:d0:v1; 38+18+20=76 navigable entries. No modification to flashcards, legacy French or account sync. Lesson 2 published as interactive companion (manual still needed), not auto-graded."
     },
     "guardrails": [
       "Never reproduce scanned book inside public repo",
@@ -116,11 +119,56 @@
         ],
         "implementation": "answers with targeted dropdowns, text and multiline fields per activity; notes, local PDF synced by page, saved states and time shared with prior D0 workspace; links to official audio portal with recorded track references but tracks not embedded.",
         "verification": "source visual pages read, code statically parsed, index on main fetched; live browser interaction remains unverified"
+      },
+      {
+        "id": "d1-l2-mediatheque",
+        "title": "M comme médiathèque",
+        "printedPages": [
+          30,
+          33
+        ],
+        "pdfPages": [
+          31,
+          34
+        ],
+        "numberedActivities": 16,
+        "grammarBlocks": 2,
+        "cultureBlocks": 1,
+        "projectTasks": 1,
+        "totalNavigableEntries": 20,
+        "interfaceCoverage": 20,
+        "activityRefs": "1–16; Point Langue l'article indéfini; Point Langue l'adjectif interrogatif quel; Point Culture les numéros de téléphone; Projet tâche 2",
+        "groups": [
+          "Demander des informations",
+          "Questionner sur l'identité",
+          "Comprendre/ Dire des coordonnées",
+          "Courriel et mises en situation",
+          "Points langue et culture",
+          "Projet · Tâche 2"
+        ],
+        "sourceVisualPagesInspected": [
+          30,
+          31,
+          32,
+          33
+        ],
+        "sourceAudioReferences": [
+          "34–35",
+          "36–37",
+          "38",
+          "39",
+          "40",
+          "41",
+          "42",
+          "43"
+        ],
+        "implementation": "Activity-specific dropdowns, text fields and multiline writing; private local PDF viewer following printed page to PDF page (offset +1); notes; local progress and active study time; on-demand correction prompt; official publisher audio resource link, track IDs referenced but no embedded track recordings.",
+        "verification": "Rendered all four relevant scanned book pages directly via PyMuPDF; authored 20 activities in mediatheque.js; validated JavaScript syntax, unique IDs, reader initialization with a D0 checkpoint, Contacts and two L2 activities. Browser end-to-end and deployed GitHub Pages propagation not confirmed."
       }
     ]
   },
   "learner": {
     "completedActivities": 0,
-    "summary": "Progress is strictly learner-controlled and browser-local. 0 completed in editorial state does not assert the learner has finished none; remote browser history not inspected."
+    "summary": "Individual answers, notes, status and active minutes remain browser-local. Editorial completion does not imply that learner has completed these exercises."
   }
 }
