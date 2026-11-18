@@ -1050,7 +1050,22 @@
         "entrypoint_commit": "4c12f9879c530357fa75aa097c17c3538bf1f7f9",
         "qa": "Sintaxis JS OK, 23 refs únicas, 85 fichas completas; integración estática y carga comprobadas. Navegador autenticado no probado."
       }
+    },
+    {
+      "chapter": 19,
+      "name": "Verbos en -μι y verbos contractos",
+      "pdf_pages": [
+        318,
+        331
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 11,
+        "items": 61,
+        "commit": "d5295892df2d87f6feec9e0dfd846d865a04eb48",
+        "qa": "PDF físico pp.318–331 examinado; prácticas, cantidades, numeración y dirección cotejadas; sintaxis JS OK; navegador autenticado no probado."
+      }
     }
   ],
-  "last_commit": "4c12f9879c530357fa75aa097c17c3538bf1f7f9"
+  "last_commit": "d5295892df2d87f6feec9e0dfd846d865a04eb48"
 }
