@@ -668,7 +668,27 @@ function chapterSeventeenPractice(){
  out+='</div>'; }out+='</details>';});return out+reviewPanel(p);
 }
 
+
+/* Duff 18 · Infinitivos, imperativos 3ª persona, partes principales · PDF físico pp. 298–317. */
+var chapterEighteenExercises={"300":[["18-1","18.1 · morfología de verbos irregulares","morphology",9]],"303":[["18-2-1-2","18.2.1–2 · infinitivo y resultado (inicio)","translation",3]],"304":[["18-2-1-2-cont","18.2.1–2 · infinitivo y resultado (continuación)","translation",2,4]],"305":[["mid-gr-es","Mitad · griego a español (inicio)","translation",5]],"306":[["mid-gr-es-cont","Mitad · griego a español (continuación)","translation",3,6],["mid-es-gr","Mitad · español a griego","greek",4,9]],"307":[["18-3","18.3 · imperativos de tercera persona","translation",6]],"310":[["18-4","18.4 · partes principales y traducción","translation",6]],"313":[["finalA-gr-es","Final A · griego a español (inicio)","translation",5]],"314":[["finalA-gr-es-cont","Final A · griego a español (continuación)","translation",3,6],["finalA-es-gr","Final A · español a griego","greek",4,9],["finalB-gr-es","Final B · griego a español (inicio)","translation",6]],"315":[["finalB-gr-es-cont","Final B · griego a español (continuación)","translation",2,7],["finalB-es-gr","Final B · español a griego","greek",4,9],["finalC-mateo","Final C · Mateo 6:9–13","translation",1]]};
+function chapterEighteenPractice(){
+ var p=state.page,raw=chapterEighteenExercises[p]||[];
+ var nav=[[300,'18.1'],[303,'18.2.1–2'],[305,'Mitad'],[307,'18.3'],[310,'18.4'],[313,'Final A'],[314,'Final A/B'],[315,'Final B/C']];
+ var out='<nav class="duff-index duff-ch2-index" aria-label="Prácticas del capítulo 18">'+nav.map(function(x){return '<button type="button" data-do="page" data-page="'+x[0]+'" aria-current="'+(p===x[0]?'page':'false')+'">'+h(x[1])+'</button>';}).join('')+'</nav>';
+ if(!raw.length)out+='<p class="duff-ch2-note">Teoría o vocabulario. Elegí una práctica en el índice.</p>';
+ raw.forEach(function(a,index){var id=a[0],label=a[1],type=a[2],count=a[3],start=a[4]||1;
+ var parts=type==='morphology'?['lema','tiempo','voz','modo','persona','numero','caso','genero']:null;
+ var labels={lema:'Lema griego',tiempo:'Tiempo / aspecto',voz:'Voz',modo:'Modo',persona:'Persona',numero:'Número',caso:'Caso (si corresponde)',genero:'Género (si corresponde)'};
+ var answered=0;for(var n=start;n<start+count;n++){var key='duff-ch18:'+id+':'+n;if(parts?parts.some(function(part){return String(note(p).answers[key+':'+part]||'').trim();}):String(note(p).answers[key]||'').trim())answered++;}
+ out+='<details class="duff-exercise duff-ch2-group" '+(index===0?'open':'')+'><summary>'+h(label)+' <span class="duff-ch2-count">'+count+' ítems'+(answered?' · '+answered+' contestados':'')+'</span></summary><p>Consultá el PDF privado. Sin soluciones ni autocorrección.</p>';
+ for(var n=start;n<start+count;n++){var key='duff-ch18:'+id+':'+n;out+='<div class="duff-answer-row"><div class="duff-answer-label">Ítem '+n+'</div>';
+ if(parts)out+='<div class="duff-answer-pair">'+parts.map(function(part){return '<div>'+field(key+':'+part,labels[part],part==='lema',false)+'</div>';}).join('')+'</div>';
+ else out+=field(key,type==='greek'?'Tu traducción al griego':'Tu traducción al español',type==='greek',2);
+ out+='</div>'; }out+='</details>';});return out+reviewPanel(p);
+}
+
 function practice(){
+ if(current()===17)return chapterEighteenPractice();
  if(current()===16)return chapterSeventeenPractice();
  if(current()===15)return chapterSixteenPractice();
  if(current()===14)return chapterFifteenPractice();
