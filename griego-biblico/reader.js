@@ -706,7 +706,27 @@ function chapterNineteenPractice(){
  out+='</div>'; }out+='</details>';});return out+reviewPanel(p);
 }
 
+
+/* Duff 20 · Condicionales, genitivo absoluto, perífrasis, grados y optativo · PDF pp.332–344. */
+var chapterTwentyExercises={"335":[["20-1","20.1 · condicionales","translation",6]],"337":[["mid-gr-es","Mitad · griego a español","translation",8],["mid-es-gr","Mitad · español a griego","greek",4,9]],"338":[["20-3","20.3 · perífrasis verbales","translation",4]],"340":[["20-4","20.4 · análisis de adjetivos y adverbios","morphology",6]],"341":[["finalA-gr-es","Final A · griego a español (inicio)","translation",5]],"342":[["finalA-gr-es-cont","Final A · griego a español (continuación)","translation",3,6],["finalA-es-gr","Final A · español a griego","greek",4,9],["finalB-gr-es","Final B · griego a español","translation",8],["finalB-es-gr","Final B · español a griego","greek",4,9]],"343":[["finalC-corintios","Final C · 1 Corintios 13:1–3","translation",1],["final-poem","Epílogo · poema griego","translation",1]]};
+function chapterTwentyPractice(){
+ var p=state.page,raw=chapterTwentyExercises[p]||[];
+ var nav=[[335,'20.1'],[337,'Mitad'],[338,'20.3'],[340,'20.4'],[341,'Final A'],[342,'Final A/B'],[343,'Final C y epílogo']];
+ var out='<nav class="duff-index duff-ch2-index" aria-label="Prácticas del capítulo 20">'+nav.map(function(x){return '<button type="button" data-do="page" data-page="'+x[0]+'" aria-current="'+(p===x[0]?'page':'false')+'">'+h(x[1])+'</button>';}).join('')+'</nav>';
+ if(!raw.length)out+='<p class="duff-ch2-note">Teoría o vocabulario. Elegí una práctica en el índice.</p>';
+ raw.forEach(function(a,index){var id=a[0],label=a[1],type=a[2],count=a[3],start=a[4]||1;
+ var parts=type==='morphology'?['lema','grado','caso','genero','numero','funcion']:null;
+ var labels={lema:'Lema griego',grado:'Grado (positivo, comparativo, superlativo)',caso:'Caso (si corresponde)',genero:'Género (si corresponde)',numero:'Número (si corresponde)',funcion:'Función y valor adverbial/adjetival'};
+ var answered=0;for(var n=start;n<start+count;n++){var key='duff-ch20:'+id+':'+n;if(parts?parts.some(function(part){return String(note(p).answers[key+':'+part]||'').trim();}):String(note(p).answers[key]||'').trim())answered++;}
+ out+='<details class="duff-exercise duff-ch2-group" '+(index===0?'open':'')+'><summary>'+h(label)+' <span class="duff-ch2-count">'+count+' ítems'+(answered?' · '+answered+' contestados':'')+'</span></summary><p>Consultá el PDF privado. Sin soluciones ni autocorrección.</p>';
+ for(var n=start;n<start+count;n++){var key='duff-ch20:'+id+':'+n;out+='<div class="duff-answer-row"><div class="duff-answer-label">Ítem '+n+'</div>';
+ if(parts)out+='<div class="duff-answer-pair">'+parts.map(function(part){return '<div>'+field(key+':'+part,labels[part],part==='lema',false)+'</div>';}).join('')+'</div>';
+ else out+=field(key,type==='greek'?'Tu traducción al griego':'Tu traducción al español',type==='greek',2);
+ out+='</div>'; }out+='</details>';});return out+reviewPanel(p);
+}
+
 function practice(){
+ if(current()===19)return chapterTwentyPractice();
  if(current()===18)return chapterNineteenPractice();
  if(current()===17)return chapterEighteenPractice();
  if(current()===16)return chapterSeventeenPractice();
