@@ -888,7 +888,7 @@
         210,
         223
       ],
-      "status": "texts_in_progress",
+      "status": "both_passes_complete",
       "exercises": {
         "groups": 16,
         "items": 75,
@@ -896,15 +896,14 @@
         "qa": "PDF físico 210–223 cotejado; 16 grupos, 75 ítems; sintaxis JS compilada con new Function. Sin navegador autenticado."
       },
       "texts": {
-        "status": "partial",
-        "blocks": 11,
-        "tokens": 75,
-        "content_commit": "48b03595fcd00591bfac9ade74ab345e59e4e574",
-        "integration_commit": "587443d04f9c9842fe577a5b5e1a9f2d262b9b6f",
-        "entrypoint_commit": "c145b2ef9225b5c8a2b65aaea726fdca87eb4f77",
-        "pending": "Citas bíblicas y QA; no prueba autenticada"
+        "status": "completed",
+        "blocks": 15,
+        "tokens": 94,
+        "pages_covered": "210–223 (PDF revisado)",
+        "content_commit": "b732ac5e2fcc773cc820c29857f2a2ed434680e6",
+        "qa": "Sintaxis JS y datos: 15 refs únicas, 94 fichas completas. Sin navegador autenticado."
       }
     }
   ],
-  "last_commit": "c145b2ef9225b5c8a2b65aaea726fdca87eb4f77"
+  "last_commit": "b732ac5e2fcc773cc820c29857f2a2ed434680e6"
 }
