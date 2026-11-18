@@ -480,5 +480,6 @@
   "start_page": 237,
   "end_page": null,
   "course_status": "completed_chapters_3_to_20",
-  "automation_shutdown": "requested_after_final_QA"
+  "automation_shutdown": "disabled_confirmed",
+  "automation_enabled": false
 }
