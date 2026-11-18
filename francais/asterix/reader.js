@@ -7,11 +7,11 @@ function renderGuided(){
  const root=$('prepared-translation');if(!root)return;
  root.replaceChildren();
  const d=window.ASTERIX_PAGE_TEXT?.[state.page];
- $('prepared-heading').textContent='Página '+state.page+(d?.label?' · '+d.label:'')+' · '+(d?.complete?'transcripción cotejada':'pendiente de cotejo');
+ $('prepared-heading').textContent='Página '+state.page+(d?.label?' · '+d.label:'')+' · '+(d?.complete?'transcripción cotejada':'borrador editorial · cotejo pendiente');
  const switcher=$('prepared-toggle');
  switcher.textContent=state.showES?'Ocultar español':'Mostrar español';
  switcher.setAttribute('aria-pressed',String(state.showES));
- if(!d?.segments?.length){const p=document.createElement('p');p.className='transcript-pending';p.textContent='Todavía no hay una transcripción francesa comprobada para esta página. Para completarla, hay que cotejar todos los globos con la página escaneada.';root.append(p);return}
+ if(!d?.segments?.length){const p=document.createElement('p');p.className='transcript-pending';p.textContent=window.ASTERIX_EDITORIAL_STATUS || 'Iniciá sesión en Lengua Viva para ver la transcripción y traducción privadas.';root.append(p);return}
  for(const segment of d.segments){
   const article=document.createElement('article');article.className='transcript-segment';
   if(segment.speaker){const speaker=document.createElement('p');speaker.className='transcript-speaker';speaker.textContent=segment.speaker;article.append(speaker)}
@@ -32,5 +32,5 @@ const DB='lv-asterix-pdf';function openDB(){return new Promise((resolve,reject)=
 async function storePDF(file){const db=await openDB();return new Promise((resolve,reject)=>{const tx=db.transaction('files','readwrite');tx.objectStore('files').put(file,'asterix');tx.oncomplete=()=>{db.close();resolve()};tx.onerror=()=>{db.close();reject(tx.error)}})}
 async function restorePDF(){try{const db=await openDB();const file=await new Promise((resolve,reject)=>{const tx=db.transaction('files','readonly'),r=tx.objectStore('files').get('asterix');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)});db.close();if(!file)return;if(!window.pdfjsLib)return;$('status').textContent='Recuperando tu PDF guardado…';pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';state.doc=await pdfjsLib.getDocument({data:new Uint8Array(await file.arrayBuffer())}).promise;state.page=Math.max(1,Math.min(state.doc.numPages,Number(localStorage.getItem(prefix+'position'))||1));$('workspace').classList.remove('hidden');await render()}catch(e){$('status').textContent='No se pudo recuperar el PDF guardado; podés seleccionarlo nuevamente.'}}
 try{state.showES=localStorage.getItem(prefix+'spanish-visible')==='yes'}catch(e){}$('prepared-toggle').onclick=()=>{state.showES=!state.showES;try{localStorage.setItem(prefix+'spanish-visible',state.showES?'yes':'no')}catch(e){}renderGuided()};
-restorePDF();
+window.addEventListener('asterix-transcripts-ready',renderGuided);restorePDF();
 })();
