@@ -1000,7 +1000,22 @@
         "entrypoint_commit": "33b28859f1641192020468327ad2ee47bb2dab36",
         "qa": "Sintaxis JS OK, 15 referencias únicas, 62 fichas completas, integración estática verificada; navegador autenticado no probado."
       }
+    },
+    {
+      "chapter": 17,
+      "name": "El subjuntivo",
+      "pdf_pages": [
+        282,
+        297
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 11,
+        "items": 55,
+        "commit": "2f6ed49de0d84ae220e0e2de395aedb28694dd32",
+        "qa": "PDF físico pp.282–297 examinado; prácticas, numeración y dirección cotejadas; sintaxis JS OK; navegador autenticado no probado."
+      }
     }
   ],
-  "last_commit": "33b28859f1641192020468327ad2ee47bb2dab36"
+  "last_commit": "2f6ed49de0d84ae220e0e2de395aedb28694dd32"
 }
