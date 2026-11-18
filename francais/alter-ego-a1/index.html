@@ -1,59 +1,184 @@
 <!doctype html>
 <html lang="es">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f7f6f0">
-<meta name="description" content="Alter Ego+ 1 · A1: recorrido nuevo de francés basado en el orden verificado del manual, con unidades originales que se publicarán progresivamente.">
-<title>Alter Ego A1 · Lengua Viva</title>
-<link rel="stylesheet" href="../../styles.css?v=20261117-ae1">
+<meta name="description" content="Alter Ego A1 en Lengua Viva: visor privado del libro, cuaderno de actividades del Dossier 0, notas y registro de estudio.">
+<title>Alter Ego A1 · Dossier 0 · Lengua Viva</title>
 <style>
-.ae-shell{width:min(1040px,calc(100% - 36px));margin:auto}
-.ae-top{border-bottom:1px solid var(--line);padding:20px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.ae-top a{color:var(--ink);text-decoration:none}.ae-top nav{display:flex;gap:20px;flex-wrap:wrap;font-size:13px}
-.ae-hero{padding:76px 0 40px;border-bottom:1px solid var(--line)}.ae-hero h1{margin:12px 0 20px;line-height:1.06}
-.ae-hero h1 em{color:var(--green)}.ae-hero p{max-width:720px;color:var(--muted);font-size:17px}
-.ae-kicker{font:500 11px var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--green)}
-.ae-links{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0 0}
-.ae-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:34px 0 54px}
-.ae-card{border:1px solid var(--line);background:var(--white);border-radius:13px;padding:28px}
-.ae-card h2{font-size:28px;margin:12px 0 12px}.ae-card p{color:var(--muted);font-size:13px}
-.ae-list{list-style:none;margin:20px 0 0;padding:0}
-.ae-list li{border-top:1px solid var(--line);padding:13px 0;display:flex;gap:15px;justify-content:space-between;align-items:baseline}
-.ae-list strong{font-size:13px}.ae-list small{font-size:11px;letter-spacing:0;text-transform:none;text-align:right;max-width:115px}
-.ae-note{background:var(--sage);padding:20px 24px;border-radius:9px;margin:0 0 60px;font-size:13px}
-.ae-note p{margin:6px 0 0}.ae-footer{border-top:1px solid var(--line);padding:22px 0 38px;font-size:12px;color:var(--muted)}
-@media(max-width:720px){.ae-hero{padding:45px 0 26px}.ae-grid{grid-template-columns:1fr}.ae-card{padding:22px}.ae-list li{align-items:flex-start}}
+:root{--ae-paper:#f7f6f0;--ae-ink:#263139;--ae-muted:#64727b;--ae-line:#d8dedb;--ae-accent:#426c60;--ae-pale:#eaf0ec;--ae-white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--ae-paper);color:var(--ae-ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--ae-accent)}button,input,select,textarea{font:inherit}button{cursor:pointer}
+.ae-header{max-width:1440px;margin:auto;padding:20px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--ae-line)}
+.ae-header nav{display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-size:.84rem}.ae-brand{font-family:Georgia,serif;font-size:1.35rem;text-decoration:none;color:var(--ae-ink)}.ae-brand em{color:var(--ae-accent)}
+.ae-page{max-width:1440px;margin:0 auto;padding:22px 26px 42px}
+.ae-heading{display:flex;justify-content:space-between;gap:20px;align-items:start;flex-wrap:wrap;margin-bottom:20px}
+.ae-heading h1{font:normal clamp(2rem,4vw,3.2rem)/1.08 Georgia,serif;margin:6px 0 9px}.ae-heading h1 em{color:var(--ae-accent)}
+.ae-kicker{font-size:.7rem;text-transform:uppercase;letter-spacing:.13em;color:var(--ae-accent);font-weight:700}
+.ae-heading p{max-width:690px;color:var(--ae-muted);line-height:1.6;margin:0}
+.ae-stat{font-size:.85rem;color:var(--ae-muted);display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.ae-meter{height:5px;background:#d6e2db;border-radius:9px;overflow:hidden;margin-top:10px}.ae-meter>span{display:block;height:100%;width:0;background:var(--ae-accent)}
+.ae-layout{display:grid;grid-template-columns:265px minmax(0,1fr);gap:18px;align-items:start}
+.ae-sidebar{background:var(--ae-white);border:1px solid var(--ae-line);border-radius:14px;padding:16px;max-height:calc(100vh - 150px);overflow:auto;position:sticky;top:12px}
+.ae-navheading{font-size:.73rem;color:var(--ae-accent);font-weight:750;letter-spacing:.03em;margin:12px 4px 7px}
+.ae-navitem{border:0;background:none;text-align:left;display:flex;justify-content:space-between;align-items:start;width:100%;gap:8px;padding:9px 10px;border-radius:8px;color:var(--ae-ink);font-size:.82rem;line-height:1.35}
+.ae-navitem:hover{background:#f3f5f3}.ae-navitem[aria-current="true"]{background:var(--ae-pale);color:#245545;font-weight:650}.ae-navitem .ae-number{font-size:.71rem;color:var(--ae-muted);min-width:44px}
+.ae-navitem .ae-done{color:#326d4c}
+.ae-card{background:var(--ae-white);border:1px solid var(--ae-line);border-radius:14px;padding:20px;min-width:0}
+.ae-controls,.ae-flex{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ae-controls{justify-content:space-between;margin-bottom:12px}
+.ae-btn{background:#fff;border:1px solid var(--ae-line);border-radius:8px;padding:9px 12px;font-size:.82rem;color:var(--ae-ink)}
+.ae-btn:hover{border-color:var(--ae-accent);background:var(--ae-pale)}
+.ae-primary{background:var(--ae-accent);color:#fff;border-color:var(--ae-accent)}.ae-primary:hover{background:#305548;color:#fff}
+.ae-workspace{display:grid;grid-template-columns:minmax(0,45%) minmax(0,55%);gap:14px;align-items:start}
+.ae-workspace.book-hidden{grid-template-columns:1fr}
+.ae-book{background:#f5f5f1;border:1px solid var(--ae-line);border-radius:12px;min-width:0;overflow:hidden}
+.ae-book-top{padding:12px 14px;display:flex;gap:10px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--ae-line);font-size:.82rem}
+.ae-file-label{display:inline-flex;align-items:center;background:#fff;border:1px solid var(--ae-line);padding:8px 10px;border-radius:8px;cursor:pointer;font-size:.78rem}
+.ae-file-label input{position:absolute;opacity:0;width:1px;height:1px}
+.ae-book-frame{width:100%;height:min(76vh,870px);border:0;background:#eceeec}
+.ae-empty{height:420px;padding:30px;display:flex;flex-direction:column;gap:15px;align-items:center;justify-content:center;text-align:center;color:var(--ae-muted);font-size:.86rem}
+.ae-taskhead{display:flex;align-items:start;justify-content:space-between;gap:12px}.ae-taskhead h2{font:normal clamp(1.6rem,2.6vw,2.1rem)/1.15 Georgia,serif;margin:7px 0 10px}
+.ae-chip{display:inline-block;background:var(--ae-pale);border-radius:99px;padding:5px 10px;color:#345e52;font-size:.72rem}
+.ae-instruction{color:#47585f;line-height:1.6;margin:13px 0}.ae-small{font-size:.78rem;color:var(--ae-muted);line-height:1.5}
+.ae-tabs{display:flex;gap:5px;border-bottom:1px solid var(--ae-line);margin:18px 0 15px}
+.ae-tab{border:0;border-bottom:2px solid transparent;padding:9px 12px;background:none;font-size:.86rem;color:var(--ae-muted)}
+.ae-tab.active{border-color:var(--ae-accent);color:var(--ae-ink);font-weight:650}
+.ae-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:14px}
+.ae-field{display:flex;flex-direction:column;gap:6px;font-size:.8rem;color:var(--ae-ink)}.ae-field input,.ae-field textarea,.ae-status{border:1px solid var(--ae-line);border-radius:7px;padding:10px;background:white;min-width:0;color:var(--ae-ink);width:100%}
+.ae-field textarea{min-height:155px;resize:vertical;line-height:1.5}.ae-field input:focus,.ae-field textarea:focus{outline:2px solid #a5c3b5;outline-offset:1px}
+.ae-tabpanel[hidden]{display:none}.ae-note textarea{min-height:180px}.ae-taskfoot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px solid var(--ae-line);margin-top:20px;padding-top:16px}
+.ae-status{width:auto;max-width:160px;padding:8px}.ae-note-box{background:var(--ae-pale);border-radius:10px;padding:12px 14px;font-size:.8rem;line-height:1.55;color:#36574d;margin-top:14px}
+.ae-footer{font-size:.75rem;color:var(--ae-muted);border-top:1px solid var(--ae-line);padding-top:19px;margin-top:24px;line-height:1.6}
+.ae-mobile-menu{display:none}
+@media(max-width:1050px){.ae-layout{grid-template-columns:225px minmax(0,1fr)}.ae-workspace{grid-template-columns:1fr}.ae-book-frame{height:62vh}}
+@media(max-width:700px){.ae-header{padding:15px}.ae-header nav{gap:10px}.ae-page{padding:15px}.ae-layout{display:block}.ae-sidebar{position:static;max-height:none;display:none;margin-bottom:12px}.ae-sidebar.is-open{display:block}.ae-mobile-menu{display:inline-flex}.ae-workspace{display:block}.ae-workspace .ae-book{margin-bottom:12px}.ae-card{padding:16px}.ae-book-frame{height:60vh}.ae-taskfoot{align-items:stretch}}
 </style>
 </head>
 <body>
-<header class="ae-shell ae-top"><a class="brand" href="../../">Lengua <em>Viva</em></a><nav aria-label="Navegación"><a href="../accueil.html">← Francés</a><a href="../../flashcards/?idioma=francais">Flashcards</a><a href="../">Curso anterior</a></nav></header>
-<main class="ae-shell">
-<section class="ae-hero">
-<div class="ae-kicker">Francés · Nuevo curso · A1</div>
-<h1>Alter Ego <em>A1.</em></h1>
-<p>Un nuevo recorrido independiente, organizado según el orden de los dossiers de <i>Alter Ego+ 1</i>. Las explicaciones, lecturas y actividades web serán originales: vas a poder estudiar sin abrir el manual. La secuencia se verificará con el material aportado.</p>
-<div class="ae-links"><a class="btn btn-primary" href="#recorrido">Ver el recorrido</a><a class="btn" href="../../flashcards/?idioma=francais&amp;mazo=alter-ego-a1-d0">Flashcards · Dossier 0</a></div>
+<header class="ae-header"><a class="ae-brand" href="../../">Lengua <em>Viva</em></a><nav aria-label="Navegación"><a href="../accueil.html">Francés</a><a href="../../flashcards/?idioma=francais">Flashcards</a><a href="../../estadisticas/?idioma=francais">Estadísticas generales</a><a href="../">Curso anterior</a></nav></header>
+<main class="ae-page">
+<div class="ae-heading"><div><div class="ae-kicker">Francés A1 · método con manual</div><h1>Alter Ego <em>A1.</em></h1><p>Estudiá con tu libro y respondé cada actividad en el cuaderno interactivo. Podés mostrar u ocultar el PDF sin perder tus respuestas. La corrección solo se realiza cuando la pedís expresamente.</p></div><div class="ae-stat"><span id="ae-progress">0 / 38 actividades</span><span>⏱ <span id="ae-time">0 h 00 min</span></span><button class="ae-btn" id="ae-export" type="button">Exportar mi cuaderno</button></div></div>
+<div class="ae-meter" aria-label="Progreso manual de actividades"><span id="ae-meter-fill"></span></div>
+<div style="height:19px"></div>
+<div class="ae-layout">
+<aside class="ae-sidebar" id="ae-nav" aria-label="Índice de actividades"><div class="ae-kicker">Índice del Dossier 0</div><p class="ae-small">Elegí una actividad para abrir el libro en la página correspondiente.</p><div id="ae-navlist"></div><div class="ae-note-box">Próximo recorrido: Dossier 1, lección 1 «Contacts». Las unidades posteriores permanecen pendientes.</div></aside>
+<section aria-label="Cuaderno de actividades">
+<div class="ae-controls">
+<div class="ae-flex"><button class="ae-btn ae-mobile-menu" id="ae-toggle-menu" type="button">☰ Índice</button><button class="ae-btn" id="ae-toggle-book" type="button">Ocultar libro</button></div>
+<span class="ae-small" id="ae-current">Dossier 0</span></div>
+<div class="ae-workspace" id="ae-workspace">
+<section class="ae-book" id="ae-book" aria-label="Visor de libro local">
+<div class="ae-book-top"><strong>Tu libro (solo local)</strong><label class="ae-file-label">Elegir PDF <input id="ae-file" type="file" accept="application/pdf"></label></div>
+<div id="ae-file-placeholder" class="ae-empty"><div style="font-size:35px">📖</div><strong>Elegí tu ejemplar de Alter Ego</strong><div>El archivo se abre exclusivamente en tu navegador. No se envía ni se publica en GitHub.</div><div class="ae-small">Cuando cambies de ejercicio, iremos a la página correspondiente. Al volver a abrir la web, tendrás que seleccionar de nuevo el PDF.</div></div>
+<iframe id="ae-pdf-frame" class="ae-book-frame" title="PDF privado del libro" hidden></iframe>
+<div class="ae-book-top"><span id="ae-pdfname">Sin archivo seleccionado</span><span>Visor local</span></div></section>
+<section class="ae-card" aria-label="Ejercicio y notas">
+<div class="ae-taskhead"><div><div class="ae-kicker" id="ae-pages-title">Dossier 0 · Découverte</div><h2 id="ae-title">Actividad</h2></div><span class="ae-chip" id="ae-pages">p. 14</span></div>
+<p class="ae-instruction" id="ae-instruction"></p>
+<div id="ae-audio" class="ae-note-box" hidden>🎧 <span id="ae-track"></span><div style="margin-top:8px"><button id="ae-open-audio" class="ae-btn" type="button">Abrir audios del editor ↗</button></div><div class="ae-small">Comprobá que las pistas correspondan a tu edición. Si no coinciden, utilizá los audios de tu ejemplar.</div></div>
+<div class="ae-tabs" role="tablist"><button type="button" class="ae-tab active" data-tab="exercise" role="tab">Ejercicio</button><button type="button" class="ae-tab" data-tab="notes" role="tab">Mis notas</button></div>
+<div id="ae-exercise-panel" class="ae-tabpanel"><div class="ae-small">Completá la actividad usando el manual como referencia. Las respuestas quedan guardadas sin ser corregidas.</div><div id="ae-exercise-fields"></div></div>
+<div id="ae-notes-panel" class="ae-tabpanel" hidden><label class="ae-field ae-note"><span>Notas, dudas y vocabulario de esta actividad</span><textarea id="ae-notes" placeholder="Escribí tus observaciones personales…"></textarea></label></div>
+<div class="ae-taskfoot"><div><label for="ae-status" class="ae-small">Mi estado</label><select id="ae-status" class="ae-status"><option value="pending">Pendiente</option><option value="working">En curso</option><option value="done">Completada</option></select></div><div class="ae-flex"><button type="button" class="ae-btn" id="ae-prev">← Anterior</button><button type="button" class="ae-btn ae-primary" id="ae-next">Siguiente →</button></div></div>
+<div class="ae-flex" style="justify-content:space-between;margin-top:14px"><span class="ae-small" id="ae-save" aria-live="polite">Guardado en este navegador</span><button type="button" class="ae-btn" id="ae-request-review">Preparar solicitud de corrección</button></div>
 </section>
-<section id="recorrido">
-<div style="padding-top:32px"><div class="ae-kicker">Plan de contenidos verificado · Primeros dossiers</div><h2 style="margin:10px 0">El recorrido</h2><p style="color:var(--muted)">Esta es la estructura inicial, no una declaración de unidades completadas. Se irán habilitando cuando estén realmente desarrolladas.</p></div>
-<div class="ae-grid">
-<article class="ae-card"><div class="ae-kicker">Dossier 0 · Découverte</div><h2>Primer contacto</h2><p>Páginas impresas 14–24 del manual aportado. Identidad, alfabeto, lenguas, países, números hasta 69 y comunicación en clase.</p><ul class="ae-list">
-<li><strong>Primeros intercambios</strong><small>pp. 14–15 · pendiente</small></li>
-<li><strong>Alfabeto y nombres</strong><small>pp. 16–17 · pendiente</small></li>
-<li><strong>Identidad y lenguas</strong><small>pp. 18–19 · pendiente</small></li>
-<li><strong>Países y números 1–69</strong><small>pp. 20–21 · pendiente</small></li>
-<li><strong>Palabras y comunicación en clase</strong><small>pp. 22–23 · pendiente</small></li>
-<li><strong>Consolidación</strong><small>p. 24 · pendiente</small></li>
-</ul></article>
-<article class="ae-card"><div class="ae-kicker">Dossier 1 · Les uns, les autres</div><h2>Presentarse y conocer</h2><p>Páginas impresas 26–42. Tres lecciones, un recorrido cultural, práctica de consolidación y preparación DELF.</p><ul class="ae-list">
-<li><strong>Leçon 1 · Contacts</strong><small>pp. 26–29 · pendiente</small></li>
-<li><strong>Leçon 2 · M comme médiathèque</strong><small>pp. 30–33 · pendiente</small></li>
-<li><strong>Leçon 3 · En direct de TV5</strong><small>pp. 34–37 · pendiente</small></li>
-<li><strong>Carnet de voyage</strong><small>pp. 38–39 · pendiente</small></li>
-<li><strong>S’exercer / DELF A1</strong><small>pp. 40–42 · pendiente</small></li>
-</ul></article>
-</div></section>
-<aside class="ae-note"><strong>Tarjetas compartidas, mazos independientes.</strong><p>Las tarjetas de Lengua Viva tienen un repositorio común: una tarjeta puede aparecer en distintos mazos sin duplicarse ni perder su historial. Tu mazo anterior permanece intacto. El mazo «Alter Ego · Dossier 0» se irá poblando cuando desarrollemos esa unidad.</p></aside>
+</div>
+</section></div>
+<footer class="ae-footer">El PDF no se sube a servidores; se lee desde un archivo que elegís en tu dispositivo. Respuestas, notas y tiempo se guardan en este navegador mediante almacenamiento local: no hay sincronización entre dispositivos en esta primera versión. Las referencias de página son las del manual aportado. Las consignas web son paráfrasis breves para orientar el trabajo con el ejemplar.</footer>
 </main>
-<footer class="ae-shell ae-footer">Lengua Viva · <a href="../accueil.html">Volver a Francés</a> · Material web original. El manual editorial sirve como referencia estructural, no se reproduce.</footer>
+<script>window.AE_D0_GROUPS=[{"id":"manual","label":"Dossier 0 · Découverte","description":"Primer contacto · pp. 14–21","items":[[14,"1","Reconocer lenguas","text","Observá el cartel europeo y anotá qué idiomas identificás. Justificá brevemente una elección."],[15,"2","El pasaporte de lenguas","fields","Explorá la lista del folleto. Identificá los idiomas que reconocés y los que te resultan nuevos.",["Lenguas reconocidas","Lenguas nuevas"]],[15,"3","Primeras presentaciones","text","Usá el modelo del libro para presentarte ante otra persona. Escribí también una posible respuesta."],[15,"4","Escuchar tres situaciones","fields","Escuchá las pistas 1–3 y asociá cada diálogo con una de las ilustraciones (a, b, c).",["Diálogo 1","Diálogo 2","Diálogo 3"],"1–3"],[15,"5","Comprobar las presentaciones","fields","Volvé a escuchar y completá las asociaciones solicitadas en el manual.",["Presentación 1","Presentación 2","Presentación 3"],"1–3"],[16,"6","El alfabeto francés","text","Escuchá el alfabeto con los nombres propios. Anotá las letras cuya pronunciación te sorprenda.",null,"4"],[16,"7","Pedir que deletreen","fields","Escuchá las preguntas y respuestas sobre cómo se escriben los nombres. Registrá las fórmulas útiles.",["Para preguntar el nombre","Para pedir que deletreen"],"5"],[16,"8","Dictado de nombres","fields","Escuchá los nombres propios y escribilos sin mirar el libro.",["Nombre 1","Nombre 2","Nombre 3","Nombre 4"],"6"],[16,"9","Deletrear tu nombre","fields","Escribí cómo deletrearías tu nombre y el de una persona imaginaria; después practicá oralmente.",["Tu nombre","Otro nombre"]],[17,"10","Lenguas de bienvenida","fields","Observá los saludos en distintas lenguas. Indicá las correspondencias que pide la actividad.",["Correspondencias entre expresiones y lenguas"]],[17,"11","¿Qué lenguas hablás?","text","Prepará un intercambio breve usando «Je parle…» y «Et toi ?»."],[18,"12","Personas en el cóctel","fields","Usá la lista de participantes y las grabaciones para identificar a cada persona en los dibujos.",["Escena a","Escena b","Escena c","Escena d"],"10–11"],[18,"13","Quién dice cada frase","fields","Volvé a escuchar y asociá las ocho intervenciones con los dibujos.",["Intervención 1","Intervención 2","Intervención 3","Intervención 4","Intervención 5","Intervención 6","Intervención 7","Intervención 8"],"10–11"],[19,"14","Sonidos y nombres","fields","Escuchá la actividad de fonética. Anotá qué palabras suenan igual o diferentes y qué terminaciones oís.",["Observaciones: nombres y sonidos","Terminaciones identificadas"],"13"],[19,"15","Conversaciones en el cóctel","text","Imaginá tu participación en el cóctel: presentate, preguntá nombres y nacionalidades e introducí a otra persona."],[20,"16","Los países y los artículos","fields","Usá la lista del cóctel para escribir los países de procedencia y agruparlos por continentes.",["Países","Continentes","Artículos definidos"]],[20,"17","Lenguas y procedencias","fields","Prepará pares de lengua y país y registrá los artículos correspondientes.",["Pares lengua–país","Dudas sobre los artículos"]],[20,"18","Contar de 0 a 20","fields","Escuchá los números del dibujo y registrá los que te cuesta reconocer.",["Números identificados","Números que quiero repasar"],"14–15"],[21,"19","Regularidades de los números","fields","Observá la tabla hasta 69 e identificá las pautas para formar números y las excepciones.",["Números simples","Números compuestos","Serie de práctica"],"16"],[21,"20","Distinguir números al oído","fields","Escuchá los pares y registrá tus elecciones. Después practicá cómo leerlos.",["a","b","c","d","e","f","g","h"],"17"],[21,"21","Stands de la Jornada Europea","fields","Escuchá el material y completá las correspondencias entre números de stand y países.",["1","2","3","4","5","6","7","8","9","10"],"18"]]},{"id":"mots","label":"D’un mot à l’autre","description":"Vocabulario y cultura · p. 22","items":[[22,"1","Palabras transparentes","fields","Señalá qué palabras francesas se parecen al español u otras lenguas que conocés.",["Palabras transparentes","Palabras que no conocía"]],[22,"2","Identificar palabras al oído","text","Escuchá los fragmentos y anotá cuáles de las palabras del recuadro reconocés.",null,"19–20"],[22,"3","Personalidades francesas","text","Escribí una lista breve de figuras francesas que ya conocés y el ámbito de cada una."],[22,"4","Nombres propios incompletos","fields","Completá las iniciales o letras ausentes de los nombres que aparecen en el libro.",["Literatura","Moda","Deporte","Cine"]],[22,"5","Mensaje secreto","fields","Descifrá el mensaje del manual; luego creá uno nuevo con el mismo código.",["Mensaje descifrado","Tu mensaje cifrado"],"21"]]},{"id":"classe","label":"La communication en classe","description":"Francés del aula · p. 23","items":[[23,"1","Instrucciones habituales","fields","Escuchá las órdenes y expresiones del aula. Indicá cuáles se pronuncian y reconocés.",["Expresiones reconocidas","Expresiones para repetir"],"22"],[23,"2","Profesor o estudiante","fields","Para las expresiones del recuadro, anotá quién las diría: profesor, estudiante o ambos.",["Expresiones del profesor","Expresiones del estudiante","Expresiones de ambos"]]]},{"id":"revision","label":"S’exercer","description":"Consolidación del dossier · p. 24","items":[[24,"1","Nombres y alfabeto","fields","Completá los ocho nombres propios en función de las letras dadas y del género indicado.",["1","2","3","4","5","6","7","8"]],[24,"2","Preguntas y respuestas","fields","Relacioná las seis preguntas con sus respuestas usando las letras del libro.",["1","2","3","4","5","6"]],[24,"3","Adjetivos de nacionalidad","fields","Completá las formas masculinas y femeninas de la tabla de nacionalidades.",["Pares de nacionalidad","Reglas observadas"]],[24,"4","Nacionalidades de personajes","fields","Escribí las nacionalidades de los seis personajes citados, con concordancia.",["Leonardo da Vinci","Napoléon","Agatha Christie","Indira Gandhi","Salvador Dalí","Albert Einstein"]],[24,"5","Presentar a otras personas","fields","Formá cuatro frases coherentes con las piezas del ejercicio.",["Frase 1","Frase 2","Frase 3","Frase 4"]],[24,"6","Orden de las palabras","fields","Ordená los tres grupos de palabras para construir frases de presentación correctas.",["Oración 1","Oración 2","Oración 3"]],[24,"7","Los países y sus artículos","fields","Escribí el país correspondiente a cada capital; indicá el artículo adecuado cuando corresponda.",["Capitales y países","Países del listado"]],[24,"8","Nacionalidad y país","fields","Transformá los ocho adjetivos de nacionalidad en nombres de países.",["1","2","3","4","5","6","7","8"]],[24,"9","Cálculo y escritura","fields","Resolvé las seis multiplicaciones y escribí cada resultado en cifras y en francés.",["1","2","3","4","5","6"]],[24,"10","Artículos definidos","fields","Completá los siete sustantivos con le, la o les.",["1","2","3","4","5","6","7"]]]}];</script>
+<script>
+(()=>{
+"use strict";
+const groups=window.AE_D0_GROUPS;
+const all=groups.flatMap(group=>group.items.map(x=>({uid:group.id+"-"+x[1],group:group.id,page:x[0],ref:x[1],title:x[2],kind:x[3],prompt:x[4],fields:x[5]||null,track:x[6]||""})));
+const STORE="lv:alter-ego-a1:d0:v1";
+const fresh={last:all[0].uid,answers:{},notes:{},statuses:{},seconds:0,hideBook:false};
+let saved;try{saved={...fresh,...JSON.parse(localStorage.getItem(STORE)||"{}")}}catch{saved={...fresh}}
+let pdfUrl="",loadedName="",activeTab="exercise",lastTouched=Date.now(),clock=Date.now();
+const $=s=>document.querySelector(s);const byId=id=>document.getElementById(id);
+const text=(s)=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function persist(){try{localStorage.setItem(STORE,JSON.stringify(saved))}catch(e){$("#ae-save").textContent="No se pudo guardar: verificá almacenamiento del navegador."}}
+function activity(){return all.find(a=>a.uid===saved.last)||all[0]}
+function formattedTime(seconds){const minutes=Math.floor(seconds/60);return Math.floor(minutes/60)+" h "+String(minutes%60).padStart(2,"0")+" min"}
+function renderProgress(){const done=all.filter(a=>saved.statuses[a.uid]==="done").length;byId("ae-progress").textContent=done+" / "+all.length+" actividades";byId("ae-time").textContent=formattedTime(saved.seconds);byId("ae-meter-fill").style.width=Math.round(100*done/all.length)+"%"}
+function renderNav(){
+ let html="";
+ for(const g of groups){html+='<div class="ae-navheading">'+text(g.label)+'</div>';for(const row of g.items){
+ const a=all.find(x=>x.group===g.id&&x.ref===row[1]);const isCurrent=a.uid===saved.last;const isDone=saved.statuses[a.uid]==="done";
+ html+='<button class="ae-navitem" type="button" data-uid="'+text(a.uid)+'" aria-current="'+isCurrent+'"><span><span class="ae-number">'+text(a.page+" · "+a.ref)+'</span> '+text(a.title)+'</span><span class="ae-done">'+(isDone?"✓":"")+'</span></button>';
+ }}
+ byId("ae-navlist").innerHTML=html;
+ byId("ae-navlist").querySelectorAll("[data-uid]").forEach(b=>b.addEventListener("click",()=>goto(b.dataset.uid)));
+}
+function frame(){
+ if(!pdfUrl){byId("ae-file-placeholder").hidden=false;byId("ae-pdf-frame").hidden=true;return}
+ byId("ae-file-placeholder").hidden=true;byId("ae-pdf-frame").hidden=false;
+ byId("ae-pdf-frame").src=pdfUrl+"#page="+(activity().page+1)+"&zoom=page-width";
+ byId("ae-pdfname").textContent=loadedName;
+}
+function renderTask(){
+ const a=activity();byId("ae-current").textContent="Dossier 0 · página "+a.page+" · ejercicio "+a.ref;
+ byId("ae-title").textContent=a.title;
+ byId("ae-instruction").textContent=a.prompt;
+ byId("ae-pages").textContent="Libro impreso p. "+a.page+" · PDF p. "+(a.page+1);
+ byId("ae-audio").hidden=!a.track;
+ byId("ae-track").textContent=a.track?"Pista(s) "+a.track+" (consulte su edición)":"";
+ let form="";
+ const answers=saved.answers[a.uid]||{};
+ if(a.kind==="fields"){
+   form='<div class="ae-fields">'+a.fields.map((f,i)=>'<label class="ae-field"><span>'+text(f)+'</span><input type="text" data-answer="'+i+'" autocomplete="off" placeholder="Respuesta '+(i+1)+'" value="'+text(answers[i]||"")+'"></label>').join("")+'</div>';
+ }else{
+   form='<label class="ae-field"><span>Mi respuesta</span><textarea data-answer="0" placeholder="Escribí tu respuesta a la actividad del libro. No se corrige automáticamente.">'+text(answers[0]||"")+'</textarea></label>';
+ }
+ byId("ae-exercise-fields").innerHTML=form;
+ byId("ae-exercise-fields").querySelectorAll("[data-answer]").forEach(el=>el.addEventListener("input",()=>{
+  saved.answers[a.uid]={...(saved.answers[a.uid]||{}),[el.dataset.answer]:el.value};
+  if(!saved.statuses[a.uid])saved.statuses[a.uid]="working";
+  persist();renderProgress();byId("ae-status").value=saved.statuses[a.uid]||"pending";
+ }));
+ byId("ae-notes").value=saved.notes[a.uid]||"";
+ byId("ae-status").value=saved.statuses[a.uid]||"pending";
+ const idx=all.findIndex(x=>x.uid===a.uid);
+ byId("ae-prev").disabled=idx<=0;byId("ae-next").disabled=idx>=all.length-1;
+ renderProgress();renderNav();frame();
+ byId("ae-save").textContent="Guardado en este navegador";
+}
+function goto(uid){if(!all.some(x=>x.uid===uid))return;saved.last=uid;persist();renderTask();if(innerWidth<701){byId("ae-nav").classList.remove("is-open")}scrollTo({top:0,behavior:"smooth"})}
+function setTab(tab){activeTab=tab;for(const b of document.querySelectorAll("[data-tab]")){const active=b.dataset.tab===tab;b.classList.toggle("active",active);b.setAttribute("aria-selected",active?"true":"false")}
+ byId("ae-exercise-panel").hidden=tab!=="exercise";byId("ae-notes-panel").hidden=tab!=="notes";}
+function bookToggle(){saved.hideBook=!saved.hideBook;persist();byId("ae-workspace").classList.toggle("book-hidden",saved.hideBook);byId("ae-book").hidden=saved.hideBook;byId("ae-toggle-book").textContent=saved.hideBook?"Mostrar libro":"Ocultar libro";if(!saved.hideBook)frame()}
+function promptForReview(){
+ const a=activity();const answers=saved.answers[a.uid]||{};const lines=a.kind==="fields" ? a.fields.map((label,i)=>label+": "+(answers[i]||"")).join("\n") : (answers[0]||"");
+ const s="Corregí solamente ahora mi respuesta a Alter Ego A1 (Dossier 0, página impresa "+a.page+", ejercicio "+a.ref+", «"+a.title+"»). Mantené el sentido de mi respuesta, explicá en español los errores y sugerí dos prioridades.\n\nMi respuesta:\n"+lines+"\n\nMis notas:\n"+(saved.notes[a.uid]||"");
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(s).then(()=>{byId("ae-save").textContent="Consigna copiada: pegala en ChatGPT para pedir corrección."}).catch(()=>window.prompt("Copiá esta consigna y pegala en ChatGPT:",s));}
+ else window.prompt("Copiá esta consigna y pegala en ChatGPT:",s);
+}
+function exportData(){const contents=JSON.stringify({exportedAt:new Date().toISOString(),course:"Alter Ego A1",dossier:0,progress:saved},null,2);const url=URL.createObjectURL(new Blob([contents],{type:"application/json"}));const link=document.createElement("a");link.href=url;link.download="alter-ego-a1-mi-cuaderno.json";link.click();setTimeout(()=>URL.revokeObjectURL(url),2000)}
+function touch(){lastTouched=Date.now()}
+document.addEventListener("pointerdown",touch,{passive:true});document.addEventListener("keydown",touch,{passive:true});
+setInterval(()=>{const now=Date.now();const sec=Math.min(2,Math.max(0,Math.round((now-clock)/1000)));clock=now;
+ if(!document.hidden&&document.hasFocus()&&now-lastTouched<90000){saved.seconds+=sec;if(saved.seconds%10<sec)persist();renderProgress()}
+},1000);
+document.addEventListener("visibilitychange",()=>{clock=Date.now();persist()});
+window.addEventListener("beforeunload",()=>{persist();if(pdfUrl)URL.revokeObjectURL(pdfUrl)});
+window.addEventListener("storage",ev=>{if(ev.key===STORE&&ev.newValue){try{saved={...fresh,...JSON.parse(ev.newValue)};renderTask()}catch{}}});
+byId("ae-file").addEventListener("change",ev=>{const f=ev.target.files&&ev.target.files[0];if(!f)return;
+ if(f.type!=="application/pdf"&&!/\.pdf$/i.test(f.name)){alert("Seleccioná un archivo PDF.");return}
+ if(pdfUrl)URL.revokeObjectURL(pdfUrl);pdfUrl=URL.createObjectURL(f);loadedName=f.name;frame();
+});
+byId("ae-toggle-book").addEventListener("click",bookToggle);
+byId("ae-toggle-menu").addEventListener("click",()=>byId("ae-nav").classList.toggle("is-open"));
+byId("ae-prev").addEventListener("click",()=>goto(all[Math.max(0,all.findIndex(x=>x.uid===saved.last)-1)].uid));
+byId("ae-next").addEventListener("click",()=>goto(all[Math.min(all.length-1,all.findIndex(x=>x.uid===saved.last)+1)].uid));
+byId("ae-status").addEventListener("change",ev=>{saved.statuses[activity().uid]=ev.target.value;persist();renderProgress();renderNav()});
+byId("ae-notes").addEventListener("input",ev=>{saved.notes[activity().uid]=ev.target.value;persist()});
+document.querySelectorAll("[data-tab]").forEach(btn=>btn.addEventListener("click",()=>setTab(btn.dataset.tab)));
+byId("ae-request-review").addEventListener("click",promptForReview);
+byId("ae-export").addEventListener("click",exportData);
+byId("ae-open-audio").addEventListener("click",()=>window.open("https://alteregoplus.hachettefle.fr/alter-ego-%2B-1_livre-de-l-eleve_fr.html","_blank","noopener"));
+byId("ae-workspace").classList.toggle("book-hidden",saved.hideBook);byId("ae-book").hidden=saved.hideBook;byId("ae-toggle-book").textContent=saved.hideBook?"Mostrar libro":"Ocultar libro";
+if(!all.some(x=>x.uid===saved.last))saved.last=all[0].uid;
+renderTask();setTab(activeTab);
+})();</script>
 </body></html>
