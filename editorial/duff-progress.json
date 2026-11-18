@@ -934,14 +934,23 @@
         237,
         251
       ],
-      "status": "exercises_complete",
+      "status": "texts_in_progress",
       "exercises": {
         "groups": 12,
         "items": 64,
         "commit": "601d53088cae52f40a2389129c510dc799026095",
         "qa": "PDF físico 237–251 cotejado. Sintaxis y navegador autenticado pendientes de prueba independiente."
+      },
+      "texts": {
+        "status": "partial",
+        "blocks": 15,
+        "tokens": 83,
+        "content_commit": "beb82fecbe66c8382ac3c3271fc97539458a3fa5",
+        "integration_commit": "3ca3be8cba653c5806063fed46bb3dc6422c9b6e",
+        "entrypoint_commit": "b1a1211670515e8aa0cccc75a4abd0acc1365254",
+        "pending": "Fragmentos bíblicos breves con licencia y QA independiente; navegador autenticado no probado"
       }
     }
   ],
-  "last_commit": "601d53088cae52f40a2389129c510dc799026095"
+  "last_commit": "b1a1211670515e8aa0cccc75a4abd0acc1365254"
 }
