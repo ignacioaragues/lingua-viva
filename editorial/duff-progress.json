@@ -926,7 +926,22 @@
         "integration_commit": "24e30f67d2d7b7f89f3857688aeb4574cd4fd782",
         "qa": "23 referencias únicas, 130 fichas completas; script cargado, lookup y render bíblico verificados estáticamente; sin compilación JS independiente ni navegador autenticado."
       }
+    },
+    {
+      "chapter": 14,
+      "name": "Los participios",
+      "pdf_pages": [
+        237,
+        251
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 12,
+        "items": 64,
+        "commit": "601d53088cae52f40a2389129c510dc799026095",
+        "qa": "PDF físico 237–251 cotejado. Sintaxis y navegador autenticado pendientes de prueba independiente."
+      }
     }
   ],
-  "last_commit": "24e30f67d2d7b7f89f3857688aeb4574cd4fd782"
+  "last_commit": "601d53088cae52f40a2389129c510dc799026095"
 }
