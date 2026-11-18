@@ -1075,7 +1075,22 @@
         "entrypoint_commit": "a91a6c2d57ce301bad1f08f16c5d750f09bb8838",
         "qa": "JS sintaxis OK, 23 refs únicas, 98 fichas completas; integración estática y carga verificadas; navegador autenticado no probado."
       }
+    },
+    {
+      "chapter": 20,
+      "name": "Condicionales, genitivo absoluto, perífrasis, grados y optativo",
+      "pdf_pages": [
+        332,
+        344
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 12,
+        "items": 54,
+        "commit": "fb1a5d4ffbbac69a383ef5636ea843280cda5529",
+        "qa": "PDF físico pp.332–344 examinado; prácticas y secciones finales cotejadas por página, número y dirección; sintaxis JS OK; navegador autenticado no probado."
+      }
     }
   ],
-  "last_commit": "a91a6c2d57ce301bad1f08f16c5d750f09bb8838"
+  "last_commit": "fb1a5d4ffbbac69a383ef5636ea843280cda5529"
 }
