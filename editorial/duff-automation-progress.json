@@ -7,27 +7,25 @@
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 19,
-  "phase": "exercises",
+  "phase": "texts",
   "phase_status": "pending",
   "previous_phase": {
-    "chapter": 18,
-    "phase": "texts",
+    "chapter": 19,
+    "phase": "exercises",
     "status": "completed",
-    "blocks": 23,
-    "tokens": 85,
-    "biblical_blocks": 6,
-    "content_commit": "82ffcd3aa291c68c9a1e205ab993cdaf4761b35e",
-    "integration_commit": "50c170649ec6c85377a987bd41be48fbb968f846",
-    "entrypoint_commit": "4c12f9879c530357fa75aa097c17c3538bf1f7f9",
-    "qa": "Sintaxis JS OK, 23 refs únicas, 85 fichas completas; integración estática y carga comprobadas. Navegador autenticado no probado."
+    "groups": 11,
+    "items": 61,
+    "commit": "d5295892df2d87f6feec9e0dfd846d865a04eb48"
   },
   "next_phase": {
     "chapter": 19,
-    "phase": "exercises",
+    "phase": "texts",
+    "start_page": 318,
+    "end_page": 331,
     "pending": [
-      "Determinar páginas físicas capítulo 19",
-      "Cotejar ejercicios y traducciones del PDF",
-      "Implementar campos y QA"
+      "Reexaminar citas, paradigmas y formas del capítulo",
+      "Añadir lecturas anotadas, traducciones originales y fichas",
+      "Integración y QA estática"
     ]
   },
   "hard_rules": [
@@ -432,9 +430,24 @@
         "entrypoint_commit": "4c12f9879c530357fa75aa097c17c3538bf1f7f9",
         "qa": "Sintaxis JS OK, 23 refs únicas, 85 fichas completas; integración estática y carga comprobadas. Navegador autenticado no probado."
       }
+    },
+    {
+      "chapter": 19,
+      "name": "Verbos en -μι y verbos contractos",
+      "pdf_pages": [
+        318,
+        331
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 11,
+        "items": 61,
+        "commit": "d5295892df2d87f6feec9e0dfd846d865a04eb48",
+        "qa": "PDF físico pp.318–331 examinado; prácticas, cantidades, numeración y dirección cotejadas; sintaxis JS OK; navegador autenticado no probado."
+      }
     }
   ],
-  "last_commit": "4c12f9879c530357fa75aa097c17c3538bf1f7f9",
+  "last_commit": "d5295892df2d87f6feec9e0dfd846d865a04eb48",
   "start_page": 237,
   "end_page": null
 }
