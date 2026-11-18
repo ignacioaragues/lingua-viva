@@ -903,7 +903,22 @@
         "content_commit": "b732ac5e2fcc773cc820c29857f2a2ed434680e6",
         "qa": "Sintaxis JS y datos: 15 refs únicas, 94 fichas completas. Sin navegador autenticado."
       }
+    },
+    {
+      "chapter": 13,
+      "name": "La tercera declinación – Segunda parte",
+      "pdf_pages": [
+        224,
+        236
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 16,
+        "items": 73,
+        "commit": "b851ceedced8ae2e0f8c297fa85381e427fca974",
+        "qa": "PDF pp. 224–236 examinado; cobertura de secciones y direcciones cotejada; comprobación independiente del archivo posterior al commit no disponible por lectura obsoleta del conector."
+      }
     }
   ],
-  "last_commit": "b732ac5e2fcc773cc820c29857f2a2ed434680e6"
+  "last_commit": "b851ceedced8ae2e0f8c297fa85381e427fca974"
 }
