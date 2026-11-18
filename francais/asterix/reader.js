@@ -11,7 +11,7 @@ function renderGuided(){
  const switcher=$('prepared-toggle');
  switcher.textContent=state.showES?'Ocultar español':'Mostrar español';
  switcher.setAttribute('aria-pressed',String(state.showES));
- if(!d?.segments?.length){const p=document.createElement('p');p.className='transcript-pending';p.textContent='Todavía no hay una transcripción francesa comprobada para esta página. Se incorporará el texto original y su traducción sin resumir los diálogos.';root.append(p);return}
+ if(!d?.segments?.length){const p=document.createElement('p');p.className='transcript-pending';p.textContent='Todavía no hay una transcripción francesa comprobada para esta página. Para completarla, hay que cotejar todos los globos con la página escaneada.';root.append(p);return}
  for(const segment of d.segments){
   const article=document.createElement('article');article.className='transcript-segment';
   if(segment.speaker){const speaker=document.createElement('p');speaker.className='transcript-speaker';speaker.textContent=segment.speaker;article.append(speaker)}
