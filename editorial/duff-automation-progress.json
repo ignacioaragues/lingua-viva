@@ -6,27 +6,23 @@
   "timezone": "Europe/Berlin",
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
-  "chapter": 12,
-  "phase": "texts",
-  "phase_status": "in_progress",
-  "start_page": 210,
-  "end_page": 223,
+  "chapter": 13,
+  "phase": "exercises",
+  "phase_status": "pending",
   "previous_phase": {
     "chapter": 12,
-    "phase": "exercises",
+    "phase": "texts",
     "status": "completed",
-    "groups": 16,
-    "items": 75,
-    "commit": "92a03aeed623bfd75d5f58247f54137bf0a0ba3f"
+    "blocks": 15,
+    "tokens": 94,
+    "commit": "b732ac5e2fcc773cc820c29857f2a2ed434680e6"
   },
   "next_phase": {
-    "chapter": 12,
-    "phase": "texts",
-    "start_page": 210,
-    "end_page": 223,
+    "chapter": 13,
+    "phase": "exercises",
     "pending": [
-      "Completar citas bíblicas breves de páginas 210 y 218 con atribución",
-      "Revisar funcionamiento estático; navegador autenticado no probado"
+      "Determinar páginas físicas del capítulo 13 en PDF original",
+      "Cotejar e implementar cada ejercicio"
     ]
   },
   "hard_rules": [
@@ -270,23 +266,22 @@
         210,
         223
       ],
-      "status": "exercises_complete",
+      "status": "both_passes_complete",
       "exercises": {
         "groups": 16,
         "items": 75,
         "commit": "92a03aeed623bfd75d5f58247f54137bf0a0ba3f",
         "qa": "PDF físico 210–223 cotejado; 16 grupos, 75 ítems; sintaxis JS compilada con new Function. Sin navegador autenticado."
+      },
+      "texts": {
+        "status": "completed",
+        "blocks": 15,
+        "tokens": 94,
+        "pages_covered": "210–223 (PDF revisado)",
+        "content_commit": "b732ac5e2fcc773cc820c29857f2a2ed434680e6",
+        "qa": "Sintaxis JS y datos: 15 refs únicas, 94 fichas completas. Sin navegador autenticado."
       }
     }
   ],
-  "last_commit": "c145b2ef9225b5c8a2b65aaea726fdca87eb4f77",
-  "partial_phase": {
-    "chapter": 12,
-    "phase": "texts",
-    "blocks": 11,
-    "tokens": 75,
-    "content_commit": "48b03595fcd00591bfac9ade74ab345e59e4e574",
-    "integration_commit": "587443d04f9c9842fe577a5b5e1a9f2d262b9b6f",
-    "entrypoint_commit": "c145b2ef9225b5c8a2b65aaea726fdca87eb4f77"
-  }
+  "last_commit": "b732ac5e2fcc773cc820c29857f2a2ed434680e6"
 }
