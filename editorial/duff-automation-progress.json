@@ -7,22 +7,24 @@
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 13,
-  "phase": "exercises",
+  "phase": "texts",
   "phase_status": "pending",
   "previous_phase": {
-    "chapter": 12,
-    "phase": "texts",
+    "chapter": 13,
+    "phase": "exercises",
     "status": "completed",
-    "blocks": 15,
-    "tokens": 94,
-    "commit": "b732ac5e2fcc773cc820c29857f2a2ed434680e6"
+    "groups": 16,
+    "items": 73,
+    "commit": "b851ceedced8ae2e0f8c297fa85381e427fca974"
   },
   "next_phase": {
     "chapter": 13,
-    "phase": "exercises",
+    "phase": "texts",
+    "start_page": 224,
+    "end_page": 236,
     "pending": [
-      "Determinar páginas físicas del capítulo 13 en PDF original",
-      "Cotejar e implementar cada ejercicio"
+      "Cotejar paradigmas y citas bíblicas; crear fichas por token",
+      "Verificar carga y datos en la página"
     ]
   },
   "hard_rules": [
