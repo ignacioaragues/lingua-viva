@@ -1025,7 +1025,22 @@
         "entrypoint_commit": "96d8d8c65c79c8389fea02eaaa43627cae35a5ef",
         "qa": "JS sintaxis OK, 21 refs únicas, 84 fichas completas; carga estática y render integrado; navegador autenticado no probado."
       }
+    },
+    {
+      "chapter": 18,
+      "name": "Infinitivos, imperativos de tercera persona y partes principales",
+      "pdf_pages": [
+        298,
+        317
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 15,
+        "items": 63,
+        "commit": "381e6e51828f24a02ba928b8533a1c3b8b894e3a",
+        "qa": "PDF físico pp.298–317 examinado; prácticas y ejercicios cotejados por página, cantidad y dirección; sintaxis JS OK; navegador autenticado no probado."
+      }
     }
   ],
-  "last_commit": "96d8d8c65c79c8389fea02eaaa43627cae35a5ef"
+  "last_commit": "381e6e51828f24a02ba928b8533a1c3b8b894e3a"
 }
