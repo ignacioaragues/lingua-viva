@@ -629,7 +629,28 @@ function chapterFifteenPractice(){
  out+='</div>'; }out+='</details>';});return out+reviewPanel(p);
 }
 
+
+/* Duff 16 · Perfecto y pluscuamperfecto · PDF físico pp. 267–281. */
+var chapterSixteenExercises={"271":[["16-2","16.2 · análisis morfológico","morphology",6]],"272":[["mid-gr-es","Mitad · griego a español","translation",8],["mid-es-gr","Mitad · español a griego","greek",4,9]],"275":[["16-3","16.3 · seleccionar tiempo griego","tense",5]],"277":[["16-4","16.4 · empleo del pluscuamperfecto","pluperfect",5]],"278":[["finalA-gr-es","Final A · griego a español (inicio)","translation",1]],"279":[["finalA-gr-es-cont","Final A · griego a español (continuación)","translation",7,2],["finalA-es-gr","Final A · español a griego","greek",4,9],["finalB-gr-es","Final B · griego a español (inicio)","translation",6]],"280":[["finalB-gr-es-cont","Final B · griego a español (continuación)","translation",2,7],["finalB-es-gr","Final B · español a griego","greek",4,9],["finalC-marcos","Final C · Marcos 5:25–34","translation",1]]};
+function chapterSixteenPractice(){
+ var p=state.page,raw=chapterSixteenExercises[p]||[];
+ var nav=[[271,'16.2'],[272,'Mitad'],[275,'16.3'],[277,'16.4'],[278,'Final A'],[279,'Final A/B'],[280,'Final B/C']];
+ var out='<nav class="duff-index duff-ch2-index" aria-label="Prácticas del capítulo 16">'+nav.map(function(x){return '<button type="button" data-do="page" data-page="'+x[0]+'" aria-current="'+(p===x[0]?'page':'false')+'">'+h(x[1])+'</button>';}).join('')+'</nav>';
+ if(p===281)out+='<p class="duff-ch2-note">La lectura final continúa aquí; respondé desde la sección C de la página 280.</p>';
+ else if(!raw.length)out+='<p class="duff-ch2-note">Teoría o vocabulario. Elegí una práctica en el índice.</p>';
+ raw.forEach(function(a,index){var id=a[0],label=a[1],type=a[2],count=a[3],start=a[4]||1;
+ var parts=type==='morphology'?['lema','tiempo','voz','modo','persona','numero','caso','genero']:null;
+ var labels={lema:'Lema griego',tiempo:'Tiempo / aspecto',voz:'Voz',modo:'Modo',persona:'Persona',numero:'Número',caso:'Caso (si corresponde)',genero:'Género (si corresponde)'};
+ var answered=0;for(var n=start;n<start+count;n++){var key='duff-ch16:'+id+':'+n;if(parts?parts.some(function(part){return String(note(p).answers[key+':'+part]||'').trim();}):String(note(p).answers[key]||'').trim())answered++;}
+ out+='<details class="duff-exercise duff-ch2-group" '+(index===0?'open':'')+'><summary>'+h(label)+' <span class="duff-ch2-count">'+count+' ítems'+(answered?' · '+answered+' contestados':'')+'</span></summary><p>Consultá el PDF privado. Sin soluciones ni autocorrección.</p>';
+ for(var n=start;n<start+count;n++){var key='duff-ch16:'+id+':'+n;out+='<div class="duff-answer-row"><div class="duff-answer-label">Ítem '+n+'</div>';
+ if(parts)out+='<div class="duff-answer-pair">'+parts.map(function(part){return '<div>'+field(key+':'+part,labels[part],part==='lema',false)+'</div>';}).join('')+'</div>';
+ else out+=field(key,type==='greek'?'Tu traducción al griego':type==='tense'?'Tiempo griego más apropiado':type==='pluperfect'?'¿Corresponde el pluscuamperfecto? Justificá':'Tu traducción al español',type==='greek',2);
+ out+='</div>'; }out+='</details>';});return out+reviewPanel(p);
+}
+
 function practice(){
+ if(current()===15)return chapterSixteenPractice();
  if(current()===14)return chapterFifteenPractice();
  if(current()===13)return chapterFourteenPractice();
  if(current()===11)return chapterTwelvePractice();
