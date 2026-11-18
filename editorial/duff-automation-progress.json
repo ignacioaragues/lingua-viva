@@ -6,26 +6,28 @@
   "timezone": "Europe/Berlin",
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
-  "chapter": 18,
-  "phase": "texts",
+  "chapter": 19,
+  "phase": "exercises",
   "phase_status": "pending",
   "previous_phase": {
     "chapter": 18,
-    "phase": "exercises",
+    "phase": "texts",
     "status": "completed",
-    "groups": 15,
-    "items": 63,
-    "commit": "381e6e51828f24a02ba928b8533a1c3b8b894e3a"
+    "blocks": 23,
+    "tokens": 85,
+    "biblical_blocks": 6,
+    "content_commit": "82ffcd3aa291c68c9a1e205ab993cdaf4761b35e",
+    "integration_commit": "50c170649ec6c85377a987bd41be48fbb968f846",
+    "entrypoint_commit": "4c12f9879c530357fa75aa097c17c3538bf1f7f9",
+    "qa": "Sintaxis JS OK, 23 refs únicas, 85 fichas completas; integración estática y carga comprobadas. Navegador autenticado no probado."
   },
   "next_phase": {
-    "chapter": 18,
-    "phase": "texts",
-    "start_page": 298,
-    "end_page": 317,
+    "chapter": 19,
+    "phase": "exercises",
     "pending": [
-      "Reexaminar citas, paradigmas y formas del capítulo",
-      "Incorporar lecturas anotadas, traducciones originales y fichas",
-      "QA estática e integración"
+      "Determinar páginas físicas capítulo 19",
+      "Cotejar ejercicios y traducciones del PDF",
+      "Implementar campos y QA"
     ]
   },
   "hard_rules": [
@@ -413,16 +415,26 @@
         298,
         317
       ],
-      "status": "exercises_complete",
+      "status": "both_passes_complete",
       "exercises": {
         "groups": 15,
         "items": 63,
         "commit": "381e6e51828f24a02ba928b8533a1c3b8b894e3a",
         "qa": "PDF físico pp.298–317 examinado; prácticas y ejercicios cotejados por página, cantidad y dirección; sintaxis JS OK; navegador autenticado no probado."
+      },
+      "texts": {
+        "status": "completed",
+        "blocks": 23,
+        "tokens": 85,
+        "biblical_blocks": 6,
+        "content_commit": "82ffcd3aa291c68c9a1e205ab993cdaf4761b35e",
+        "integration_commit": "50c170649ec6c85377a987bd41be48fbb968f846",
+        "entrypoint_commit": "4c12f9879c530357fa75aa097c17c3538bf1f7f9",
+        "qa": "Sintaxis JS OK, 23 refs únicas, 85 fichas completas; integración estática y carga comprobadas. Navegador autenticado no probado."
       }
     }
   ],
-  "last_commit": "381e6e51828f24a02ba928b8533a1c3b8b894e3a",
+  "last_commit": "4c12f9879c530357fa75aa097c17c3538bf1f7f9",
   "start_page": 237,
   "end_page": null
 }
