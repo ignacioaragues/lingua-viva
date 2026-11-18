@@ -1008,14 +1008,24 @@
         282,
         297
       ],
-      "status": "exercises_complete",
+      "status": "both_passes_complete",
       "exercises": {
         "groups": 11,
         "items": 55,
         "commit": "2f6ed49de0d84ae220e0e2de395aedb28694dd32",
         "qa": "PDF físico pp.282–297 examinado; prácticas, numeración y dirección cotejadas; sintaxis JS OK; navegador autenticado no probado."
+      },
+      "texts": {
+        "status": "completed",
+        "blocks": 21,
+        "tokens": 84,
+        "biblical_blocks": 6,
+        "content_commit": "6c547936de31142ebf950ab041806fd8d2604a36",
+        "integration_commit": "2754036642512786b4e32412aa8c74b2b62a21e2",
+        "entrypoint_commit": "96d8d8c65c79c8389fea02eaaa43627cae35a5ef",
+        "qa": "JS sintaxis OK, 21 refs únicas, 84 fichas completas; carga estática y render integrado; navegador autenticado no probado."
       }
     }
   ],
-  "last_commit": "2f6ed49de0d84ae220e0e2de395aedb28694dd32"
+  "last_commit": "96d8d8c65c79c8389fea02eaaa43627cae35a5ef"
 }
