@@ -958,14 +958,24 @@
         252,
         266
       ],
-      "status": "exercises_complete",
+      "status": "both_passes_complete",
       "exercises": {
         "groups": 13,
         "items": 61,
         "commit": "c5e67626805c699f59ed44fc32b939054baf3a77",
         "qa": "PDF físico pp. 252–266 examinado; grupos y direcciones cotejados; sintaxis JS verificada; navegador autenticado no probado."
+      },
+      "texts": {
+        "status": "completed",
+        "blocks": 18,
+        "tokens": 95,
+        "biblical_blocks": 4,
+        "content_commit": "15f550a1a462b384eae17247f11e57c142e13830",
+        "integration_commit": "5c9eaf23cf1550b3f538b4d446cf10dbc471d29f",
+        "entrypoint_commit": "8ff2cffa207a3d0278bb65d19afed35c67183371",
+        "qa": "JS sintaxis independiente OK; 18 refs únicas, 95 fichas completas; lookup/render y carga estática comprobados. Navegador autenticado no probado."
       }
     }
   ],
-  "last_commit": "c5e67626805c699f59ed44fc32b939054baf3a77"
+  "last_commit": "8ff2cffa207a3d0278bb65d19afed35c67183371"
 }
