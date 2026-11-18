@@ -950,7 +950,22 @@
         "integration_commit": "3ca3be8cba653c5806063fed46bb3dc6422c9b6e",
         "qa": "Sintaxis JS independiente OK; 20 refs únicas, 109 fichas completas; index carga archivo y lector tiene lookup/render. Navegador autenticado no probado."
       }
+    },
+    {
+      "chapter": 15,
+      "name": "La voz pasiva y la voz media",
+      "pdf_pages": [
+        252,
+        266
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 13,
+        "items": 61,
+        "commit": "c5e67626805c699f59ed44fc32b939054baf3a77",
+        "qa": "PDF físico pp. 252–266 examinado; grupos y direcciones cotejados; sintaxis JS verificada; navegador autenticado no probado."
+      }
     }
   ],
-  "last_commit": "289a132f87452183ed217e449d456e9a98ac8660"
+  "last_commit": "c5e67626805c699f59ed44fc32b939054baf3a77"
 }
