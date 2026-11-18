@@ -1,6 +1,6 @@
 {
   "project": "Lengua Viva · Alter Ego A1",
-  "version": "2026-11-18-d0",
+  "version": "2026-11-18-d1-l1",
   "repository": "ignacioaragues/lingua-viva",
   "branch": "main",
   "coursePath": "francais/alter-ego-a1/",
@@ -13,46 +13,27 @@
     "visibility": "Local private PDF only; never commit scans, pages, or commercial source content to the public repository"
   },
   "editorial": {
-    "current": "Dossier 0 · Découverte",
-    "status": "initial_interactive_workbook_published",
-    "publishedLesson": {
-      "id": "d0-decouverte",
-      "printedPages": [
-        14,
-        24
-      ],
-      "pdfPages": [
-        15,
-        25
-      ],
-      "manualActivities": 21,
-      "vocabularyActivities": 5,
-      "classroomActivities": 2,
-      "consolidationActivities": 10,
-      "totalActivities": 38,
-      "interfaceCoverage": 38,
-      "completionNote": "Every activity is navigable with bespoke instructions and answer fields; question types mostly free text and labelled fields; further dedicated interactions, audio matching and cross-device sync remain future improvements. Do not claim these enhancements exist."
-    },
+    "current": "Dossier 1 · Leçon 1 · Contacts",
+    "status": "dossier_0_and_d1_lesson_1_workbook_published",
     "next": {
-      "id": "d1-l1-contacts",
-      "title": "Contacts",
+      "id": "d1-l2-mediatheque",
+      "title": "M comme médiathèque",
       "printedPages": [
-        26,
-        29
+        30,
+        33
       ],
       "pdfPages": [
-        27,
-        30
+        31,
+        34
       ],
-      "goal": "Create a complete lesson with all exercise references, activity-specific input controls, notes, audio references, local book viewer and checkpoint."
+      "goal": "Read all four scans visually; implement each numbered activity with suitable form controls plus notes, article indéfini, identité / quel, telephone numbers 70+, email punctuation, project task 2; ensure checkpoint and no overwrites."
     },
     "futureOrder": [
-      "D1 L2 · M comme médiathèque · pp. 30–33",
       "D1 L3 · En direct de TV5 · pp. 34–37",
       "D1 Carnet de voyage · pp. 38–39",
       "D1 S’exercer · pp. 40–41",
       "D1 Vers le DELF A1 · p. 42",
-      "Then Dossiers 2–9 in book order; include Carnet de voyage / S'exercer / DELF and project sections, not just L1–L3."
+      "Dossiers 2–9, three lessons each plus Carnet de voyage, S’exercer, DELF and projects, with dates/page ranges read from book."
     ],
     "review": {
       "sourceVisualPagesInspected": [
@@ -66,11 +47,16 @@
         21,
         22,
         23,
-        24
+        24,
+        26,
+        27,
+        28,
+        29
       ],
-      "codeSyntacticValidation": "both inline scripts compiled via Function constructor after GitHub readback",
-      "deployment": "Github main updated; Pages public site not independently verified from web in this pass",
-      "audio": "Reference to publisher's Alter Ego+1 resource link, not individually matched/embedded files"
+      "codeSyntacticValidation": "Current index inline scripts parsed (3 inline scripts) using new Function before commit; static duplicate-ID check passed.",
+      "deployment": "GitHub main index and contacts.js written; verify actual Pages separately; do not imply browser E2E tested",
+      "audio": "References p26 pistes 25–29, p27 pistes 30–31, p29 pistes 32–33 and editor website; individual recordings not downloaded or embedded.",
+      "note": "Keep localStorage key lv:alter-ego-a1:d0:v1 intentionally to preserve prior D0 learner answers. All 56 activities share the current reader; 38 D0 + 18 Contacts."
     },
     "guardrails": [
       "Never reproduce scanned book inside public repo",
@@ -79,10 +65,62 @@
       "Progress and notes are browser-local; do not promise device sync",
       "Checkpoint publication progress vs learner completion separate",
       "Check latest HEAD before new commit; avoid overwrite"
+    ],
+    "publishedLessons": [
+      {
+        "id": "d0-decouverte",
+        "printedPages": [
+          14,
+          24
+        ],
+        "pdfPages": [
+          15,
+          25
+        ],
+        "manualActivities": 21,
+        "vocabularyActivities": 5,
+        "classroomActivities": 2,
+        "consolidationActivities": 10,
+        "totalActivities": 38,
+        "interfaceCoverage": 38,
+        "completionNote": "Every activity is navigable with bespoke instructions and answer fields; question types mostly free text and labelled fields; further dedicated interactions, audio matching and cross-device sync remain future improvements. Do not claim these enhancements exist."
+      },
+      {
+        "id": "d1-l1-contacts",
+        "title": "Contacts",
+        "printedPages": [
+          26,
+          29
+        ],
+        "pdfPages": [
+          27,
+          30
+        ],
+        "numberedActivities": 14,
+        "grammarCultureBlocks": 3,
+        "projectTasks": 1,
+        "totalNavigableEntries": 18,
+        "interfaceCoverage": 18,
+        "activityRefs": "1–14; Point Culture tu/vous; Point Langue avoir; Point Langue ne… pas; Projet tâche 1",
+        "groups": [
+          "Saluer",
+          "Se présenter",
+          "Points langue",
+          "Projet"
+        ],
+        "sourceVisualPagesInspected": [
+          26,
+          27,
+          28,
+          29
+        ],
+        "implementation": "answers with targeted dropdowns, text and multiline fields per activity; notes, local PDF synced by page, saved states and time shared with prior D0 workspace; links to official audio portal with recorded track references but tracks not embedded.",
+        "verification": "source visual pages read, code statically parsed, index on main fetched; live browser interaction remains unverified"
+      }
     ]
   },
   "learner": {
     "completedActivities": 0,
-    "summary": "Do not infer any learner progress from editorial publication; learner manually marks completion on website."
+    "summary": "Progress is strictly learner-controlled and browser-local. 0 completed in editorial state does not assert the learner has finished none; remote browser history not inspected."
   }
 }
