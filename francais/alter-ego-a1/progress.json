@@ -1,6 +1,6 @@
 {
   "project": "Lengua Viva · Alter Ego A1",
-  "version": "2026-11-18-d1-l2",
+  "version": "2026-11-18-d1-l3",
   "repository": "ignacioaragues/lingua-viva",
   "branch": "main",
   "coursePath": "francais/alter-ego-a1/",
@@ -13,26 +13,25 @@
     "visibility": "Local private PDF only; never commit scans, pages, or commercial source content to the public repository"
   },
   "editorial": {
-    "current": "Dossier 1 · Leçon 2 · M comme médiathèque",
-    "status": "dossier_0_and_d1_lessons_1_2_workbooks_published",
+    "current": "Dossier 1 · Leçon 3 · En direct de TV5",
+    "status": "dossier_0_and_d1_three_lessons_published_complements_pending",
     "next": {
-      "id": "d1-l3-tv5",
-      "title": "En direct de TV5",
+      "id": "d1-carnet",
+      "title": "Carnet de voyage",
       "printedPages": [
-        34,
-        37
+        38,
+        39
       ],
       "pdfPages": [
-        35,
-        38
+        39,
+        40
       ],
-      "goal": "Render and inspect all four pages visually; cover numbered activities and appropriate points langue/culture and task 3, then checkpoint, preserving D0 and Contacts/Médiathèque."
+      "goal": "Read both pages visually, build all relevant activities and publish as dossier supplementary phase; do not mark dossier complete until S'exercer and DELF are done."
     },
     "futureOrder": [
-      "D1 Carnet de voyage · La France en Europe · pp. 38–39",
       "D1 S’exercer · pp. 40–41",
       "D1 Vers le DELF A1 · p. 42",
-      "Dossiers 2–9: three book lessons plus carnet, révision, DELF and project, check actual printed page ranges"
+      "Dossiers 2–9 in exact book order, including supplementary sections"
     ],
     "review": {
       "sourceVisualPagesInspected": [
@@ -54,12 +53,16 @@
         30,
         31,
         32,
-        33
+        33,
+        34,
+        35,
+        36,
+        37
       ],
-      "codeSyntacticValidation": "Inline scripts in updated index parse with new Function; mediatheque.js parses; reader initialization simulated for preexisting D0, Contacts, new L2 listening and grammar; activity IDs 76 unique, DOM identifiers non-duplicated.",
-      "deployment": "GitHub main contains updated index and mediatheque.js. Live site could not be independently opened by the browsing tool (not evidence of deployment failure).",
-      "audio": "Referenced printed book tracks 34–43, not audio embedded; external portal from original course retained.",
-      "note": "Preserved storage key lv:alter-ego-a1:d0:v1; 38+18+20=76 navigable entries. No modification to flashcards, legacy French or account sync. Lesson 2 published as interactive companion (manual still needed), not auto-graded."
+      "codeSyntacticValidation": "Updated index inline scripts and tv5.js parse; need final readback and smoke test.",
+      "deployment": "Committed to GitHub main; GitHub Pages deployment/browser interaction not independently verified.",
+      "audio": "Pistes 44–53 referenced from printed lesson; publisher audio not embedded or individually verified.",
+      "note": "38 D0 + 18 Contacts + 20 Médiathèque + 15 TV5 = 91 navigable entries. No changes to existing flashcards, previous French course or learner storage key."
     },
     "guardrails": [
       "Never reproduce scanned book inside public repo",
@@ -164,6 +167,40 @@
         ],
         "implementation": "Activity-specific dropdowns, text fields and multiline writing; private local PDF viewer following printed page to PDF page (offset +1); notes; local progress and active study time; on-demand correction prompt; official publisher audio resource link, track IDs referenced but no embedded track recordings.",
         "verification": "Rendered all four relevant scanned book pages directly via PyMuPDF; authored 20 activities in mediatheque.js; validated JavaScript syntax, unique IDs, reader initialization with a D0 checkpoint, Contacts and two L2 activities. Browser end-to-end and deployed GitHub Pages propagation not confirmed."
+      },
+      {
+        "id": "d1-l3-tv5",
+        "title": "En direct de TV5",
+        "printedPages": [
+          34,
+          37
+        ],
+        "pdfPages": [
+          35,
+          38
+        ],
+        "numberedActivities": 10,
+        "grammarBlocks": 3,
+        "cultureBlocks": 1,
+        "projectTasks": 1,
+        "totalNavigableEntries": 15,
+        "interfaceCoverage": 15,
+        "activityRefs": "1–10; pays/prépositions; francophonie; présent des verbes en -er; être/avoir; projet tâche 3",
+        "sourceVisualPagesInspected": [
+          34,
+          35,
+          36,
+          37
+        ],
+        "sourceAudioReferences": [
+          "44–45",
+          "46–47",
+          "48",
+          "49–50",
+          "51–53"
+        ],
+        "implementation": "Dropdowns and text/multiline response fields, private local PDF viewer, notes, manual status, local storage and on-demand correction",
+        "verification": "All four page scans visually inspected; JS syntax verified. Full browser/mobile interaction not independently verified."
       }
     ]
   },
