@@ -911,14 +911,26 @@
         224,
         236
       ],
-      "status": "exercises_complete",
+      "status": "texts_in_progress",
       "exercises": {
         "groups": 16,
         "items": 73,
         "commit": "b851ceedced8ae2e0f8c297fa85381e427fca974",
         "qa": "PDF pp. 224–236 examinado; cobertura de secciones y direcciones cotejada; comprobación independiente del archivo posterior al commit no disponible por lectura obsoleta del conector."
+      },
+      "texts": {
+        "status": "partial",
+        "blocks": 19,
+        "tokens": 115,
+        "content_commit": "905896f98e12d9cede5cbe907efad07387cfa2a3",
+        "integration_commit": "cde868c28da6e250c4e77ffd42e7e881af1cae35",
+        "entrypoint_commit": "14dbc21101209515ea9c8f637dd8137e28daebef",
+        "pending": [
+          "Citas bíblicas breves con atribución",
+          "QA sintaxis independiente; navegador autenticado"
+        ]
       }
     }
   ],
-  "last_commit": "b851ceedced8ae2e0f8c297fa85381e427fca974"
+  "last_commit": "14dbc21101209515ea9c8f637dd8137e28daebef"
 }
