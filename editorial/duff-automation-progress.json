@@ -7,22 +7,25 @@
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 14,
-  "phase": "exercises",
+  "phase": "texts",
   "phase_status": "pending",
   "previous_phase": {
-    "chapter": 13,
-    "phase": "texts",
+    "chapter": 14,
+    "phase": "exercises",
     "status": "completed",
-    "blocks": 23,
-    "tokens": 130,
-    "commit": "24e30f67d2d7b7f89f3857688aeb4574cd4fd782"
+    "groups": 12,
+    "items": 64,
+    "commit": "601d53088cae52f40a2389129c510dc799026095"
   },
   "next_phase": {
     "chapter": 14,
-    "phase": "exercises",
+    "phase": "texts",
+    "start_page": 237,
+    "end_page": 251,
     "pending": [
-      "Determinar límites físicos del capítulo 14 en PDF",
-      "Cotejar ejercicios y crear campos específicos"
+      "Cotejar citas y paradigmas del capítulo",
+      "Añadir fichas de participios y traducciones propias",
+      "Verificar sintaxis e integración"
     ]
   },
   "hard_rules": [
@@ -303,9 +306,24 @@
         "integration_commit": "24e30f67d2d7b7f89f3857688aeb4574cd4fd782",
         "qa": "23 referencias únicas, 130 fichas completas; script cargado, lookup y render bíblico verificados estáticamente; sin compilación JS independiente ni navegador autenticado."
       }
+    },
+    {
+      "chapter": 14,
+      "name": "Los participios",
+      "pdf_pages": [
+        237,
+        251
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 12,
+        "items": 64,
+        "commit": "601d53088cae52f40a2389129c510dc799026095",
+        "qa": "PDF físico 237–251 cotejado. Sintaxis y navegador autenticado pendientes de prueba independiente."
+      }
     }
   ],
-  "last_commit": "24e30f67d2d7b7f89f3857688aeb4574cd4fd782",
+  "last_commit": "601d53088cae52f40a2389129c510dc799026095",
   "start_page": 237,
   "end_page": null
 }
