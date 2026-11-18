@@ -8,7 +8,7 @@
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 13,
   "phase": "texts",
-  "phase_status": "pending",
+  "phase_status": "in_progress",
   "previous_phase": {
     "chapter": 13,
     "phase": "exercises",
@@ -23,8 +23,8 @@
     "start_page": 224,
     "end_page": 236,
     "pending": [
-      "Cotejar paradigmas y citas bíblicas; crear fichas por token",
-      "Verificar carga y datos en la página"
+      "Citas bíblicas breves con atribución",
+      "QA sintaxis independiente; navegador autenticado"
     ]
   },
   "hard_rules": [
@@ -283,7 +283,33 @@
         "content_commit": "b732ac5e2fcc773cc820c29857f2a2ed434680e6",
         "qa": "Sintaxis JS y datos: 15 refs únicas, 94 fichas completas. Sin navegador autenticado."
       }
+    },
+    {
+      "chapter": 13,
+      "name": "La tercera declinación – Segunda parte",
+      "pdf_pages": [
+        224,
+        236
+      ],
+      "status": "texts_in_progress",
+      "exercises": {
+        "groups": 16,
+        "items": 73,
+        "commit": "b851ceedced8ae2e0f8c297fa85381e427fca974"
+      },
+      "texts": {
+        "status": "partial",
+        "blocks": 19,
+        "tokens": 115,
+        "content_commit": "905896f98e12d9cede5cbe907efad07387cfa2a3",
+        "integration_commit": "cde868c28da6e250c4e77ffd42e7e881af1cae35",
+        "entrypoint_commit": "14dbc21101209515ea9c8f637dd8137e28daebef",
+        "pending": [
+          "Citas bíblicas breves con atribución",
+          "QA sintaxis independiente; navegador autenticado"
+        ]
+      }
     }
   ],
-  "last_commit": "b732ac5e2fcc773cc820c29857f2a2ed434680e6"
+  "last_commit": "14dbc21101209515ea9c8f637dd8137e28daebef"
 }
