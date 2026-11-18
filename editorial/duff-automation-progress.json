@@ -6,26 +6,28 @@
   "timezone": "Europe/Berlin",
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
-  "chapter": 17,
-  "phase": "texts",
+  "chapter": 18,
+  "phase": "exercises",
   "phase_status": "pending",
   "previous_phase": {
     "chapter": 17,
-    "phase": "exercises",
+    "phase": "texts",
     "status": "completed",
-    "groups": 11,
-    "items": 55,
-    "commit": "2f6ed49de0d84ae220e0e2de395aedb28694dd32"
+    "blocks": 21,
+    "tokens": 84,
+    "biblical_blocks": 6,
+    "content_commit": "6c547936de31142ebf950ab041806fd8d2604a36",
+    "integration_commit": "2754036642512786b4e32412aa8c74b2b62a21e2",
+    "entrypoint_commit": "96d8d8c65c79c8389fea02eaaa43627cae35a5ef",
+    "qa": "JS sintaxis OK, 21 refs únicas, 84 fichas completas; carga estática y render integrado; navegador autenticado no probado."
   },
   "next_phase": {
-    "chapter": 17,
-    "phase": "texts",
-    "start_page": 282,
-    "end_page": 297,
+    "chapter": 18,
+    "phase": "exercises",
     "pending": [
-      "Reexaminar todas las páginas para citas, paradigmas y formas",
-      "Crear fichas tokenizadas de subjuntivo y traducciones propias",
-      "Integrar corpus y QA"
+      "Determinar páginas físicas capítulo 18",
+      "Cotejar prácticas, numeración y dirección en PDF",
+      "Implementar campos específicos y QA"
     ]
   },
   "hard_rules": [
@@ -388,16 +390,26 @@
         282,
         297
       ],
-      "status": "exercises_complete",
+      "status": "both_passes_complete",
       "exercises": {
         "groups": 11,
         "items": 55,
         "commit": "2f6ed49de0d84ae220e0e2de395aedb28694dd32",
         "qa": "PDF físico pp.282–297 examinado; prácticas, numeración y dirección cotejadas; sintaxis JS OK; navegador autenticado no probado."
+      },
+      "texts": {
+        "status": "completed",
+        "blocks": 21,
+        "tokens": 84,
+        "biblical_blocks": 6,
+        "content_commit": "6c547936de31142ebf950ab041806fd8d2604a36",
+        "integration_commit": "2754036642512786b4e32412aa8c74b2b62a21e2",
+        "entrypoint_commit": "96d8d8c65c79c8389fea02eaaa43627cae35a5ef",
+        "qa": "JS sintaxis OK, 21 refs únicas, 84 fichas completas; carga estática y render integrado; navegador autenticado no probado."
       }
     }
   ],
-  "last_commit": "2f6ed49de0d84ae220e0e2de395aedb28694dd32",
+  "last_commit": "96d8d8c65c79c8389fea02eaaa43627cae35a5ef",
   "start_page": 237,
   "end_page": null
 }
