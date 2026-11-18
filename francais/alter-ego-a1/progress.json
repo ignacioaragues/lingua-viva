@@ -1,0 +1,88 @@
+{
+  "project": "Lengua Viva · Alter Ego A1",
+  "version": "2026-11-18-d0",
+  "repository": "ignacioaragues/lingua-viva",
+  "branch": "main",
+  "coursePath": "francais/alter-ego-a1/",
+  "source": {
+    "title": "Alter Ego+ 1 — méthode de français (A1)",
+    "pdf": "Alter Ego 1 (Unknown) (Z-Library)(1).pdf",
+    "pages": 225,
+    "scan": true,
+    "pagination": "pdf_page = printed_page + 1; verify each block",
+    "visibility": "Local private PDF only; never commit scans, pages, or commercial source content to the public repository"
+  },
+  "editorial": {
+    "current": "Dossier 0 · Découverte",
+    "status": "initial_interactive_workbook_published",
+    "publishedLesson": {
+      "id": "d0-decouverte",
+      "printedPages": [
+        14,
+        24
+      ],
+      "pdfPages": [
+        15,
+        25
+      ],
+      "manualActivities": 21,
+      "vocabularyActivities": 5,
+      "classroomActivities": 2,
+      "consolidationActivities": 10,
+      "totalActivities": 38,
+      "interfaceCoverage": 38,
+      "completionNote": "Every activity is navigable with bespoke instructions and answer fields; question types mostly free text and labelled fields; further dedicated interactions, audio matching and cross-device sync remain future improvements. Do not claim these enhancements exist."
+    },
+    "next": {
+      "id": "d1-l1-contacts",
+      "title": "Contacts",
+      "printedPages": [
+        26,
+        29
+      ],
+      "pdfPages": [
+        27,
+        30
+      ],
+      "goal": "Create a complete lesson with all exercise references, activity-specific input controls, notes, audio references, local book viewer and checkpoint."
+    },
+    "futureOrder": [
+      "D1 L2 · M comme médiathèque · pp. 30–33",
+      "D1 L3 · En direct de TV5 · pp. 34–37",
+      "D1 Carnet de voyage · pp. 38–39",
+      "D1 S’exercer · pp. 40–41",
+      "D1 Vers le DELF A1 · p. 42",
+      "Then Dossiers 2–9 in book order; include Carnet de voyage / S'exercer / DELF and project sections, not just L1–L3."
+    ],
+    "review": {
+      "sourceVisualPagesInspected": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "codeSyntacticValidation": "both inline scripts compiled via Function constructor after GitHub readback",
+      "deployment": "Github main updated; Pages public site not independently verified from web in this pass",
+      "audio": "Reference to publisher's Alter Ego+1 resource link, not individually matched/embedded files"
+    },
+    "guardrails": [
+      "Never reproduce scanned book inside public repo",
+      "Never change legacy French course or existing flashcards",
+      "Corrections ONLY on explicit request (currently copy-to-ChatGPT prompt)",
+      "Progress and notes are browser-local; do not promise device sync",
+      "Checkpoint publication progress vs learner completion separate",
+      "Check latest HEAD before new commit; avoid overwrite"
+    ]
+  },
+  "learner": {
+    "completedActivities": 0,
+    "summary": "Do not infer any learner progress from editorial publication; learner manually marks completion on website."
+  }
+}
