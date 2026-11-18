@@ -7,27 +7,25 @@
   "updated_at": "2026-11-17",
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 17,
-  "phase": "exercises",
+  "phase": "texts",
   "phase_status": "pending",
   "previous_phase": {
-    "chapter": 16,
-    "phase": "texts",
+    "chapter": 17,
+    "phase": "exercises",
     "status": "completed",
-    "blocks": 15,
-    "tokens": 62,
-    "biblical_blocks": 4,
-    "content_commit": "da21c48b84645b751c854281c6da47430b63b3ee",
-    "integration_commit": "d7584c62eed449e0bca06370789cb619c419a318",
-    "entrypoint_commit": "33b28859f1641192020468327ad2ee47bb2dab36",
-    "qa": "Sintaxis JS OK, 15 referencias únicas, 62 fichas completas, integración estática verificada; navegador autenticado no probado."
+    "groups": 11,
+    "items": 55,
+    "commit": "2f6ed49de0d84ae220e0e2de395aedb28694dd32"
   },
   "next_phase": {
     "chapter": 17,
-    "phase": "exercises",
+    "phase": "texts",
+    "start_page": 282,
+    "end_page": 297,
     "pending": [
-      "Determinar páginas físicas del capítulo 17",
-      "Cotejar prácticas y ejercicios originales",
-      "Implementar campos específicos sin soluciones"
+      "Reexaminar todas las páginas para citas, paradigmas y formas",
+      "Crear fichas tokenizadas de subjuntivo y traducciones propias",
+      "Integrar corpus y QA"
     ]
   },
   "hard_rules": [
@@ -382,9 +380,24 @@
         "entrypoint_commit": "33b28859f1641192020468327ad2ee47bb2dab36",
         "qa": "Sintaxis JS OK, 15 referencias únicas, 62 fichas completas, integración estática verificada; navegador autenticado no probado."
       }
+    },
+    {
+      "chapter": 17,
+      "name": "El subjuntivo",
+      "pdf_pages": [
+        282,
+        297
+      ],
+      "status": "exercises_complete",
+      "exercises": {
+        "groups": 11,
+        "items": 55,
+        "commit": "2f6ed49de0d84ae220e0e2de395aedb28694dd32",
+        "qa": "PDF físico pp.282–297 examinado; prácticas, numeración y dirección cotejadas; sintaxis JS OK; navegador autenticado no probado."
+      }
     }
   ],
-  "last_commit": "33b28859f1641192020468327ad2ee47bb2dab36",
+  "last_commit": "2f6ed49de0d84ae220e0e2de395aedb28694dd32",
   "start_page": 237,
   "end_page": null
 }
