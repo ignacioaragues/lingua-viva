@@ -8,7 +8,7 @@
   "automation_id": "Automation_f1ce5c1b94088191a8a6200b56a53202",
   "chapter": 14,
   "phase": "texts",
-  "phase_status": "pending",
+  "phase_status": "in_progress",
   "previous_phase": {
     "chapter": 14,
     "phase": "exercises",
@@ -23,9 +23,8 @@
     "start_page": 237,
     "end_page": 251,
     "pending": [
-      "Cotejar citas y paradigmas del capítulo",
-      "Añadir fichas de participios y traducciones propias",
-      "Verificar sintaxis e integración"
+      "Incorporar fragmentos bíblicos breves del capítulo con atribución",
+      "QA de sintaxis y datos; navegador autenticado no disponible"
     ]
   },
   "hard_rules": [
@@ -323,7 +322,18 @@
       }
     }
   ],
-  "last_commit": "601d53088cae52f40a2389129c510dc799026095",
+  "last_commit": "b1a1211670515e8aa0cccc75a4abd0acc1365254",
   "start_page": 237,
-  "end_page": null
+  "end_page": null,
+  "partial_phase": {
+    "chapter": 14,
+    "phase": "texts",
+    "status": "partial",
+    "blocks": 15,
+    "tokens": 83,
+    "content_commit": "beb82fecbe66c8382ac3c3271fc97539458a3fa5",
+    "integration_commit": "3ca3be8cba653c5806063fed46bb3dc6422c9b6e",
+    "entrypoint_commit": "b1a1211670515e8aa0cccc75a4abd0acc1365254",
+    "pending": "Fragmentos bíblicos breves con licencia y QA independiente; navegador autenticado no probado"
+  }
 }
