@@ -1,6 +1,6 @@
 {
   "project": "Lengua Viva · Alter Ego A1",
-  "version": "2026-11-18-d1-l3",
+  "version": "2026-11-19-d1-carnet",
   "repository": "ignacioaragues/lingua-viva",
   "branch": "main",
   "coursePath": "francais/alter-ego-a1/",
@@ -13,25 +13,24 @@
     "visibility": "Local private PDF only; never commit scans, pages, or commercial source content to the public repository"
   },
   "editorial": {
-    "current": "Dossier 1 · Leçon 3 · En direct de TV5",
-    "status": "dossier_0_and_d1_three_lessons_published_complements_pending",
+    "current": "Dossier 1 · Carnet de voyage · La France en Europe",
+    "status": "dossier_0_plus_d1_3_lessons_and_carnet_published_review_and_delf_pending",
     "next": {
-      "id": "d1-carnet",
-      "title": "Carnet de voyage",
+      "id": "d1-s-exercer",
+      "title": "S’exercer · Dossier 1",
       "printedPages": [
-        38,
-        39
+        40,
+        41
       ],
       "pdfPages": [
-        39,
-        40
+        41,
+        42
       ],
-      "goal": "Read both pages visually, build all relevant activities and publish as dossier supplementary phase; do not mark dossier complete until S'exercer and DELF are done."
+      "goal": "Read both scanned pages visually, implement all numbered consolidation exercises (1–18) across lessons 1–3, preserving manual page/exercise cross-references, then checkpoint."
     },
     "futureOrder": [
-      "D1 S’exercer · pp. 40–41",
-      "D1 Vers le DELF A1 · p. 42",
-      "Dossiers 2–9 in exact book order, including supplementary sections"
+      "Dossier 1 · Vers le DELF A1 · p. 42",
+      "Dossiers 2–9 in book order, three lessons + Carnet + S’exercer + DELF and projects"
     ],
     "review": {
       "sourceVisualPagesInspected": [
@@ -57,12 +56,14 @@
         34,
         35,
         36,
-        37
+        37,
+        38,
+        39
       ],
-      "codeSyntacticValidation": "Updated index inline scripts and tv5.js parse; need final readback and smoke test.",
-      "deployment": "Committed to GitHub main; GitHub Pages deployment/browser interaction not independently verified.",
-      "audio": "Pistes 44–53 referenced from printed lesson; publisher audio not embedded or individually verified.",
-      "note": "38 D0 + 18 Contacts + 20 Médiathèque + 15 TV5 = 91 navigable entries. No changes to existing flashcards, previous French course or learner storage key."
+      "codeSyntacticValidation": "Index inline JS and carnet-d1.js parse; smoke-tested 5 initialized activities across D0, Contacts, and Carnet, with 100 unique activity IDs.",
+      "deployment": "GitHub main commits created for carnet-d1.js and updated index. GitHub Pages live deploy/browser visual QA not yet confirmed.",
+      "audio": "Carnet de voyage pages 38–39 contain no numbered listening tracks; no additional audio integrated.",
+      "note": "Stable localStorage key lv:alter-ego-a1:d0:v1 preserved; existing flashcards and legacy course untouched. Total navigable entries: 38+18+20+15+9=100. 4 principal units + 1 supplementary section; Dossier 1 still incomplete until S’exercer and DELF."
     },
     "guardrails": [
       "Never reproduce scanned book inside public repo",
@@ -201,11 +202,50 @@
         ],
         "implementation": "Dropdowns and text/multiline response fields, private local PDF viewer, notes, manual status, local storage and on-demand correction",
         "verification": "All four page scans visually inspected; JS syntax verified. Full browser/mobile interaction not independently verified."
+      },
+      {
+        "id": "d1-carnet",
+        "title": "Carnet de voyage · La France en Europe",
+        "type": "supplementary",
+        "printedPages": [
+          38,
+          39
+        ],
+        "pdfPages": [
+          39,
+          40
+        ],
+        "numberedActivities": 5,
+        "subactivities": [
+          "1",
+          "2a",
+          "2b",
+          "2c",
+          "2d",
+          "3a",
+          "3b",
+          "4",
+          "5"
+        ],
+        "totalNavigableEntries": 9,
+        "interfaceCoverage": 9,
+        "groups": [
+          "L'Hexagone / géographie européenne",
+          "Quelques symboles européens",
+          "La France en chiffres"
+        ],
+        "sourceVisualPagesInspected": [
+          38,
+          39
+        ],
+        "implementation": "Nine navigable forms with country, geography, European symbol classification and dated statistics from the original page. Local PDF viewer points to corresponding page; autosaved responses, notes and manual completion preserved. No automatic grading.",
+        "verification": "Rendered PDF pages 39–40 (printed 38–39) directly with PyMuPDF. Verified script syntax, 100 unique activity IDs and initialization with existing D0 answers, Contacts and 3 Carnet activities. Browser/device E2E and Pages build still unverified.",
+        "editorialCaveat": "Numerical figures on printed page 39 are historic figures in the scanned textbook, not verified current statistics; keep answers based on that page only."
       }
     ]
   },
   "learner": {
     "completedActivities": 0,
-    "summary": "Individual answers, notes, status and active minutes remain browser-local. Editorial completion does not imply that learner has completed these exercises."
+    "summary": "The learner's answers, notes, time and completion status are saved browser-locally, separate from editorial checkpoint. No remote learner completion can be inferred."
   }
 }
