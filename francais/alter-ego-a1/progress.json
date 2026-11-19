@@ -1,6 +1,6 @@
 {
   "project": "Lengua Viva · Alter Ego A1",
-  "version": "2026-11-19-d1-exercer",
+  "version": "2026-11-19-d1-delf",
   "repository": "ignacioaragues/lingua-viva",
   "branch": "main",
   "coursePath": "francais/alter-ego-a1/",
@@ -13,23 +13,25 @@
     "visibility": "Local private PDF only; never commit scans, pages, or commercial source content to the public repository"
   },
   "editorial": {
-    "current": "Dossier 1 · S’exercer",
-    "status": "dossier_0_dossier_1_three_lessons_carnet_exercer_done_delf_pending",
+    "current": "Dossier 1 · Vers le DELF A1",
+    "status": "dossier_0_and_dossier_1_fully_covered_in_companion_workbook",
     "next": {
-      "id": "d1-delf",
-      "title": "Vers le DELF A1 · Dossier 1",
+      "id": "d2-l1-cest-ma-ville",
+      "title": "C’est ma ville",
       "printedPages": [
-        42,
-        42
+        44,
+        47
       ],
       "pdfPages": [
-        43,
-        43
+        45,
+        48
       ],
-      "goal": "Visually inspect p.42 and implement all DELF tasks, verify, then close Dossier 1 and proceed to Dossier 2 Leçon 1."
+      "goal": "Read scanned original pp. 44–47 visually; cover entire Dossier 2 Leçon 1 with every numbered exercise and culture/grammar/project where present, keeping all previous workbook data and no public PDF."
     },
     "futureOrder": [
-      "Dossier 2 · Leçon 1, then 2 and 3, Carnet de voyage, S’exercer and DELF; repeat in order through Dossier 9"
+      "Dossier 2 · Leçon 2 «Passer une nuit...» starts printed p. 48 (verified visually); check its final page before coding",
+      "Dossier 2 · Leçon 3 «Bons baisers de...»; then Carnet de voyage «Paris, hier et aujourd’hui», S’exercer, Vers le DELF A1 (verify exact pages)",
+      "Dossiers 3–9 in real textbook order, three lessons each plus supplements"
     ],
     "review": {
       "sourceVisualPagesInspected": [
@@ -59,12 +61,17 @@
         38,
         39,
         40,
-        41
+        41,
+        42,
+        43,
+        44,
+        48
       ],
-      "codeSyntacticValidation": "exercer-d1.js and inline index scripts parse; HTML unique DOM IDs, existing storage key retained; full interactive browser smoke test pending.",
-      "deployment": "Files committed to main; GitHub Pages propagation and mobile visual rendering not independently confirmed.",
-      "audio": "S’exercer pp.40–41 are written/oral practice activities without specific audio track numbers.",
-      "note": "118 entries: 38+18+20+15+9+18. Four principal units, two supplementary sections. Dossier 1 pending DELF. No flashcards modified."
+      "codeSyntacticValidation": "All seven JS modules loaded in reader simulation; inline JS parsed; 124 unique activity UIDs; navigation, label, page offset, source track 54, prior D0 answers and 9-field written DELF simulated successfully.",
+      "deployment": "GitHub main contains delf-d1.js and updated reader; live GitHub Pages URL could not be fetched because direct fetch is disabled and browser DNS is unavailable. Do not claim real deployment or mobile E2E.",
+      "audio": "Dossier 1 DELF comprehension references official printed track 54 (single listen twice), links to publisher portal; not embedded or independently matched downloadable file.",
+      "note": "Total 124=38+18+20+15+9+18+6 navigable entries. Dossier 1 now editorially covered: 3 lessons plus Carnet, S’exercer, DELF and 3 project tasks in lesson groups. 4/28 main units completed (14.3%), plus 3 D1 supplements; denominator excludes supplementary units. D2 Leçon 1 printed 44–47, D2 Leçon 2 begins 48. No changes to flashcards or old course.",
+      "browserE2E": "Not tested; use static simulation only"
     },
     "guardrails": [
       "Never reproduce scanned book inside public repo",
@@ -269,11 +276,46 @@
         ],
         "implementation": "18 individual original interactive workbooks with targeted dropdowns, short and multiline fields for all exercise numbers; page-linked local private book viewer, notes, manual completion, saved position and time; no automatic correction.",
         "verification": "Both scanned printed pages inspected visually from local page renders; JS syntax and HTML script integration verified; main commit confirmed. Full live-browser and mobile QA outstanding."
+      },
+      {
+        "id": "d1-delf",
+        "title": "Vers le DELF A1 · Dossier 1",
+        "type": "supplementary",
+        "printedPages": [
+          42,
+          42
+        ],
+        "pdfPages": [
+          43,
+          43
+        ],
+        "sourceVisualPagesInspected": [
+          42
+        ],
+        "assessments": [
+          {
+            "section": "Compréhension de l’oral",
+            "questions": 5,
+            "track": "54",
+            "points": 10
+          },
+          {
+            "section": "Production écrite",
+            "tasks": 1,
+            "points": 10,
+            "formFields": 9
+          }
+        ],
+        "totalNavigableEntries": 6,
+        "interfaceCoverage": 6,
+        "activityRefs": "oral 1–5; production écrite : formulaire de concours",
+        "implementation": "Single page split into five listening questions and one form, each accessible with notes and manual completion; choices for languages/day/time, written answers for occupation/telephone; nine form fields; fictitious personal data encouraged. Local PDF p43 synced. Track 54 displayed and publisher audio portal linked, no recording hosted. No automatic answer checking.",
+        "verification": "Scanned original printed p42 rendered and visually read; delf-d1.js and inline scripts validated. Smoke-tested 124 unique activity UIDs, D0 answer retained, Contacts, S’exercer and three DELF cases including 9-field form, page offset and piste 54. GitHub Pages propagation and real mobile browser interaction not verified."
       }
     ]
   },
   "learner": {
     "completedActivities": 0,
-    "summary": "The learner's answers, notes, time and completion status are saved browser-locally, separate from editorial checkpoint. No remote learner completion can be inferred."
+    "summary": "Editorial coverage is separate from learner completion, which is saved in the browser's existing localStorage key and not known remotely."
   }
 }
