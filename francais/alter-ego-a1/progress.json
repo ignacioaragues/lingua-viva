@@ -1,6 +1,6 @@
 {
   "project": "Lengua Viva · Alter Ego A1",
-  "version": "2026-11-19-d1-carnet",
+  "version": "2026-11-19-d1-exercer",
   "repository": "ignacioaragues/lingua-viva",
   "branch": "main",
   "coursePath": "francais/alter-ego-a1/",
@@ -13,24 +13,23 @@
     "visibility": "Local private PDF only; never commit scans, pages, or commercial source content to the public repository"
   },
   "editorial": {
-    "current": "Dossier 1 · Carnet de voyage · La France en Europe",
-    "status": "dossier_0_plus_d1_3_lessons_and_carnet_published_review_and_delf_pending",
+    "current": "Dossier 1 · S’exercer",
+    "status": "dossier_0_dossier_1_three_lessons_carnet_exercer_done_delf_pending",
     "next": {
-      "id": "d1-s-exercer",
-      "title": "S’exercer · Dossier 1",
+      "id": "d1-delf",
+      "title": "Vers le DELF A1 · Dossier 1",
       "printedPages": [
-        40,
-        41
-      ],
-      "pdfPages": [
-        41,
+        42,
         42
       ],
-      "goal": "Read both scanned pages visually, implement all numbered consolidation exercises (1–18) across lessons 1–3, preserving manual page/exercise cross-references, then checkpoint."
+      "pdfPages": [
+        43,
+        43
+      ],
+      "goal": "Visually inspect p.42 and implement all DELF tasks, verify, then close Dossier 1 and proceed to Dossier 2 Leçon 1."
     },
     "futureOrder": [
-      "Dossier 1 · Vers le DELF A1 · p. 42",
-      "Dossiers 2–9 in book order, three lessons + Carnet + S’exercer + DELF and projects"
+      "Dossier 2 · Leçon 1, then 2 and 3, Carnet de voyage, S’exercer and DELF; repeat in order through Dossier 9"
     ],
     "review": {
       "sourceVisualPagesInspected": [
@@ -58,12 +57,14 @@
         36,
         37,
         38,
-        39
+        39,
+        40,
+        41
       ],
-      "codeSyntacticValidation": "Index inline JS and carnet-d1.js parse; smoke-tested 5 initialized activities across D0, Contacts, and Carnet, with 100 unique activity IDs.",
-      "deployment": "GitHub main commits created for carnet-d1.js and updated index. GitHub Pages live deploy/browser visual QA not yet confirmed.",
-      "audio": "Carnet de voyage pages 38–39 contain no numbered listening tracks; no additional audio integrated.",
-      "note": "Stable localStorage key lv:alter-ego-a1:d0:v1 preserved; existing flashcards and legacy course untouched. Total navigable entries: 38+18+20+15+9=100. 4 principal units + 1 supplementary section; Dossier 1 still incomplete until S’exercer and DELF."
+      "codeSyntacticValidation": "exercer-d1.js and inline index scripts parse; HTML unique DOM IDs, existing storage key retained; full interactive browser smoke test pending.",
+      "deployment": "Files committed to main; GitHub Pages propagation and mobile visual rendering not independently confirmed.",
+      "audio": "S’exercer pp.40–41 are written/oral practice activities without specific audio track numbers.",
+      "note": "118 entries: 38+18+20+15+9+18. Four principal units, two supplementary sections. Dossier 1 pending DELF. No flashcards modified."
     },
     "guardrails": [
       "Never reproduce scanned book inside public repo",
@@ -241,6 +242,33 @@
         "implementation": "Nine navigable forms with country, geography, European symbol classification and dated statistics from the original page. Local PDF viewer points to corresponding page; autosaved responses, notes and manual completion preserved. No automatic grading.",
         "verification": "Rendered PDF pages 39–40 (printed 38–39) directly with PyMuPDF. Verified script syntax, 100 unique activity IDs and initialization with existing D0 answers, Contacts and 3 Carnet activities. Browser/device E2E and Pages build still unverified.",
         "editorialCaveat": "Numerical figures on printed page 39 are historic figures in the scanned textbook, not verified current statistics; keep answers based on that page only."
+      },
+      {
+        "id": "d1-s-exercer",
+        "title": "S’exercer · Dossier 1",
+        "type": "supplementary",
+        "printedPages": [
+          40,
+          41
+        ],
+        "pdfPages": [
+          41,
+          42
+        ],
+        "numberedActivities": 18,
+        "totalNavigableEntries": 18,
+        "interfaceCoverage": 18,
+        "groups": [
+          "Leçon 1 · exercices 1–6",
+          "Leçon 2 · exercices 7–12",
+          "Leçon 3 · exercices 13–18"
+        ],
+        "sourceVisualPagesInspected": [
+          40,
+          41
+        ],
+        "implementation": "18 individual original interactive workbooks with targeted dropdowns, short and multiline fields for all exercise numbers; page-linked local private book viewer, notes, manual completion, saved position and time; no automatic correction.",
+        "verification": "Both scanned printed pages inspected visually from local page renders; JS syntax and HTML script integration verified; main commit confirmed. Full live-browser and mobile QA outstanding."
       }
     ]
   },
