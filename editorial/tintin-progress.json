@@ -11,7 +11,12 @@
     6,
     7,
     8,
-    9
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
   ],
   "first_pass_segments_by_page": {
     "3": 12,
@@ -20,15 +25,20 @@
     "6": 14,
     "7": 18,
     "8": 12,
-    "9": 14
+    "9": 14,
+    "10": 11,
+    "11": 10,
+    "12": 7,
+    "13": 13,
+    "14": 12
   },
   "frontmatter_reference_pdf_pages": [
     1,
     2
   ],
-  "next_page_pdf": 10,
-  "next_story_page": 8,
-  "current_status": "Primera pasada de transcripción y traducción de las planchas 1–7 (PDF 3–9) guardada en el área privada de Supabase. Cinco planchas nuevas PDF 5–9 en la pasada manual del 19/11/2026, 74 segmentos nuevos (109 acumulados). Lector y catálogos públicos sin cambios.",
+  "next_page_pdf": 15,
+  "next_story_page": 13,
+  "current_status": "Primera pasada de transcripción francesa y traducción española de las planchas 1–12 (PDF 3–14) guardada en Supabase privado. Pasada manual nueva PDF 10–14: cinco planchas, 53 segmentos nuevos; 162 acumulados. Edición final pendiente de revisión fina.",
   "implementation": [
     "Catálogo /comics/ integrado en Lengua Viva y Edición Viva",
     "Asterix conserva URL anterior y recibe panel lateral redimensionable",
@@ -44,39 +54,40 @@
     "Comprobada política RLS de lectura restringida por auth.uid()",
     "Comprobado contenido y SHA de archivos publicados a main",
     "Base privada: comprobadas siete filas tintin-transcript:3–9, 109 segmentos en total.",
-    "Objetivo de recurrente modificado a tandas de 5–10 planchas completas."
+    "Objetivo de recurrente modificado a tandas de 5–10 planchas completas.",
+    "Verificadas en Supabase 12 filas privadas consecutivas (PDF 3–14): 162 segmentos bilingües, marcadas como primera pasada completa."
   ],
   "unverified": [
     "Apertura real de GitHub Pages y prueba visual en navegador: el entorno no pudo acceder a github.io",
     "Prueba funcional real en móvil y gesto de arrastre",
     "Autocarga de PDF desde IndexedDB en navegador y sesión de Supabase en UI final"
   ],
-  "next": "Continuar desde página 10 del PDF (plancha 8). Objetivo revisado a 5–10 planchas completas por entrega. Cotejar dudas pequeñas de bocadillos y atribución de personajes en segunda pasada, sin frenar avance.",
-  "completed_story_pages": 7,
+  "next": "Continuar desde página 15 del PDF (plancha 13), cinco a diez planchas COMPLETAS por ejecución. Revisar detalles mínimos de lectura, ortografía, atribución y viñetas en una pasada de QA posterior sin volver a transcribir lo ya hecho.",
+  "completed_story_pages": 12,
   "total_story_pages": 62,
-  "completed_percent": 11.29,
-  "last_completed_pdf_page": 9,
-  "last_completed_story_page": 7,
+  "completed_percent": 19.35,
+  "last_completed_pdf_page": 14,
+  "last_completed_story_page": 12,
   "latest_delivery": {
     "date": "2026-11-19",
     "pdf_pages": [
-      5,
-      6,
-      7,
-      8,
-      9
+      10,
+      11,
+      12,
+      13,
+      14
     ],
     "story_pages": [
-      3,
-      4,
-      5,
-      6,
-      7
+      8,
+      9,
+      10,
+      11,
+      12
     ],
-    "new_segments": 74,
-    "previous_segments": 35,
-    "total_segments": 109,
+    "new_segments": 53,
+    "previous_segments": 109,
+    "total_segments": 162,
     "private_database_verified": true
   },
-  "quality_note": "El campo complete:true marca una primera pasada por plancha, no cotejo editorial definitivo. Hay que revisar texto fino y atribuciones de personajes antes de dar la edición por cerrada."
+  "quality_note": "complete:true marca una primera transcripción y traducción de la plancha, con lectura cotejada visualmente del escaneo; NO equivale a auditoría editorial final. Revisar fragmentos de carteles/papeles, onomatopeyas y atribuciones en la fase final."
 }
