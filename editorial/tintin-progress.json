@@ -1,0 +1,43 @@
+{
+  "work": "Tintin · L’Île Noire — Cómics · Lengua Viva / Edición Viva",
+  "updated_at": "2026-11-19",
+  "source": "PDF suministrado por el usuario: 65 páginas (1 cubierta, 2 portadilla, 3–64 planchas numeradas 1–62, 65 catálogo/editorial final)",
+  "public_reader": "comics/tintin-ile-noire/",
+  "private_transcription_key": "tintin-transcript:<página de PDF>",
+  "first_pass_complete_pdf_pages": [
+    3,
+    4
+  ],
+  "first_pass_segments_by_page": {
+    "3": 12,
+    "4": 23
+  },
+  "frontmatter_reference_pdf_pages": [
+    1,
+    2
+  ],
+  "next_page_pdf": 5,
+  "next_story_page": 3,
+  "current_status": "Lector publicado en rama main, con PDF privado y panel de francés/español. Primera pasada de transcripción/traducción de las planchas 1–2 guardada en cuenta privada Supabase. Resto pendiente.",
+  "implementation": [
+    "Catálogo /comics/ integrado en Lengua Viva y Edición Viva",
+    "Asterix conserva URL anterior y recibe panel lateral redimensionable",
+    "Tintin: visor PDF.js, paso de página, zoom, ajustar ancho, PDF guardado en IndexedDB",
+    "Notas por página y viñeta localStorage, español opcional",
+    "Slider independiente de ancho lateral, slider de tamaño de texto y scroll independiente",
+    "Controles de ancho situados fuera de la grilla para evitar desplazamiento al arrastrar",
+    "Transcripciones privadas tras acceso de usuario; no se publican reproducciones escaneadas"
+  ],
+  "checks": [
+    "Archivos JS verificados sintácticamente a través de la conexión GitHub",
+    "Verificadas dos filas privadas de transcripción en lingua_notes con 12+23 segmentos",
+    "Comprobada política RLS de lectura restringida por auth.uid()",
+    "Comprobado contenido y SHA de archivos publicados a main"
+  ],
+  "unverified": [
+    "Apertura real de GitHub Pages y prueba visual en navegador: el entorno no pudo acceder a github.io",
+    "Prueba funcional real en móvil y gesto de arrastre",
+    "Autocarga de PDF desde IndexedDB en navegador y sesión de Supabase en UI final"
+  ],
+  "next": "Retomar del PDF página 5 (plancha 3), seguir por páginas completas y guardar cada transcripción/traducción en notas privadas. Cotejar manualmente detalles de las dos primeras planchas en una segunda pasada sin frenar el avance."
+}
