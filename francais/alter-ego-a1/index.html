@@ -9,7 +9,7 @@
 *{box-sizing:border-box}body{margin:0;background:var(--ae-paper);color:var(--ae-ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 a{color:var(--ae-accent)}button,input,select,textarea{font:inherit}button{cursor:pointer}
 .ae-header{max-width:1440px;margin:auto;padding:20px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--ae-line)}
-.ae-header nav{display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-size:.84rem}.ae-brand{font-family:Georgia,serif;font-size:1.35rem;text-decoration:none;color:var(--ae-ink)}.ae-brand em{color:var(--ae-accent)}
+.ae-header nav{display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-size:.84rem}.ae-return-parent{border:1px solid var(--ae-line);border-radius:5px;padding:7px 10px;text-decoration:none;white-space:nowrap;font-weight:600}.ae-return-parent:hover{background:var(--ae-pale)}.ae-brand{font-family:Georgia,serif;font-size:1.35rem;text-decoration:none;color:var(--ae-ink)}.ae-brand em{color:var(--ae-accent)}
 .ae-page{max-width:1440px;margin:0 auto;padding:22px 26px 42px}
 .ae-heading{display:flex;justify-content:space-between;gap:20px;align-items:start;flex-wrap:wrap;margin-bottom:20px}
 .ae-heading h1{font:normal clamp(2rem,4vw,3.2rem)/1.08 Georgia,serif;margin:6px 0 9px}.ae-heading h1 em{color:var(--ae-accent)}
@@ -55,7 +55,7 @@ a{color:var(--ae-accent)}button,input,select,textarea{font:inherit}button{cursor
 </style>
 </head>
 <body>
-<header class="ae-header"><a class="ae-brand" href="../../">Lengua <em>Viva</em></a><nav aria-label="Navegación"><a href="../accueil.html">Francés</a><a href="../../flashcards/?idioma=francais">Flashcards</a><a href="../../estadisticas/?idioma=francais">Estadísticas generales</a><a href="../">Curso anterior</a></nav></header>
+<header class="ae-header"><a class="ae-brand" href="../../">Lengua <em>Viva</em></a><nav aria-label="Navegación"><a class="ae-return-parent" href="https://ignacioaragues.github.io/palabra-viva/">← Palabra Viva</a><a href="../accueil.html">Francés</a><a href="../../flashcards/?idioma=francais">Flashcards</a><a href="../../estadisticas/?idioma=francais">Estadísticas generales</a><a href="../">Curso anterior</a></nav></header>
 <main class="ae-page">
 <div class="ae-heading"><div><div class="ae-kicker">Francés A1 · método con manual</div><h1>Alter Ego <em>A1.</em></h1><p>Estudiá con tu libro y respondé cada actividad en el cuaderno interactivo. Podés mostrar u ocultar el PDF sin perder tus respuestas. La corrección solo se realiza cuando la pedís expresamente.</p></div><div class="ae-stat"><span id="ae-progress">0 / 91 actividades</span><span>⏱ <span id="ae-time">0 h 00 min</span></span><button class="ae-btn" id="ae-export" type="button">Exportar mi cuaderno</button></div></div>
 <div class="ae-meter" aria-label="Progreso manual de actividades"><span id="ae-meter-fill"></span></div>
