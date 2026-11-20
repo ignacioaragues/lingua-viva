@@ -51,7 +51,12 @@
     46,
     47,
     48,
-    49
+    49,
+    50,
+    51,
+    52,
+    53,
+    54
   ],
   "first_pass_segments_by_page": {
     "3": 12,
@@ -100,15 +105,20 @@
     "46": 12,
     "47": 12,
     "48": 11,
-    "49": 15
+    "49": 15,
+    "50": 13,
+    "51": 15,
+    "52": 14,
+    "53": 17,
+    "54": 16
   },
   "frontmatter_reference_pdf_pages": [
     1,
     2
   ],
-  "next_page_pdf": 50,
-  "next_story_page": 48,
-  "current_status": "Primera pasada bilingüe: planchas 1–47 de 62 (PDF 3–49); se guardaron 57 segmentos nuevos en las páginas PDF 45–49 (7+12+12+11+15), 605 acumulados. Base privada verificada; pendiente revisión editorial fina.",
+  "next_page_pdf": 55,
+  "next_story_page": 53,
+  "current_status": "Primera pasada de 52/62 planchas (PDF 3–54) publicada en Supabase privado. Última tanda PDF 50–54: 75 segmentos bilingües nuevos, 680 acumulados. La transcripción y traducción están sujetas a auditoría editorial fina.",
   "implementation": [
     "Catálogo /comics/ integrado en Lengua Viva y Edición Viva",
     "Asterix conserva URL anterior y recibe panel lateral redimensionable",
@@ -133,39 +143,40 @@
     "20/11/2026: PDF 35–39 cotejado por franjas a 4× y guardado en Supabase privado; verificados los 5 registros nuevos con 12, 13, 13, 18 y 16 segmentos (72 nuevos; 457 acumulados).",
     "20/11/2026: páginas PDF 40–44 cotejadas visualmente en franjas; 5 filas privadas guardadas y verificadas (16,19,16,16,22 segmentos), 89 nuevas y 546 acumuladas.",
     "20/11/2026: reconciliación de dos pasadas coincidentes sobre PDF 40–44: base privada consultada después de guardar, 15+20+17+17+22 = 91 segmentos; checkpoint real 548 acumulados y próxima PDF 45.",
-    "20/11/2026: PDF 45–49 leídos desde fuente original 4× (recortes en tres franjas), verificados registros consecutivos privados en Supabase: 7+12+12+11+15=57 segmentos nuevos; 605 acumulados."
+    "20/11/2026: PDF 45–49 leídos desde fuente original 4× (recortes en tres franjas), verificados registros consecutivos privados en Supabase: 7+12+12+11+15=57 segmentos nuevos; 605 acumulados.",
+    "20/11/2026: PDFs 50–54 renderizados con PyMuPDF a 4,2×; cinco registros privados confirmados tras INSERT (13+15+14+17+16 = 75 segmentos nuevos, 680 acumulados)."
   ],
   "unverified": [
     "Apertura real de GitHub Pages y prueba visual en navegador: el entorno no pudo acceder a github.io",
     "Prueba funcional real en móvil y gesto de arrastre",
     "Autocarga de PDF desde IndexedDB en navegador y sesión de Supabase en UI final"
   ],
-  "next": "Continuar desde PDF p. 50, plancha 48, con 5–10 planchas por tanda. PDF original aportado por usuario en /mnt/data/Les aventures de Tintin LÎle Noire (Hergé) (z-library.sk, 1lib.sk, z-lib.sk).pdf; renderizar con PyMuPDF a 4× y recortar en 3 franjas solapadas, no asumir diálogo en viñetas mudas. Verificar existencia y calidad de transcripción antes de guardar. No sobrescribir páginas 3–49 si hay otra recurrente simultánea.",
-  "completed_story_pages": 47,
+  "next": "Continuar desde PDF página 55 (plancha 53), cinco a diez planchas completas por tanda. Reutilizar el PDF original en /mnt/data/Les aventures de Tintin LÎle Noire (Hergé) (z-library.sk, 1lib.sk, z-lib.sk).pdf: PyMuPDF 4,2× con tres franjas por página para cotejo de globos. No repetir páginas 3–54 ni sobreescribir transcripciones de otra ejecución concurrente. Al finalizar la última plancha, auditar faltantes y exactitud antes de detener recurrente.",
+  "completed_story_pages": 52,
   "total_story_pages": 62,
-  "completed_percent": 75.81,
-  "last_completed_pdf_page": 49,
-  "last_completed_story_page": 47,
+  "completed_percent": 83.87,
+  "last_completed_pdf_page": 54,
+  "last_completed_story_page": 52,
   "latest_delivery": {
     "date": "2026-11-20",
     "pdf_pages": [
-      45,
-      46,
-      47,
-      48,
-      49
+      50,
+      51,
+      52,
+      53,
+      54
     ],
     "story_pages": [
-      43,
-      44,
-      45,
-      46,
-      47
+      48,
+      49,
+      50,
+      51,
+      52
     ],
-    "new_segments": 57,
-    "previous_segments": 548,
-    "total_segments": 605,
+    "new_segments": 75,
+    "previous_segments": 605,
+    "total_segments": 680,
     "private_database_verified": true
   },
-  "quality_note": "complete:true significa primera pasada de 47 planchas (PDF 3–49), no auditoría editorial final. Seguir revisando literalmente globos, cartuchos, onomatopeyas, atribuciones y variantes gráficas; durante auditoría evitar errores de transcripción, especialmente páginas con poco texto."
+  "quality_note": "complete:true designa PRIMERA PASADA, no edición crítica revisada. En las 52 planchas terminadas queda pendiente cotejo final de globos, atribuciones, onomatopeyas, rótulos, lecturas dudosas y correspondencia entre página PDF y página impresa."
 }
