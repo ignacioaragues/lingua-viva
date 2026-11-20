@@ -86,10 +86,10 @@
     "37": 13,
     "38": 18,
     "39": 16,
-    "40": 16,
-    "41": 19,
-    "42": 16,
-    "43": 16,
+    "40": 15,
+    "41": 20,
+    "42": 17,
+    "43": 17,
     "44": 22
   },
   "frontmatter_reference_pdf_pages": [
@@ -98,7 +98,7 @@
   ],
   "next_page_pdf": 45,
   "next_story_page": 43,
-  "current_status": "Primera pasada bilingüe de 42/62 planchas (PDF 3–44), 546 segmentos privados. Última tanda: PDF 40–44, 89 segmentos nuevos. Pendiente auditoría editorial fina.",
+  "current_status": "Primera pasada bilingüe de 42/62 planchas (PDF 3–44), 548 segmentos privados. La entrega de páginas PDF 40–44 fue cotejada visualmente y contiene 91 segmentos tras conciliación de dos ejecuciones simultáneas; pendiente auditoría editorial fina.",
   "implementation": [
     "Catálogo /comics/ integrado en Lengua Viva y Edición Viva",
     "Asterix conserva URL anterior y recibe panel lateral redimensionable",
@@ -121,14 +121,15 @@
     "20/11: PDF 25–29 cotejadas visualmente y verificadas cinco filas privadas (11, 16, 15, 9 y 17 segmentos).",
     "20/11/2026: cotejado visualmente PDF 30–34 a escala 3,6×; verificadas cinco nuevas filas privadas con 10,12,10,9,13 segmentos; cobertura consecutiva hasta PDF 34 (385 segmentos acumulados).",
     "20/11/2026: PDF 35–39 cotejado por franjas a 4× y guardado en Supabase privado; verificados los 5 registros nuevos con 12, 13, 13, 18 y 16 segmentos (72 nuevos; 457 acumulados).",
-    "20/11/2026: páginas PDF 40–44 cotejadas visualmente en franjas; 5 filas privadas guardadas y verificadas (16,19,16,16,22 segmentos), 89 nuevas y 546 acumuladas."
+    "20/11/2026: páginas PDF 40–44 cotejadas visualmente en franjas; 5 filas privadas guardadas y verificadas (16,19,16,16,22 segmentos), 89 nuevas y 546 acumuladas.",
+    "20/11/2026: reconciliación de dos pasadas coincidentes sobre PDF 40–44: base privada consultada después de guardar, 15+20+17+17+22 = 91 segmentos; checkpoint real 548 acumulados y próxima PDF 45."
   ],
   "unverified": [
     "Apertura real de GitHub Pages y prueba visual en navegador: el entorno no pudo acceder a github.io",
     "Prueba funcional real en móvil y gesto de arrastre",
     "Autocarga de PDF desde IndexedDB en navegador y sesión de Supabase en UI final"
   ],
-  "next": "Continuar por PDF 45 (plancha 43) con 5–10 planchas. PDF original en /mnt/data/Les aventures de Tintin LÎle Noire (Hergé) (z-library.sk, 1lib.sk, z-lib.sk).pdf. No repetir páginas 3–44. Revisar la correspondencia exacta entre globo y viñeta y las lecturas dudosas antes de declarar edición final.",
+  "next": "Continuar desde PDF 45, plancha 43, sin repetir ni sobreescribir la pasada de PDF 40–44. Cotejar el original aportado por el usuario con PyMuPDF 4,2×, tres franjas por página, y avanzar de cinco a diez planchas.",
   "completed_story_pages": 42,
   "total_story_pages": 62,
   "completed_percent": 67.74,
@@ -150,10 +151,10 @@
       41,
       42
     ],
-    "new_segments": 89,
+    "new_segments": 91,
     "previous_segments": 457,
-    "total_segments": 546,
+    "total_segments": 548,
     "private_database_verified": true
   },
-  "quality_note": "Primera pasada no equivale a edición final. Pendiente cotejo íntegro globo por globo, especialmente exactitud literal, atribución, onomatopeyas y separación de viñetas."
+  "quality_note": "complete:true designa primera pasada de 42 planchas (PDF 3–44); no sustituye la auditoría editorial fina. Revisar exactitud de diálogos, etiquetas, distribución de viñetas y atribuciones; evitar que dos pasadas simultáneas se sobreescriban."
 }
