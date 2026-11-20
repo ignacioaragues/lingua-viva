@@ -138,7 +138,7 @@
   ],
   "next_page_pdf": null,
   "next_story_page": null,
-  "current_status": "PRIMERA PASADA COMPLETA: 62/62 planchas PDF 3–64, 807 segmentos en Supabase privado verificados. NO TERMINADA la auditoría: p.64 contiene artículo de prensa parcialmente resumido en español, no transcripción/traducción integral de todo el texto; p.56 lista manuscrita parcialmente legible; revisar exactitud, atribuciones y navegación antes de desactivar la recurrente.",
+  "current_status": "PRIMERA PASADA COMPLETA; auditoría estructural de base privada aprobada (62/62, 807/807 campos básicos). Auditoría visual y funcional pendientes por ausencia del PDF original y acceso a navegador interactivo.",
   "implementation": [
     "Catálogo /comics/ integrado en Lengua Viva y Edición Viva",
     "Asterix conserva URL anterior y recibe panel lateral redimensionable",
@@ -166,14 +166,16 @@
     "20/11/2026: PDF 45–49 leídos desde fuente original 4× (recortes en tres franjas), verificados registros consecutivos privados en Supabase: 7+12+12+11+15=57 segmentos nuevos; 605 acumulados.",
     "20/11/2026: PDFs 50–54 renderizados con PyMuPDF a 4,2×; cinco registros privados confirmados tras INSERT (13+15+14+17+16 = 75 segmentos nuevos, 680 acumulados).",
     "20/11/2026: PDF 55–59 cotejados visualmente mediante PyMuPDF 4,2× en tres franjas, registros verificados en tabla privada con 12+17+8+15+11=63 segmentos; total 743.",
-    "20/11/2026: PDFs 60–64 leídos visualmente, 64 segmentos nuevos insertados. Consulta SQL confirma 62 entradas consecutivas PDF 3–64 y 807 segmentos, todos complete:true (primera pasada, no auditoría final)."
+    "20/11/2026: PDFs 60–64 leídos visualmente, 64 segmentos nuevos insertados. Consulta SQL confirma 62 entradas consecutivas PDF 3–64 y 807 segmentos, todos complete:true (primera pasada, no auditoría final).",
+    "20/11/2026: auditoría estructural SQL de 62 páginas y 807 segmentos: 0 páginas ausentes, 0 segmentos sin francés, español o atribución, 0 flags incomplete."
   ],
   "unverified": [
     "Apertura real de GitHub Pages y prueba visual en navegador: el entorno no pudo acceder a github.io",
     "Prueba funcional real en móvil y gesto de arrastre",
-    "Autocarga de PDF desde IndexedDB en navegador y sesión de Supabase en UI final"
+    "Autocarga de PDF desde IndexedDB en navegador y sesión de Supabase en UI final",
+    "Auditoría visual exhaustiva bloqueada en esta ejecución: PDF original no montado en /mnt/data y búsqueda en archivos de conversación/biblioteca sin coincidencia; no es posible validar lista p.56 ni periódico p.64 sin inventar."
   ],
-  "next": "AUDITORÍA FINAL: verificar exhaustivamente las 62 páginas y los 807 segmentos contra PDF original, correspondencia viñetas, globos, onomatopeyas, p.56 lista manuscrita, p.64 noticia del Daily Reporter (texto secundario parcialmente abreviado), navegación y acceso privado del lector. Corregir errores y faltantes; solamente después de verificar desactivar la misma recurrente.",
+  "next": "Recuperar PDF original, cotejar visualmente 62 planchas, corregir lista manuscrita PDF56 y noticia PDF64, probar lector real y después desactivar recurrente.",
   "completed_story_pages": 62,
   "total_story_pages": 62,
   "completed_percent": 100,
