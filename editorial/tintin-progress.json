@@ -31,7 +31,12 @@
     26,
     27,
     28,
-    29
+    29,
+    30,
+    31,
+    32,
+    33,
+    34
   ],
   "first_pass_segments_by_page": {
     "3": 12,
@@ -60,15 +65,20 @@
     "26": 16,
     "27": 15,
     "28": 9,
-    "29": 17
+    "29": 17,
+    "30": 10,
+    "31": 12,
+    "32": 10,
+    "33": 9,
+    "34": 13
   },
   "frontmatter_reference_pdf_pages": [
     1,
     2
   ],
-  "next_page_pdf": 30,
-  "next_story_page": 28,
-  "current_status": "Primera pasada de 27/62 planchas (PDF 3–29), 331 segmentos bilingües privados. Última tanda: PDF 25–29, 68 segmentos verificados. Pendiente revisión editorial fina.",
+  "next_page_pdf": 35,
+  "next_story_page": 33,
+  "current_status": "Primera pasada de 32/62 planchas (PDF 3–34) almacenada en Supabase privado. Nueva entrega: PDF 30–34 (planchas 28–32), 54 segmentos bilingües, 385 acumulados. Pendiente revisión filológica final.",
   "implementation": [
     "Catálogo /comics/ integrado en Lengua Viva y Edición Viva",
     "Asterix conserva URL anterior y recibe panel lateral redimensionable",
@@ -88,39 +98,40 @@
     "Verificadas en Supabase 12 filas privadas consecutivas (PDF 3–14): 162 segmentos bilingües, marcadas como primera pasada completa.",
     "Páginas PDF 15–19 recuperadas visualmente del PDF original y transcritas con traducción propia; cinco filas nuevas confirmadas en Supabase privado.",
     "2026-11-20: comprobada existencia y lectura de 65 páginas del PDF con PyMuPDF; verificados en Supabase registros consecutivos tintin-transcript:3–24 (263 segmentos).",
-    "20/11: PDF 25–29 cotejadas visualmente y verificadas cinco filas privadas (11, 16, 15, 9 y 17 segmentos)."
+    "20/11: PDF 25–29 cotejadas visualmente y verificadas cinco filas privadas (11, 16, 15, 9 y 17 segmentos).",
+    "20/11/2026: cotejado visualmente PDF 30–34 a escala 3,6×; verificadas cinco nuevas filas privadas con 10,12,10,9,13 segmentos; cobertura consecutiva hasta PDF 34 (385 segmentos acumulados)."
   ],
   "unverified": [
     "Apertura real de GitHub Pages y prueba visual en navegador: el entorno no pudo acceder a github.io",
     "Prueba funcional real en móvil y gesto de arrastre",
     "Autocarga de PDF desde IndexedDB en navegador y sesión de Supabase en UI final"
   ],
-  "next": "Continuar desde PDF 30 (plancha 28), 5–10 páginas completas. PDF original accesible en /mnt/data; cotejar viñetas y mantener las transcripciones solo en Supabase privado.",
-  "completed_story_pages": 27,
+  "next": "Continuar por PDF 35 (plancha 33), de 5 a 10 planchas por entrega. PDF original disponible en /mnt/data/Les aventures de Tintin LÎle Noire (Hergé) (z-library.sk, 1lib.sk, z-lib.sk).pdf, renderizar con PyMuPDF y cortes horizontales para cotejo. Si faltan globos o hay material dudoso, anotarlo para revisión final. No duplicar páginas 3–34.",
+  "completed_story_pages": 32,
   "total_story_pages": 62,
-  "completed_percent": 43.55,
-  "last_completed_pdf_page": 29,
-  "last_completed_story_page": 27,
+  "completed_percent": 51.61,
+  "last_completed_pdf_page": 34,
+  "last_completed_story_page": 32,
   "latest_delivery": {
     "date": "2026-11-20",
     "pdf_pages": [
-      25,
-      26,
-      27,
-      28,
-      29
+      30,
+      31,
+      32,
+      33,
+      34
     ],
     "story_pages": [
-      23,
-      24,
-      25,
-      26,
-      27
+      28,
+      29,
+      30,
+      31,
+      32
     ],
-    "new_segments": 68,
-    "previous_segments": 263,
-    "total_segments": 331,
+    "new_segments": 54,
+    "previous_segments": 331,
+    "total_segments": 385,
     "private_database_verified": true
   },
-  "quality_note": "Las 22 planchas están marcadas como complete:true para PRIMERA PASADA únicamente. Para cerrar la edición debe cotejarse cada viñeta/globo/onomatopeya y pulir lecturas dudosas; textos breves y paneles sin parlamentos están incluidos cuando se pudieron leer. No equivale a auditoría editorial final."
+  "quality_note": "El indicador complete:true designa una primera pasada por plancha y NO una auditoría definitiva. Revisar legibilidad, ortografía, textos en inglés, onomatopeyas, posibles globos omitidos y atribución de parlamentos; especialmente viñetas mudas y reacciones simbólicas."
 }
