@@ -1,6 +1,6 @@
 {
   "work": "Tintin · L’Île Noire — Cómics · Lengua Viva / Edición Viva",
-  "updated_at": "2026-11-19",
+  "updated_at": "2026-11-20",
   "source": "PDF suministrado por el usuario: 65 páginas (1 cubierta, 2 portadilla, 3–64 planchas numeradas 1–62, 65 catálogo/editorial final)",
   "public_reader": "comics/tintin-ile-noire/",
   "private_transcription_key": "tintin-transcript:<página de PDF>",
@@ -16,7 +16,12 @@
     11,
     12,
     13,
-    14
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
   ],
   "first_pass_segments_by_page": {
     "3": 12,
@@ -30,15 +35,20 @@
     "11": 10,
     "12": 7,
     "13": 13,
-    "14": 12
+    "14": 12,
+    "15": 13,
+    "16": 12,
+    "17": 16,
+    "18": 7,
+    "19": 8
   },
   "frontmatter_reference_pdf_pages": [
     1,
     2
   ],
-  "next_page_pdf": 15,
-  "next_story_page": 13,
-  "current_status": "Primera pasada de transcripción francesa y traducción española de las planchas 1–12 (PDF 3–14) guardada en Supabase privado. Pasada manual nueva PDF 10–14: cinco planchas, 53 segmentos nuevos; 162 acumulados. Edición final pendiente de revisión fina.",
+  "next_page_pdf": 20,
+  "next_story_page": 18,
+  "current_status": "Primera pasada de las planchas 1–17 (PDF 3–19) guardada en Supabase privado. Última tanda: planchas 13–17 (PDF 15–19), 56 segmentos nuevos. Total 218 segmentos. Revisión editorial de precisión y segmentación por viñeta pendiente.",
   "implementation": [
     "Catálogo /comics/ integrado en Lengua Viva y Edición Viva",
     "Asterix conserva URL anterior y recibe panel lateral redimensionable",
@@ -55,39 +65,40 @@
     "Comprobado contenido y SHA de archivos publicados a main",
     "Base privada: comprobadas siete filas tintin-transcript:3–9, 109 segmentos en total.",
     "Objetivo de recurrente modificado a tandas de 5–10 planchas completas.",
-    "Verificadas en Supabase 12 filas privadas consecutivas (PDF 3–14): 162 segmentos bilingües, marcadas como primera pasada completa."
+    "Verificadas en Supabase 12 filas privadas consecutivas (PDF 3–14): 162 segmentos bilingües, marcadas como primera pasada completa.",
+    "Páginas PDF 15–19 recuperadas visualmente del PDF original y transcritas con traducción propia; cinco filas nuevas confirmadas en Supabase privado."
   ],
   "unverified": [
     "Apertura real de GitHub Pages y prueba visual en navegador: el entorno no pudo acceder a github.io",
     "Prueba funcional real en móvil y gesto de arrastre",
     "Autocarga de PDF desde IndexedDB en navegador y sesión de Supabase en UI final"
   ],
-  "next": "Continuar desde página 15 del PDF (plancha 13), cinco a diez planchas COMPLETAS por ejecución. Revisar detalles mínimos de lectura, ortografía, atribución y viñetas en una pasada de QA posterior sin volver a transcribir lo ya hecho.",
-  "completed_story_pages": 12,
+  "next": "Continuar desde PDF página 20 (plancha 18), en tandas de 5–10 planchas completas. No repetir las páginas 15–19. Cotejar después la atribución y separación de segmentos por viñeta; en particular página 15, texto manuscrito recompuesto.",
+  "completed_story_pages": 17,
   "total_story_pages": 62,
-  "completed_percent": 19.35,
-  "last_completed_pdf_page": 14,
-  "last_completed_story_page": 12,
+  "completed_percent": 27.42,
+  "last_completed_pdf_page": 19,
+  "last_completed_story_page": 17,
   "latest_delivery": {
-    "date": "2026-11-19",
+    "date": "2026-11-20",
     "pdf_pages": [
-      10,
-      11,
-      12,
-      13,
-      14
+      15,
+      16,
+      17,
+      18,
+      19
     ],
     "story_pages": [
-      8,
-      9,
-      10,
-      11,
-      12
+      13,
+      14,
+      15,
+      16,
+      17
     ],
-    "new_segments": 53,
-    "previous_segments": 109,
-    "total_segments": 162,
+    "new_segments": 56,
+    "previous_segments": 162,
+    "total_segments": 218,
     "private_database_verified": true
   },
-  "quality_note": "complete:true marca una primera transcripción y traducción de la plancha, con lectura cotejada visualmente del escaneo; NO equivale a auditoría editorial final. Revisar fragmentos de carteles/papeles, onomatopeyas y atribuciones en la fase final."
+  "quality_note": "Primera pasada: segmentación inicial de diálogos, no revisión filológica final. Se detectan onomatopeyas y textos de papel que requieren cotejo de precisión; complete:true no significa QA final."
 }
