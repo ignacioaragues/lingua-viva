@@ -40,7 +40,7 @@
     grammar:localGet('grammar','fr'), revealed:new Set(), readingParallel:localGet('readingParallel',true),
     lessonDraft:localGet('drafts',{}), dictationDraft:localGet('dictationDraft',{}),
     questionDrafts:localGet('questionDrafts',{}), questionOpen:new Set(),
-    localSessions:localGet('sessions',[]), greekSessions:localGet('greekSessions',[]), localProgress:localGet('progress',{}),
+    localSessions:localGet('sessions',[]), greekSessions:localGet('greekSessions',[]), comicSessions:localGet('comicSessions',[]), localProgress:localGet('progress',{}),
     localAttempts:localGet('attempts',{}), localCards:localGet('cards',{}),
     tabFocused:true,
     lastActivity:Date.now(), activeSession:null,
@@ -60,7 +60,7 @@
 
   function totalSeconds(sessions) { return sessions.reduce((a,x)=>a+(Number(x.duration_seconds)||0),0); }
   function allSessions() {
-    const combined = [...state.sessions, ...state.localSessions, ...state.greekSessions];
+    const combined = [...state.sessions, ...state.localSessions, ...state.greekSessions, ...state.comicSessions];
     const merged = new Map();
     combined.forEach(s=>{const prev=merged.get(s.id);if(!prev||Number(s.duration_seconds)>Number(prev.duration_seconds))merged.set(s.id,s);});
     const items = [...merged.values()];
@@ -273,7 +273,9 @@
   const formatDate = (d,options)=>new Date(d).toLocaleDateString(isFrench?'fr-FR':'es-AR',options);
   const humanMinutes = sec => Math.round(sec/60)+' '+t('min','min');
   const languageName = slug => languages.find(l=>l.slug===slug)?.name || slug;
-  const sessionLessonName = s => s.language==='griego-biblico' && /^duff-ch\d+$/.test(s.lesson_id)
+  const sessionLessonName = s => s.lesson_id==='comics-asterix-cleopatre' ? 'Astérix et Cléopâtre · cómics'
+    : s.lesson_id==='comics-tintin-ile-noire' ? 'Tintin · L’Île Noire · cómics'
+    : s.language==='griego-biblico' && /^duff-ch\d+$/.test(s.lesson_id)
     ? 'Capítulo '+Number(s.lesson_id.slice(7))+' · Jeremy Duff'
     : lessonById(s.lesson_id).title;
   function renderStats(){
@@ -394,9 +396,9 @@
     const id=state.user.id;
     const pendingSessions=new Map();
     const remoteDurations=new Map(state.sessions.map(s=>[s.id,Number(s.duration_seconds)||0]));
-    [...state.localSessions,...state.greekSessions].filter(s=>s.duration_seconds>0 && Number(s.duration_seconds)>(remoteDurations.get(s.id)||0)).forEach(s=>{const prev=pendingSessions.get(s.id);if(!prev||Number(s.duration_seconds)>Number(prev.duration_seconds))pendingSessions.set(s.id,{...s,user_id:id});});
+    [...state.localSessions,...state.greekSessions,...state.comicSessions].filter(s=>s.duration_seconds>0 && Number(s.duration_seconds)>(remoteDurations.get(s.id)||0)).forEach(s=>{const prev=pendingSessions.get(s.id);if(!prev||Number(s.duration_seconds)>Number(prev.duration_seconds))pendingSessions.set(s.id,{...s,user_id:id});});
     const localSessions=[...pendingSessions.values()];
-    if(localSessions.length){const{error}=await state.client.from('lingua_study_sessions').upsert(localSessions,{onConflict:'id'});if(!error){state.sessions=[...state.sessions.filter(s=>!localSessions.some(x=>x.id===s.id)),...localSessions];state.localSessions=[];state.greekSessions=[];localPut('sessions',[]);localPut('greekSessions',[]);}}
+    if(localSessions.length){const{error}=await state.client.from('lingua_study_sessions').upsert(localSessions,{onConflict:'id'});if(!error){state.sessions=[...state.sessions.filter(s=>!localSessions.some(x=>x.id===s.id)),...localSessions];state.localSessions=[];state.greekSessions=[];state.comicSessions=[];localPut('sessions',[]);localPut('greekSessions',[]);localPut('comicSessions',[]);}}
     const p=Object.entries(state.localProgress).map(([lesson_id,completed])=>({user_id:id,lesson_id,completed,updated_at:new Date().toISOString()}));
     if(p.length){const{error}=await state.client.from('lingua_lesson_progress').upsert(p,{onConflict:'user_id,lesson_id'});if(!error){Object.assign(state.progress,state.localProgress);state.localProgress={};localPut('progress',{});}}
     const a=Object.entries(state.localAttempts).map(([exercise_id,entry])=>({user_id:id,exercise_id,lesson_id:entry.lesson_id,selected_answer:entry.selected_answer,correct:entry.correct,updated_at:new Date().toISOString()}));
