@@ -60,7 +60,7 @@
 
   function totalSeconds(sessions) { return sessions.reduce((a,x)=>a+(Number(x.duration_seconds)||0),0); }
   function allSessions() {
-    const combined = [...state.sessions, ...state.localSessions, ...state.greekSessions, ...state.comicSessions];
+    const combined = [...state.sessions, ...state.localSessions, ...state.greekSessions, ...state.comicSessions, ...localGet('comicSessions',[])];
     const merged = new Map();
     combined.forEach(s=>{const prev=merged.get(s.id);if(!prev||Number(s.duration_seconds)>Number(prev.duration_seconds))merged.set(s.id,s);});
     const items = [...merged.values()];
@@ -396,9 +396,9 @@
     const id=state.user.id;
     const pendingSessions=new Map();
     const remoteDurations=new Map(state.sessions.map(s=>[s.id,Number(s.duration_seconds)||0]));
-    [...state.localSessions,...state.greekSessions,...state.comicSessions].filter(s=>s.duration_seconds>0 && Number(s.duration_seconds)>(remoteDurations.get(s.id)||0)).forEach(s=>{const prev=pendingSessions.get(s.id);if(!prev||Number(s.duration_seconds)>Number(prev.duration_seconds))pendingSessions.set(s.id,{...s,user_id:id});});
+    [...state.localSessions,...state.greekSessions,...state.comicSessions,...localGet('comicSessions',[])].filter(s=>s.duration_seconds>0 && Number(s.duration_seconds)>(remoteDurations.get(s.id)||0)).forEach(s=>{const prev=pendingSessions.get(s.id);if(!prev||Number(s.duration_seconds)>Number(prev.duration_seconds))pendingSessions.set(s.id,{...s,user_id:id});});
     const localSessions=[...pendingSessions.values()];
-    if(localSessions.length){const{error}=await state.client.from('lingua_study_sessions').upsert(localSessions,{onConflict:'id'});if(!error){state.sessions=[...state.sessions.filter(s=>!localSessions.some(x=>x.id===s.id)),...localSessions];state.localSessions=[];state.greekSessions=[];state.comicSessions=[];localPut('sessions',[]);localPut('greekSessions',[]);localPut('comicSessions',[]);}}
+    if(localSessions.length){const{error}=await state.client.from('lingua_study_sessions').upsert(localSessions,{onConflict:'id'});if(!error){state.sessions=[...state.sessions.filter(s=>!localSessions.some(x=>x.id===s.id)),...localSessions];state.localSessions=[];state.greekSessions=[];localPut('sessions',[]);localPut('greekSessions',[]);const migrated=new Map(localSessions.map(s=>[s.id,Number(s.duration_seconds)||0]));const comicRemaining=localGet('comicSessions',[]).filter(s=>!migrated.has(s.id)||Number(s.duration_seconds)>migrated.get(s.id));state.comicSessions=comicRemaining;localPut('comicSessions',comicRemaining);}}
     const p=Object.entries(state.localProgress).map(([lesson_id,completed])=>({user_id:id,lesson_id,completed,updated_at:new Date().toISOString()}));
     if(p.length){const{error}=await state.client.from('lingua_lesson_progress').upsert(p,{onConflict:'user_id,lesson_id'});if(!error){Object.assign(state.progress,state.localProgress);state.localProgress={};localPut('progress',{});}}
     const a=Object.entries(state.localAttempts).map(([exercise_id,entry])=>({user_id:id,exercise_id,lesson_id:entry.lesson_id,selected_answer:entry.selected_answer,correct:entry.correct,updated_at:new Date().toISOString()}));
