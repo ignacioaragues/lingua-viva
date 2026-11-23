@@ -1,6 +1,6 @@
 {
   "project": "Lengua Viva · Alter Ego A1",
-  "version": "2026-11-22-d2-l1",
+  "version": "2026-11-23-d2-l2",
   "repository": "ignacioaragues/lingua-viva",
   "branch": "main",
   "coursePath": "francais/alter-ego-a1/",
@@ -13,25 +13,25 @@
     "visibility": "Local private PDF only; never commit scans, pages, or commercial source content to the public repository"
   },
   "editorial": {
-    "current": "Dossier 2 · Leçon 1 · C’est ma ville",
-    "status": "dossier_0_and_dossier_1_complete_dossier_2_lesson_1_workbook_published",
+    "current": "Dossier 2 · Leçon 2 · Passer une nuit…",
+    "status": "dossier_0_dossier_1_complete_dossier_2_lessons_1_and_2_published",
     "next": {
-      "id": "d2-l2-passer-une-nuit",
-      "title": "Passer une nuit…",
+      "id": "d2-l3-bons-baisers",
+      "title": "Bons baisers de…",
       "printedPages": [
-        48,
-        51
+        52,
+        55
       ],
       "pdfPages": [
-        49,
-        52
+        53,
+        56
       ],
-      "goal": "Read printed pp. 48–51 visually from original PDF; cover every numbered activity 1–14, Points Langue and Projet tâche 2, then update checkpoint after real main readback and tests. Dossier 2 remains open pending Leçon 3, Carnet, S’exercer and DELF."
+      "goal": "Read printed pp. 52–55 visually, implement all 10 numbered activities with carte postale texts, grammar/culture/phonetics, dossier project task 3, verify in main; then D2 Carnet de voyage starts printed p.56."
     },
     "futureOrder": [
-      "D2 Leçon 3 · Bons baisers de… starts p. 52 (visually verified); verify its end page from PDF",
-      "D2 Carnet de voyage · Paris, hier et aujourd’hui, S’exercer p. 58+ and DELF; verify exact pages before coding",
-      "Dossiers 3–9: three lessons plus Carnet, S’exercer, DELF each"
+      "Dossier 2 · Carnet de voyage «Paris, hier et aujourd’hui», starts p.56",
+      "Dossier 2 · S’exercer and Vers le DELF A1 (verify exact page spans)",
+      "Dossiers 3–9 with 3 lessons plus Carnet de voyage, S’exercer, DELF and projects"
     ],
     "review": {
       "sourceVisualPagesInspected": [
@@ -69,13 +69,17 @@
         46,
         47,
         48,
+        49,
+        50,
         51,
-        52
+        52,
+        55,
+        56
       ],
-      "codeSyntacticValidation": "D2 L1 module and index inline JS parsed successfully, 142 unique UIDs; 9 reader initialization cases passed (including saved previous answer, P45, sources of audio 59–66, 19-category-fields and project task).",
-      "deployment": "GitHub main confirmed for new file cest-ma-ville.js and revised index; live GitHub Pages fetch disabled; no browser E2E or real iPad test.",
-      "audio": "D2 L1 source piste 59–60 (exercises 4–5), 61–64 (exercise 6), 65–66 (exercise 11). Audio IDs only and publisher portal link; no files hosted.",
-      "note": "Total 142 entries = 124 existing + 18 D2L1. Main units 5/28 = 17.86% including D0 and 4 numbered lessons; Dossier 1 has Carnet/S’exercer/DELF. Dossier 2 remains open. Old flashcards and legacy French unaffected.",
+      "codeSyntacticValidation": "9 modules and all index scripts initialized in fake DOM; 161 unique activity IDs, original D0 answer and D2L1 page preserved, D2L2 listening/phonetics/project rendered, 0 duplicate IDs.",
+      "deployment": "New lesson committed to GitHub main. GitHub Pages live deployment and real mobile interactive behavior not independently verified.",
+      "audio": "Printed tracks 67–68,69–70,71–73,74–75,76–77 labeled in UI; official audio portal link retained, track files not hosted.",
+      "note": "161 = 124 through D1 + 18 D2L1 + 19 D2L2. 6/28 principal units (21.4%), Dossier 2 remains incomplete until L3 plus Carnet/S’exercer/DELF. Full PDF in private ChatGPT Library /Idiomas/, file_id file_00000000e6fc820aab9a981e36ceacba; recover through Files materialize if not mounted, never republish on GitHub.",
       "browserE2E": "Not tested; use static simulation only"
     },
     "guardrails": [
@@ -357,11 +361,53 @@
         "implementation": "13 activities as individually navigable sections with fields, dropdowns and structured written answers for 2a/b, 3a/b, 5.1–5.3, 6a–d, etc.; 4 original supplementary culture/grammar sections, 1 group project; each linked to correct printed and private local PDF page; old localStorage key unchanged. No answer auto-grading.",
         "verification": "Original 225-page PDF opened directly via PyMuPDF; all four pp 44–47 rendered and visually read, including previously inaccessible p45. New module JS parsed; HTML inline JS parsed and no duplicate DOM identifiers; smoke-initialized 142 unique activity UIDs, D0 saved answer and Contacts, D2 p44–47, printed↔PDF offsets, 59–66 tracks and D2 form sizes. GitHub Pages actual browser/mobile E2E not verified.",
         "copyright": "No original PDF, scans or large passages of book copied to public repo. Only paraphrased instructions and reader forms."
+      },
+      {
+        "id": "d2-l2-passer-une-nuit",
+        "title": "Passer une nuit…",
+        "printedPages": [
+          48,
+          51
+        ],
+        "pdfPages": [
+          49,
+          52
+        ],
+        "numberedActivities": 14,
+        "languageBlocks": 2,
+        "cultureBlocks": 1,
+        "aideMemoireBlocks": 1,
+        "projectTasks": 1,
+        "totalNavigableEntries": 19,
+        "interfaceCoverage": 19,
+        "activityRefs": "1–14; Point Langue Poser des questions pour s’informer; Point Culture Les types d’hébergement; Point Langue Indiquer un itinéraire; Aide-mémoire aller/prendre/descendre; Projet Dossier 2 tâche 2",
+        "groups": [
+          "S’informer sur l’hébergement",
+          "Comparer et réserver",
+          "Indiquer un itinéraire",
+          "Points langue et culture",
+          "Projet tâche 2"
+        ],
+        "sourceVisualPagesInspected": [
+          48,
+          49,
+          50,
+          51
+        ],
+        "sourceAudioReferences": [
+          "67–68",
+          "69–70",
+          "71–73",
+          "74–75",
+          "76–77"
+        ],
+        "implementation": "19 entries (14 numbered plus 5 supplements) with option selects, fields, multiline notes, local page-synced PDF viewer; no scans hosted, no auto correction, preserved localStorage key and previous answers. Audio track labels verified in book but audio files not individually embedded.",
+        "verification": "All four page scans 48–51 visually inspected directly from full 225-page local PDF. New JS created on main, index updated, 9 JS modules loaded in simulated DOM; 161 unique activity UIDs, source offsets and legacy D0/D2L1 answers tested. Browser/mobile E2E and GitHub Pages propagation not independently verified."
       }
     ]
   },
   "learner": {
     "completedActivities": 0,
-    "summary": "Editorial coverage and remote book work are distinct; learner answers, manual completion, notes, last position and study time remain browser-local under same key and are not inspected remotely."
+    "summary": "Editorial activities published; learner completion and notes remain browser-local, not known remotely."
   }
 }
