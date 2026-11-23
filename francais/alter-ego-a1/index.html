@@ -57,11 +57,11 @@ a{color:var(--ae-accent)}button,input,select,textarea{font:inherit}button{cursor
 <body>
 <header class="ae-header"><a class="ae-brand" href="../../">Lengua <em>Viva</em></a><nav aria-label="Navegación"><a class="ae-return-parent" href="https://ignacioaragues.github.io/palabra-viva/">← Palabra Viva</a><a href="../accueil.html">Francés</a><a href="../../flashcards/?idioma=francais">Flashcards</a><a href="../../estadisticas/?idioma=francais">Estadísticas generales</a><a href="../">Curso anterior</a></nav></header>
 <main class="ae-page">
-<div class="ae-heading"><div><div class="ae-kicker">Francés A1 · método con manual</div><h1>Alter Ego <em>A1.</em></h1><p>Estudiá con tu libro y respondé cada actividad en el cuaderno interactivo. Podés mostrar u ocultar el PDF sin perder tus respuestas. La corrección solo se realiza cuando la pedís expresamente.</p></div><div class="ae-stat"><span id="ae-progress">0 / 161 actividades</span><span>⏱ <span id="ae-time">0 h 00 min</span></span><button class="ae-btn" id="ae-export" type="button">Exportar mi cuaderno</button></div></div>
+<div class="ae-heading"><div><div class="ae-kicker">Francés A1 · método con manual</div><h1>Alter Ego <em>A1.</em></h1><p>Estudiá con tu libro y respondé cada actividad en el cuaderno interactivo. Podés mostrar u ocultar el PDF sin perder tus respuestas. La corrección solo se realiza cuando la pedís expresamente.</p></div><div class="ae-stat"><span id="ae-progress">0 / 176 actividades</span><span>⏱ <span id="ae-time">0 h 00 min</span></span><button class="ae-btn" id="ae-export" type="button">Exportar mi cuaderno</button></div></div>
 <div class="ae-meter" aria-label="Progreso manual de actividades"><span id="ae-meter-fill"></span></div>
 <div style="height:19px"></div>
 <div class="ae-layout">
-<aside class="ae-sidebar" id="ae-nav" aria-label="Índice de actividades"><div class="ae-kicker">Índice de Alter Ego A1</div><p class="ae-small">Elegí una actividad para abrir el libro en la página correspondiente.</p><div id="ae-navlist"></div><div class="ae-note-box">El Dossier 1 está completo. Dossier 2 · Leçon 1 «Dossier 2 · Leçons 1 y 2 incorporadas. Próximo: Leçon 3 «Bons baisers de…» (desde p. 52). Luego, Carnet de voyage, S’exercer y DELF.</div></aside>
+<aside class="ae-sidebar" id="ae-nav" aria-label="Índice de actividades"><div class="ae-kicker">Índice de Alter Ego A1</div><p class="ae-small">Elegí una actividad para abrir el libro en la página correspondiente.</p><div id="ae-navlist"></div><div class="ae-note-box">El Dossier 1 está completo. Dossier 2 · Lecciones 1–3 incorporadas. Próxima fase: «Carnet de voyage · Paris, hier et aujourd’hui» (desde p. 56); después S’exercer y DELF.</div></aside>
 <section aria-label="Cuaderno de actividades">
 <div class="ae-controls">
 <div class="ae-flex"><button class="ae-btn ae-mobile-menu" id="ae-toggle-menu" type="button">☰ Índice</button><button class="ae-btn" id="ae-toggle-book" type="button">Ocultar libro</button></div>
@@ -103,6 +103,8 @@ a{color:var(--ae-accent)}button,input,select,textarea{font:inherit}button{cursor
 <script>window.AE_D0_GROUPS = window.AE_D0_GROUPS.concat(window.AE_D2_L1_GROUPS || []);</script>
 <script src="./passer-une-nuit.js?v=20261123-d2-l2"></script>
 <script>window.AE_D0_GROUPS = window.AE_D0_GROUPS.concat(window.AE_D2_L2_GROUPS || []);</script>
+<script src="./bons-baisers.js?v=20261123-d2-l3"></script>
+<script>window.AE_D0_GROUPS = window.AE_D0_GROUPS.concat(window.AE_D2_L3_GROUPS || []);</script>
 <script>
 (()=>{
 "use strict";
@@ -133,7 +135,7 @@ function frame(){
  byId("ae-pdf-frame").src=pdfUrl+"#page="+(activity().page+1)+"&zoom=page-width";
  byId("ae-pdfname").textContent=loadedName;
 }
-function lessonLabel(a){return a.group.startsWith("d2-l2-")?"Dossier 2 · Leçon 2 · Passer une nuit…":a.group.startsWith("d2-l1-")?"Dossier 2 · Leçon 1 · C’est ma ville":a.group.startsWith("d1-delf-")?"Dossier 1 · Vers le DELF A1":a.group.startsWith("d1-exercer-")?"Dossier 1 · S’exercer":a.group.startsWith("d1-carnet-")?"Dossier 1 · Carnet de voyage":a.group.startsWith("d1-l3-")?"Dossier 1 · Leçon 3 · En direct de TV5":a.group.startsWith("d1-l2-")?"Dossier 1 · Leçon 2 · M comme médiathèque":a.group.startsWith("d1-")?"Dossier 1 · Leçon 1 · Contacts":"Dossier 0 · Découverte";}
+function lessonLabel(a){return a.group.startsWith("d2-l3-")?"Dossier 2 · Leçon 3 · Bons baisers de…":a.group.startsWith("d2-l2-")?"Dossier 2 · Leçon 2 · Passer une nuit…":a.group.startsWith("d2-l1-")?"Dossier 2 · Leçon 1 · C’est ma ville":a.group.startsWith("d1-delf-")?"Dossier 1 · Vers le DELF A1":a.group.startsWith("d1-exercer-")?"Dossier 1 · S’exercer":a.group.startsWith("d1-carnet-")?"Dossier 1 · Carnet de voyage":a.group.startsWith("d1-l3-")?"Dossier 1 · Leçon 3 · En direct de TV5":a.group.startsWith("d1-l2-")?"Dossier 1 · Leçon 2 · M comme médiathèque":a.group.startsWith("d1-")?"Dossier 1 · Leçon 1 · Contacts":"Dossier 0 · Découverte";}
 function renderTask(){
  const a=activity();byId("ae-current").textContent=lessonLabel(a)+" · p. "+a.page+" · activité "+a.ref;
  byId("ae-title").textContent=a.title;
